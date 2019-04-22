@@ -32,7 +32,11 @@ skos:definition a owl:AnnotationProperty .
 
 :EducationLevel a owl:Class;
 	rdfs:label "Education Level";
-	 skos:definition "Education Level".
+	skos:definition "Education Level".
+
+:Urine a owl:Class;
+        rdfs:label "Urine";
+        skos:definition "Urine".
 	 
 ################################################
 #
