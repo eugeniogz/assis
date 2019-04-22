@@ -1,0 +1,157 @@
+<script type="application/javascript"><!--
+
+   var actualStartAngle=90;
+
+   function gcd(a, b) {
+
+    while (b) {
+        r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+   }
+
+   function verifyP() {
+     var p=document.forms.form1.strP.value*1.0;
+     if (Math.round(n/2)<=p) {
+        document.forms.form1.strP.value = Math.round(n/2);
+        alert('Step must be less than N Vertices/2');
+     }
+
+   }
+
+   function setup() {
+     var size = document.forms.form1.strSize.value * 1.0;
+     var canvas = document.getElementById("canvas");
+     if (size>500) size=500;
+     canvas.width=size;
+     canvas.height=canvas.width;
+     var ctx = document.getElementById('canvas').getContext('2d');
+     ctx.strokeStyle = "#ffffff";
+     return ctx;
+   }
+
+   function drawNext()  {    
+     var n=document.forms.form1.strN.value*1.0;
+     var p=document.forms.form1.strP.value*1.0;
+     if (Math.round(n/2)>(p+1)) {
+        document.forms.form1.strP.value = p+1;
+     } else {
+        document.forms.form1.strN.value=n+1;
+        document.forms.form1.strP.value = 1;
+     }
+   draw();
+
+   }
+
+   function draw() {  
+ 
+     var ctx = setup();
+     var n=document.forms.form1.strN.value*1.0;
+     var p=document.forms.form1.strP.value*1.0;
+     actualStartAngle = 90;
+     if  (n==3) actualStartAngle=30;
+     if  (n==4) actualStartAngle=45;
+     actualStartAngle=actualStartAngle  + 180*(p+1) / n;
+     drawStar(ctx, n, p, document.getElementById("canvas").width,actualStartAngle);
+    
+     //Para abrir janela só com o canvas
+     //var canvas = document.getElementById("canvas");
+     // no argument defaults to image/png; image/jpeg, etc also work on some
+     // implementations - image/png is the only one that must be supported per spec.
+     //window.location = canvas.toDataURL("image/png");
+   }  
+
+   function drawStar(ctx, n, p, size, startAngle) { 
+     if (n>3000) n=3000; 
+     if (n<3) {
+        alert("Can't draw with less than three vertices"); return;
+     }
+     if (p>Math.round(n/2)) {alert("Step must be less than half of vertices"); return }
+
+     var len = (size/2)*0.95;
+     var centro = size/2;
+     var angle = 180 - 180 * ( n - 2* p ) / n;  
+     var actualAngle = startAngle;
+     ctx.beginPath();  
+     var i = 0;
+     var mudar=0;
+     if (gcd(n,p)>1) mudar=n/gcd(n,p);
+     if (mudar>0) {
+          document.getElementById("msg").innerHTML="<p>Polígono Irregular</p>";
+     } else {
+          document.getElementById("msg").innerHTML="<p>Polígono regular</p>";
+     }
+     do { 
+       if (mudar>0 && i % mudar==0 && i>0) {
+          actualAngle=actualAngle+360/n;
+       }
+       var x1 = len*Math.cos(actualAngle*Math.PI/180);  
+       var y1 = len*Math.sin(actualAngle*Math.PI/180);  
+       actualAngle = actualAngle + 360 * p / n; 
+       var x2 = len*Math.cos(actualAngle*Math.PI/180);  
+       var y2 = len*Math.sin(actualAngle*Math.PI/180);  
+       ctx.moveTo(x1+centro,y1+centro);
+       ctx.lineTo(x2+centro,y2+centro);
+       ctx.stroke();
+       i++;  
+    } while (i<n);
+    i=0;
+    var actualAngle = startAngle;
+    ctx.closePath();
+    ctx.stroke();  
+   } 
+
+   function drawSemiComplete() {
+     var ctx = setup();
+     var n = document.forms.form1.strN.value * 1.0;
+	 var p=document.forms.form1.strP.value*1.0;
+     if  (n==3) actualStartAngle=30;
+     if  (n==4) actualStartAngle=45;
+     
+     for (var i=1; i<=p;i++) {
+		if (gcd(n,i)!=1) drawStar(ctx, n, i, document.getElementById("canvas").width, actualStartAngle);
+     }
+
+   }
+
+   function drawComplete() {
+     var ctx = setup();
+     var n = document.forms.form1.strN.value * 1.0;
+	 var p=n/2;
+     if  (n==3) actualStartAngle=30;
+     if  (n==4) actualStartAngle=45;
+     
+     for (var i=1; i<=p;i++) {
+		drawStar(ctx, n, i, document.getElementById("canvas").width, actualStartAngle);
+     }
+
+   }
+   setTimeout(draw,400);
+   
+//--></script>
+<style>
+body {background: black}
+</style>
+<div class="headBanner">
+      <!--span style='color:#d0d0d0'>A</span><span style='color:#a0a0a0'>ssis</span-->
+<a class="current menu" href="/p/stars.html">Polygons</a><a class="menu" href="/p/polyhedrons.html">Polyhedrons</a><a class="menu" href="/p/compounds.html">Polyhedron Compounds</a>
+</div>
+<br />
+A small JavaScript program to generate polygons. If step = 1, the polygons are normal polygons. Use the step&gt; 1 to draw star polygons.
+The star polygons will be regular if the greatest common divisor between the step and number of vertices is one, which means that they can be drawn by a continuous line from vertex to vertex.
+<br />
+<br /><div id="msg"></div>
+    <br />
+<form id="form1">
+<table>
+    <tbody>
+<tr><td>Vertices</td><td><input enabled="true" id="strN" maxlength="3" name="strN" size="3" type="text" value="3" /></td></tr>
+<tr><td>Step</td><td><input enabled="true" id="strP" maxlength="3" name="strP" onchange="verifyP()" size="3" type="text" value="1" /></td></tr>
+<tr><td>Size</td><td><input enabled="true" id="strSize" maxlength="3" name="strSize" size="3" type="text" value="300" /></td></tr>
+<tr><td colspan="2"><input onclick="draw()" type="button" value="Draw" /><input onclick="drawComplete()" type="button" value="Complete Graph" /><input onclick="drawSemiComplete()" type="button" value="Semi-Complete Graph" /><input onclick="drawNext()" type="button" value="Next" /></td></tr>
+</tbody></table>
+</form>
+<canvas width="100%" id="canvas">
+</canvas>
