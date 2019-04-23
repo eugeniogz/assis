@@ -47,6 +47,13 @@ skos:definition a owl:AnnotationProperty .
         rdfs:label "Sample 2";
         skos:definition "Sample 2".
 
+:hasMother a rdf:Property;
+        rdfs:label "has Mother".
+
+:hasChild a rdf:Property;
+        rdfs:label "has Child". 
+
+
 ################################################
 #
 #   Quotes 
