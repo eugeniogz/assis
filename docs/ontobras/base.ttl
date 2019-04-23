@@ -37,7 +37,16 @@ skos:definition a owl:AnnotationProperty .
 :Urine a owl:Class;
         rdfs:label "Urine";
         skos:definition "Urine".
+
+:Sample1 a owl:Class;
+        rdfs:label "Sample 1";
+        skos:definition "Sample 1".
 	 
+
+:Sample2 a owl:Class;
+        rdfs:label "Sample 2";
+        skos:definition "Sample 2".
+
 ################################################
 #
 #   Quotes 
