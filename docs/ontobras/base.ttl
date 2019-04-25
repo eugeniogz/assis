@@ -38,6 +38,11 @@ skos:definition a owl:AnnotationProperty .
         rdfs:label "Urine";
         skos:definition "Urine".
 
+
+:Month a owl:Class;
+        rdfs:label "Month";
+	skos:definition "Month".
+		
 :Sample1 a owl:Class;
         rdfs:label "Sample 1";
         skos:definition "Sample 1".
