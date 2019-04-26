@@ -22,16 +22,18 @@
 skos:definition a owl:AnnotationProperty .
 
 :Age a owl:Class;
-   rdfs:label "Age";
-	 skos:definition "Age".
+   	rdfs:label "Age";
+	rdfs:subClassOf  hasco:StudyIndicator;
+	skos:definition "Age".
 
 :SolutionPH a owl:Class;
 	rdfs:label "Solution PH";
-  rdfs:subClassOf hasco:StudyIndicator ;
+  	rdfs:subClassOf hasco:StudyIndicator ;
 	skos:definition "Solution PH".
 
 :EducationLevel a owl:Class;
 	rdfs:label "Education Level";
+	rdfs:subClassOf  hasco:StudyIndicator;
 	skos:definition "Education Level".
 
 :Urine a owl:Class;
