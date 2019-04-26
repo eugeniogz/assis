@@ -42,15 +42,6 @@ skos:definition a owl:AnnotationProperty .
 :Month a owl:Class;
         rdfs:label "Month";
 	skos:definition "Month".
-		
-:Sample1 a owl:Class;
-        rdfs:label "Sample 1";
-        skos:definition "Sample 1".
-	 
-
-:Sample2 a owl:Class;
-        rdfs:label "Sample 2";
-        skos:definition "Sample 2".
 
 :hasMother a rdf:Property;
         rdfs:label "has Mother".
@@ -58,6 +49,25 @@ skos:definition a owl:AnnotationProperty .
 :hasChild a rdf:Property;
         rdfs:label "has Child". 
 
+:Month1 a owl:Class;
+        rdfs:label "Month 1";
+        skos:definition "Month 1".
+	 
+:Month2 a owl:Class;
+        rdfs:label "Month 2";
+        skos:definition "Month 2".
+
+######################################################
+# Deprecated Classes used by versions earlier than V7
+######################################################
+
+:Sample1 a owl:Class;
+        rdfs:label "Sample 1";
+        skos:definition "Sample 1".
+	 
+:Sample2 a owl:Class;
+        rdfs:label "Sample 2";
+        skos:definition "Sample 2".
 
 ################################################
 #
