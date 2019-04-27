@@ -36,6 +36,26 @@ skos:definition a owl:AnnotationProperty .
 	rdfs:subClassOf  hasco:StudyIndicator;
 	skos:definition "Education Level".
 
+:PreSchool a owl:Class;
+	rdfs:label "Pre School";
+	rdfs:subClassOf  :EducationLevel;
+	skos:definition "Pre School".
+
+:PrimarySchool a owl:Class;
+	rdfs:label "Primary School";
+	rdfs:subClassOf  :EducationLevel;
+	skos:definition "Primary School".
+
+:HighSchool a owl:Class;
+	rdfs:label "High School";
+	rdfs:subClassOf  :EducationLevel;
+	skos:definition "High School".
+
+:University a owl:Class;
+	rdfs:label "University";
+	rdfs:subClassOf  :EducationLevel;
+	skos:definition "University".
+
 :Urine a owl:Class;
         rdfs:label "Urine";
         skos:definition "Urine".
@@ -51,11 +71,13 @@ skos:definition a owl:AnnotationProperty .
 :hasChild a rdf:Property;
         rdfs:label "has Child". 
 
-:Month1 a :Month;
+:Month1 a owl:Class;
+	rdfs:subClassOf  :Month;
         rdfs:label "Month 1";
         skos:definition "Month 1".
 	 
-:Month2 a :Month;
+:Month2 a owl:Class;
+	rdfs:subClassOf  :Month;
         rdfs:label "Month 2";
         skos:definition "Month 2".
 
