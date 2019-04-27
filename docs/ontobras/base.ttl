@@ -51,11 +51,11 @@ skos:definition a owl:AnnotationProperty .
 :hasChild a rdf:Property;
         rdfs:label "has Child". 
 
-:Month1 a demo:Month;
+:Month1 a :Month;
         rdfs:label "Month 1";
         skos:definition "Month 1".
 	 
-:Month2 a demo:Month;
+:Month2 a :Month;
         rdfs:label "Month 2";
         skos:definition "Month 2".
 
