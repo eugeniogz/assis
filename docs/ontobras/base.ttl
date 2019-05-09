@@ -1,18 +1,16 @@
-@prefix : <http://ws1.assis.bhz.br/ontobras#> .
-@prefix obo: <http://purl.obolibrary.org/obo/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix sio: <http://semanticscience.org/resource/> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix hasco: <http://hadatac.org/ont/hasco/> .
+@prefix : <http://ws1.assis.bhz.br/ontobras#>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix sio: <http://semanticscience.org/resource/>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix hasco: <http://hadatac.org/ont/hasco/>.
 
-<http://ws1.assis.bhz.br/ontobras> a owl:Ontology ;
-	owl:versionIRI <http://ws1.assis.bhz.br/ontobras/0.2> ;
-	owl:imports <http://semanticscience.org/ontology/sio-subset-labels.owl> , <http://hadatac.org/ont/hasco/> , 
-        <http://semanticscience.org/ontology/sio.owl> .
+<http://ws1.assis.bhz.br/ontobras> a owl:Ontology;
+	owl:versionIRI <http://ws1.assis.bhz.br/ontobras/0.2>.
 
 #################################################################
 #
@@ -20,22 +18,32 @@
 #
 #################################################################
 
-skos:definition a owl:AnnotationProperty .
+skos:definition a owl:AnnotationProperty.
+
+:SubjectProperties a owl:Class;
+   	rdfs:label "Subject properties";
+	rdfs:subClassOf  hasco:StudyIndicator;
+	skos:definition "Subject properties".
 
 :Age a owl:Class;
    	rdfs:label "Age";
-	rdfs:subClassOf  hasco:StudyIndicator;
+	rdfs:subClassOf  :SubjectProperties;
 	skos:definition "Age".
-
-:SolutionPH a owl:Class;
-	rdfs:label "Solution PH";
-  	rdfs:subClassOf hasco:StudyIndicator ;
-	skos:definition "Solution PH".
 
 :EducationLevel a owl:Class;
 	rdfs:label "Education Level";
-	rdfs:subClassOf  hasco:StudyIndicator;
+	rdfs:subClassOf  :SubjectProperties;
 	skos:definition "Education Level".
+
+:SampleIndicator a owl:Class;
+   	rdfs:label "Sample Indicator";
+	rdfs:subClassOf  hasco:SampleIndicator;
+	skos:definition "Sample Indicator".
+
+:SolutionPH a owl:Class;
+	rdfs:label "Solution PH";
+  	rdfs:subClassOf :SampleIndicator;
+	skos:definition "Solution PH".
 
 :PreSchool a owl:Class;
 	rdfs:label "Pre School";
@@ -82,18 +90,6 @@ skos:definition a owl:AnnotationProperty .
         rdfs:label "Month 2";
         skos:definition "Month 2".
 
-######################################################
-# Deprecated Classes used by versions earlier than V7
-######################################################
-
-:Sample1 a owl:Class;
-        rdfs:label "Sample 1";
-        skos:definition "Sample 1".
-	 
-:Sample2 a owl:Class;
-        rdfs:label "Sample 2";
-        skos:definition "Sample 2".
-
 ################################################
 #
 #   Quotes 
@@ -103,4 +99,3 @@ skos:definition a owl:AnnotationProperty .
 sio:Human a owl:Class;
     rdfs:label "Human";
     skos:definition "A Human being".
-    #rdfs:subClassOf xxx;
