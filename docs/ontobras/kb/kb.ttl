@@ -8,4 +8,4 @@
    	rdfs:label "Ontobrás demo Study".
 
 :lab a owl:Class;
-	redfs:label "Laboratory samples".
+	rdfs:label "Laboratory samples".
