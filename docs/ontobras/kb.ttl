@@ -1,1 +1,7 @@
+@prefix : <http://ws1.assis.bhz.br/ontobras/kb#>.
 
+<http://ws1.assis.bhz.br/ontobras/kb> a owl:Ontology;
+	owl:versionIRI <http://ws1.assis.bhz.br/ontobras/kb/0.1>.
+
+:STD-ONT2019 a owl:Class;
+   	rdfs:label "Ontobrás demo Study".
