@@ -1,12 +1,17 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix : <http://ws1.assis.bhz.br/ontobras/kb#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 
 <http://ws1.assis.bhz.br/ontobras/kb> a owl:Ontology;
 	owl:versionIRI <http://ws1.assis.bhz.br/ontobras/kb/0.1>.
 
+skos:definition a owl:AnnotationProperty.
+
 :STD-ONT2019 a owl:Class;
-   	rdfs:label "Ontobrás demo Study".
+   	rdfs:label "Ontobrás demo Study";
+	skos:definition "Ontobrás demo Study".
 
 :lab a owl:Class;
-	rdfs:label "Laboratory samples".
+	rdfs:label "Laboratory samples";
+	skos:definition "Laboratory samples".
