@@ -6,3 +6,6 @@
 
 :STD-ONT2019 a owl:Class;
    	rdfs:label "Ontobrás demo Study".
+
+:lab a owl:Class;
+	redfs:label "Laboratory samples".
