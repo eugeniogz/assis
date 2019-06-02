@@ -38,12 +38,20 @@ skos:definition a owl:AnnotationProperty.
 :SampleIndicator a owl:Class;
    	rdfs:label "Sample Indicator";
 	rdfs:subClassOf  hasco:SampleIndicator;
-	skos:definition "Sample Indicator".
+	skos:definition "Sample Indicator";
+	owl:deprecated "true"^^xsd:boolean.
+
+
+:SampleProperties a owl:Class;
+   	rdfs:label "Sample Properties";
+	rdfs:subClassOf  hasco:SampleIndicator;
+	skos:definition "Sample Properties".
 
 :SolutionPH a owl:Class;
 	rdfs:label "Solution PH";
-  	rdfs:subClassOf :SampleIndicator;
+  	rdfs:subClassOf :SampleProperties;
 	skos:definition "Solution PH".
+
 
 :PreSchool a owl:Class;
 	rdfs:label "Pre School";
