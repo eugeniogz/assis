@@ -62,3 +62,7 @@ skos:definition a owl:AnnotationProperty.
 :prec a owl:Class.
 :ndvi a owl:Class.
 :ndwi a owl:Class.
+:Estado a owl:class;
+  rdfs:label "Estado";
+  rdfs:subClassOf :SubjectProperties;
+  skos:definition "Estado".
