@@ -90,3 +90,9 @@ skos:definition a owl:AnnotationProperty.
 :Estado a owl:class;
   rdfs:label "Estado";
   skos:definition "Estado".
+:Sample  a owl:class;
+  rdfs:label "Sample";
+  skos:definition "Sample".
+:State  a owl:class;
+  rdfs:label "State";
+  skos:definition "State".
