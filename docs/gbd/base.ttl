@@ -38,6 +38,9 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Municipio";
   rdfs:subClassOf :SubjectProperties;
   skos:definition "Municipio".
+:NomeMunicipio a owl:Class;
+  rdfs:label "Municipio";
+  skos:definition "Nome do Municipio".
 :biome a owl:Class;
   rdfs:label "Biome";
   rdfs:subClassOf :SubjectProperties;
