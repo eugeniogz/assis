@@ -25,43 +25,62 @@ skos:definition a owl:AnnotationProperty.
 	rdfs:subClassOf  hasco:StudyIndicator;
 	skos:definition "Subject properties".
 
-:Age a owl:Class;
-  rdfs:label "Age";
-	rdfs:subClassOf  :SubjectProperties;
-  skos:definition "Age".
-
-:CodigoUf  a owl:Class.
+:CodigoUf  a owl:Class;
+  rdfs:label "Codigo UF".
 :UF a owl:Class;
   rdfs:label "UF";
   rdfs:subClassOf :SubjectProperties;
   skos:definition "UF".
-:Regiao  a owl:Class.
-:CdGeocMu a owl:Class.
-:Municipio a owl:Class.
-:biome a owl:Class.
+:Regiao  a owl:Class;
+  rdfs:label "Regiao".
+:CdGeocMu a owl:Class;
+  rdfs:label "CdGeoMu".
+:Municipio a owl:Class;
+  rdfs:label "Municipio".
+:biome a owl:Class;
+  rdfs:label "Biome".
 :year a owl:Class;
   rdfs:label "Year";
   rdfs:subClassOf :SubjectProperties;
   skos:definition "Year".
-:seq a owl:Class.
-:number a owl:Class.
-:pop a owl:Class.
-:rate a owl:Class.
-:rate_n a owl:Class.
-:analf a owl:Class.
-:san a owl:Class.
-:pob a owl:Class.
-:vuln a owl:Class.
-:rural a owl:Class.
-:migr a owl:Class.
-:ab a owl:Class.
-:med a owl:Class.
-:esf a owl:Class.
-:tmi a owl:Class.
-:temp a owl:Class.
-:prec a owl:Class.
-:ndvi a owl:Class.
-:ndwi a owl:Class.
+:seq a owl:Class;
+  rdfs:label "seq".
+:number a owl:Class;
+  rdfs:label "number".
+:pop a owl:Class;
+  rdfs:label "pop".
+:rate a owl:Class;
+  rdfs:label "rate".
+:rate_n a owl:Class;
+  rdfs:label "rate_n".
+:analf a owl:Class;
+  rdfs:label "analf".
+:san a owl:Class;
+  rdfs:label "san".
+:pob a owl:Class;
+  rdfs:label "pob".
+:vuln a owl:Class;
+  rdfs:label "vuln".
+:rural a owl:Class;
+  rdfs:label "rural".
+:migr a owl:Class;
+  rdfs:label "migr".
+:ab a owl:Class;
+  rdfs:label "ab".
+:med a owl:Class;
+  rdfs:label "med".
+:esf a owl:Class;
+  rdfs:label "esf".
+:tmi a owl:Class;
+  rdfs:label "tmi".
+:temp a owl:Class;
+  rdfs:label "temp".
+:prec a owl:Class;
+  rdfs:label "prec".
+:ndvi a owl:Class;
+  rdfs:label "ndvi".
+:ndwi a owl:Class;
+  rdfs:label "ndwi".
 :Estado a owl:class;
   rdfs:label "Estado";
   rdfs:subClassOf :SubjectProperties;
