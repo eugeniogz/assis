@@ -31,14 +31,10 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Regiao".
 :CdGeocMu a owl:Class;
   rdfs:label "CdGeoMu".
-#:Municipio a owl:Class;
-#  rdfs:label "Municipio";
-#  rdfs:subClassOf :SubjectProperties;
-#  skos:definition "Municipio".
-:NomeMunicipio a owl:Class;
-  rdfs:label "Nome Municipio";
+:CountyName a owl:Class;
+  rdfs:label "County Name";
   rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Nome do Municipio".
+  skos:definition "County Name".
 :biome a owl:Class;
   rdfs:label "Biome";
   rdfs:subClassOf hasco:StudyIndicator;
@@ -84,12 +80,9 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "ndvi".
 :ndwi a owl:Class;
   rdfs:label "ndwi".
-:Estado a owl:class;
-  rdfs:label "Estado";
-  skos:definition "Estado".
-:Sample  a owl:class;
-  rdfs:label "Sample";
-  skos:definition "Sample".
+:Data  a owl:class;
+  rdfs:label "Data";
+  skos:definition "Data".
 :State  a owl:class;
   rdfs:label "State";
   skos:definition "State".
