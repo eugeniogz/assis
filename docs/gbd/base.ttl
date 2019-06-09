@@ -41,16 +41,15 @@ skos:definition a owl:AnnotationProperty.
 #  rdfs:subClassOf :SubjectProperties;
 #  skos:definition "Municipio".
 :NomeMunicipio a owl:Class;
-  rdfs:label "Municipio";
+  rdfs:label "Nome Municipio";
   rdfs:subClassOf  hasco:StudyIndicator;
   skos:definition "Nome do Municipio".
 :biome a owl:Class;
   rdfs:label "Biome";
-  rdfs:subClassOf :SubjectProperties;
+  rdfs:subClassOf hasco:StudyIndicator;
   skos:definition "Biome".
 :year a owl:Class;
   rdfs:label "Year";
-  rdfs:subClassOf :SubjectProperties;
   skos:definition "Year".
 :seq a owl:Class;
   rdfs:label "seq".
