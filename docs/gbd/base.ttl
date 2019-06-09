@@ -20,11 +20,6 @@
 
 skos:definition a owl:AnnotationProperty.
 
-#:SubjectProperties a owl:Class;
-#  rdfs:label "Subject properties";
-#	rdfs:subClassOf  hasco:StudyIndicator;
-#	skos:definition "Subject properties".
-
 :CodigoUf  a owl:Class;
   rdfs:label "Codigo UF".
 :UF a owl:Class;
