@@ -96,3 +96,36 @@ skos:definition a owl:AnnotationProperty.
 :State  a owl:class;
   rdfs:label "State";
   skos:definition "State".
+:2000   a owl:class;
+  rdfs:label "2000";
+  skos:definition "2000".
+:2001   a owl:class;
+  rdfs:label "2001";
+  skos:definition "2001".
+:2002  a owl:class;
+  rdfs:label "2002";
+  skos:definition "2002".
+:2003  a owl:class;
+  rdfs:label "2003";
+  skos:definition "2003".
+:2004  a owl:class;
+  rdfs:label "2004";
+  skos:definition "2004".
+:2005  a owl:class;
+  rdfs:label "2005";
+  skos:definition "2005".
+:2006  a owl:class;
+  rdfs:label "2006";
+  skos:definition "2006".
+:2007  a owl:class;
+  rdfs:label "2007";
+  skos:definition "2007".
+:2008  a owl:class;
+  rdfs:label "2008";
+  skos:definition "2008".
+:2009  a owl:class;
+  rdfs:label "2009";
+  skos:definition "2009".
+:2010  a owl:class;
+  rdfs:label "2010";
+  skos:definition "2010".
