@@ -119,3 +119,18 @@ skos:definition a owl:AnnotationProperty.
 :2010  a owl:class;
   rdfs:label "2010";
   skos:definition "2010".
+:Midwest a owl:class;
+  rdfs:label "Midwest";
+  skos:definition "Midwest".
+:Northeast a owl:class;
+  rdfs:label "Northeast";
+  skos:definition "Northeast".
+:North a owl:class;
+  rdfs:label "North";
+  skos:definition "North".
+:Southeast a owl:class;
+  rdfs:label "Southeast";
+  skos:definition "Southeast".
+:South a owl:class;
+  rdfs:label "South";
+  skos:definition "South".
