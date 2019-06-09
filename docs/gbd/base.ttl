@@ -36,10 +36,10 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Regiao".
 :CdGeocMu a owl:Class;
   rdfs:label "CdGeoMu".
-:Municipio a owl:Class;
-  rdfs:label "Municipio";
-  rdfs:subClassOf :SubjectProperties;
-  skos:definition "Municipio".
+#:Municipio a owl:Class;
+#  rdfs:label "Municipio";
+#  rdfs:subClassOf :SubjectProperties;
+#  skos:definition "Municipio".
 :NomeMunicipio a owl:Class;
   rdfs:label "Municipio";
   rdfs:subClassOf  hasco:StudyIndicator;
