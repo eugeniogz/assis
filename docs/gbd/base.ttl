@@ -26,9 +26,9 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "UF";
   rdfs:subClassOf  hasco:StudyIndicator;
   skos:definition "UF".
-:Regiao  a owl:Class;
+:Region  a owl:Class;
   rdfs:subClassOf  hasco:StudyIndicator;
-  rdfs:label "Regiao".
+  rdfs:label "Region".
 :CdGeocMu a owl:Class;
   rdfs:label "CdGeoMu".
 :CountyName a owl:Class;
