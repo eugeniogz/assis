@@ -31,6 +31,9 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Region".
 :CdGeocMu a owl:Class;
   rdfs:label "CdGeoMu".
+:County a owl:Class;
+  rdfs:label "County";
+  skos:definition "County".
 :CountyName a owl:Class;
   rdfs:label "County Name";
   rdfs:subClassOf  hasco:StudyIndicator;
