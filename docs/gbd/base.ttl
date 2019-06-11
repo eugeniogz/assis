@@ -137,3 +137,32 @@ skos:definition a owl:AnnotationProperty.
 :South a owl:class;
   rdfs:label "South";
   skos:definition "South".
+
+gbd:AC	a owl:Class; rdfs:label "AC";rdfs:subClassOf :UF.
+gbd:AL	a owl:Class; rdfs:label "AL";rdfs:subClassOf :UF.
+gbd:AM	a owl:Class; rdfs:label "AM";rdfs:subClassOf :UF.
+gbd:AP	a owl:Class; rdfs:label "AP";rdfs:subClassOf :UF.
+gbd:BA	a owl:Class; rdfs:label "BA";rdfs:subClassOf :UF.
+gbd:CE	a owl:Class; rdfs:label "CE";rdfs:subClassOf :UF.
+gbd:DF	a owl:Class; rdfs:label "DF";rdfs:subClassOf :UF.
+gbd:ES	a owl:Class; rdfs:label "ES";rdfs:subClassOf :UF.
+gbd:GO	a owl:Class; rdfs:label "GO";rdfs:subClassOf :UF.
+gbd:MA	a owl:Class; rdfs:label "MA";rdfs:subClassOf :UF.
+gbd:MG	a owl:Class; rdfs:label "MG";rdfs:subClassOf :UF.
+gbd:MS	a owl:Class; rdfs:label "MS";rdfs:subClassOf :UF.
+gbd:MT	a owl:Class; rdfs:label "MT";rdfs:subClassOf :UF.
+gbd:PA	a owl:Class; rdfs:label "PA";rdfs:subClassOf :UF.
+gbd:PB	a owl:Class; rdfs:label "PB";rdfs:subClassOf :UF.
+gbd:PE	a owl:Class; rdfs:label "PE";rdfs:subClassOf :UF.
+gbd:PI	a owl:Class; rdfs:label "PI";rdfs:subClassOf :UF.
+gbd:PR	a owl:Class; rdfs:label "PR";rdfs:subClassOf :UF.
+gbd:RJ	a owl:Class; rdfs:label "RJ";rdfs:subClassOf :UF.
+gbd:RN	a owl:Class; rdfs:label "RN";rdfs:subClassOf :UF.
+gbd:RO	a owl:Class; rdfs:label "RO";rdfs:subClassOf :UF.
+gbd:RR	a owl:Class; rdfs:label "RR";rdfs:subClassOf :UF.
+gbd:RS	a owl:Class; rdfs:label "RS";rdfs:subClassOf :UF.
+gbd:SC	a owl:Class; rdfs:label "SC";rdfs:subClassOf :UF.
+gbd:SE	a owl:Class; rdfs:label "SE";rdfs:subClassOf :UF.
+gbd:SP	a owl:Class; rdfs:label "SP";rdfs:subClassOf :UF.
+gbd:TO	a owl:Class; rdfs:label "TO";rdfs:subClassOf :UF.
+
