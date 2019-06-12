@@ -83,58 +83,60 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "ndvi".
 :ndwi a owl:Class;
   rdfs:label "ndwi".
-:Data  a owl:class;
+:Data  a owl:Class;
   rdfs:label "Data";
   skos:definition "Data".
-:State  a owl:class;
+:State  a owl:Class;
   rdfs:label "State";
   skos:definition "State".
-:2000   a owl:class;
+:hasState a owl:Class;
+  rfs:label "hasState".
+:2000   a owl:Class;
   rdfs:label "2000";
   skos:definition "2000".
-:2001   a owl:class;
+:2001   a owl:Class;
   rdfs:label "2001";
   skos:definition "2001".
-:2002  a owl:class;
+:2002  a owl:Class;
   rdfs:label "2002";
   skos:definition "2002".
-:2003  a owl:class;
+:2003  a owl:Class;
   rdfs:label "2003";
   skos:definition "2003".
-:2004  a owl:class;
+:2004  a owl:Class;
   rdfs:label "2004";
   skos:definition "2004".
-:2005  a owl:class;
+:2005  a owl:Class;
   rdfs:label "2005";
   skos:definition "2005".
-:2006  a owl:class;
+:2006  a owl:Class;
   rdfs:label "2006";
   skos:definition "2006".
-:2007  a owl:class;
+:2007  a owl:Class;
   rdfs:label "2007";
   skos:definition "2007".
-:2008  a owl:class;
+:2008  a owl:Class;
   rdfs:label "2008";
   skos:definition "2008".
-:2009  a owl:class;
+:2009  a owl:Class;
   rdfs:label "2009";
   skos:definition "2009".
-:2010  a owl:class;
+:2010  a owl:Class;
   rdfs:label "2010";
   skos:definition "2010".
-:Midwest a owl:class;
+:Midwest a owl:Class;
   rdfs:label "Midwest";
   skos:definition "Midwest".
-:Northeast a owl:class;
+:Northeast a owl:Class;
   rdfs:label "Northeast";
   skos:definition "Northeast".
-:North a owl:class;
+:North a owl:Class;
   rdfs:label "North";
   skos:definition "North".
-:Southeast a owl:class;
+:Southeast a owl:Class;
   rdfs:label "Southeast";
   skos:definition "Southeast".
-:South a owl:class;
+:South a owl:Class;
   rdfs:label "South";
   skos:definition "South".
 
