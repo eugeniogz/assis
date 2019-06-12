@@ -92,6 +92,7 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf  hasco:StudyIndicator;
   skos:definition "State".
 :hasState a owl:Class;
+  rdfs:subClassOf  hasco:StudyIndicator;
   rfs:label "hasState".
 :2000   a owl:Class;
   rdfs:label "2000";
