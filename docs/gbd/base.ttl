@@ -10,7 +10,117 @@
 @prefix hasco: <http://hadatac.org/ont/hasco/>.
 
 <http://ws1.assis.bhz.br/gbdbr> a owl:Ontology;
-	owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.1>.
+	owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.7>.
+
+#################################################################
+#
+#    New Definitions for GBDBR - V7
+#
+#################################################################
+
+#Attributes
+:totalCasosDengue a owl:Class;
+  rdfs:label "totalCasosDengue";
+  skos:definition "totalCasosDengue".
+:populacao a owl:Class;
+  rdfs:label "populacao";
+  skos:definition "populacao".
+:analfabetismoMaior15Anos a owl:Class;
+  rdfs:label "analfabetismoMaior15Anos";
+  skos:definition "analfabetismoMaior15Anos".
+:saneamentoInadequado a owl:Class;
+  rdfs:label "saneamentoInadequado";
+  skos:definition "saneamentoInadequado".
+:pobreza a owl:Class;
+  rdfs:label "pobreza";
+  skos:definition "pobreza".
+:vulnerabilidadeInfantil a owl:Class;
+  rdfs:label "vulnerabilidadeInfantil";
+  skos:definition "vulnerabilidadeInfantil".
+:residenciasAreaRural a owl:Class;
+  rdfs:label "residenciasAreaRural";
+  skos:definition "residenciasAreaRural".
+:migracao a owl:Class;
+  rdfs:label "migracao";
+  skos:definition "migracao".
+:unidadesDeAtencaoBasica a owl:Class;
+  rdfs:label "unidadesDeAtencaoBasica";
+  skos:definition "unidadesDeAtencaoBasica".
+:totalMedicos a owl:Class;
+  rdfs:label "totalMedicos";
+  skos:definition "totalMedicos".
+:estrategiasSaudeFamilia a owl:Class;
+  rdfs:label "estrategiasSaudeFamilia";
+  skos:definition "estrategiasSaudeFamilia".
+:mortalidadeInfantil a owl:Class;
+  rdfs:label "mortalidadeInfantil";
+  skos:definition "mortalidadeInfantil".
+:temperaturaMedia a owl:Class;
+  rdfs:label "temperaturaMedia";
+  skos:definition "temperaturaMedia".
+:precipitacao a owl:Class;
+  rdfs:label "precipitacao";
+  skos:definition "precipitacao".
+:indiceCorberturaVegetacao a owl:Class;
+  rdfs:label "indiceCorberturaVegetacao";
+  skos:definition "indiceCorberturaVegetacao".
+:indiceCorberturaHidrica a owl:Class;
+  rdfs:label "indiceCorberturaHidrica";
+  skos:definition "indiceCorberturaHidrica".
+:CountyName a owl:Class;
+  rdfs:label "County Name";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "County Name".
+
+
+##### Units
+:porMil a owl:Class;
+  rdfs:label "porMil";
+  skos:definition "porMil".
+:Celsius a owl:Class;
+  rdfs:label "Celsius";
+  skos:definition "Celsius".
+:NVDI a owl:Class;
+  rdfs:label "NVDI";
+  skos:definition "NVDI".
+:NDWI a owl:Class;
+  rdfs:label "NDWI";
+  skos:definition "NDWI".
+
+
+
+##### SDD Entities
+:Municipality a owl:Class;
+  rdfs:label "Municipality";
+  skos:definition "Municipality".
+gbdbr:CensoIBGE a owl:Class;
+  rdfs:label "CensoIBGE";
+  skos:definition "CensoIBGE".
+gbdbr:Datasus a owl:Class;
+  rdfs:label "Datasus";
+  skos:definition "Datasus".
+gbdbr:IPEA a owl:Class;
+  rdfs:label "IPEA";
+  skos:definition "IPEA".
+gbdbr:GoogleEarth a owl:Class;
+  rdfs:label "GoogleEarth";
+  skos:definition "GoogleEarth".
+
+##### SSD Entities
+:Biome a owl:Class;
+  rdfs:label "Biome";
+  rdfs:subClassOf hasco:StudyIndicator;
+  skos:definition "Biome".
+:State  a owl:Class;
+  rdfs:label "State";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "State".
+:Region  a owl:Class;
+  rdfs:subClassOf  hasco:StudyIndicator;
+  rdfs:label "Region".
+
+
+
 
 #################################################################
 #
@@ -26,9 +136,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "UF";
   rdfs:subClassOf  hasco:StudyIndicator;
   skos:definition "UF".
-:Region  a owl:Class;
-  rdfs:subClassOf  hasco:StudyIndicator;
-  rdfs:label "Region".
 :CdGeocMu a owl:Class;
   rdfs:label "CdGeoMu".
 
@@ -37,13 +144,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "County";
   skos:definition "County".
 
-:Municipality a owl:Class;
-  rdfs:label "Municipality";
-  skos:definition "Municipality".
-:CountyName a owl:Class;
-  rdfs:label "County Name";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "County Name".
 
 #### Deprecated #######
 :biome a owl:Class;
@@ -51,10 +151,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf hasco:StudyIndicator;
   skos:definition "Biome".
 
-:Biome a owl:Class;
-  rdfs:label "Biome";
-  rdfs:subClassOf hasco:StudyIndicator;
-  skos:definition "Biome".
 :year a owl:Class;
   rdfs:label "Year";
   skos:definition "Year".
@@ -100,10 +196,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Data";
   rdfs:subClassOf  hasco:StudyIndicator;
   skos:definition "Data".
-:State  a owl:Class;
-  rdfs:label "State";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "State".
 :hasState a owl:Class;
   rdfs:subClassOf  hasco:StudyIndicator;
   rdfs:label "hasState".
