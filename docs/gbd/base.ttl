@@ -87,7 +87,7 @@ skos:definition a owl:AnnotationProperty.
   skos:definition "Precipitacao".
 :indiceCorberturaVegetacao a owl:Class;
   rdfs:label "Indice Corbertura Vegetacao";
-  rdfs:subClassOf  hasco:StudyIndicator;
+  rdfs:subClassOf :VariaveisClimaticas;
   skos:definition "Indice Corbertura Vegetacao".
 :indiceCorberturaHidrica a owl:Class;
   rdfs:label "Indice Corbertura Hidrica";
