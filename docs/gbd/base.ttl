@@ -99,17 +99,21 @@ skos:definition a owl:AnnotationProperty.
 :Municipality a owl:Class;
   rdfs:label "Municipio";
   skos:definition "Municipio".
-gbdbr:CensoIBGE a owl:Class;
+:CensoIBGE a owl:Class;
   rdfs:label "Censo IBGE";
+  rdfs:subClassOf  :Municipality;
   skos:definition "Censo IBGE".
-gbdbr:Datasus a owl:Class;
+:Datasus a owl:Class;
   rdfs:label "Datasus";
+  rdfs:subClassOf  :Municipality;
   skos:definition "Datasus".
-gbdbr:IPEA a owl:Class;
+:IPEA a owl:Class;
   rdfs:label "IPEA";
+  rdfs:subClassOf  :Municipality;
   skos:definition "IPEA".
-gbdbr:GoogleEarth a owl:Class;
+:GoogleEarth a owl:Class;
   rdfs:label "GoogleEarth";
+  rdfs:subClassOf  :Municipality;
   skos:definition "GoogleEarth".
 
 ##### SSD Entities
@@ -123,7 +127,7 @@ gbdbr:GoogleEarth a owl:Class;
   skos:definition "Estado".
 :Region  a owl:Class;
   rdfs:subClassOf  hasco:StudyIndicator;
-  rdfs:label "Estado".
+  rdfs:label "Regiao".
 
 
 
