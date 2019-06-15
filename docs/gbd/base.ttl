@@ -14,7 +14,32 @@
 
 
 skos:definition a owl:AnnotationProperty.
+#################################################################
+#
+#   Version 8
+#
+#################################################################
+:TotalPopulation a owl:Class;
+  rdfs:label "População total";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "População total".
 
+:isTotalPopulationOf
+  rdf:type owl:ObjectProperty;
+  rdfs:label "População total de";
+  rdfs:domain :Municipality;
+  rdfs:range :TotalPopulation.
+
+:greater15Populaion a owl:Class;
+  rdfs:label "População maior de 15 anos";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "População maior de 15 anos".
+
+:population25PctMinimalIncome a owl:Class;
+  rdfs:label "População com renda per-capita menor que 25 SM";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "População com renda per-capita menor que 25 salários mínimos".
+  
 #################################################################
 #
 #    New Definitions for GBDBR - V7
