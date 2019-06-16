@@ -33,7 +33,6 @@ skos:definition a owl:AnnotationProperty.
 
 :greater15Populaion a owl:Class;
   rdfs:label "População maior de 15 anos";
-  rdfs:subClassOf :SocioeconomicVariables;
   skos:definition "População maior de 15 anos".
 
 :population25PctMinimalIncome a owl:Class;
@@ -42,8 +41,7 @@ skos:definition a owl:AnnotationProperty.
   skos:definition "População com renda per-capita menor que 25 salários mínimos".
 
 :TotalResidences a owl:Class;
-  rdfs:label "Número total de residências";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:label "Número total de residências". 
 :NonNativePopulation a owl:Class;
   rdfs:label "População não nativa";
   rdfs:subClassOf :SocioeconomicVariables. 
