@@ -225,8 +225,8 @@ skos:definition a owl:AnnotationProperty.
 
 ##### SDD Entities
 :Municipality a owl:Class;
-  rdfs:label "Municipio";
-  skos:definition "Municipio".
+  rdfs:label "Municipality";
+  skos:definition "Municipality".
 :CensoIBGE a owl:Class;
   rdfs:label "Censo IBGE";
   rdfs:subClassOf  :Municipality;
@@ -246,16 +246,16 @@ skos:definition a owl:AnnotationProperty.
 
 ##### SSD Entities
 :Biome a owl:Class;
-  rdfs:label "Bioma";
+  rdfs:label "Biome";
   rdfs:subClassOf :ClimateVariables;
-  skos:definition "Bioma".
+  skos:definition "Biome".
 :State  a owl:Class;
-  rdfs:label "Estado";
+  rdfs:label "State";
   rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Estado".
+  skos:definition "State".
 :Region  a owl:Class;
   rdfs:subClassOf  hasco:StudyIndicator;
-  rdfs:label "Regiao".
+  rdfs:label "Region".
 
 
 
