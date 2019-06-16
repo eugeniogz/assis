@@ -22,7 +22,7 @@ skos:definition a owl:AnnotationProperty.
 
 :TotalPopulation a owl:Class;
   rdfs:label "Total population";
-  rdfs:subClassOf :SocioeconomicVariables;
+  rdfs:subClassOf :SocioEconomicVariables;
   skos:definition "Total population".
 
 :isTotalPopulationOf
@@ -37,7 +37,7 @@ skos:definition a owl:AnnotationProperty.
 
 :population25PctMinimalIncome a owl:Class;
   rdfs:label "Population living on less than 25% of the minimum wage";
-  rdfs:subClassOf :SocioeconomicVariables;
+  rdfs:subClassOf :SocioEconomicVariables;
   skos:definition "Population living on less than 25% of the minimum wage".
 
 :totalDengueCases a owl:Class;
@@ -49,57 +49,57 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Total of Residences". 
 :NonNativePopulation a owl:Class;
   rdfs:label "Non native population";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :LessThan5yearsPopulation a owl:Class;
   rdfs:label "Less than 5 years population";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :BirthsInTheYear a owl:Class;
   rdfs:label "number of births in the year";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :SurfaceTemperature a owl:Class;
   rdfs:label "Surface temperature";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :Precipitation a owl:Class;
   rdfs:label "Precipitation";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :Vegetation a owl:Class;
   rdfs:label "Vegetation";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :WaterBodies a owl:Class;
   rdfs:label "Water bodies";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :totalDengueCasesOn100Thousand a owl:Class;
   rdfs:label "Total dengue cases on 100 thousand";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :poverty a owl:Class;
   rdfs:label "Poverty";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :livingWithIliterate a owl:Class;
   rdfs:label "Population living with responsible illiterate";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :locatedInRuralArea a owl:Class;
   rdfs:label "Residences located in a rural area";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :residencesWithInadequateSanitation a owl:Class;
   rdfs:label "Residences with inadequate Sanitation";
-  rdfs:subClassOf :VariaveisSocioEconomicas.
+  rdfs:subClassOf :SocioEconomicVariables.
 :populationWithPermanentResidency a owl:Class;
   rdfs:label "Population with permanent residency". 
 :totalBasicAtentionUnits a owl:Class;
   rdfs:label "Total of Basic Atention Units";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :totalDoctors a owl:Class;
   rdfs:label "Total of doctors";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :familyStrategyUnitsTotal a owl:Class;
   rdfs:label "Total of Family Strategy Units";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :numberOfDeathsLessThanOneYear a owl:Class;
   rdfs:label "Number of people who died with less than one year";
-  rdfs:subClassOf :SocioeconomicVariables. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :iliterates a owl:Class;
   rdfs:label "Iliterates";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
+  rdfs:subClassOf :SocioEconomicVariables;
   skos:definition "Iliterates".
 :averageAnnualTemperature a owl:Class;
   rdfs:label "Average annual temperature";
