@@ -88,7 +88,7 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :SurfaceTemperature.
 :averageAnnualPrecipitation a owl:Class;
   rdfs:label "Average annual precipitation";
-  rdfs:subClassOf :precipitation.
+  rdfs:subClassOf :Precipitation.
 :normalizedDifferenceVegetationIndex a owl:Class;
   rdfs:label "Normalized Difference Vegetation Index (NDVI)";
   rdfs:subClassOf :Vegetation.
