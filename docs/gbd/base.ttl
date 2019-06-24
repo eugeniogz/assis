@@ -106,24 +106,24 @@ skos:definition a owl:AnnotationProperty.
 #SDD Entities
 :greater15Population a owl:Class;
   rdfs:label "Greater than 15 population";
-  rdfs:subClassOf :Municipality;
+  rdfs:subClassOf :TotalPopulation;
   skos:definition "Greater than 15 population".
 :population25PctMinimalIncome a owl:Class;
   rdfs:label "Population living on less than 25% of the minimum wage";
-  rdfs:subClassOf :Municipality;
+  rdfs:subClassOf :TotalPopulation;
   skos:definition "Population living on less than 25% of the minimum wage".
 :TotalResidences a owl:Class;
   rdfs:subClassOf :Municipality;
   rdfs:label "Total of Residences". 
 :populationWithPermanentResidency a owl:Class;
-  rdfs:subClassOf :Municipality;
+  rdfs:subClassOf :TotalPopulation;
   rdfs:label "Population with permanent residency". 
 :LessThan5yearsPopulation a owl:Class;
-  rdfs:subClassOf :Municipality;
+  rdfs:subClassOf :TotalPopulation;
   rdfs:label "Less than 5 years population".
 :BirthsInTheYear a owl:Class;
   rdfs:label "number of births in the year";
-  rdfs:subClassOf :Municipality;. 
+  rdfs:subClassOf :TotalPopulation;. 
 :SurfaceTemperature a owl:Class;
   rdfs:label "Surface temperature";
   rdfs:subClassOf :Municipality. 
