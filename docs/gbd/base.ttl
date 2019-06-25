@@ -10,7 +10,7 @@
 @prefix hasco: <http://hadatac.org/ont/hasco/>.
 
 <http://ws1.assis.bhz.br/gbdbr> a owl:Ontology;
-	owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.8>.
+  owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.9>.
 
 
 skos:definition a owl:AnnotationProperty.
@@ -24,20 +24,19 @@ skos:definition a owl:AnnotationProperty.
 ### Biome, is on SSD and in SDD too. TODO: keep it only in SDD in futher versions 
 :Municipality a owl:Class;
   rdfs:label "Municipality";
-  rdfs:subClassOf :State;
+  rdfs:subClassOf hasco:StudyIndicator;
   skos:definition "Municipality".
 :Biome a owl:Class;
   rdfs:label "Biome";
+  rdfs:subClassOf hasco:StudyIndicator;
   skos:definition "Biome".
 :State  a owl:Class;
   rdfs:label "State";
-  rdfs:subClassOf  :Region;
+  rdfs:subClassOf  hasco:StudyIndicator;
   skos:definition "State".
 :Region  a owl:Class;
   rdfs:subClassOf  hasco:StudyIndicator;
   rdfs:label "Region".
-
-
 
 #### SDD Atributes
 :municipalityName a owl:Class;
