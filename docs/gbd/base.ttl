@@ -10,7 +10,7 @@
 @prefix hasco: <http://hadatac.org/ont/hasco/>.
 
 <http://ws1.assis.bhz.br/gbdbr> a owl:Ontology;
-	owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.7>.
+	owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.8>.
 
 
 skos:definition a owl:AnnotationProperty.
@@ -20,101 +20,8 @@ skos:definition a owl:AnnotationProperty.
 #
 #################################################################
 
-### Relations
-:isTotalPopulationOf
-  rdf:type owl:ObjectProperty;
-  rdfs:label "Is total population of";
-  rdfs:domain :Municipality;
-  rdfs:range :TotalPopulation.
-### Attributes
-:totalDengueCases a owl:Class;
-  rdfs:label "Total Dengue cases";
-  rdfs:subClassOf  hasco:SampleIndicator;
-  skos:definition "Total Dengue cases".
-:NonNativePopulation a owl:Class;
-  rdfs:label "Non native population";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:totalDengueCasesOn100Thousand a owl:Class;
-  rdfs:label "Total dengue cases on 100 thousand";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:poverty a owl:Class;
-  rdfs:label "Poverty";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:livingWithIliterate a owl:Class;
-  rdfs:label "Population living with responsible illiterate";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:locatedInRuralArea a owl:Class;
-  rdfs:label "Residences located in a rural area";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:residencesWithInadequateSanitation a owl:Class;
-  rdfs:label "Residences with inadequate Sanitation";
-  rdfs:subClassOf :SocioEconomicVariables.
-:totalBasicAtentionUnits a owl:Class;
-  rdfs:label "Total of Basic Atention Units";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:totalDoctors a owl:Class;
-  rdfs:label "Total of doctors";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:familyStrategyUnitsTotal a owl:Class;
-  rdfs:label "Total of Family Strategy Units";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:numberOfDeathsLessThanOneYear a owl:Class;
-  rdfs:label "Number of people who died with less than one year";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:iliterates a owl:Class;
-  rdfs:label "Iliterates";
-  rdfs:subClassOf :SocioEconomicVariables;
-  skos:definition "Iliterates".
-:averageAnnualTemperature a owl:Class;
-  rdfs:label "Average annual temperature";
-  rdfs:subClassOf :ClimateVariables.
-:averageAnnualPrecipitation a owl:Class;
-  rdfs:label "Average annual precipitation";
-  rdfs:subClassOf :ClimateVariables.
-:normalizedDifferenceVegetationIndex a owl:Class;
-  rdfs:label "Normalized Difference Vegetation Index (NDVI)";
-  rdfs:subClassOf :ClimateVariables.
-:normalizedDifferenceWaterIndex a owl:Class;
-  rdfs:label "Normalized Difference Water Index (NDWI)";
-  rdfs:subClassOf :ClimateVariables.
-:municipalityName a owl:Class;
-  rdfs:label "Municipality name";
-  skos:definition "Municipality name".
-:ClimateVariables a owl:Class;
-  rdfs:label "Climate variables";
-  rdfs:subClassOf  hasco:StudyIndicator.
-:SocioEconomicVariables a owl:Class;
-  rdfs:label "Socio-Economic Variables";
-  rdfs:subClassOf  hasco:StudyIndicator.
-
-##### SDD Entities
-:TotalPopulation a owl:Class;
-  rdfs:label "Total population";
-  skos:definition "Total population".
-:greater15Population a owl:Class;
-  rdfs:label "Greater than 15 population";
-  skos:definition "Greater than 15 population".
-:population25PctMinimalIncome a owl:Class;
-  rdfs:label "Population living on less than 25% of the minimum wage";
-  skos:definition "Population living on less than 25% of the minimum wage".
-:TotalResidences a owl:Class;
-  rdfs:label "Total of Residences". 
-:populationWithPermanentResidency a owl:Class;
-  rdfs:label "Population with permanent residency". 
-:LessThan5yearsPopulation a owl:Class;
-  rdfs:label "Less than 5 years population". 
-:BirthsInTheYear a owl:Class;
-  rdfs:label "number of births in the year". 
-:SurfaceTemperature a owl:Class;
-  rdfs:label "Surface temperature". 
-:Precipitation a owl:Class;
-  rdfs:label "Precipitation". 
-:Vegetation a owl:Class;
-  rdfs:label "Vegetation". 
-:WaterBodies a owl:Class;
-  rdfs:label "Water bodies". 
-
 ##### SSD Entities
+### Biome, is on SSD and in SDD too. TODO: keep it only in SDD in futher versions 
 :Municipality a owl:Class;
   rdfs:label "Municipality";
   rdfs:subClassOf :State;
@@ -130,283 +37,117 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf  hasco:StudyIndicator;
   rdfs:label "Region".
 
-#################################################################
-#
-#    New Definitions for GBDBR - V7
-#
-#################################################################
-:CountyName a owl:Class;
+
+
+#### SDD Atributes
+:municipalityName a owl:Class;
   rdfs:label "Municipality name";
+  rdfs:subClassOf  :Municipality;
   skos:definition "Municipality name".
+:totalDengueCases a owl:Class;
+  rdfs:label "Total Dengue cases";
+  rdfs:subClassOf  :TotalPopulation;
+  skos:definition "Total Dengue cases".
+:TotalPopulation a owl:Class;
+  rdfs:label "Total population";
+  rdfs:subClassOf :Municipality;
+  skos:definition "Total population".
+:totalDengueCasesOn100Thousand a owl:Class;
+  rdfs:label "Total Dengue cases on 100 thousand";
+  rdfs:subClassOf  :TotalPopulation.
+:iliterates a owl:Class;
+  rdfs:label "Iliterates";
+  rdfs:subClassOf :greater15Population;
+  skos:definition "Iliterates".
+:residencesWithInadequateSanitation a owl:Class;
+  rdfs:label "Residences with inadequate Sanitation";
+  rdfs:subClassOf :TotalResidences.
+:poverty a owl:Class;
+  rdfs:label "Poverty";
+  rdfs:subClassOf :population25PctMinimalIncome. 
+:livingWithIliterate a owl:Class;
+  rdfs:label "Population living with responsible illiterate";
+  rdfs:subClassOf :LessThan5yearsPopulation. 
+:locatedInRuralArea a owl:Class;
+  rdfs:label "Residences located in a rural area";
+  rdfs:subClassOf :TotalResidences. 
+:NonNativePopulation a owl:Class;
+  rdfs:label "Non native population";
+  rdfs:subClassOf :populationWithPermanentResidency. 
+:totalBasicAtentionUnits a owl:Class;
+  rdfs:label "Total of Basic Atention Units";
+  rdfs:subClassOf :Municipality. 
+:totalDoctors a owl:Class;
+  rdfs:label "Total of doctors";
+  rdfs:subClassOf :Municipality. 
+:familyStrategyUnitsTotal a owl:Class;
+  rdfs:label "Total of Family Strategy Units";
+  rdfs:subClassOf :Municipality. 
+:numberOfDeathsLessThanOneYear a owl:Class;
+  rdfs:label "Number of people who died with less than one year";
+  rdfs:subClassOf :BirthsInTheYear. 
+:averageAnnualTemperature a owl:Class;
+  rdfs:label "Average annual temperature";
+  rdfs:subClassOf :SurfaceTemperature.
+:averageAnnualPrecipitation a owl:Class;
+  rdfs:label "Average annual precipitation";
+  rdfs:subClassOf :Precipitation.
+:normalizedDifferenceVegetationIndex a owl:Class;
+  rdfs:label "Normalized Difference Vegetation Index (NDVI)";
+  rdfs:subClassOf :Vegetation.
+:normalizedDifferenceWaterIndex a owl:Class;
+  rdfs:label "Normalized Difference Water Index (NDWI)";
+  rdfs:subClassOf :WaterBodies.
 
-:VariaveisClimaticas a owl:Class;
-  rdfs:label "Variaveis Climaticas";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Variaveis Climaticas".
-:VariaveisSocioEconomicas a owl:Class;
-  rdfs:label "Variaveis Socioeconomicas";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Variaveis Socioeconomicas".
-#Attributes
+#SDD Relations
+:isTotalPopulationOf
+  rdf:type owl:ObjectProperty;
+  rdfs:label "Is total population of";
+  rdfs:domain :Municipality;
+  rdfs:range :TotalPopulation.
 
-:totalCasosDengue a owl:Class;
-  rdfs:label "Total de Casos de Dengue";
-  rdfs:subClassOf  hasco:SampleIndicator;
-  skos:definition "Total de Casos de Dengue".
-:populacao a owl:Class;
-  rdfs:label "Populacao";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Populacao".
-:analfabetismoMaior15Anos a owl:Class;
-  rdfs:label "AnalfabetismoMaiores de 15 Anos";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Analfabetismo Maiores de 15 Anos".
-:saneamentoInadequado a owl:Class;
-  rdfs:label "Saneamento Inadequado";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Saneamento Inadequado".
-:pobreza a owl:Class;
-  rdfs:label "Pobreza";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Pobreza".
-:vulnerabilidadeInfantil a owl:Class;
-  rdfs:label "Vulnerabilidade Infantil";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Vulnerabilidade Infantil".
-:residenciasAreaRural a owl:Class;
-  rdfs:label "Residencias Area Rural";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Residencias Area Rural".
-:migracao a owl:Class;
-  rdfs:label "Migracao";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Migracao".
-:unidadesDeAtencaoBasica a owl:Class;
-  rdfs:label "Unidades de Atencao Basica";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Unidades de Atencao Basica".
-:totalMedicos a owl:Class;
-  rdfs:label "Total de Medicos";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Total de Medicos".
-:estrategiasSaudeFamilia a owl:Class;
-  rdfs:label "Estrategias de Saude da Familia";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Estrategias de Saude da Familia".
-:mortalidadeInfantil a owl:Class;
-  rdfs:label "Mortalidade Infantil";
-  rdfs:subClassOf :VariaveisSocioEconomicas;
-  skos:definition "Mortalidade Infantil".
-:temperaturaMedia a owl:Class;
-  rdfs:label "Temperatura Media";
-  rdfs:subClassOf :VariaveisClimaticas;
-  skos:definition "Temperatura Media".
-:precipitacao a owl:Class;
-  rdfs:label "Precipitacao";
-  rdfs:subClassOf :VariaveisClimaticas;
-  skos:definition "Precipitacao".
-:indiceCorberturaVegetacao a owl:Class;
-  rdfs:label "Indice Corbertura Vegetacao";
-  rdfs:subClassOf :VariaveisClimaticas;
-  skos:definition "Indice Corbertura Vegetacao".
-:indiceCorberturaHidrica a owl:Class;
-  rdfs:label "Indice Corbertura Hidrica";
-  rdfs:subClassOf :VariaveisClimaticas;
-  skos:definition "Indice Corbertura Hidrica".
+#SDD Entities
+:greater15Population a owl:Class;
+  rdfs:label "Greater than 15 population";
+  rdfs:subClassOf :TotalPopulation;
+  skos:definition "Greater than 15 population".
+:population25PctMinimalIncome a owl:Class;
+  rdfs:label "Population living on less than 25% of the minimum wage";
+  rdfs:subClassOf :TotalPopulation;
+  skos:definition "Population living on less than 25% of the minimum wage".
+:TotalResidences a owl:Class;
+  rdfs:subClassOf :Municipality;
+  rdfs:label "Total of Residences". 
+:populationWithPermanentResidency a owl:Class;
+  rdfs:subClassOf :TotalPopulation;
+  rdfs:label "Population with permanent residency". 
+:LessThan5yearsPopulation a owl:Class;
+  rdfs:subClassOf :TotalPopulation;
+  rdfs:label "Less than 5 years population".
+:BirthsInTheYear a owl:Class;
+  rdfs:label "number of births in the year";
+  rdfs:subClassOf :TotalPopulation;. 
+:SurfaceTemperature a owl:Class;
+  rdfs:label "Surface temperature";
+  rdfs:subClassOf :Municipality. 
+:Precipitation a owl:Class;
+  rdfs:label "Precipitation";
+  rdfs:subClassOf :Municipality. 
+:Vegetation a owl:Class;
+  rdfs:label "Vegetation";
+  rdfs:subClassOf :Municipality. 
+:WaterBodies a owl:Class;
+  rdfs:label "Water bodies";
+  rdfs:subClassOf :Municipality. 
+
+#:ClimateVariables a owl:Class;
+#  rdfs:label "Climate variables";
+#  rdfs:subClassOf  hasco:StudyIndicator.
+#:SocioEconomicVariables a owl:Class;
+#  rdfs:label "Socio-Economic Variables";
+#  rdfs:subClassOf  hasco:StudyIndicator.
 
 ##### Units
-:porMil a owl:Class;
-  rdfs:label "por mil";
-  skos:definition "por mil".
 :Celsius a owl:Class;
   rdfs:label "Celsius";
   skos:definition "Celsius".
-:NVDI a owl:Class;
-  rdfs:label "NVDI";
-  skos:definition "NVDI".
-:NDWI a owl:Class;
-  rdfs:label "NDWI";
-  skos:definition "NDWI".
-
-
-
-##### SDD Entities
-:CensoIBGE a owl:Class;
-  rdfs:label "Censo IBGE";
-  rdfs:subClassOf  :Municipality;
-  skos:definition "Censo IBGE".
-:Datasus a owl:Class;
-  rdfs:label "Datasus";
-  rdfs:subClassOf  :Municipality;
-  skos:definition "Datasus".
-:IPEA a owl:Class;
-  rdfs:label "IPEA";
-  rdfs:subClassOf  :Municipality;
-  skos:definition "IPEA".
-:GoogleEarth a owl:Class;
-  rdfs:label "GoogleEarth";
-  rdfs:subClassOf  :Municipality;
-  skos:definition "GoogleEarth".
-
-#################################################################
-#
-#    Annotation properties
-#
-#################################################################
-
-
-######################################################
-#
-# Deprecated
-#
-######################################################
-
-:CodigoUf  a owl:Class;
-  rdfs:label "Codigo UF".
-:UF a owl:Class;
-  rdfs:label "UF";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "UF".
-:CdGeocMu a owl:Class;
-  rdfs:label "CdGeoMu".
-
-:County a owl:Class;
-  rdfs:label "County";
-  skos:definition "County".
-
-#### Deprecated #######
-:biome a owl:Class;
-  rdfs:label "Biome";
-  rdfs:subClassOf hasco:StudyIndicator;
-  skos:definition "Biome".
-
-:year a owl:Class;
-  rdfs:label "Year";
-  skos:definition "Year".
-:seq a owl:Class;
-  rdfs:label "seq".
-:number a owl:Class;
-  rdfs:label "number".
-:pop a owl:Class;
-  rdfs:label "pop".
-:rate a owl:Class;
-  rdfs:label "rate".
-:rate_n a owl:Class;
-  rdfs:label "rate_n".
-:analf a owl:Class;
-  rdfs:label "analf".
-:san a owl:Class;
-  rdfs:label "san".
-:pob a owl:Class;
-  rdfs:label "pob".
-:vuln a owl:Class;
-  rdfs:label "vuln".
-:rural a owl:Class;
-  rdfs:label "rural".
-:migr a owl:Class;
-  rdfs:label "migr".
-:ab a owl:Class;
-  rdfs:label "ab".
-:med a owl:Class;
-  rdfs:label "med".
-:esf a owl:Class;
-  rdfs:label "esf".
-:tmi a owl:Class;
-  rdfs:label "tmi".
-:temp a owl:Class;
-  rdfs:label "temp".
-:prec a owl:Class;
-  rdfs:label "prec".
-:ndvi a owl:Class;
-  rdfs:label "ndvi".
-:ndwi a owl:Class;
-  rdfs:label "ndwi".
-:Data  a owl:Class;
-  rdfs:label "Data";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Data".
-:hasState a owl:Class;
-  rdfs:subClassOf  hasco:StudyIndicator;
-  rdfs:label "hasState".
-:2000   a owl:Class;
-  rdfs:label "2000";
-  skos:definition "2000".
-:2001   a owl:Class;
-  rdfs:label "2001";
-  skos:definition "2001".
-:2002  a owl:Class;
-  rdfs:label "2002";
-  skos:definition "2002".
-:2003  a owl:Class;
-  rdfs:label "2003";
-  skos:definition "2003".
-:2004  a owl:Class;
-  rdfs:label "2004";
-  skos:definition "2004".
-:2005  a owl:Class;
-  rdfs:label "2005";
-  skos:definition "2005".
-:2006  a owl:Class;
-  rdfs:label "2006";
-  skos:definition "2006".
-:2007  a owl:Class;
-  rdfs:label "2007";
-  skos:definition "2007".
-:2008  a owl:Class;
-  rdfs:label "2008";
-  skos:definition "2008".
-:2009  a owl:Class;
-  rdfs:label "2009";
-  skos:definition "2009".
-:2010  a owl:Class;
-  rdfs:label "2010";
-  skos:definition "2010".
-:Midwest a owl:Class;
-  rdfs:label "Midwest";
-  rdfs:subClassOf  hasco:StudyIndicator;
-    skos:definition "Midwest".
-:Northeast a owl:Class;
-  rdfs:label "Northeast";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Northeast".
-:North a owl:Class;
-  rdfs:label "North";
-  rdfs:subClassOf  hasco:StudyIndicator;
-    skos:definition "North".
-:Southeast a owl:Class;
-  rdfs:label "Southeast";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "Southeast".
-:South a owl:Class;
-  rdfs:label "South";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "South".
-
-:AC	a owl:Class; rdfs:label "AC";rdfs:subClassOf :gbdbr:State.
-:AL	a owl:Class; rdfs:label "AL";rdfs:subClassOf :gbdbr:State.
-:AM	a owl:Class; rdfs:label "AM";rdfs:subClassOf :gbdbr:State.
-:AP	a owl:Class; rdfs:label "AP";rdfs:subClassOf :gbdbr:State.
-:BA	a owl:Class; rdfs:label "BA";rdfs:subClassOf :gbdbr:State.
-:CE	a owl:Class; rdfs:label "CE";rdfs:subClassOf :gbdbr:State.
-:DF	a owl:Class; rdfs:label "DF";rdfs:subClassOf :gbdbr:State.
-:ES	a owl:Class; rdfs:label "ES";rdfs:subClassOf :gbdbr:State.
-:GO	a owl:Class; rdfs:label "GO";rdfs:subClassOf :gbdbr:State.
-:MA	a owl:Class; rdfs:label "MA";rdfs:subClassOf :gbdbr:State.
-:MG	a owl:Class; rdfs:label "MG";rdfs:subClassOf :gbdbr:State.
-:MS	a owl:Class; rdfs:label "MS";rdfs:subClassOf :gbdbr:State.
-:MT	a owl:Class; rdfs:label "MT";rdfs:subClassOf :gbdbr:State.
-:PA	a owl:Class; rdfs:label "PA";rdfs:subClassOf :gbdbr:State.
-:PB	a owl:Class; rdfs:label "PB";rdfs:subClassOf :gbdbr:State.
-:PE	a owl:Class; rdfs:label "PE";rdfs:subClassOf :gbdbr:State.
-:PI	a owl:Class; rdfs:label "PI";rdfs:subClassOf :gbdbr:State.
-:PR	a owl:Class; rdfs:label "PR";rdfs:subClassOf :gbdbr:State.
-:RJ	a owl:Class; rdfs:label "RJ";rdfs:subClassOf :gbdbr:State.
-:RN	a owl:Class; rdfs:label "RN";rdfs:subClassOf :gbdbr:State.
-:RO	a owl:Class; rdfs:label "RO";rdfs:subClassOf :gbdbr:State.
-:RR	a owl:Class; rdfs:label "RR";rdfs:subClassOf :gbdbr:State.
-:RS	a owl:Class; rdfs:label "RS";rdfs:subClassOf :gbdbr:State.
-:SC	a owl:Class; rdfs:label "SC";rdfs:subClassOf :gbdbr:State.
-:SE	a owl:Class; rdfs:label "SE";rdfs:subClassOf :gbdbr:State.
-:SP	a owl:Class; rdfs:label "SP";rdfs:subClassOf :gbdbr:State.
-:TO	a owl:Class; rdfs:label "TO";rdfs:subClassOf :gbdbr:State.
-
