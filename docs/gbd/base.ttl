@@ -20,53 +20,19 @@ skos:definition a owl:AnnotationProperty.
 #
 #################################################################
 
-:TotalPopulation a owl:Class;
-  rdfs:label "Total population";
-  rdfs:subClassOf :SocioEconomicVariables;
-  skos:definition "Total population".
-
+### Relations
 :isTotalPopulationOf
   rdf:type owl:ObjectProperty;
   rdfs:label "Is total population of";
   rdfs:domain :Municipality;
   rdfs:range :TotalPopulation.
-
-:greater15Population a owl:Class;
-  rdfs:label "Greater than 15 population";
-  skos:definition "Greater than 15 population".
-
-:population25PctMinimalIncome a owl:Class;
-  rdfs:label "Population living on less than 25% of the minimum wage";
-  rdfs:subClassOf :SocioEconomicVariables;
-  skos:definition "Population living on less than 25% of the minimum wage".
-
+### Attributes
 :totalDengueCases a owl:Class;
   rdfs:label "Total Dengue cases";
   rdfs:subClassOf  hasco:SampleIndicator;
   skos:definition "Total Dengue cases".
-
-:TotalResidences a owl:Class;
-  rdfs:label "Total of Residences". 
 :NonNativePopulation a owl:Class;
   rdfs:label "Non native population";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:LessThan5yearsPopulation a owl:Class;
-  rdfs:label "Less than 5 years population";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:BirthsInTheYear a owl:Class;
-  rdfs:label "number of births in the year";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:SurfaceTemperature a owl:Class;
-  rdfs:label "Surface temperature";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:Precipitation a owl:Class;
-  rdfs:label "Precipitation";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:Vegetation a owl:Class;
-  rdfs:label "Vegetation";
-  rdfs:subClassOf :SocioEconomicVariables. 
-:WaterBodies a owl:Class;
-  rdfs:label "Water bodies";
   rdfs:subClassOf :SocioEconomicVariables. 
 :totalDengueCasesOn100Thousand a owl:Class;
   rdfs:label "Total dengue cases on 100 thousand";
@@ -83,8 +49,6 @@ skos:definition a owl:AnnotationProperty.
 :residencesWithInadequateSanitation a owl:Class;
   rdfs:label "Residences with inadequate Sanitation";
   rdfs:subClassOf :SocioEconomicVariables.
-:populationWithPermanentResidency a owl:Class;
-  rdfs:label "Population with permanent residency". 
 :totalBasicAtentionUnits a owl:Class;
   rdfs:label "Total of Basic Atention Units";
   rdfs:subClassOf :SocioEconomicVariables. 
@@ -122,6 +86,49 @@ skos:definition a owl:AnnotationProperty.
 :SocioEconomicVariables a owl:Class;
   rdfs:label "Socio-Economic Variables";
   rdfs:subClassOf  hasco:StudyIndicator.
+
+##### SDD Entities
+:TotalPopulation a owl:Class;
+  rdfs:label "Total population";
+  skos:definition "Total population".
+:greater15Population a owl:Class;
+  rdfs:label "Greater than 15 population";
+  skos:definition "Greater than 15 population".
+:population25PctMinimalIncome a owl:Class;
+  rdfs:label "Population living on less than 25% of the minimum wage";
+  skos:definition "Population living on less than 25% of the minimum wage".
+:TotalResidences a owl:Class;
+  rdfs:label "Total of Residences". 
+:populationWithPermanentResidency a owl:Class;
+  rdfs:label "Population with permanent residency". 
+:LessThan5yearsPopulation a owl:Class;
+  rdfs:label "Less than 5 years population". 
+:BirthsInTheYear a owl:Class;
+  rdfs:label "number of births in the year". 
+:SurfaceTemperature a owl:Class;
+  rdfs:label "Surface temperature". 
+:Precipitation a owl:Class;
+  rdfs:label "Precipitation". 
+:Vegetation a owl:Class;
+  rdfs:label "Vegetation". 
+:WaterBodies a owl:Class;
+  rdfs:label "Water bodies". 
+
+##### SSD Entities
+:Municipality a owl:Class;
+  rdfs:label "Municipality";
+  rdfs:subClassOf :State;
+  skos:definition "Municipality".
+:Biome a owl:Class;
+  rdfs:label "Biome";
+  skos:definition "Biome".
+:State  a owl:Class;
+  rdfs:label "State";
+  rdfs:subClassOf  :Region;
+  skos:definition "State".
+:Region  a owl:Class;
+  rdfs:subClassOf  hasco:StudyIndicator;
+  rdfs:label "Region".
 
 #################################################################
 #
@@ -224,9 +231,6 @@ skos:definition a owl:AnnotationProperty.
 
 
 ##### SDD Entities
-:Municipality a owl:Class;
-  rdfs:label "Municipality";
-  skos:definition "Municipality".
 :CensoIBGE a owl:Class;
   rdfs:label "Censo IBGE";
   rdfs:subClassOf  :Municipality;
@@ -243,22 +247,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "GoogleEarth";
   rdfs:subClassOf  :Municipality;
   skos:definition "GoogleEarth".
-
-##### SSD Entities
-:Biome a owl:Class;
-  rdfs:label "Biome";
-  rdfs:subClassOf :ClimateVariables;
-  skos:definition "Biome".
-:State  a owl:Class;
-  rdfs:label "State";
-  rdfs:subClassOf  hasco:StudyIndicator;
-  skos:definition "State".
-:Region  a owl:Class;
-  rdfs:subClassOf  hasco:StudyIndicator;
-  rdfs:label "Region".
-
-
-
 
 #################################################################
 #
