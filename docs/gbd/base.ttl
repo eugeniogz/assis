@@ -21,19 +21,21 @@ skos:definition a owl:AnnotationProperty.
 #################################################################
 
 ##### SSD Entities
-### Biome, is on SSD and in SDD too. TODO: keep it only in SDD in futher versions 
+### the biome is on SSD and in SDD too. TODO: keep it only in SDD in further versions 
 :Biome a owl:Class;
   rdfs:label "Biome";
   rdfs:subClassOf :Municipality;
   skos:definition "Biome".
 :State  a owl:Class;
   rdfs:label "State";
+  rdfs:subClassOf :Region;
   skos:definition "State".
 :Region  a owl:Class;
+  rdfs:subClassOf hasco:SampleIndicator;
   rdfs:label "Region".
 :Municipality a owl:Class;
   rdfs:label "Municipality";
-  rdfs:subClassOf  hasco:SampleIndicator;
+  rdfs:subClassOf  hasco:State;
   skos:definition "Municipality".
 
 #### SDD Atributes
