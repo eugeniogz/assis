@@ -27,15 +27,17 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :Municipality;
   skos:definition "Biome".
 :Region  a owl:Class;
+  rdfs:subClassOf hasco:SampleIndicator;
   rdfs:label "Region".
 :State  a owl:Class;
   rdfs:label "State";
+  rdfs:subClassOf hasco:SampleIndicator;
   rdfs:subClassOf :Region;
   skos:definition "State".
 :Municipality a owl:Class;
   rdfs:label "Municipality";
-  rdfs:subClassOf :State;
   rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:subClassOf :State;
   skos:definition "Municipality".
 
 #### SDD Atributes
