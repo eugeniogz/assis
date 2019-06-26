@@ -10,7 +10,7 @@
 @prefix hasco: <http://hadatac.org/ont/hasco/>.
 
 <http://ws1.assis.bhz.br/gbdbr> a owl:Ontology;
-  owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.9>.
+  owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.95>.
 
 
 skos:definition a owl:AnnotationProperty.
