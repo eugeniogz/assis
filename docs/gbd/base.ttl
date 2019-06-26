@@ -34,7 +34,7 @@ skos:definition a owl:AnnotationProperty.
   skos:definition "State".
 :Municipality a owl:Class;
   rdfs:label "Municipality";
-  rdfs:subClassOf hasco:State;
+  rdfs:subClassOf :State;
   rdfs:subClassOf hasco:SampleIndicator;
   skos:definition "Municipality".
 
