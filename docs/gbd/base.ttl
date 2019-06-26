@@ -30,9 +30,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "State";
   rdfs:subClassOf :Region;
   skos:definition "State".
-:Region  a owl:Class;
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:label "Region".
 :Municipality a owl:Class;
   rdfs:label "Municipality";
   rdfs:subClassOf  hasco:State;
