@@ -98,6 +98,10 @@ skos:definition a owl:AnnotationProperty.
         rdfs:label "Month 2";
         skos:definition "Month 2".
 
+:Month3 a owl:Class;
+        rdfs:label "Month 3";
+        skos:definition "Month 3".
+
 ################################################
 #
 #   Quotes 
