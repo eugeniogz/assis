@@ -37,6 +37,7 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :State;
   skos:definition "Municipality".
 
+
 #### SDD Atributes
 
 ### Schistosomiasis
