@@ -108,11 +108,11 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Number of people who died with less than one year";
   rdfs:subClassOf :SocioEconomicVariables;
   rdfs:subClassOf :BirthsInTheYear. 
-:averageAnnualTemperature a owl:Class;
+:averageTemperature a owl:Class;
   rdfs:label "Average annual temperature";
   rdfs:subClassOf :EnviromentVariables;
   rdfs:subClassOf :SurfaceTemperature.
-:averageAnnualPrecipitation a owl:Class;
+:averagePrecipitation a owl:Class;
   rdfs:label "Average annual precipitation";
   rdfs:subClassOf :EnviromentVariables;
   rdfs:subClassOf :Precipitation.
