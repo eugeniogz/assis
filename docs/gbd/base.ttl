@@ -168,6 +168,9 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Surface temperature";
   rdfs:subClassOf :EnviromentVariables;  
   rdfs:subClassOf :Municipality. 
+:Surface a owl:Class;
+  rdfs:label "Surface";
+  rdfs:subClassOf :Municipality. 
 :Precipitation a owl:Class;
   rdfs:label "Precipitation";
   rdfs:subClassOf :EnviromentVariables;
