@@ -72,11 +72,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Total Dengue cases on 100 thousand";
   rdfs:subClassOf hasco:SampleIndicator;
   rdfs:subClassOf  :TotalPopulation.
-:iliterates a owl:Class;
-  rdfs:label "Iliterates";
-  rdfs:subClassOf :greater15Population;
-  rdfs:subClassOf :SocioEconomicVariables;
-  skos:definition "Iliterates".
 :residencesWithInadequateSanitation a owl:Class;
   rdfs:label "Residences with inadequate Sanitation";
   rdfs:subClassOf :SocioEconomicVariables;
@@ -183,6 +178,11 @@ skos:definition a owl:AnnotationProperty.
   rdfs:label "Water bodies";
   rdfs:subClassOf :EnviromentVariables;
   rdfs:subClassOf :Municipality. 
+:Iliterates a owl:Class;
+  rdfs:label "Iliterates";
+  rdfs:subClassOf :greater15Population;
+  rdfs:subClassOf :SocioEconomicVariables;
+  skos:definition "Iliterates".
 
 :EnviromentVariables a owl:Class;
   rdfs:label "Climate variables";
