@@ -1,4 +1,5 @@
 @prefix : <http://ws1.assis.bhz.br/gbd#>.
+@prefix kb: <http://ws1.assis.bhz.br/gbd/kb#>.
 @prefix obo: <http://purl.obolibrary.org/obo/>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
@@ -39,6 +40,22 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf hasco:SampleIndicator;
   rdfs:subClassOf :State;
   skos:definition "Municipality".
+
+kb:SBJ-NO-GBDBR a :Region;
+  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:label "North".
+kb:SBJ-NE-GBDBR a :Region;
+  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:label "Northeast".	
+kb:SBJ-SE-GBDBR a :Region;
+  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:label "Southeast".	
+kb:SBJ-SU-GBDBR a :Region;
+  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:label "South".	
+kb:SBJ-CO-GBDBR a :Region;
+  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:label "Center-west".
 
 #### SDD Atributes
 :municipalityName a owl:Class;
