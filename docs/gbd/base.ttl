@@ -17,7 +17,7 @@
 skos:definition a owl:AnnotationProperty.
 #################################################################
 #
-#   Version 8
+#   Version 9
 #
 #################################################################
 
@@ -38,33 +38,16 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :State;
   skos:definition "Municipality".
 
-kb:SBJ-NO-GBDBR a :Region;
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:label "North".
-kb:SBJ-NE-GBDBR a :Region;
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:label "Northeast".	
-kb:SBJ-SE-GBDBR a :Region;
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:label "Southeast".	
-kb:SBJ-SU-GBDBR a :Region;
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:label "South".	
-kb:SBJ-CO-GBDBR a :Region;
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:label "Center-west".
 
 #### SDD Atributes
 
 ### Schistosomiasis
 :totalSchistosomiasisCases a owl:Class;
   rdfs:label "Total Schostosomiasis cases";
-  rdfs:subClassOf  :TotalPopulation;
   rdfs:subClassOf hasco:SampleIndicator;
   skos:definition "Total Schostosomiasis cases".
 :totalSchistosomiasisOn100Thousand a owl:Class;
   rdfs:label "Total Schostosomiasis cases on 100 thousand";
-  rdfs:subClassOf  :TotalPopulation;
   rdfs:subClassOf hasco:SampleIndicator;
   skos:definition "Total Schostosomiasis cases on 100 thousand".
 ### End Schistosomiasis
@@ -76,7 +59,6 @@ kb:SBJ-CO-GBDBR a :Region;
   skos:definition "Municipality name".
 :totalDengueCases a owl:Class;
   rdfs:label "Total Dengue cases";
-  rdfs:subClassOf  :TotalPopulation;
   rdfs:subClassOf hasco:SampleIndicator;
   skos:definition "Total Dengue cases".
 :TotalPopulation a owl:Class;
@@ -86,8 +68,7 @@ kb:SBJ-CO-GBDBR a :Region;
   skos:definition "Total population".
 :totalDengueCasesOn100Thousand a owl:Class;
   rdfs:label "Total Dengue cases on 100 thousand";
-  rdfs:subClassOf hasco:SampleIndicator;
-  rdfs:subClassOf  :TotalPopulation.
+  rdfs:subClassOf hasco:SampleIndicator.
 :residencesWithInadequateSanitation a owl:Class;
   rdfs:label "Residences with inadequate Sanitation";
   rdfs:subClassOf :SocioEconomicVariables;
