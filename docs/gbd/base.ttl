@@ -35,7 +35,7 @@ skos:definition a owl:AnnotationProperty.
   skos:definition "State".
 :Municipality a owl:Class;
   rdfs:label "Municipality";
-  rdfs:subClassOf :State;
+  rdfs:subClassOf hasco:StudyIndicator;
   skos:definition "Municipality".
 
 
@@ -44,31 +44,29 @@ skos:definition a owl:AnnotationProperty.
 ### Schistosomiasis
 :totalSchistosomiasisCases a owl:Class;
   rdfs:label "Total Schostosomiasis cases";
-  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:subClassOf :Diseases;
   skos:definition "Total Schostosomiasis cases".
 :totalSchistosomiasisOn100Thousand a owl:Class;
   rdfs:label "Total Schostosomiasis cases on 100 thousand";
-  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:subClassOf :Diseases;
   skos:definition "Total Schostosomiasis cases on 100 thousand".
 ### End Schistosomiasis
 
 :municipalityName a owl:Class;
-  rdfs:label "Municipality name";
+  rdfs:label "Name";
   rdfs:subClassOf  :Municipality;
-  rdfs:subClassOf hasco:StudyIndicator;
-  skos:definition "Municipality name".
+  skos:definition "Name".
 :totalDengueCases a owl:Class;
   rdfs:label "Total Dengue cases";
-  rdfs:subClassOf hasco:SampleIndicator;
+  rdfs:subClassOf :Diseases;
   skos:definition "Total Dengue cases".
 :TotalPopulation a owl:Class;
   rdfs:label "Total population";
-  rdfs:subClassOf :SocioEconomicVariables;
   rdfs:subClassOf :Municipality;
   skos:definition "Total population".
 :totalDengueCasesOn100Thousand a owl:Class;
   rdfs:label "Total Dengue cases on 100 thousand";
-  rdfs:subClassOf hasco:SampleIndicator.
+  rdfs:subClassOf :Diseases.
 :residencesWithInadequateSanitation a owl:Class;
   rdfs:label "Residences with inadequate Sanitation";
   rdfs:subClassOf :SocioEconomicVariables;
@@ -91,16 +89,13 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :populationWithPermanentResidency. 
 :totalBasicAtentionUnits a owl:Class;
   rdfs:label "Total of Basic Atention Units";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :totalDoctors a owl:Class;
   rdfs:label "Total of doctors";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :familyStrategyUnitsTotal a owl:Class;
   rdfs:label "Total of Family Strategy Units";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :numberOfDeathsLessThanOneYear a owl:Class;
   rdfs:label "Number of people who died with less than one year";
   rdfs:subClassOf :SocioEconomicVariables;
@@ -186,6 +181,9 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf  hasco:StudyIndicator.
 :SocioEconomicVariables a owl:Class;
   rdfs:label "Socio-Economic Variables";
+  rdfs:subClassOf  hasco:StudyIndicator.
+:Diseases a owl:Class;
+  rdfs:label "Diseases";
   rdfs:subClassOf  hasco:StudyIndicator.
 
 ##### Units
