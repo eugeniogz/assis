@@ -136,7 +136,6 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :SocioEconomicVariables;
   skos:definition "Population living on less than 25% of the minimum wage".
 :TotalResidences a owl:Class;
-  rdfs:subClassOf :Municipality;
   rdfs:subClassOf :SocioEconomicVariables;
   rdfs:label "Total of Residences". 
 :populationWithPermanentResidency a owl:Class;
@@ -153,23 +152,19 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :TotalPopulation;. 
 :SurfaceTemperature a owl:Class;
   rdfs:label "Surface temperature";
-  rdfs:subClassOf :EnviromentVariables;  
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :EnviromentVariables. 
 :Surface a owl:Class;
   rdfs:label "Surface";
   rdfs:subClassOf :Municipality. 
 :Precipitation a owl:Class;
   rdfs:label "Precipitation";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :EnviromentVariables. 
 :Vegetation a owl:Class;
   rdfs:label "Vegetation";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :EnviromentVariables. 
 :WaterBodies a owl:Class;
   rdfs:label "Water bodies";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :Municipality. 
+  rdfs:subClassOf :EnviromentVariables. 
 :Iliterates a owl:Class;
   rdfs:label "Iliterates";
   rdfs:subClassOf :greater15Population;
