@@ -69,24 +69,19 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :Diseases.
 :residencesWithInadequateSanitation a owl:Class;
   rdfs:label "Residences with inadequate Sanitation";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :TotalResidences.
+  rdfs:subClassOf :SocioEconomicVariables.
 :poverty a owl:Class;
   rdfs:label "Poverty";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :population25PctMinimalIncome. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :livingWithIliterate a owl:Class;
   rdfs:label "Population living with responsible illiterate";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :LessThan5yearsPopulation. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :locatedInRuralArea a owl:Class;
   rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:label "Residences located in a rural area";
-  rdfs:subClassOf :TotalResidences. 
+  rdfs:label "Residences located in a rural area". 
 :NonNativePopulation a owl:Class;
   rdfs:label "Non native population";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :populationWithPermanentResidency. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :totalBasicAtentionUnits a owl:Class;
   rdfs:label "Total of Basic Atention Units";
   rdfs:subClassOf :SocioEconomicVariables. 
@@ -98,24 +93,19 @@ skos:definition a owl:AnnotationProperty.
   rdfs:subClassOf :SocioEconomicVariables. 
 :numberOfDeathsLessThanOneYear a owl:Class;
   rdfs:label "Number of people who died with less than one year";
-  rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:subClassOf :BirthsInTheYear. 
+  rdfs:subClassOf :SocioEconomicVariables. 
 :averageTemperature a owl:Class;
   rdfs:label "Average annual temperature";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :SurfaceTemperature.
+  rdfs:subClassOf :EnviromentVariables.
 :averagePrecipitation a owl:Class;
   rdfs:label "Average annual precipitation";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :Precipitation.
+  rdfs:subClassOf :EnviromentVariables.
 :normalizedDifferenceVegetationIndex a owl:Class;
   rdfs:label "Normalized Difference Vegetation Index (NDVI)";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :Vegetation.
+  rdfs:subClassOf :EnviromentVariables.
 :normalizedDifferenceWaterIndex a owl:Class;
   rdfs:label "Normalized Difference Water Index (NDWI)";
-  rdfs:subClassOf :EnviromentVariables;
-  rdfs:subClassOf :WaterBodies.
+  rdfs:subClassOf :EnviromentVariables.
 
 #SDD Relations
 :isTotalPopulationOf
