@@ -57,7 +57,7 @@ skos:definition a owl:AnnotationProperty.
 
 :municipalityName a owl:Class;
   rdfs:label "Name";
-  rdfs:subClassOf  :Municipality;
+  rdfs:subClassOf  :SocioEconomicVariables;
   skos:definition "Name".
 :totalDengueCases a owl:Class;
   rdfs:label "Total Dengue cases";
