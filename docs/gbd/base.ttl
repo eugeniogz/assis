@@ -25,18 +25,21 @@ skos:definition a owl:AnnotationProperty.
 ### the biome is on SSD and in SDD too. TODO: keep it only in SDD in further versions 
 :Biome a owl:Class;
   rdfs:label "Biome";
-  rdfs:subClassOf :Municipality;
+  rdfs:subClassOf :SocioEconomicVariables;
   skos:definition "Biome".
 :Region  a owl:Class;
+  rdfs:subClassOf :SocioEconomicVariables;
   rdfs:label "Region".
 :State  a owl:Class;
   rdfs:label "State";
-  rdfs:subClassOf :Region;
   skos:definition "State".
 :Municipality a owl:Class;
   rdfs:label "Municipality";
-  rdfs:subClassOf hasco:StudyIndicator;
+  rdfs:subClassOf hasco:SocioEconomicVariables;
   skos:definition "Municipality".
+:UF a owl:Class;
+  rdfs:subClassOf :SocioEconomicVariables;
+  rdfs:label "State".
 
 
 #### SDD Atributes
