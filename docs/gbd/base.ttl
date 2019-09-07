@@ -39,7 +39,7 @@ skos:definition a owl:AnnotationProperty.
   skos:definition "Municipality".
 :UF a owl:Class;
   rdfs:subClassOf :SocioEconomicVariables;
-  rdfs:label "State".
+  rdfs:label "UF".
 
 
 #### SDD Atributes
