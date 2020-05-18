@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+  <owl:Ontology rdf:about="http://ws1.assis.bhz.br/gbdbr">
+    <owl:versionIRI rdf:resource="http://ws1.assis.bhz.br/gbdbr/0.97"/>
+  </owl:Ontology>
+
+  <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition">
+  </owl:AnnotationProperty>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Biome">
+    <rdfs:label>Biome</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <skos:definition>Biome</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Region">
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:label>Region</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#State">
+    <rdfs:label>State</rdfs:label>
+    <skos:definition>State</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Municipality">
+    <rdfs:label>Municipality</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <skos:definition>Municipality</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#UF">
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:label>UF</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#totalSchistosomiasisCases">
+    <rdfs:label>Total Schostosomiasis cases</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#Diseases"/>
+    <skos:definition>Total Schostosomiasis cases</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#totalSchistosomiasisOn100Thousand">
+    <rdfs:label>Total Schostosomiasis cases on 100 thousand</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#Diseases"/>
+    <skos:definition>Total Schostosomiasis cases on 100 thousand</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#municipalityName">
+    <rdfs:label>Name</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <skos:definition>Name</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#totalDengueCases">
+    <rdfs:label>Total Dengue cases</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#Diseases"/>
+    <skos:definition>Total Dengue cases</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#TotalPopulation">
+    <rdfs:label>Total population</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#Municipality"/>
+    <skos:definition>Total population</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#totalDengueCasesOn100Thousand">
+    <rdfs:label>Total Dengue cases on 100 thousand</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#Diseases"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#residencesWithInadequateSanitation">
+    <rdfs:label>Residences with inadequate Sanitation</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#poverty">
+    <rdfs:label>Poverty</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#livingWithIliterate">
+    <rdfs:label>Population living with responsible illiterate</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#locatedInRuralArea">
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:label>Residences located in a rural area</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#NonNativePopulation">
+    <rdfs:label>Non native population</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#totalBasicAtentionUnits">
+    <rdfs:label>Total of Basic Atention Units</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#totalDoctors">
+    <rdfs:label>Total of doctors</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#familyStrategyUnitsTotal">
+    <rdfs:label>Total of Family Strategy Units</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#numberOfDeathsLessThanOneYear">
+    <rdfs:label>Number of people who died with less than one year</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#averageTemperature">
+    <rdfs:label>Average annual temperature</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#averagePrecipitation">
+    <rdfs:label>Average annual precipitation</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#normalizedDifferenceVegetationIndex">
+    <rdfs:label>Normalized Difference Vegetation Index (NDVI)</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#normalizedDifferenceWaterIndex">
+    <rdfs:label>Normalized Difference Water Index (NDWI)</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:ObjectProperty rdf:about="http://ws1.assis.bhz.br/gbd#isTotalPopulationOf">
+    <rdfs:label>Is total population of</rdfs:label>
+    <rdfs:domain rdf:resource="http://ws1.assis.bhz.br/gbd#Municipality"/>
+    <rdfs:range rdf:resource="http://ws1.assis.bhz.br/gbd#TotalPopulation"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#greater15Population">
+    <rdfs:label>Greater than 15 population</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#TotalPopulation"/>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <skos:definition>Greater than 15 population</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#population25PctMinimalIncome">
+    <rdfs:label>Population living on less than 25% of the minimum wage</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#TotalPopulation"/>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <skos:definition>Population living on less than 25% of the minimum wage</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#TotalResidences">
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:label>Total of Residences</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#populationWithPermanentResidency">
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#TotalPopulation"/>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:label>Population with permanent residency</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#LessThan5yearsPopulation">
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#TotalPopulation"/>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:label>Less than 5 years population</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#BirthsInTheYear">
+    <rdfs:label>number of births in the year</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#TotalPopulation"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#SurfaceTemperature">
+    <rdfs:label>Surface temperature</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Surface">
+    <rdfs:label>Surface</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#Municipality"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Precipitation">
+    <rdfs:label>Precipitation</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Vegetation">
+    <rdfs:label>Vegetation</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#WaterBodies">
+    <rdfs:label>Water bodies</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#EnviromentVariables"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Iliterates">
+    <rdfs:label>Iliterates</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#greater15Population"/>
+    <rdfs:subClassOf rdf:resource="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables"/>
+    <skos:definition>Iliterates</skos:definition>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#EnviromentVariables">
+    <rdfs:label>Climate variables</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://hadatac.org/ont/hasco/StudyIndicator"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#SocioEconomicVariables">
+    <rdfs:label>Socio-Economic Variables</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://hadatac.org/ont/hasco/StudyIndicator"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Diseases">
+    <rdfs:label>Diseases</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://hadatac.org/ont/hasco/StudyIndicator"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="http://ws1.assis.bhz.br/gbd#Celsius">
+    <rdfs:label>Celsius</rdfs:label>
+    <skos:definition>Celsius</skos:definition>
+  </owl:Class>
+
+</rdf:RDF>
