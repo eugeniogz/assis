@@ -19,12 +19,14 @@
 :State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
 :Municipality rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
 
-:totalSchistosomiasisCases rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
-:totalSchistosomiasisOn100Thousand rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
+:totalSchistosomiasisCases rdf:type owl:DatatypeProperty; rdfs:domain :Diseases; rdfs:range rdfs:Literal.
+:totalSchistosomiasisOn100Thousand rdf:type owl:DatatypeProperty; rdfs:domain :Diseases; rdfs:range rdfs:Literal.
+:totalDengueCases  rdf:type owl:DatatypeProperty; rdfs:domain :Diseases; rdfs:range rdfs:Literal.
+:totalDengueCasesOn100Thousand  rdf:type owl:DatatypeProperty;  rdfs:domain :Diseases; rdfs:range rdfs:Literal.
 
-:Dengue rdfs:subClassOf :Diseases.
-:totalDengueCases  rdf:type owl:DatatypeProperty; rdfs:domain :Dengue; rdfs:range rdfs:Literal.
-:totalDengueCasesOn100Thousand  rdf:type owl:DatatypeProperty;  rdfs:domain :Dengue; rdfs:range rdfs:Literal.
+:Data1 rdf:type :Diseases;
+:totalDengueCases "42".
+
 
 # :municipalityName rdfs:p hasco:attributeOf :Municipality.
 # :TotalPopulation rdfs:subClassOf :SocioEconomicVariables.
