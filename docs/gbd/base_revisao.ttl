@@ -14,25 +14,27 @@
   owl:versionIRI <http://ws1.assis.bhz.br/gbdbr_rev1/0.1>.
 
 
-:Biome rdfs:subClassOf :SocioEconomicVariables.
-:Region rdfs:subClassOf :SocioEconomicVariables.
-:State rdfs:subClassOf :SocioEconomicVariables.
-:Municipality rdfs:subClassOf :SocioEconomicVariables.
-:totalSchistosomiasisCases rdfs:subClassOf :Schistosomiasis.
-:totalSchistosomiasisOn100Thousand rdfs:subClassOf :Schistosomiasis.
-:Schistosomiasis rdfs:subClassOf :Diseases.
+:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+:Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+:State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+:Municipality rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+
+:totalSchistosomiasisCases rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
+:totalSchistosomiasisOn100Thousand rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
+
 :Dengue rdfs:subClassOf :Diseases.
-:municipalityName hasco:attributeOf :Municipality.
-:totalDengueCases rdfs:subClassOf :Dengue.
-:totalDengueCasesOn100Thousand rdfs:subClassOf :Dengue.
-:TotalPopulation rdfs:subClassOf :SocioEconomicVariables.
-:residencesWithInadequateSanitation rdfs:subClassOf :SocioEconomicVariables.
-:totalBasicAtentionUnits rdfs:subClassOf :SocioEconomicVariables. 
-:numberOfDeathsLessThanOneYear rdfs:subClassOf :SocioEconomicVariables. 
-:averageTemperature rdfs:subClassOf :EnviromentVariables.
-:averagePrecipitation rdfs:subClassOf :EnviromentVariables.
-:normalizedDifferenceVegetationIndex rdfs:subClassOf :EnviromentVariables.
-:normalizedDifferenceWaterIndex rdfs:subClassOf :EnviromentVariables.
+:totalDengueCases  rdf:type owl:DatatypeProperty; rdfs:domain :Dengue; rdfs:range rdfs:Literal.
+:totalDengueCasesOn100Thousand  rdf:type owl:DatatypeProperty;  rdfs:domain :Dengue; rdfs:range rdfs:Literal.
+
+# :municipalityName rdfs:p hasco:attributeOf :Municipality.
+# :TotalPopulation rdfs:subClassOf :SocioEconomicVariables.
+# :residencesWithInadequateSanitation rdfs:subClassOf :SocioEconomicVariables.
+# :totalBasicAtentionUnits rdfs:subClassOf :SocioEconomicVariables. 
+# :numberOfDeathsLessThanOneYear rdfs:subClassOf :SocioEconomicVariables. 
+# :averageTemperature rdfs:subClassOf :EnviromentVariables.
+# :averagePrecipitation rdfs:subClassOf :EnviromentVariables.
+# :normalizedDifferenceVegetationIndex rdfs:subClassOf :EnviromentVariables.
+# :normalizedDifferenceWaterIndex rdfs:subClassOf :EnviromentVariables.
 
 #SDD Relations
 #:isTotalPopulationOf rdfs:domain :Municipality;
