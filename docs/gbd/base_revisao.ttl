@@ -17,6 +17,10 @@
 # :EnviromentVariables rdfs:subClassOf  hasco:StudyIndicator.
 # :SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
 # :DiseaseIndicators rdfs:subClassOf  hasco:StudyIndicator.
+:EnviromentVariables rdf:type owl:Class.
+:SocioEconomicVariables rdf:type owl:Class.
+:DiseaseIndicators rdf:type owl:Class.
+
 
 :Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
 :Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
@@ -24,6 +28,8 @@
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
 :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 :hasState  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :State.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicVariables; rdfs:range hasco:NamedTime.
+hasco:NamedTime rdf:type owl:Class.
 
 :County rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
 :CountyName rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
@@ -33,6 +39,7 @@
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
 :TotalPopulation rdf:type owl:Class.
 :hasDiseaseIndicators  rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :DiseaseIndicators.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicators; rdfs:range hasco:NamedTime.
 
 :Schistosomiasis  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicators.
 :totalSchistosomiasisCases rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
@@ -47,6 +54,7 @@
 :totalDengueCases "42".
 
 :Surface rdf:type owl:Class; rdfs:subClassOf :EnviromentVariables.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentVariables; rdfs:range hasco:NamedTime.
 
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 
