@@ -15,8 +15,8 @@
 
 hasco:StudyIndicator a owl:Class.
 
-#:SocioEconomicVariables rdfs:subPropertyOf  owl:DatatypeProperty.
-:SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
+:SocioEconomicVariables rdfs:subPropertyOf  owl:DatatypeProperty.
+# :SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
 
 :County rdf:type owl:Class.
 :CountyName  rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
