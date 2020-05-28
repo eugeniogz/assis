@@ -20,8 +20,8 @@ hasco:StudyIndicator a owl:Class.
 
 :County rdf:type owl:Class.
 :CountyName  rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
-:residencesWithInadequateSanitation a owl:Class. #rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
-:isRelatedTo rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicVariables; rdfs:range :residencesWithInadequateSanitation.
+:residencesWithInadequateSanitation rdfs:subClassOf :SocioEconomicVariables.
+:hasResidencesWithInadequatedSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :residencesWithInadequateSanitation.
 
 # hasco:StudyIndicator rdf:type owl:Class.
 # :EnviromentVariables rdfs:subClassOf  hasco:StudyIndicator.
