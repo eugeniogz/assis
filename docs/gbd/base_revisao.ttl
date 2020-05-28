@@ -11,9 +11,9 @@
 @prefix hasco: <http://hadatac.org/ont/hasco/>.
 
 <http://ws1.assis.bhz.br/gbd#> a owl:Ontology;
-  owl:versionIRI <http://ws1.assis.bhz.br/gbdbr_rev1/0.1>.
+  owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
-hasco:StudyIndicator a owl:Property.
+hasco:StudyIndicator a owl:DatatypeProperty.
 
 :SocioEconomicVariables rdfs:subPropertyOf  hasco:StudyIndicator.
 
