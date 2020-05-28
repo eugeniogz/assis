@@ -14,38 +14,38 @@
   owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
 hasco:StudyIndicator rdf:type owl:Class.
-:EnviromentVariables rdfs:subClassOf  hasco:StudyIndicator.
-:SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
-:DiseaseIndicators rdfs:subClassOf  hasco:StudyIndicator.
-:EnviromentVariables rdf:type owl:Class.
-:SocioEconomicVariables rdf:type owl:Class.
-:DiseaseIndicators rdf:type owl:Class.
+:EnviromentIndicator rdfs:subClassOf  hasco:StudyIndicator.
+:SocioEconomicIndicator rdfs:subClassOf  hasco:StudyIndicator.
+:DiseaseIndicator rdfs:subClassOf  hasco:StudyIndicator.
+:EnviromentIndicator rdf:type owl:Class.
+:SocioEconomicIndicator rdf:type owl:Class.
+:DiseaseIndicator rdf:type owl:Class.
 
 
-:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
-:Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
-:State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
+:Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
+:State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
 :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 :hasState  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :State.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicVariables; rdfs:range hasco:NamedTime.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
 hasco:NamedTime rdf:type owl:Class.
 
-:County rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+:County rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :CountyName rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
 :residencesWithInadequateSanitation rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
 :totalBasicAtentionUnits rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
 :numberOfDeathsLessThanOneYear rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
 :TotalPopulation rdf:type owl:Class.
-:hasDiseaseIndicators  rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :DiseaseIndicators.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicators; rdfs:range hasco:NamedTime.
+:hasDiseaseIndicator  rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :DiseaseIndicator.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicator; rdfs:range hasco:NamedTime.
 
-:Schistosomiasis  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicators.
+:Schistosomiasis  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicator.
 :totalSchistosomiasisCases rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
 :totalSchistosomiasisOn100Thousand rdf:type owl:DatatypeProperty; rdfs:domain :Schistosomiasis; rdfs:range rdfs:Literal.
 
-:Dengue  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicators.
+:Dengue  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicator.
 :totalDengueCases rdf:type owl:DatatypeProperty; rdfs:domain :Dengue; rdfs:range rdfs:Literal.
 
 :totalDengueCasesOn100Thousand  rdf:type owl:DatatypeProperty;  rdfs:domain :Dengue; rdfs:range rdfs:Literal.
@@ -53,8 +53,8 @@ hasco:NamedTime rdf:type owl:Class.
 :Dengue1 rdf:type :Dengue;
 :totalDengueCases "42".
 
-:Surface rdf:type owl:Class; rdfs:subClassOf :EnviromentVariables.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentVariables; rdfs:range hasco:NamedTime.
+:Surface rdf:type owl:Class; rdfs:subClassOf :EnviromentIndicator.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
 
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 
@@ -74,30 +74,30 @@ SDD Relations
 
 #SDD Entities
 # :TotalResidences a owl:Class;
-#   rdfs:subClassOf :SocioEconomicVariables;
+#   rdfs:subClassOf :SocioEconomicIndicator;
 #   rdfs:label "Total of Residences". 
 # :BirthsInTheYear a owl:Class;
 #   rdfs:label "number of births in the year";
-#   rdfs:subClassOf :SocioEconomicVariables;
+#   rdfs:subClassOf :SocioEconomicIndicator;
 #   rdfs:subClassOf :TotalPopulation;. 
 # :SurfaceTemperature a owl:Class;
 #   rdfs:label "Surface temperature";
-#   rdfs:subClassOf :EnviromentVariables. 
+#   rdfs:subClassOf :EnviromentIndicator. 
 # :Surface a owl:Class;
 #   rdfs:label "Surface";
 #   rdfs:subClassOf :County. 
 # :Precipitation a owl:Class;
 #   rdfs:label "Precipitation";
-#   rdfs:subClassOf :EnviromentVariables. 
+#   rdfs:subClassOf :EnviromentIndicator. 
 # :Vegetation a owl:Class;
 #   rdfs:label "Vegetation";
-#   rdfs:subClassOf :EnviromentVariables. 
+#   rdfs:subClassOf :EnviromentIndicator. 
 # :WaterBodies a owl:Class;
 #   rdfs:label "Water bodies";
-#   rdfs:subClassOf :EnviromentVariables. 
+#   rdfs:subClassOf :EnviromentIndicator. 
 # :Iliterates a owl:Class;
 #   rdfs:label "Iliterates";
 #   rdfs:subClassOf :greater15Population;
-#   rdfs:subClassOf :SocioEconomicVariables;
+#   rdfs:subClassOf :SocioEconomicIndicator;
 #   skos:definition "Iliterates".
 
