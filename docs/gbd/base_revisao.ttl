@@ -13,10 +13,10 @@
 <http://ws1.assis.bhz.br/gbd#> a owl:Ontology;
   owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
-hasco:StudyIndicator rdf:type owl:Class.
-:EnviromentVariables rdfs:subClassOf  hasco:StudyIndicator.
-:SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
-:DiseaseIndicators rdfs:subClassOf  hasco:StudyIndicator.
+# hasco:StudyIndicator rdf:type owl:Class.
+# :EnviromentVariables rdfs:subClassOf  hasco:StudyIndicator.
+# :SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
+# :DiseaseIndicators rdfs:subClassOf  hasco:StudyIndicator.
 
 :Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
 :Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
@@ -38,6 +38,7 @@ hasco:NamedTime rdf:type owl:Class.
 :hasNumberOfDeathsLessThanOneYear rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :numberOfDeathsLessThanOneYear.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
 :TotalPopulation rdf:type owl:Class.
+
 :hasDiseaseIndicators  rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :DiseaseIndicators.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicators; rdfs:range hasco:NamedTime.
 
