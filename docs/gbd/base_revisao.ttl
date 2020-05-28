@@ -13,14 +13,15 @@
 <http://ws1.assis.bhz.br/gbd#> a owl:Ontology;
   owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
-# hasco:StudyIndicator a owl:DatatypeProperty.
+hasco:StudyIndicator a owl:Class.
 
 #:SocioEconomicVariables rdfs:subPropertyOf  owl:DatatypeProperty.
-:SocioEconomicVariables rdfs:subClassOf  owl:DatatypeProperty.
+:SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
 
 :County rdf:type owl:Class.
-:CountyName  rdfs:subClassOf :SocioEconomicVariables; rdfs:domain :County; rdfs:range rdfs:Literal.
-:residencesWithInadequateSanitation rdfs:subPropertyOf :SocioEconomicVariables; rdfs:domain :County; rdfs:range rdfs:Literal.
+:CountyName  rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
+:residencesWithInadequateSanitation rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
+:isRelatedTo rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicVariables; rdfs:range :residencesWithInadequateSanitation.
 
 # hasco:StudyIndicator rdf:type owl:Class.
 # :EnviromentVariables rdfs:subClassOf  hasco:StudyIndicator.
