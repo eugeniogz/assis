@@ -43,15 +43,15 @@ hasco:NamedTime rdf:type owl:Class.
 
 :Schistosomiasis  rdf:type owl:Class.
 :TotalSchistosomiasisCases rdfs:subClassOf :DiseaseIndicators.
-:hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :Schistosomiasis; rdfs:range :TotalSchistosomiasisCases.
+:isRelatedTo rdf:type owl:ObjectProperty; rdfs:domain :TotalSchistosomiasisCases; rdfs:range :Schistosomiasis.
 :TotalSchistosomiasisOn100Thousand rdfs:subClassOf :DiseaseIndicators.
-:hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :Schistosomiasis; rdfs:range :TotalSchistosomiasisOn100Thousand.
+:isRelatedTo rdf:type owl:ObjectProperty; rdfs:domain :TotalSchistosomiasisOn100Thousand; rdfs:range :Schistosomiasis.
 
 :Dengue  rdf:type owl:Class.
 :TotalDengueCases rdfs:subClassOf :DiseaseIndicators.
-:hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :Dengue; rdfs:range :TotalDengueCases.
+:isRelatedTo rdf:type owl:ObjectProperty; rdfs:domain :TotalDengueCases; rdfs:range :Dengue.
 :TotalDengueCasesOn100Thousand rdfs:subClassOf :DiseaseIndicators.
-:hasTotalDengueCasesOn100Thousand rdf:type owl:ObjectProperty;  rdfs:domain :Dengue; rdfs:range :TotalDengueCasesOn100Thousand.
+:isRelatedTo rdf:type owl:ObjectProperty;  rdfs:domain :TotalDengueCasesOn100Thousand; rdfs:range :Dengue.
 
 :hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisCases.
 :hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisOn100Thousand.
