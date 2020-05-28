@@ -27,7 +27,7 @@ hasco:StudyIndicator rdf:type owl:Class.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicVariables; rdfs:range hasco:NamedTime.
 hasco:NamedTime rdf:type owl:Class.
 
-:County rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
+:County rdf:type owl:Class.
 :CountyName rdfs:subClassOf :SocioEconomicVariables.
 :hasName rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :CountyName.
 :residencesWithInadequateSanitation  rdfs:subClassOf :SocioEconomicVariables.
@@ -41,39 +41,40 @@ hasco:NamedTime rdf:type owl:Class.
 :hasDiseaseIndicators  rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :DiseaseIndicators.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicators; rdfs:range hasco:NamedTime.
 
-:Schistosomiasis  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicators.
-:totalSchistosomiasisCases rdfs:subClassOf :SocioEconomicVariables.
+:Schistosomiasis  rdf:type owl:Class.
+:totalSchistosomiasisCases rdfs:subClassOf :DiseaseIndicators.
 :hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :Schistosomiasis; rdfs:range :totalSchistosomiasisCases.
-:totalSchistosomiasisOn100Thousand rdfs:subClassOf :SocioEconomicVariables.
+:totalSchistosomiasisOn100Thousand rdfs:subClassOf :DiseaseIndicators.
 :hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :Schistosomiasis; rdfs:range :totalSchistosomiasisOn100Thousand.
 
-:Dengue  rdf:type owl:Class; rdfs:subClassOf :DiseaseIndicators.
-:totalDengueCases rdfs:subClassOf :SocioEconomicVariables.
+:Dengue  rdf:type owl:Class.
+:totalDengueCases rdfs:subClassOf :DiseaseIndicators.
 :hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :Dengue; rdfs:range :totalDengueCases.
-
-:totalDengueCasesOn100Thousand rdfs:subClassOf :SocioEconomicVariables.
+:totalDengueCasesOn100Thousand rdfs:subClassOf :DiseaseIndicators.
 :hasTotalDengueCasesOn100Thousand rdf:type owl:ObjectProperty;  rdfs:domain :Dengue; rdfs:range :totalDengueCasesOn100Thousand.
 
 :Dengue1 rdf:type :Dengue;
 :totalDengueCases "42".
 
-:Surface rdf:type owl:Class; rdfs:subClassOf :EnviromentVariables.
+:Surface rdf:type owl:Class.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentVariables; rdfs:range hasco:NamedTime.
-
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 
-:averageTemperature   rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range rdfs:Literal.
-:averagePrecipitation   rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range rdfs:Literal.
-:normalizedDifferenceVegetationIndex   rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range rdfs:Literal.
-:normalizedDifferenceWaterIndex   rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range rdfs:Literal.
+:averageTemperature rdfs:subClassOf :EnviromentVariables.
+:hasAverageTemperatura  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :averageTemperature.
+:averagePrecipitation rdfs:subClassOf :EnviromentVariables.
+:hasAveragePrecipitation  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :averagePrecipitation.
+:normalizedDifferenceVegetationIndex rdfs:subClassOf :EnviromentVariables.
+:hasNormalizedDifferenceVegetationIndex  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :normalizedDifferenceVegetationIndex.
+:normalizedDifferenceWaterIndex rdfs:subClassOf :EnviromentVariables.
+:hasNormalizedDifferenceWaterIndex  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :normalizedDifferenceWaterIndex.
 
 
 :population25PctMinimalIncome rdfs:subClassOf :SocioEconomicVariables.
 :hasPopulation25PctMinimalIncome rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :population25PctMinimalIncome.
 :Iliterates rdfs:subClassOf :SocioEconomicVariables.
 :hasIliterates rdf:type owl:ObjectProperty;  rdfs:domain :Greater15Population; rdfs:range :Iliterates.
-:Greater15Population a owl:Class; rdfs:subClassOf :TotalPopulation.
+:Greater15Population rdfs:subClassOf :TotalPopulation.
 
-#SDD Relations
 :isTotalPopulationOf rdfs:domain :County;
  rdfs:range :TotalPopulation.
