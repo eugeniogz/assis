@@ -13,9 +13,9 @@
 <http://ws1.assis.bhz.br/gbd#> a owl:Ontology;
   owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
-hasco:StudyIndicator a owl:DatatypeProperty.
+# hasco:StudyIndicator a owl:DatatypeProperty.
 
-:SocioEconomicVariables rdfs:subPropertyOf  hasco:StudyIndicator.
+:SocioEconomicVariables rdfs:subPropertyOf  owl:DatatypeProperty.
 
 :County rdf:type owl:Class.
 :CountyName  rdfs:subPropertyOf :SocioEconomicVariables; rdfs:domain :County; rdfs:range rdfs:Literal.
