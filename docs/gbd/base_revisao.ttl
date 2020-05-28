@@ -41,13 +41,13 @@ hasco:NamedTime rdf:type owl:Class.
 
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicator; rdfs:range hasco:NamedTime.
 
-:PopulationWithSchistosomiasis  rdf:type owl:Class.
+:PopulationWithSchistosomiasis rdfs:subClassOf :TotalPopulation.
 :TotalSchistosomiasisCases rdfs:subClassOf :DiseaseIndicator.
 :hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :PopulationWithSchistosomiasis; rdfs:range :TotalSchistosomiasisCases.
 :TotalSchistosomiasisOn100Thousand rdfs:subClassOf :DiseaseIndicator.
 :hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :PopulationWithSchistosomiasis; rdfs:range :TotalSchistosomiasisOn100Thousand.
 
-:PopulationWithDengue  rdf:type owl:Class.
+:PopulationWithDengue rdfs:subClassOf :TotalPopulation.
 :TotalDengueCases rdfs:subClassOf :DiseaseIndicator.
 :hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :PopulationWithDengue; rdfs:range :TotalDengueCases.
 :TotalDengueCasesOn100Thousand rdfs:subClassOf :DiseaseIndicator.
