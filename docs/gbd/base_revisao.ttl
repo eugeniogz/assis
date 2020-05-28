@@ -18,7 +18,7 @@
 # :SocioEconomicVariables rdfs:subClassOf  hasco:StudyIndicator.
 # :DiseaseIndicators rdfs:subClassOf  hasco:StudyIndicator.
 :EnviromentVariables rdf:type owl:Class.
-:SocioEconomicVariables rdf:type owl:Class.
+:SocioEconomicVariables rdf:type owl:DatatypeProperty.
 :DiseaseIndicators rdf:type owl:Class.
 
 
@@ -33,7 +33,9 @@ hasco:NamedTime rdf:type owl:Class.
 
 :County rdf:type owl:Class; rdfs:subClassOf :SocioEconomicVariables.
 :CountyName rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
-:residencesWithInadequateSanitation rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
+:residencesWithInadequateSanitation rdf:type owl:DatatypeProperty;
+rdfs:subClassOf :SocioEconomicVariables;
+rdfs:domain :County; rdfs:range rdfs:Literal.
 :totalBasicAtentionUnits rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
 :numberOfDeathsLessThanOneYear rdf:type owl:DatatypeProperty; rdfs:domain :County; rdfs:range rdfs:Literal.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
