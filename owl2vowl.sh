@@ -1,0 +1,1 @@
+java -jar owl2vowl.jar -iri "http://ws1.assis.bhz.br/gbd/base_revisao.ttl"
