@@ -31,37 +31,25 @@
     "id" : "10",
     "type" : "owl:Class"
   }, {
-    "id" : "16",
-    "type" : "owl:Class"
-  }, {
-    "id" : "19",
+    "id" : "18",
     "type" : "owl:Class"
   }, {
     "id" : "7",
     "type" : "owl:Class"
   }, {
+    "id" : "20",
+    "type" : "owl:Class"
+  }, {
     "id" : "21",
     "type" : "owl:Class"
   }, {
-    "id" : "24",
-    "type" : "owl:Class"
-  }, {
-    "id" : "26",
-    "type" : "owl:Class"
-  }, {
-    "id" : "25",
-    "type" : "owl:Class"
-  }, {
-    "id" : "20",
+    "id" : "19",
     "type" : "owl:Class"
   }, {
     "id" : "12",
     "type" : "owl:Class"
   }, {
-    "id" : "43",
-    "type" : "owl:Class"
-  }, {
-    "id" : "38",
+    "id" : "32",
     "type" : "owl:Class"
   }, {
     "id" : "2",
@@ -73,16 +61,13 @@
     "id" : "4",
     "type" : "owl:Class"
   }, {
-    "id" : "18",
+    "id" : "17",
     "type" : "owl:Class"
   }, {
     "id" : "6",
     "type" : "owl:Class"
   }, {
-    "id" : "34",
-    "type" : "owl:Class"
-  }, {
-    "id" : "28",
+    "id" : "23",
     "type" : "owl:Class"
   }, {
     "id" : "14",
@@ -91,10 +76,7 @@
     "id" : "3",
     "type" : "owl:Class"
   }, {
-    "id" : "23",
-    "type" : "owl:Class"
-  }, {
-    "id" : "31",
+    "id" : "26",
     "type" : "owl:Class"
   }, {
     "id" : "15",
@@ -141,23 +123,14 @@
     "id" : "10",
     "superClasses" : [ "15" ]
   }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#ResidencesWithInadequateSanitation",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "ResidencesWithInadequateSanitation"
-    },
-    "id" : "16",
-    "superClasses" : [ "15" ]
-  }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#TotalSchistosomiasisCases",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
     "instances" : 0,
     "label" : {
       "IRI-based" : "TotalSchistosomiasisCases"
     },
-    "id" : "19",
-    "superClasses" : [ "20" ]
+    "id" : "18",
+    "superClasses" : [ "19" ]
   }, {
     "iri" : "http://hadatac.org/ont/hasco/NamedTime",
     "baseIri" : "http://hadatac.org/ont/hasco",
@@ -168,32 +141,14 @@
     "attributes" : [ "external" ],
     "id" : "7"
   }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#Population25PctMinimalIncome",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "Population25PctMinimalIncome"
-    },
-    "id" : "21",
-    "superClasses" : [ "15" ]
-  }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#Greater15Population",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
     "instances" : 0,
     "label" : {
       "IRI-based" : "Greater15Population"
     },
-    "id" : "24",
-    "superClasses" : [ "25" ]
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#NumberOfDeathsLessThanOneYear",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "NumberOfDeathsLessThanOneYear"
-    },
-    "id" : "26",
-    "superClasses" : [ "15" ]
+    "id" : "20",
+    "superClasses" : [ "21" ]
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#TotalPopulation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -201,8 +156,8 @@
     "label" : {
       "IRI-based" : "TotalPopulation"
     },
-    "subClasses" : [ "24" ],
-    "id" : "25"
+    "subClasses" : [ "20" ],
+    "id" : "21"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#SchistosomiasisIndicator",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -210,8 +165,8 @@
     "label" : {
       "IRI-based" : "SchistosomiasisIndicator"
     },
-    "subClasses" : [ "19", "31" ],
-    "id" : "20",
+    "subClasses" : [ "18", "26" ],
+    "id" : "19",
     "superClasses" : [ "12" ]
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#DiseaseIndicator",
@@ -220,7 +175,7 @@
     "label" : {
       "IRI-based" : "DiseaseIndicator"
     },
-    "subClasses" : [ "20", "11" ],
+    "subClasses" : [ "19", "11" ],
     "id" : "12"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#Iliterate",
@@ -229,16 +184,7 @@
     "label" : {
       "IRI-based" : "Iliterate"
     },
-    "id" : "43",
-    "superClasses" : [ "15" ]
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#Biome",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "Biome"
-    },
-    "id" : "38",
+    "id" : "32",
     "superClasses" : [ "15" ]
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#NormalizedDifferenceVegetationIndex",
@@ -274,21 +220,12 @@
     "label" : {
       "IRI-based" : "County"
     },
-    "id" : "18"
+    "id" : "17"
   }, {
     "instances" : 0,
     "union" : [ "0", "12", "15" ],
     "attributes" : [ "anonymous", "union" ],
     "id" : "6"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#CountyName",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "CountyName"
-    },
-    "id" : "34",
-    "superClasses" : [ "15" ]
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#Surface",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -296,7 +233,7 @@
     "label" : {
       "IRI-based" : "Surface"
     },
-    "id" : "28"
+    "id" : "23"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#TotalDengueCases",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -316,23 +253,14 @@
     "id" : "3",
     "superClasses" : [ "0" ]
   }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#BasicAtentionUnit",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "BasicAtentionUnit"
-    },
-    "id" : "23",
-    "superClasses" : [ "15" ]
-  }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#TotalSchistosomiasisOn100Thousand",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
     "instances" : 0,
     "label" : {
       "IRI-based" : "TotalSchistosomiasisOn100Thousand"
     },
-    "id" : "31",
-    "superClasses" : [ "20" ]
+    "id" : "26",
+    "superClasses" : [ "19" ]
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#SocioEconomicIndicator",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -340,7 +268,7 @@
     "label" : {
       "IRI-based" : "SocioEconomicIndicator"
     },
-    "subClasses" : [ "43", "38", "16", "10", "26", "34", "9", "21", "23" ],
+    "subClasses" : [ "32", "10", "9" ],
     "id" : "15"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#TotalDengueCasesOn100Thousand",
@@ -359,25 +287,37 @@
     "id" : "8",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "17",
+    "id" : "16",
     "type" : "owl:objectProperty"
   }, {
     "id" : "22",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "24",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "25",
+    "type" : "owl:objectProperty"
   }, {
     "id" : "27",
-    "type" : "owl:objectProperty"
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "28",
+    "type" : "rdfs:SubClassOf"
   }, {
     "id" : "29",
-    "type" : "owl:objectProperty"
+    "type" : "rdfs:SubClassOf"
   }, {
     "id" : "30",
-    "type" : "owl:objectProperty"
+    "type" : "rdfs:SubClassOf"
   }, {
-    "id" : "32",
+    "id" : "31",
     "type" : "rdfs:SubClassOf"
   }, {
     "id" : "33",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "34",
     "type" : "rdfs:SubClassOf"
   }, {
     "id" : "35",
@@ -389,11 +329,14 @@
     "id" : "37",
     "type" : "rdfs:SubClassOf"
   }, {
+    "id" : "38",
+    "type" : "owl:objectProperty"
+  }, {
     "id" : "39",
     "type" : "rdfs:SubClassOf"
   }, {
     "id" : "40",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
   }, {
     "id" : "41",
     "type" : "rdfs:SubClassOf"
@@ -401,76 +344,25 @@
     "id" : "42",
     "type" : "rdfs:SubClassOf"
   }, {
-    "id" : "44",
+    "id" : "43",
     "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "44",
+    "type" : "owl:objectProperty"
   }, {
     "id" : "45",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
   }, {
     "id" : "46",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
   }, {
     "id" : "47",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
   }, {
     "id" : "48",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
   }, {
     "id" : "49",
-    "type" : "rdfs:SubClassOf"
-  }, {
-    "id" : "50",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "51",
-    "type" : "rdfs:SubClassOf"
-  }, {
-    "id" : "52",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "53",
-    "type" : "rdfs:SubClassOf"
-  }, {
-    "id" : "54",
-    "type" : "rdfs:SubClassOf"
-  }, {
-    "id" : "55",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "56",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "57",
-    "type" : "rdfs:SubClassOf"
-  }, {
-    "id" : "58",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "59",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "60",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "61",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "62",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "63",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "64",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "65",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "66",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "67",
     "type" : "owl:objectProperty"
   } ],
   "propertyAttribute" : [ {
@@ -500,14 +392,9 @@
     "label" : {
       "IRI-based" : "hasState"
     },
-    "domain" : "18",
+    "domain" : "17",
     "attributes" : [ "object" ],
-    "id" : "17"
-  }, {
-    "range" : "15",
-    "domain" : "23",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "22"
+    "id" : "16"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasAveragePrecipitation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -515,9 +402,9 @@
     "label" : {
       "IRI-based" : "hasAveragePrecipitation"
     },
-    "domain" : "28",
+    "domain" : "23",
     "attributes" : [ "object" ],
-    "id" : "27"
+    "id" : "22"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasNormalizedDifferenceVegetationIndex",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -525,109 +412,84 @@
     "label" : {
       "IRI-based" : "hasNormalizedDifferenceVegetationIndex"
     },
-    "domain" : "28",
+    "domain" : "23",
     "attributes" : [ "object" ],
-    "id" : "29"
+    "id" : "24"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasTotalSchistosomiasisOn100Thousand",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "31",
+    "range" : "26",
     "label" : {
       "IRI-based" : "hasTotalSchistosomiasisOn100Thousand"
     },
-    "domain" : "25",
-    "attributes" : [ "object" ],
-    "id" : "30"
-  }, {
-    "range" : "15",
-    "domain" : "9",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "32"
-  }, {
-    "range" : "15",
-    "domain" : "34",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "33"
-  }, {
-    "range" : "15",
     "domain" : "21",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "35"
-  }, {
-    "range" : "15",
-    "domain" : "16",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "36"
-  }, {
-    "range" : "15",
-    "domain" : "38",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "37"
-  }, {
-    "range" : "15",
-    "domain" : "26",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "39"
-  }, {
-    "range" : "15",
-    "domain" : "10",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "40"
-  }, {
-    "range" : "12",
-    "domain" : "20",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "41"
-  }, {
-    "range" : "15",
-    "domain" : "43",
-    "attributes" : [ "anonymous", "object" ],
-    "id" : "42"
+    "attributes" : [ "object" ],
+    "id" : "25"
   }, {
     "range" : "12",
     "domain" : "11",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "44"
+    "id" : "27"
+  }, {
+    "range" : "12",
+    "domain" : "19",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "28"
+  }, {
+    "range" : "15",
+    "domain" : "9",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "29"
+  }, {
+    "range" : "19",
+    "domain" : "26",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "30"
+  }, {
+    "range" : "19",
+    "domain" : "18",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "31"
   }, {
     "range" : "0",
     "domain" : "2",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "45"
+    "id" : "33"
   }, {
     "range" : "0",
     "domain" : "3",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "46"
+    "id" : "34"
   }, {
     "range" : "0",
     "domain" : "4",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "47"
+    "id" : "35"
   }, {
     "range" : "11",
     "domain" : "13",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "48"
+    "id" : "36"
   }, {
     "range" : "11",
     "domain" : "14",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "49"
+    "id" : "37"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasTotalSchistosomiasisCases",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "19",
+    "range" : "18",
     "label" : {
       "IRI-based" : "hasTotalSchistosomiasisCases"
     },
-    "domain" : "25",
+    "domain" : "21",
     "attributes" : [ "object" ],
-    "id" : "50"
+    "id" : "38"
   }, {
-    "range" : "25",
-    "domain" : "24",
+    "range" : "21",
+    "domain" : "20",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "51"
+    "id" : "39"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasTotalDengueCases",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -635,54 +497,24 @@
     "label" : {
       "IRI-based" : "hasTotalDengueCases"
     },
-    "domain" : "25",
+    "domain" : "21",
     "attributes" : [ "object" ],
-    "id" : "52"
+    "id" : "40"
   }, {
-    "range" : "20",
-    "domain" : "19",
+    "range" : "15",
+    "domain" : "32",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "53"
+    "id" : "41"
   }, {
-    "range" : "20",
-    "domain" : "31",
+    "range" : "15",
+    "domain" : "10",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "54"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#hasNumberOfDeathsLessThanOneYear",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "26",
-    "label" : {
-      "IRI-based" : "hasNumberOfDeathsLessThanOneYear"
-    },
-    "domain" : "18",
-    "attributes" : [ "object" ],
-    "id" : "55"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#hasPopulation25PctMinimalIncome",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "21",
-    "label" : {
-      "IRI-based" : "hasPopulation25PctMinimalIncome"
-    },
-    "domain" : "25",
-    "attributes" : [ "object" ],
-    "id" : "56"
+    "id" : "42"
   }, {
     "range" : "0",
     "domain" : "1",
     "attributes" : [ "anonymous", "object" ],
-    "id" : "57"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#hasName",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "34",
-    "label" : {
-      "IRI-based" : "hasName"
-    },
-    "domain" : "18",
-    "attributes" : [ "object" ],
-    "id" : "58"
+    "id" : "43"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasAverageTemperature",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -690,19 +522,19 @@
     "label" : {
       "IRI-based" : "hasAverageTemperature"
     },
-    "domain" : "28",
+    "domain" : "23",
     "attributes" : [ "object" ],
-    "id" : "59"
+    "id" : "44"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasSurface",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "28",
+    "range" : "23",
     "label" : {
       "IRI-based" : "hasSurface"
     },
-    "domain" : "18",
+    "domain" : "17",
     "attributes" : [ "object" ],
-    "id" : "60"
+    "id" : "45"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasTotalDengueCasesOn100Thousand",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -710,59 +542,29 @@
     "label" : {
       "IRI-based" : "hasTotalDengueCasesOn100Thousand"
     },
-    "domain" : "25",
+    "domain" : "21",
     "attributes" : [ "object" ],
-    "id" : "61"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#hasBiome",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "38",
-    "label" : {
-      "IRI-based" : "hasBiome"
-    },
-    "domain" : "18",
-    "attributes" : [ "object" ],
-    "id" : "62"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#hasResidencesWithInadequateSanitation",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "16",
-    "label" : {
-      "IRI-based" : "hasResidencesWithInadequateSanitation"
-    },
-    "domain" : "18",
-    "attributes" : [ "object" ],
-    "id" : "63"
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#hasBasicAtentionUnit",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "23",
-    "label" : {
-      "IRI-based" : "hasBasicAtentionUnit"
-    },
-    "domain" : "18",
-    "attributes" : [ "object" ],
-    "id" : "64"
+    "id" : "46"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasIliterate",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "43",
+    "range" : "32",
     "label" : {
       "IRI-based" : "hasIliterate"
     },
-    "domain" : "24",
+    "domain" : "20",
     "attributes" : [ "object" ],
-    "id" : "65"
+    "id" : "47"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasTotalPopulation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "25",
+    "range" : "21",
     "label" : {
       "IRI-based" : "hasTotalPopulation"
     },
-    "domain" : "18",
+    "domain" : "17",
     "attributes" : [ "object" ],
-    "id" : "66"
+    "id" : "48"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasNormalizedDifferenceWaterIndex",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -770,8 +572,8 @@
     "label" : {
       "IRI-based" : "hasNormalizedDifferenceWaterIndex"
     },
-    "domain" : "28",
+    "domain" : "23",
     "attributes" : [ "object" ],
-    "id" : "67"
+    "id" : "49"
   } ]
 }

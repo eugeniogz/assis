@@ -18,27 +18,31 @@
 # :SocioEconomicIndicator rdfs:subClassOf  hasco:StudyIndicator.
 # :DiseaseIndicator rdfs:subClassOf  hasco:StudyIndicator.
 
-:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
+# :Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
-:hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
+# :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 :hasState  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :State.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
 hasco:NamedTime rdf:type owl:Class.
 
 :County rdf:type owl:Class.
-:CountyName rdfs:subClassOf :SocioEconomicIndicator.
-:hasName rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :CountyName.
-:ResidencesWithInadequateSanitation  rdfs:subClassOf :SocioEconomicIndicator.
-:hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :ResidencesWithInadequateSanitation.
-:BasicAtentionUnit rdfs:subClassOf :SocioEconomicIndicator.
-:hasBasicAtentionUnit rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :BasicAtentionUnit.
-:NumberOfDeathsLessThanOneYear rdfs:subClassOf :SocioEconomicIndicator.
-:hasNumberOfDeathsLessThanOneYear rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :NumberOfDeathsLessThanOneYear.
+# :CountyName rdfs:subClassOf :SocioEconomicIndicator.
+# :hasName rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :CountyName.
+# :ResidencesWithInadequateSanitation  rdfs:subClassOf :SocioEconomicIndicator.
+# :hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :ResidencesWithInadequateSanitation.
+# :BasicAtentionUnit rdfs:subClassOf :SocioEconomicIndicator.
+# :hasBasicAtentionUnit rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :BasicAtentionUnit.
+# :NumberOfDeathsLessThanOneYear rdfs:subClassOf :SocioEconomicIndicator.
+# :hasNumberOfDeathsLessThanOneYear rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :NumberOfDeathsLessThanOneYear.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
 :TotalPopulation rdf:type owl:Class.
-
+# :Population25PctMinimalIncome rdfs:subClassOf :SocioEconomicIndicator.
+# :hasPopulation25PctMinimalIncome rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :Population25PctMinimalIncome.
+:Iliterate rdfs:subClassOf :SocioEconomicIndicator.
+:hasIliterate rdf:type owl:ObjectProperty;  rdfs:domain :Greater15Population; rdfs:range :Iliterate.
+:Greater15Population rdfs:subClassOf :TotalPopulation.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicator; rdfs:range hasco:NamedTime.
 
 :SchistosomiasisIndicator rdfs:subClassOf :DiseaseIndicator.
@@ -74,8 +78,3 @@ hasco:NamedTime rdf:type owl:Class.
 :hasNormalizedDifferenceWaterIndex  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :NormalizedDifferenceWaterIndex.
 
 
-:Population25PctMinimalIncome rdfs:subClassOf :SocioEconomicIndicator.
-:hasPopulation25PctMinimalIncome rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :Population25PctMinimalIncome.
-:Iliterate rdfs:subClassOf :SocioEconomicIndicator.
-:hasIliterate rdf:type owl:ObjectProperty;  rdfs:domain :Greater15Population; rdfs:range :Iliterate.
-:Greater15Population rdfs:subClassOf :TotalPopulation.
