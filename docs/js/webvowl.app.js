@@ -8223,7 +8223,7 @@ webvowl.app =
 	  var showLoadingDetails = false;
 	  var visibilityStatus = true;
 	  
-	  var DEFAULT_JSON_NAME = "foaf"; // This file is loaded by default
+	  var DEFAULT_JSON_NAME = "./gbd/base_revisao"; // This file is loaded by default
 	  var conversion_sessionId;
 	  
 	  /** variable defs **/
@@ -8733,7 +8733,13 @@ webvowl.app =
 	      var fileToRead = "./data/" + ontology + ".json";
 	      if ( f2r ) {
 	        fileToRead = f2r;
-	      } // overwrite the newOntology Index
+		  } else {
+			var fileToRead = ontology + ".json";
+			if ( f2r ) {
+			  fileToRead = f2r;
+			}
+		  }
+		   // overwrite the newOntology Index
 	      // read file
 	      d3.xhr(fileToRead, "application/json", function ( error, request ){
 	        var loadingSuccessful = !error;
