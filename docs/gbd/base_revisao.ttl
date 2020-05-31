@@ -41,17 +41,17 @@ hasco:NamedTime rdf:type owl:Class.
 
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicator; rdfs:range hasco:NamedTime.
 
-:PopulationWithSchistosomiasis rdfs:subClassOf :TotalPopulation.
-:TotalSchistosomiasisCases rdfs:subClassOf :DiseaseIndicator.
-:hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :PopulationWithSchistosomiasis; rdfs:range :TotalSchistosomiasisCases.
-:TotalSchistosomiasisOn100Thousand rdfs:subClassOf :DiseaseIndicator.
-:hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :PopulationWithSchistosomiasis; rdfs:range :TotalSchistosomiasisOn100Thousand.
+:SchistosomiasisIndicator rdfs:subClassOf :DiseaseIndicator.
+:TotalSchistosomiasisCases rdfs:subClassOf :SchistosomiasisIndicator.
+:hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisCases.
+:TotalSchistosomiasisOn100Thousand rdfs:subClassOf :SchistosomiasisIndicator.
+:hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisOn100Thousand.
 
-:PopulationWithDengue rdfs:subClassOf :TotalPopulation.
-:TotalDengueCases rdfs:subClassOf :DiseaseIndicator.
-:hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :PopulationWithDengue; rdfs:range :TotalDengueCases.
-:TotalDengueCasesOn100Thousand rdfs:subClassOf :DiseaseIndicator.
-:hasTotalDengueCasesOn100Thousand rdf:type owl:ObjectProperty;  rdfs:domain :PopulationWithDengue; rdfs:range :TotalDengueCasesOn100Thousand.
+:DengueIndicator rdfs:subClassOf :TotalPopulation.
+:TotalDengueCases rdfs:subClassOf :DengueIndicator.
+:hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalDengueCases.
+:TotalDengueCasesOn100Thousand rdfs:subClassOf :DengueIndicator.
+:hasTotalDengueCasesOn100Thousand rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :TotalDengueCasesOn100Thousand.
 
 #:hasDengue rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :PopulationWithDengue.
 #:hasSchistosomiasis rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :Schistosmiasis.
