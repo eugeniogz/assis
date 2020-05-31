@@ -1959,8 +1959,24 @@ webvowl.app =
 	    comment += " %\\end{document} \n";
 	    comment += " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n";
 	    
-	    
-	    var texString = comment + "\\definecolor{imageBGCOLOR}{HTML}{FFFFFF} \n" +
+	    start="\\RequirePackage{shellesc}\n"+
+		"\\RequirePackage{pdftexcmds}\n"+
+		"%cspell:disable\n"+
+		"\\makeatletter\n"+
+		"  \\let\\pdfshellescape\\pdf@shellescap\n"+
+		"\\makeatother\n"+
+		"\\RequirePackage{luatex85}\n"+
+		"\\documentclass[tikz,preview,11pt]{standalone}\n"+
+		"\\usepackage{helvet}\n"+
+		"\\usepackage{lmodern}\n"+
+		"\\usepackage[T1]{fontenc}\n"+
+		"\\usepackage[portuguese]{babel}\n"+
+		"\\usetikzlibrary{decorations.markings,decorations.shapes,decorations,arrows,automata,backgrounds,petri,shapes.geometric}\n"+
+		"\\usepackage{xcolor}\n"+  
+		"\\begin{document}\n"
+		
+		
+	    var texString = comment + start + "\\definecolor{imageBGCOLOR}{HTML}{FFFFFF} \n" +
 	      "\\definecolor{owlClassColor}{HTML}{AACCFF}\n" +
 	      "\\definecolor{owlObjectPropertyColor}{HTML}{AACCFF}\n" +
 	      "\\definecolor{owlExternalClassColor}{HTML}{AACCFF}\n" +
@@ -1971,10 +1987,10 @@ webvowl.app =
 	      "\\definecolor{rdfPropertyColor}{HTML}{CC99CC}\n" +
 	      "\\definecolor{unionColor}{HTML}{6699cc}\n" +
 	      "\\begin{center} \n" +
-	      "\\resizebox{\\linewidth}{!}{\n" +
+	      "{\n" +
 	      
-	      "\\begin{tikzpicture}[framed]\n" +
-	      "\\clip (" + bbox[0] + "pt , " + bbox[1] + "pt ) rectangle (" + bbox[2] + "pt , " + bbox[3] + "pt);\n" +
+	      "\\begin{tikzpicture}\n" +
+	      //"\\clip (" + bbox[0] + "pt , " + bbox[1] + "pt ) rectangle (" + bbox[2] + "pt , " + bbox[3] + "pt);\n" +
 	      "\\tikzstyle{dashed}=[dash pattern=on 4pt off 4pt] \n" +
 	      "\\tikzstyle{dotted}=[dash pattern=on 2pt off 2pt] \n" +
 	      "\\fontfamily{sans-serif}{\\fontsize{12}{12}\\selectfont}\n \n";
@@ -2569,7 +2585,7 @@ webvowl.app =
 	      }
 	    }
 	    
-	    texString += "\\end{tikzpicture}\n}\n \\end{center}\n";
+	    texString += "\\end{tikzpicture}\n}\n \\end{center}\n\\end{document}";
 	    
 	    //   console.log("Tex Output\n"+ texString);
 	    var dataURI = "data:text/json;charset=utf-8," + encodeURIComponent(texString);
