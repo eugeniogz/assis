@@ -24,7 +24,7 @@
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
 # :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 :hasState  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :State.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
+:hasYear1  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
 hasco:NamedTime rdf:type owl:Class.
 
 :County rdf:type owl:Class.
@@ -65,7 +65,7 @@ hasco:NamedTime rdf:type owl:Class.
 # :totalDengueCases "42".
 
 :Surface rdf:type owl:Class.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
+:hasYear2  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 
 :AverageTemperature rdfs:subClassOf :EnviromentIndicator.
