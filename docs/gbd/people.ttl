@@ -22,7 +22,7 @@
 
 #ABox - A editar
 :EricMiller rdf:type owl:Class.
-:type owl:ObjectProperty; rdfs:domain :Person; rdfs:range :EricMiller.
+:type a owl:ObjectProperty; rdfs:domain :Person; rdfs:range :EricMiller.
 :fullName a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
 :personalTitle a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
 :mailbox rdf:type owl:ObjectProperty; rdfs:domain :EricMiller; rdfs:range :Mailbox.
