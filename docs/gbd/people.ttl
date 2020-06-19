@@ -20,6 +20,7 @@
     :mailbox mb;
     :personalTitle "Dr."
 :mb a :Mailbox;
+    value "mailto:em@w3.org";
 :State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :fullName a owl:DataTypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
 :personalTitle a owl:DataTypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
