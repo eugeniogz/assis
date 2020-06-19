@@ -25,5 +25,5 @@
 :type a owl:ObjectProperty; rdfs:domain :EricMiller; rdfs:range :Person.
 :fullName a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdf:PlainLiteral.
 :personalTitle a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
-:mailbox rdf:type owl:ObjectProperty; rdfs:domain :EricMiller; rdfs:range :Mailbox.
+:e-mail rdf:type owl:ObjectProperty; rdfs:domain :EricMiller; rdfs:range :Mailbox.
 :Mailbox a owl:Class.
