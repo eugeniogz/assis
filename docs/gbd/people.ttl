@@ -21,7 +21,7 @@
 # :Mailbox a owl:Class.
 
 #ABox - A editar
-:EricMiller rdf:type :Person.
+:EricMiller rdfs:subClassOf :Person.
 :fullName a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
 :personalTitle a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
 :mailbox rdf:type owl:ObjectProperty; rdfs:domain :EricMiller; rdfs:range :Mailbox.
