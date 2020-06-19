@@ -14,14 +14,15 @@
   owl:versionIRI <http://ws1.assis.bhz.br/people/0.1>.
 
 
-:Person rdf:type owl:Class.
-# :Me a  :Person;
-#     :fullName "Eric Miller";
-#     :mailbox :mb;
-#     :personalTitle "Dr.".
-# :mb a :Mailbox;
-#     :value "mailto:em@w3.org".
-:fullName a owl:DatatypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
-:personalTitle a owl:DatatypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
-:mailbox rdf:type owl:ObjectProperty; rdfs:domain :Person; rdfs:range :Mailbox.
+# :Person rdf:type owl:Class.
+# :fullName a owl:DatatypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
+# :personalTitle a owl:DatatypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
+# :mailbox rdf:type owl:ObjectProperty; rdfs:domain :Person; rdfs:range :Mailbox.
+# :Mailbox a owl:Class.
+
+#ABox - A editar
+:EricMiller rdf:type :Person.
+:fullName a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
+:personalTitle a owl:DatatypeProperty; rdfs:domain :EricMiller; rdfs:range rdfs:Literal.
+:mailbox rdf:type owl:ObjectProperty; rdfs:domain :EricMiller; rdfs:range :Mailbox.
 :Mailbox a owl:Class.
