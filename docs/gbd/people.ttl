@@ -17,7 +17,7 @@
 :Person rdf:type owl:Class.
 :Me a  :Person;
     :fullName "Eric Miller";
-    :mailbox mb;
+    :mailbox :mb;
     :personalTitle "Dr."
 :mb a :Mailbox;
     value "mailto:em@w3.org";
