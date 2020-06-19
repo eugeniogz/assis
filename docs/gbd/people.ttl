@@ -18,10 +18,9 @@
 :Me a  :Person;
     :fullName "Eric Miller";
     :mailbox :mb;
-    :personalTitle "Dr."
+    :personalTitle "Dr.".
 :mb a :Mailbox;
     value "mailto:em@w3.org";
-:State rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :fullName a owl:DataTypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
 :personalTitle a owl:DataTypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
 :mailbox rdf:type owl:ObjectProperty; rdfs:domain :Person; rdfs:range :Mailbox.
