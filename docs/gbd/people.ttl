@@ -14,7 +14,7 @@
   owl:versionIRI <http://ws1.assis.bhz.br/people/0.1>.
 
 
-# :Person rdf:type owl:Class.
+:Person rdf:type owl:Class.
 # :fullName a owl:DatatypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
 # :personalTitle a owl:DatatypeProperty; rdfs:domain :Person; rdfs:range rdfs:Literal.
 # :mailbox rdf:type owl:ObjectProperty; rdfs:domain :Person; rdfs:range :Mailbox.
