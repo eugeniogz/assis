@@ -1,0 +1,159 @@
+@prefix : <http://ws1.assis.bhz.br/gbd#>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix sio: <http://semanticscience.org/resource/>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix hasco: <http://hadatac.org/ont/hasco/>.
+
+<http://ws1.assis.bhz.br/gbdbr> a owl:Ontology;
+	owl:versionIRI <http://ws1.assis.bhz.br/gbdbr/0.7>.
+
+
+skos:definition a owl:AnnotationProperty.
+
+#################################################################
+#
+#    New Definitions for GBDBR - V7
+#
+#################################################################
+:VariaveisClimaticas a owl:Class;
+  rdfs:label "Variaveis Climaticas";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "Variaveis Climaticas".
+:VariaveisSocioEconomicas a owl:Class;
+  rdfs:label "Variaveis Socioeconomicas";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "Variaveis Socioeconomicas".
+#Attributes
+:totalCasosDengue a owl:Class;
+  rdfs:label "Total de Casos de Dengue";
+  rdfs:subClassOf  hasco:SampleIndicator;
+  skos:definition "Total de Casos de Dengue".
+:populacao a owl:Class;
+  rdfs:label "Populacao";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Populacao".
+:analfabetismoMaior15Anos a owl:Class;
+  rdfs:label "AnalfabetismoMaiores de 15 Anos";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Analfabetismo Maiores de 15 Anos".
+:saneamentoInadequado a owl:Class;
+  rdfs:label "Saneamento Inadequado";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Saneamento Inadequado".
+:pobreza a owl:Class;
+  rdfs:label "Pobreza";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Pobreza".
+:vulnerabilidadeInfantil a owl:Class;
+  rdfs:label "Vulnerabilidade Infantil";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Vulnerabilidade Infantil".
+:residenciasAreaRural a owl:Class;
+  rdfs:label "Residencias Area Rural";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Residencias Area Rural".
+:migracao a owl:Class;
+  rdfs:label "Migracao";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Migracao".
+:unidadesDeAtencaoBasica a owl:Class;
+  rdfs:label "Unidades de Atencao Basica";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Unidades de Atencao Basica".
+:totalMedicos a owl:Class;
+  rdfs:label "Total de Medicos";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Total de Medicos".
+:estrategiasSaudeFamilia a owl:Class;
+  rdfs:label "Estrategias de Saude da Familia";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Estrategias de Saude da Familia".
+:mortalidadeInfantil a owl:Class;
+  rdfs:label "Mortalidade Infantil";
+  rdfs:subClassOf :VariaveisSocioEconomicas;
+  skos:definition "Mortalidade Infantil".
+:temperaturaMedia a owl:Class;
+  rdfs:label "Temperatura Media";
+  rdfs:subClassOf :VariaveisClimaticas;
+  skos:definition "Temperatura Media".
+:precipitacao a owl:Class;
+  rdfs:label "Precipitacao";
+  rdfs:subClassOf :VariaveisClimaticas;
+  skos:definition "Precipitacao".
+:indiceCorberturaVegetacao a owl:Class;
+  rdfs:label "Indice Corbertura Vegetacao";
+  rdfs:subClassOf :VariaveisClimaticas;
+  skos:definition "Indice Corbertura Vegetacao".
+:indiceCorberturaHidrica a owl:Class;
+  rdfs:label "Indice Corbertura Hidrica";
+  rdfs:subClassOf :VariaveisClimaticas;
+  skos:definition "Indice Corbertura Hidrica".
+:CountyName a owl:Class;
+  rdfs:label "Nome do Municipio";
+  skos:definition "Nome do Municipio".
+
+##### Units
+:porMil a owl:Class;
+  rdfs:label "por mil";
+  skos:definition "por mil".
+:Celsius a owl:Class;
+  rdfs:label "Celsius";
+  skos:definition "Celsius".
+:NVDI a owl:Class;
+  rdfs:label "NVDI";
+  skos:definition "NVDI".
+:NDWI a owl:Class;
+  rdfs:label "NDWI";
+  skos:definition "NDWI".
+
+
+
+##### SDD Entities
+:Municipality a owl:Class;
+  rdfs:label "Municipio";
+  skos:definition "Municipio".
+:CensoIBGE a owl:Class;
+  rdfs:label "Censo IBGE";
+  rdfs:subClassOf  :Municipality;
+  skos:definition "Censo IBGE".
+:Datasus a owl:Class;
+  rdfs:label "Datasus";
+  rdfs:subClassOf  :Municipality;
+  skos:definition "Datasus".
+:IPEA a owl:Class;
+  rdfs:label "IPEA";
+  rdfs:subClassOf  :Municipality;
+  skos:definition "IPEA".
+:GoogleEarth a owl:Class;
+  rdfs:label "GoogleEarth";
+  rdfs:subClassOf  :Municipality;
+  skos:definition "GoogleEarth".
+
+##### SSD Entities
+:Biome a owl:Class;
+  rdfs:label "Bioma";
+  rdfs:subClassOf hasco:StudyIndicator;
+  skos:definition "Bioma".
+:State  a owl:Class;
+  rdfs:label "Estado";
+  rdfs:subClassOf  hasco:StudyIndicator;
+  skos:definition "Estado".
+:Region  a owl:Class;
+  rdfs:subClassOf  hasco:StudyIndicator;
+  rdfs:label "Regiao".
+
+
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+

@@ -1,0 +1,93 @@
+@prefix ns1: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ns2: <http://hadatac.org/ont/hasco/> .
+@prefix ns3: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix demo: <http://hadatac.org/ont/demo#> .
+@prefix hasco: <http://hadatac.org/ont/hasco/> .
+@prefix sio: <http://semanticscience.org/resource/> .
+
+<http://hadatac.org/ont/demo> a owl:Ontology ;
+    rdfs:comment """Demo ontology for HADatAc""" ;
+    owl:imports <http://hadatac.org/ont/cogat/>,
+        <http://hadatac.org/ont/hasco/>,
+        <http://purl.obolibrary.org/obo/cl-basic.owl>,
+        <http://purl.obolibrary.org/obo/cmo.owl>,
+        <http://purl.obolibrary.org/obo/stato.owl>,
+        <http://purl.obolibrary.org/obo/uo.owl>,
+        <http://semanticscience.org/resource/>,
+        <http://semanticscience.org/ontology/sio-subset-labels.owl> ;
+    owl:versionIRI <http://hadatac.org/ont/demo/1.0> .
+
+
+demo:Level a owl:Class ;
+    rdfs:label "Level" ;
+    ns1:definition "Level of activity." .
+
+demo:Time a owl:Class ;
+    rdfs:label "Time" ;
+    ns1:definition "Time of activity." .
+
+demo:Person a owl:Class;
+    rdfs:label "Person" ;
+    ns1:definition "Person." ;
+    rdfs:subClassOf sio:Human .
+
+demo:Activity a owl:Class ;
+    rdfs:label "Activity" ;
+    ns1:definition "Activity." .
+
+demo:activityComponents a owl:Class;
+    rdfs:label "Activity Components";
+    rdfs:subClassOf hasco:SampleIndicator.
+
+demo:activityLevel a owl:Class;
+    rdfs:label "Activity Level";
+    rdfs:subClassOf demo:activityComponents .
+
+
+demo:activityOutcomes a owl:Class;
+    rdfs:label "Activity Outcomes";
+    rdfs:subClassOf hasco:SampleIndicator.
+
+demo:calories rdf:type owl:ObjectProperty ;
+    rdfs:label "Calories";
+    ns1:definition  "Calories" ;
+    rdfs:subClassOf demo:activityOutcomes ;
+    rdfs:domain demo:Activity .
+
+demo:activeDuration  rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    rdfs:label "Active Duration";
+    ns1:definition  "Active Duration" ;
+    rdfs:subClassOf demo:activityComponents ;
+    rdfs:domain demo:Activity .
+
+demo:steps  rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    rdfs:label "Steps";
+    ns1:definition  "Steps" ;
+    rdfs:subClassOf demo:activityComponents ;
+    rdfs:domain demo:Activity .
+
+demo:minutes  rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    rdfs:label "Minutes";
+    ns1:definition  "Minutes" ;
+    rdfs:subClassOf demo:activityLevel ;
+    rdfs:domain demo:Level .
+
+demo:levelName  rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:topObjectProperty ;
+    rdfs:label "Name";
+    ns1:definition  "Name" ;
+    rdfs:subClassOf demo:activityLevel ;
+    rdfs:domain demo:Level .
+
+   
+demo:hasActivity rdfs:domain demo:Person ; rdfs:range demo:Activity .
+
+demo:hasLevel rdfs:domain demo:Activity ; rdfs:range demo:Level .
