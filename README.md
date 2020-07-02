@@ -1,14 +1,13 @@
-## Artefatos gerados para ingestão de dados no HADatAc V 1.1.12 (http://hadatac.org)
+## Resources used in José Eugênio 's doctoral thesis
+## Artefacts genereated for data ingestion on HADatAc V 1.1.12 (http://hadatac.org)
 
-**Diretórios**
-  **demo_template** -> Templates para a demonstração de dois datasets com dados de smartbands (Fitbit e Miband)
+**Directories**
+  **demo_template** -> Templates for demonstration of two datasets of smartbands (Fitbit e Miband)
   
-  **demo_gbd** -> Templates com o experimento para dados da dengue e esquistossomose associados a indicadores socioeconômicos e ambientais
-
- **docs** -> website http://ws1.assis.bhz.br
+  **demo_gbd** -> Templates with the *gbd* experiment using epidemological data from dengue and schistosomiasis diseases assiciated with datasets with socioeconomic and enviromental data
+  
+ **docs** -> http://ws1.assis.bhz.br
  
- Última versão da ontologia Base para *demo*: http://ws1.assis.bhz.br/demo/demo-ont.ttl
+ Last version of 'Base onotology' for the *demo* demonstration: http://ws1.assis.bhz.br/demo/demo-ont.ttl
  
- Última versão da ontologia Base para *gbd*: http://ws1.assis.bhz.br/gbd/base.ttl
- 
- Grafo da ontologia simplficado da ontologia Base: http://ws1.assis.bhz.br/graph.html
+ Last version of 'Base onotology' for the *gbd* experiment: http://ws1.assis.bhz.br/gbd/base.ttl and a simplified graph http://ws1.assis.bhz.br/graph.html
