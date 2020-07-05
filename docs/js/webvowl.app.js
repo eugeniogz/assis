@@ -2507,7 +2507,7 @@ webvowl.app =
 	        if ( graph.options().compactNotation() === false ) {
 	          texString += "(disjoint)";
 	        }
-	        texString.replaceAll("-","\\") += "};\n";
+	        texString.relace(/\-/g,"\\\\") += "};\n";
 	        continue;
 	      }
 	      
