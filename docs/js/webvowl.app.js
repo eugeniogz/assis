@@ -2376,7 +2376,7 @@ webvowl.app =
 	      var rightPos = px + 7;
 	      var txtOffset = py + 20;
 	      if ( node.type() !== "owl:unionOf" || node.type() !== "owl:disjointUnionOf" ) {
-	        texString += "\\node[" + qType + " " + widthString + " " + bgColorStr + " " + textColorStr + "] at (" + px + "pt, " + py + "pt)   (Node" + i + ") {" + identifier.replaceAll("_", "\\_ ").replaceAll("\-","\\\\") + "};\n";
+	        texString += "\\node[" + qType + " " + widthString + " " + bgColorStr + " " + textColorStr + "] at (" + px + "pt, " + py + "pt)   (Node" + i + ") {" + identifier.replaceAll("_", "\\_ ").replaceAll("-","\\\\") + "};\n";
 	      }
 	      if ( node.type() === "owl:unionOf" ) {
 	        // add symbol to it;
