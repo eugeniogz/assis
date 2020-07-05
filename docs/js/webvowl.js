@@ -1367,7 +1367,7 @@ webvowl =
 	    
 	    truncatedText = truncatedText.substring(0, newTruncatedTextLength);
 	  }
-	//   fixffixmd: nÃO TRUN
+	//   FIXME: Não trunca por causa do latex
 	//   if ( text.length > truncatedText.length ) {
 	//     return text.substring(0, truncatedText.length - 3) + "...";
 	//   }
