@@ -14,9 +14,9 @@
   owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
 # hasco:StudyIndicator rdf:type owl:Class.
-:EnviromentIndicator rdfs:subClassOf  :DiseaseIndicator.
-:SocioEconomicIndicator rdfs:subClassOf  :DiseaseIndicator.
-:DiseaseIndicator rdfs:subClassOf  hasco:StudyIndicator.
+# :EnviromentIndicator rdfs:subClassOf  hasco:StudyIndicator.
+# :SocioEconomicIndicator rdfs:subClassOf  hasco:StudyIndicator.
+# :DiseaseIndicator rdfs:subClassOf  hasco:StudyIndicator.
 
 # :Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
