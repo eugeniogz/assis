@@ -5328,8 +5328,9 @@ webvowl.app =
 	      var entries = mergedIdList[newResultsIds[i]];
 	      var eLen = entries.length;
 	      
-	      var croppedText = cropText(newResults[i]);
-	      
+	      //var croppedText = cropText(newResults[i]);
+	      var croppedText = newResults[i]; //FIXME: Nãp está truncando textoxx
+ 	      
 	      var el0 = entries[0];
 	      var allSame = true;
 	      var nodeMap = graph.getNodeMapForSearch();
