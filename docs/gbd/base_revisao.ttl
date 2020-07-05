@@ -48,8 +48,8 @@ hasco:NamedTime rdf:type owl:Class.
 :SchistosomiasisIndicator rdfs:subClassOf :DiseaseIndicator.
 :TotalSchistosomiasisCases rdfs:subClassOf :SchistosomiasisIndicator.
 :hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisCases.
-:TotalSchistosomiasisOn100Thousand rdfs:subClassOf :SchistosomiasisIndicator.
-:hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisOn100Thousand.
+:Total-Schistosomiasis-On100Thousand rdfs:subClassOf :SchistosomiasisIndicator.
+:hasTotal-Schistosomiasis-On100Thousand rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisOn100Thousand.
 
 :DengueIndicator rdfs:subClassOf :DiseaseIndicator.
 :TotalDengueCases rdfs:subClassOf :DengueIndicator.
