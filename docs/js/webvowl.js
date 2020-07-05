@@ -1367,10 +1367,10 @@ webvowl =
 	    
 	    truncatedText = truncatedText.substring(0, newTruncatedTextLength);
 	  }
-	  
-	  if ( text.length > truncatedText.length ) {
-	    return text.substring(0, truncatedText.length - 3) + "...";
-	  }
+	//   fixffixmd: nÃO TRUN
+	//   if ( text.length > truncatedText.length ) {
+	//     return text.substring(0, truncatedText.length - 3) + "...";
+	//   }
 	  return text;
 	};
 
