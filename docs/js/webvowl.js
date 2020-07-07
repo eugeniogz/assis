@@ -7180,7 +7180,7 @@ webvowl =
 	    var create_container = d3.select("#emptyContainer");
 	    
 	    var modeOfOpString = d3.select("#modeOfOperationString").node();
-	    if ( !arguments.length ) {
+		if ( false && !arguments.length ) { //JEUGENIO:  disable edit mode
 	      create_entry.node().checked = editMode;
 	      if ( editMode === false ) {
 	        create_container.node().title = "Enable editing in modes menu to create a new ontology";
@@ -7199,7 +7199,7 @@ webvowl =
 	    }
 	    graph.options().setEditorModeForDefaultObject(val);
 	    
-	    // if (seenEditorHint===false  && val===true){
+	    // if (seenEditorHint===false  && val===true){: 
 	    //     seenEditorHint=true;
 	    //     graph.options().warningModule().showEditorHint();
 	    // }
