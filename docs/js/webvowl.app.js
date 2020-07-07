@@ -8466,13 +8466,13 @@ webvowl.app =
 	    d3.select("#progressBarValue").node().innerHTML = " ";
 	    // switch ( loadingMethod ) {
 	    //   case 0:
-	        loadingModule.from_presetOntology(ontologyIdentifierFromURL);
+	    //    loadingModule.from_presetOntology(ontologyIdentifierFromURL);
 	    //     break;
 	    //   case 1:
 	    //     loadingModule.from_FileUpload(ontologyIdentifierFromURL);
 	    //     break;
 	    //   case 2:
-	    //     loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
+	         loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
 	        // break;
 	    //   case 3:
 	    //     loadingModule.from_IRI_URL(ontologyIdentifierFromURL);
@@ -8966,11 +8966,10 @@ webvowl.app =
 	  
 	  return loadingModule;
 	}
-	;
 
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */.call(exports, __webpack_require__(6)))
 
 /***/ }),
 
