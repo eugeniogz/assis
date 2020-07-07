@@ -8241,11 +8241,11 @@ webvowl.app =
 	  var missingImportsWarning = false;
 	  var showLoadingDetails = false;
 	  var visibilityStatus = true;
-	  
+	  var DEFAULT_JSON_NAME="./gbd/base_revisao";
 	  var DEFAULT_JSON_NAME = location.search.split('file=')[1]; // This file is loaded by default
-	  if (typeof(DEFAULT_JSON_NAME) == undefined) {
+	  if (DEFAULT_JSON_NAME == undefined) {
 		  DEFAULT_JSON_NAME="./gbd/base_revisao";
-	  } else { DEFAULT_JSON_NAME =  "./gbd/" + DEFAULT_JSON_NAME;}
+	  } e lse { DEFAULT_JSON_NAME =  "./gbd/" + DEFAULT_JSON_NAME;}
 	  
 	  var conversion_sessionId;
 	  
