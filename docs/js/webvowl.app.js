@@ -8464,21 +8464,21 @@ webvowl.app =
 	    loadGraphOptions(parameterArray); // identifies and loads configuration values
 	    var loadingMethod = identifyOntologyLoadingMethod(ontologyIdentifierFromURL);
 	    d3.select("#progressBarValue").node().innerHTML = " ";
-	    switch ( loadingMethod ) {
-	      case 0:
+	    // switch ( loadingMethod ) {
+	    //   case 0:
 	        loadingModule.from_presetOntology(ontologyIdentifierFromURL);
-	        break;
-	      case 1:
-	        loadingModule.from_FileUpload(ontologyIdentifierFromURL);
-	        break;
-	      case 2:
-	        loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
-	        break;
-	      case 3:
-	        loadingModule.from_IRI_URL(ontologyIdentifierFromURL);
-	        break;
-	      default:
-	        console.log("Could not identify loading method , or not IMPLEMENTED YET");
+	    //     break;
+	    //   case 1:
+	    //     loadingModule.from_FileUpload(ontologyIdentifierFromURL);
+	    //     break;
+	    //   case 2:
+	    //     loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
+	        // break;
+	    //   case 3:
+	    //     loadingModule.from_IRI_URL(ontologyIdentifierFromURL);
+	    //     break;
+	    //   default:
+	    //     console.log("Could not identify loading method , or not IMPLEMENTED YET");
 	    }
 	  };
 	  
