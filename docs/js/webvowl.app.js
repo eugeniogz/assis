@@ -2581,11 +2581,11 @@ webvowl.app =
 	        texString += "\\node[" + qType + " " + widthString + " " + bgColorStr + " " + textColorStr + "] at (" + p_px + "pt, " + pOY2 + "pt)   (property" + i + ") {" + identifier.replaceAll("_", "\\_ ") + "};\n";
 	        
 	      } else {
-			if (qType != "rdfsSubClassOf") {
+			//if (qType != "rdfsSubClassOf") {
 				texString += "\\node[" + qType + " " + widthString + " " + bgColorStr + " " + textColorStr + "] at (" + p_px + "pt, " + p_py + "pt)   (property" + i + ") {" + identifier.replaceAll("_", "\\_ ") + "};\n";
-			}
-	      }
-	    }
+			//} ///Avaliar mnter o subclass
+		  }
+		}
 	    
 	    texString += "\\end{tikzpicture}\n}\n \\end{center}\n\\end{document}";
 	    
