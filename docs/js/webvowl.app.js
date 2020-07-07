@@ -8472,14 +8472,14 @@ webvowl.app =
 	    //     loadingModule.from_FileUpload(ontologyIdentifierFromURL);
 	    //     break;
 	    //   case 2:
-	         loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
+	          loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
 	        // break;
 	    //   case 3:
 	    //     loadingModule.from_IRI_URL(ontologyIdentifierFromURL);
 	    //     break;
 	    //   default:
 	    //     console.log("Could not identify loading method , or not IMPLEMENTED YET");
-	    }
+	    //}
 	  };
 	  
 	  /** ------------------- LOADING --------------------- **/
