@@ -6,7 +6,7 @@
 		{
 			"label": "build",
 			"type": "shell",
-			"command": "java -jar ../../owl2vowl.jar -file base_revisao.ttl",
+			"command": "java -jar ../../owl2vowl.jar -file ${fileBasename}",
 			"group": "build",
 			"options": {"cwd": "${workspaceFolder}/docs/gbd"},
 			"problemMatcher": []

@@ -8242,7 +8242,8 @@ webvowl.app =
 	  var showLoadingDetails = false;
 	  var visibilityStatus = true;
 	  
-	  var DEFAULT_JSON_NAME = "./gbd/base_revisao"; // This file is loaded by default
+	  var DEFAULT_JSON_NAME = location.search.split('file=')[1]; // This file is loaded by default
+	  if (typeof(DEFAULT_JSON_NAME) == undefined) DEFAULT_JSON_NAME="./gbd/base_revisao";
 	  var conversion_sessionId;
 	  
 	  /** variable defs **/
