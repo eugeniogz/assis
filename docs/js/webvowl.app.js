@@ -8246,14 +8246,6 @@ webvowl.app =
 	  if (typeof newJSON != 'undefined' && newJSON !=null  && newJSON!='') {
 	   DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
 	 }
-	  
-	 
-	var http = new XMLHttpRequest();
-	http.open('HEAD', DEFAULT_JSON_NAME+'.json', false);
-	http.send();
-	if (http.status==404) {
-		alert("File " + DEFAULT_JSON_NAME +  'not found!');
-	}
 	
 	  var conversion_sessionId;
 	  
