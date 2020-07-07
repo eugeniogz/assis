@@ -8243,7 +8243,10 @@ webvowl.app =
 	  var visibilityStatus = true;
 	  
 	  var DEFAULT_JSON_NAME = location.search.split('file=')[1]; // This file is loaded by default
-	  if (typeof(DEFAULT_JSON_NAME) == undefined) DEFAULT_JSON_NAME="./gbd/base_revisao";
+	  if (typeof(DEFAULT_JSON_NAME) == undefined) {
+		  DEFAULT_JSON_NAME="./gbd/base_revisao";
+	  } else { DEFAULT_JSON_NAME =  "./gbd/" + DEFAULT_JSON_NAME;}
+	  
 	  var conversion_sessionId;
 	  
 	  /** variable defs **/
