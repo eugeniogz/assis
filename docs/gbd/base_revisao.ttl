@@ -28,9 +28,9 @@
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
 :TotalPopulation rdf:type owl:Class.
 
-:Iliterate rdfs:subClassOf :SocioEconomic-Indicator.
-:hasIliterate rdf:type owl:ObjectProperty;  rdfs:domain :Greater15-Population; rdfs:range :Iliterate.
-:Greater15-Population rdfs:subClassOf :TotalPopulation.
+# :Iliterate rdfs:subClassOf :SocioEconomic-Indicator.
+# :hasIliterate rdf:type owl:ObjectProperty;  rdfs:domain :Greater15-Population; rdfs:range :Iliterate.
+# :Greater15-Population rdfs:subClassOf :TotalPopulation.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :Disease-Indicator; rdfs:range hasco:NamedTime.
 
 :DengueIndicator rdfs:subClassOf :Disease-Indicator.
