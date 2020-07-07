@@ -8241,20 +8241,19 @@ webvowl.app =
 	  var missingImportsWarning = false;
 	  var showLoadingDetails = false;
 	  var visibilityStatus = true;
-	  var DEFAULT_JSON_NAME="./gbd/base_revisao";
-
+	  
+	  var DEFAULT_JSON_NAME = "./gbd/base_revisao"; // This file is loaded by default
 	  var newJSON = location.search.split('file=')[1]; // This file is loaded by default
 	  if (typeof newJSON != 'undefined' && newJSON !=null  && newJSON!='') {
 	   DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
 	 }
-	
 
-	//   var newJSON = location.search.split('file=')[1]; // This file is loaded by default
-	//   if (typeof newJSON != 'undefined' && newJSON !=null ) {
-	// 	  DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
-	//   }
 	  
->>>>>>> parent of 0b740fb... ZZXZXZXZX
+	 
+
+
+
+
 	  var conversion_sessionId;
 	  
 	  /** variable defs **/
@@ -8464,22 +8463,22 @@ webvowl.app =
 	    loadGraphOptions(parameterArray); // identifies and loads configuration values
 	    var loadingMethod = identifyOntologyLoadingMethod(ontologyIdentifierFromURL);
 	    d3.select("#progressBarValue").node().innerHTML = " ";
-	    // switch ( loadingMethod ) {
-	    //   case 0:
-	    //    loadingModule.from_presetOntology(ontologyIdentifierFromURL);
-	    //     break;
-	    //   case 1:
-	    //     loadingModule.from_FileUpload(ontologyIdentifierFromURL);
-	    //     break;
-	    //   case 2:
-	          loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
-	        // break;
-	    //   case 3:
-	    //     loadingModule.from_IRI_URL(ontologyIdentifierFromURL);
-	    //     break;
-	    //   default:
-	    //     console.log("Could not identify loading method , or not IMPLEMENTED YET");
-	    //}
+	    switch ( loadingMethod ) {
+	      case 0:
+	        loadingModule.from_presetOntology(ontologyIdentifierFromURL);
+	        break;
+	      case 1:
+	        loadingModule.from_FileUpload(ontologyIdentifierFromURL);
+	        break;
+	      case 2:
+	        loadingModule.from_JSON_URL(ontologyIdentifierFromURL);
+	        break;
+	      case 3:
+	        loadingModule.from_IRI_URL(ontologyIdentifierFromURL);
+	        break;
+	      default:
+	        console.log("Could not identify loading method , or not IMPLEMENTED YET");
+	    }
 	  };
 	  
 	  /** ------------------- LOADING --------------------- **/
@@ -8966,7 +8965,8 @@ webvowl.app =
 	  
 	  return loadingModule;
 	}
-    ;
+	;
+
 
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
