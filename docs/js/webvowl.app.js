@@ -8242,10 +8242,10 @@ webvowl.app =
 	  var showLoadingDetails = false;
 	  var visibilityStatus = true;
 	  var DEFAULT_JSON_NAME="./gbd/base_revisao";
-	  var newJSON = location.search.split('file=')[1]; // This file is loaded by default
-	  if (typeof newJSON != 'undefined' && newJSON !=null ) {
-		  DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
-	  }
+	//   var newJSON = location.search.split('file=')[1]; // This file is loaded by default
+	//   if (typeof newJSON != 'undefined' && newJSON !=null ) {
+	// 	  DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
+	//   }
 	  
 	  var conversion_sessionId;
 	  
