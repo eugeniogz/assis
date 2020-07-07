@@ -8243,10 +8243,18 @@ webvowl.app =
 	  var visibilityStatus = true;
 	  var DEFAULT_JSON_NAME="./gbd/base_revisao";
 	  var newJSON = location.search.split('file=')[1]; // This file is loaded by default
-	   if (typeof newJSON != 'undefined' && newJSON !=null  && newJSON!='') {
-	 	  DEFAULT_JSON_NAME =  "./gbd/" + newJSON;=
-	   }
+	  if (typeof newJSON != 'undefined' && newJSON !=null  && newJSON!='') {
+	   DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
+	 }
 	  
+	 
+	var http = new XMLHttpRequest();
+	http.open('HEAD', DEFAULT_JSON_NAME+'.json', false);
+	http.send();
+	if (http.status==404) {
+		alert("File " + DEFAULT_JSON_NAME +  'not found!');
+	}
+	
 	  var conversion_sessionId;
 	  
 	  /** variable defs **/
