@@ -10,6 +10,14 @@
 			"group": "build",
 			"options": {"cwd": "${workspaceFolder}/docs/gbd"},
 			"problemMatcher": []
+		},
+		{
+			"label": "copy",
+			"type": "shell",
+			"group": "build",
+			"command": "cp ${workspaceFolder}/docs/gbd/${fileBasenameNoExtension}.json ${workspaceFolder}/docs/gbd/base_revisao.json",
+			"options": {"cwd": "${workspaceFolder}/docs/gbd"},
+			"problemMatcher": []
 		}
 	]
 }

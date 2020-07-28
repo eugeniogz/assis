@@ -1,0 +1,37 @@
+@prefix : <http://ws1.assis.bhz.br/gbd#>.
+@prefix kb: <http://ws1.assis.bhz.br/gbd/kb#>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix sio: <http://semanticscience.org/resource/>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix hasco: <http://hadatac.org/ont/hasco/>.
+ 
+<http://ws1.assis.bhz.br/gbd#> a owl:Ontology;
+  owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
+
+
+:Disease a owl:Class.
+:Region a owl:Class.
+:AverageTemperature a owl:Class.
+:AveragePrecipitation a owl:Class.
+:ResidencesWithInadequateSanitation a owl:Class.
+:TotalBasicAtentionUnits a owl:Class.
+:NumberOfDeathsLessThanOneYear a owl:Class.
+:TotalPopulation  a owl:Class.
+:Year  a owl:Class.
+:Schistosomiasis  rdf:type owl:Class; rdfs:subClassOf :Disease.
+:Dengue  rdf:type owl:Class; rdfs:subClassOf :Disease.
+
+
+:hasRegion rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :Region.
+:hasAverageTemperature rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :AverageTemperature.
+:hasAveragePrecipitation rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :AveragePrecipitation.
+:hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :ResidencesWithInadequateSanitation.
+:hasTotalBasicAtentionUnits rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :TotalBasicAtentionUnits.
+:hasNumberOfDeathsLessThanOneYear rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :NumberOfDeathsLessThanOneYear.
+:hasTotalPopulation rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :TotalPopulation.
+:hasYear rdf:type owl:ObjectProperty; rdfs:domain :Disease; rdfs:range :Year.

@@ -37,7 +37,7 @@ hasco:NamedTime rdf:type owl:Class.
 :NumberOfDeathsLessThanOneYear rdfs:subClassOf :SocioEconomicIndicator.
 :hasNumberOfDeathsLessThanOneYear rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :NumberOfDeathsLessThanOneYear.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
-:TotalPopulation rdf:type owl:Class.
+:TotalPopulation  rdfs:subClassOf :SocioEconomicIndicator.
 # :Population25PctMinimalIncome rdfs:subClassOf :SocioEconomicIndicator.
 # :hasPopulation25PctMinimalIncome rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :Population25PctMinimalIncome.
 :Iliterate rdfs:subClassOf :SocioEconomicIndicator.
@@ -65,7 +65,7 @@ hasco:NamedTime rdf:type owl:Class.
 # :totalDengueCases "42".
 
 :Surface rdf:type owl:Class.
-:hasYear2  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 
 :AverageTemperature rdfs:subClassOf :EnviromentIndicator.

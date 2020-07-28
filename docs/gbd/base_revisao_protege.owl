@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://ws1.assis.bhz.br/gbd#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://ws1.assis.bhz.br/gbd#"
+     versionIRI="http://ws1.assis.bhz.br/gbd/0.1">
+    <Prefix name="" IRI="http://ws1.assis.bhz.br/gbd#"/>
+    <Prefix name="kb" IRI="http://ws1.assis.bhz.br/gbd/kb#"/>
+    <Prefix name="obo" IRI="http://purl.obolibrary.org/obo/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="sio" IRI="http://semanticscience.org/resource/"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="skos" IRI="http://www.w3.org/2004/02/skos/core#"/>
+    <Prefix name="hasco" IRI="http://hadatac.org/ont/hasco/"/>
+    <Declaration>
+        <Class abbreviatedIRI="hasco:NamedTime"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="hasco:StudyIndicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Biome"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="County"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="State"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Surface"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasAveragePrecipitation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasAverageTemperature"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBasicAtentionUnit"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBiome"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasIliterate"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasNormalizedDifferenceVegetationIndex"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasNormalizedDifferenceWaterIndex"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasNumberOfDeathsLessThanOneYear"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRegion"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasResidencesWithInadequateSanitation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasState"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSurface"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTotalDengueCases"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTotalDengueCasesOn100Thousand"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTotalPopulation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTotalSchistosomiasisCases"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTotalSchistosomiasisOn100Thousand"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasYear"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="SchistosomiasisIndicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="NormalizedDifferenceWaterIndex"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="BasicAtentionUnit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="ResidencesWithInadequateSanitation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TotalPopulation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TotalSchistosomiasisOn100Thousand"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TotalDengueCasesOn100Thousand"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="DengueIndicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TotalDengueCases"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AveragePrecipitation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="DiseaseIndicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="NormalizedDifferenceVegetationIndex"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TotalSchistosomiasisCases"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Greater15Population"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AverageTemperature"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="NumberOfDeathsLessThanOneYear"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Iliterate"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="SocioEconomicIndicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="EnviromentIndicator"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="AveragePrecipitation"/>
+        <Class IRI="EnviromentIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="AverageTemperature"/>
+        <Class IRI="EnviromentIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="BasicAtentionUnit"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Biome"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="DengueIndicator"/>
+        <Class IRI="DiseaseIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="DiseaseIndicator"/>
+        <Class abbreviatedIRI="hasco:StudyIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="EnviromentIndicator"/>
+        <Class abbreviatedIRI="hasco:StudyIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Greater15Population"/>
+        <Class IRI="TotalPopulation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Iliterate"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="NormalizedDifferenceVegetationIndex"/>
+        <Class IRI="EnviromentIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="NormalizedDifferenceWaterIndex"/>
+        <Class IRI="EnviromentIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="NumberOfDeathsLessThanOneYear"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Region"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="ResidencesWithInadequateSanitation"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="SchistosomiasisIndicator"/>
+        <Class IRI="DiseaseIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="SocioEconomicIndicator"/>
+        <Class abbreviatedIRI="hasco:StudyIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="State"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="TotalDengueCases"/>
+        <Class IRI="DengueIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="TotalDengueCasesOn100Thousand"/>
+        <Class IRI="DengueIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="TotalPopulation"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="TotalSchistosomiasisCases"/>
+        <Class IRI="SchistosomiasisIndicator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="TotalSchistosomiasisOn100Thousand"/>
+        <Class IRI="SchistosomiasisIndicator"/>
+    </SubClassOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasAveragePrecipitation"/>
+        <Class IRI="Surface"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasAverageTemperature"/>
+        <Class IRI="Surface"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasBasicAtentionUnit"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasBiome"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIliterate"/>
+        <Class IRI="Greater15Population"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasNormalizedDifferenceVegetationIndex"/>
+        <Class IRI="Surface"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasNormalizedDifferenceWaterIndex"/>
+        <Class IRI="Surface"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasNumberOfDeathsLessThanOneYear"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasRegion"/>
+        <Class IRI="State"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasResidencesWithInadequateSanitation"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasState"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasSurface"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasTotalDengueCases"/>
+        <Class IRI="TotalPopulation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasTotalDengueCasesOn100Thousand"/>
+        <Class IRI="TotalPopulation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasTotalPopulation"/>
+        <Class IRI="County"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasTotalSchistosomiasisCases"/>
+        <Class IRI="TotalPopulation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasTotalSchistosomiasisOn100Thousand"/>
+        <Class IRI="TotalPopulation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasYear"/>
+        <Class IRI="DiseaseIndicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasYear"/>
+        <Class IRI="EnviromentIndicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasYear"/>
+        <Class IRI="SocioEconomicIndicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasAveragePrecipitation"/>
+        <Class IRI="AveragePrecipitation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasAverageTemperature"/>
+        <Class IRI="AverageTemperature"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasBasicAtentionUnit"/>
+        <Class IRI="BasicAtentionUnit"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasBiome"/>
+        <Class IRI="Biome"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasIliterate"/>
+        <Class IRI="Iliterate"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasNormalizedDifferenceVegetationIndex"/>
+        <Class IRI="NormalizedDifferenceVegetationIndex"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasNormalizedDifferenceWaterIndex"/>
+        <Class IRI="NormalizedDifferenceWaterIndex"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasNumberOfDeathsLessThanOneYear"/>
+        <Class IRI="NumberOfDeathsLessThanOneYear"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasRegion"/>
+        <Class IRI="Region"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasResidencesWithInadequateSanitation"/>
+        <Class IRI="ResidencesWithInadequateSanitation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasState"/>
+        <Class IRI="State"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasSurface"/>
+        <Class IRI="Surface"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasTotalDengueCases"/>
+        <Class IRI="TotalDengueCases"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasTotalDengueCasesOn100Thousand"/>
+        <Class IRI="TotalDengueCasesOn100Thousand"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasTotalPopulation"/>
+        <Class IRI="TotalPopulation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasTotalSchistosomiasisCases"/>
+        <Class IRI="TotalSchistosomiasisCases"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasTotalSchistosomiasisOn100Thousand"/>
+        <Class IRI="TotalSchistosomiasisOn100Thousand"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasYear"/>
+        <Class abbreviatedIRI="hasco:NamedTime"/>
+    </ObjectPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
