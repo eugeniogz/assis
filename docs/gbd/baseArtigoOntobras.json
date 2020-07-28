@@ -46,7 +46,7 @@
     "id" : "12",
     "type" : "owl:Class"
   }, {
-    "id" : "28",
+    "id" : "26",
     "type" : "owl:Class"
   }, {
     "id" : "8",
@@ -55,16 +55,13 @@
     "id" : "17",
     "type" : "owl:Class"
   }, {
-    "id" : "31",
+    "id" : "29",
     "type" : "owl:Class"
   }, {
-    "id" : "25",
+    "id" : "33",
     "type" : "owl:Class"
   }, {
-    "id" : "35",
-    "type" : "owl:Class"
-  }, {
-    "id" : "26",
+    "id" : "34",
     "type" : "owl:Class"
   }, {
     "id" : "15",
@@ -168,7 +165,7 @@
     "label" : {
       "IRI-based" : "County"
     },
-    "id" : "28"
+    "id" : "26"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#Disease-Indicator",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -196,7 +193,7 @@
     "label" : {
       "IRI-based" : "Surface"
     },
-    "id" : "31"
+    "id" : "29"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#TotalPopulation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -204,8 +201,8 @@
     "label" : {
       "IRI-based" : "TotalPopulation"
     },
-    "id" : "25",
-    "superClasses" : [ "26" ]
+    "id" : "33",
+    "superClasses" : [ "3" ]
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#Residences-WithInadequate-Sanitation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -213,17 +210,8 @@
     "label" : {
       "IRI-based" : "Residences-WithInadequate-Sanitation"
     },
-    "id" : "35",
+    "id" : "34",
     "superClasses" : [ "3" ]
-  }, {
-    "iri" : "http://ws1.assis.bhz.br/gbd#SocioEconomicIndicator",
-    "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "SocioEconomicIndicator"
-    },
-    "subClasses" : [ "25" ],
-    "id" : "26"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#Dengue-Indicator",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -249,7 +237,7 @@
     "label" : {
       "IRI-based" : "SocioEconomic-Indicator"
     },
-    "subClasses" : [ "2", "6", "35" ],
+    "subClasses" : [ "2", "6", "33", "34" ],
     "id" : "3",
     "superClasses" : [ "17" ]
   }, {
@@ -293,22 +281,25 @@
     "id" : "24",
     "type" : "rdfs:SubClassOf"
   }, {
+    "id" : "25",
+    "type" : "rdfs:SubClassOf"
+  }, {
     "id" : "27",
     "type" : "rdfs:SubClassOf"
   }, {
-    "id" : "29",
+    "id" : "28",
     "type" : "rdfs:SubClassOf"
   }, {
     "id" : "30",
-    "type" : "rdfs:SubClassOf"
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "31",
+    "type" : "owl:objectProperty"
   }, {
     "id" : "32",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "33",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "34",
+    "id" : "35",
     "type" : "owl:objectProperty"
   }, {
     "id" : "36",
@@ -318,15 +309,12 @@
     "type" : "owl:objectProperty"
   }, {
     "id" : "38",
-    "type" : "owl:objectProperty"
+    "type" : "rdfs:SubClassOf"
   }, {
     "id" : "39",
     "type" : "rdfs:SubClassOf"
   }, {
     "id" : "40",
-    "type" : "rdfs:SubClassOf"
-  }, {
-    "id" : "41",
     "type" : "rdfs:SubClassOf"
   } ],
   "propertyAttribute" : [ {
@@ -390,25 +378,25 @@
     "attributes" : [ "object" ],
     "id" : "22"
   }, {
-    "range" : "26",
-    "domain" : "25",
-    "attributes" : [ "object", "anonymous" ],
-    "id" : "24"
-  }, {
     "range" : "15",
     "domain" : "23",
     "attributes" : [ "object", "anonymous" ],
-    "id" : "27"
+    "id" : "24"
+  }, {
+    "range" : "3",
+    "domain" : "2",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "25"
   }, {
     "range" : "0",
     "domain" : "1",
     "attributes" : [ "object", "anonymous" ],
-    "id" : "29"
+    "id" : "27"
   }, {
     "range" : "7",
     "domain" : "9",
     "attributes" : [ "object", "anonymous" ],
-    "id" : "30"
+    "id" : "28"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasAverageTemperature",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -416,9 +404,9 @@
     "label" : {
       "IRI-based" : "hasAverageTemperature"
     },
-    "domain" : "31",
+    "domain" : "29",
     "attributes" : [ "object" ],
-    "id" : "32"
+    "id" : "30"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasAveragePrecipitation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -426,19 +414,19 @@
     "label" : {
       "IRI-based" : "hasAveragePrecipitation"
     },
-    "domain" : "31",
+    "domain" : "29",
     "attributes" : [ "object" ],
-    "id" : "33"
+    "id" : "31"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasSurface",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "31",
+    "range" : "29",
     "label" : {
       "IRI-based" : "hasSurface"
     },
-    "domain" : "28",
+    "domain" : "26",
     "attributes" : [ "object" ],
-    "id" : "34"
+    "id" : "32"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasBiome",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -446,19 +434,19 @@
     "label" : {
       "IRI-based" : "hasBiome"
     },
-    "domain" : "28",
+    "domain" : "26",
     "attributes" : [ "object" ],
-    "id" : "36"
+    "id" : "35"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasResidencesWithInadequateSanitation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
-    "range" : "35",
+    "range" : "34",
     "label" : {
       "IRI-based" : "hasResidencesWithInadequateSanitation"
     },
-    "domain" : "28",
+    "domain" : "26",
     "attributes" : [ "object" ],
-    "id" : "37"
+    "id" : "36"
   }, {
     "iri" : "http://ws1.assis.bhz.br/gbd#hasTotalPopulation",
     "baseIri" : "http://ws1.assis.bhz.br/gbd",
@@ -466,23 +454,23 @@
     "label" : {
       "IRI-based" : "hasTotalPopulation"
     },
-    "domain" : "28",
+    "domain" : "26",
     "attributes" : [ "object" ],
-    "id" : "38"
-  }, {
-    "range" : "3",
-    "domain" : "2",
-    "attributes" : [ "object", "anonymous" ],
-    "id" : "39"
-  }, {
-    "range" : "3",
-    "domain" : "35",
-    "attributes" : [ "object", "anonymous" ],
-    "id" : "40"
+    "id" : "37"
   }, {
     "range" : "3",
     "domain" : "6",
     "attributes" : [ "object", "anonymous" ],
-    "id" : "41"
+    "id" : "38"
+  }, {
+    "range" : "3",
+    "domain" : "34",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "39"
+  }, {
+    "range" : "3",
+    "domain" : "33",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "40"
   } ]
 }

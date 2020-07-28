@@ -29,7 +29,7 @@ hasco:StudyIndicator rdf:type owl:Class.
 :Residences-WithInadequate-Sanitation  rdfs:subClassOf :SocioEconomic-Indicator.
 :hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Residences-WithInadequate-Sanitation.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Total-Population.
-:TotalPopulation  rdfs:subClassOf :SocioEconomicIndicator.
+:TotalPopulation  rdfs:subClassOf :SocioEconomic-Indicator.
 
 :Schistosomiasis-Indicator rdfs:subClassOf :Disease-Indicator.
 :Total-Schistosomiasis-Cases rdfs:subClassOf :Schistosomiasis-Indicator.
