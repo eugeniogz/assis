@@ -22,8 +22,6 @@ hasco:StudyIndicator rdf:type owl:Class.
 :Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
 :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :StudyIndicator; rdfs:range hasco:NamedTime.
-hasco:NamedTime rdf:type owl:Class.
 
 :County rdf:type owl:Class.
 # :CountyName rdfs:subClassOf :SocioEconomicIndicator.
