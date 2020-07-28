@@ -24,7 +24,7 @@
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
 # :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 :hasState  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :State.
-:hasYear1  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
+:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
 hasco:NamedTime rdf:type owl:Class.
 
 :County rdf:type owl:Class.
@@ -42,19 +42,19 @@ hasco:NamedTime rdf:type owl:Class.
 # :hasPopulation25PctMinimalIncome rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :Population25PctMinimalIncome.
 :Iliterate rdfs:subClassOf :SocioEconomicIndicator.
 :hasIliterate rdf:type owl:ObjectProperty;  rdfs:domain :Greater15Population; rdfs:range :Iliterate.
-:Greater15Population rdfs:subClassOf :TotalPopulation.
+:Greater15-Population rdfs:subClassOf :TotalPopulation.
 :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicator; rdfs:range hasco:NamedTime.
 
-:SchistosomiasisIndicator rdfs:subClassOf :DiseaseIndicator.
-:TotalSchistosomiasisCases rdfs:subClassOf :SchistosomiasisIndicator.
+:Schistosomiasis-Indicator rdfs:subClassOf :DiseaseIndicator.
+:Total-Schistosomiasis-Cases rdfs:subClassOf :SchistosomiasisIndicator.
 :hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisCases.
-:TotalSchistosomiasisOn100Thousand rdfs:subClassOf :SchistosomiasisIndicator.
+:Total-Schistosomiasis-On100Thousand rdfs:subClassOf :SchistosomiasisIndicator.
 :hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisOn100Thousand.
 
-:DengueIndicator rdfs:subClassOf :DiseaseIndicator.
-:TotalDengueCases rdfs:subClassOf :DengueIndicator.
+:Dengue-Indicator rdfs:subClassOf :DiseaseIndicator.
+:Total-DengueCases rdfs:subClassOf :DengueIndicator.
 :hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalDengueCases.
-:TotalDengueCasesOn100Thousand rdfs:subClassOf :DengueIndicator.
+:Total-DengueCases-On100Thousand rdfs:subClassOf :DengueIndicator.
 :hasTotalDengueCasesOn100Thousand rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :TotalDengueCasesOn100Thousand.
 
 #:hasDengue rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :PopulationWithDengue.
