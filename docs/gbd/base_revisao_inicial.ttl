@@ -68,7 +68,6 @@ hasco:NamedTime rdf:type owl:Class.
 :Iliterates  rdf:type owl:DatatypeProperty;  rdfs:domain :Greater15Population; rdfs:range rdfs:Literal.
 :Greater15Population a owl:Class; rdfs:subClassOf :TotalPopulation.
 
-SDD Relations
 :isTotalPopulationOf rdfs:domain :County;
  rdfs:range :TotalPopulation.
 
