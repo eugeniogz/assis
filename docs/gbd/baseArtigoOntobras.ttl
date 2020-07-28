@@ -18,10 +18,6 @@ hasco:StudyIndicator rdf:type owl:Class.
 :SocioEconomic-Indicator rdfs:subClassOf  hasco:StudyIndicator.
 :Disease-Indicator rdfs:subClassOf  hasco:StudyIndicator.
 
-:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomic-Indicator.
-:Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomic-Indicator.
-:hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
-:hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 
 :County rdf:type owl:Class.
 # :CountyName rdfs:subClassOf :SocioEconomicIndicator.
@@ -29,7 +25,7 @@ hasco:StudyIndicator rdf:type owl:Class.
 :Residences-WithInadequate-Sanitation  rdfs:subClassOf :SocioEconomic-Indicator.
 :hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Residences-WithInadequate-Sanitation.
 :hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Total-Population.
-:TotalPopulation  rdfs:subClassOf :SocioEconomic-Indicator.
+:Total-Population  rdfs:subClassOf :SocioEconomic-Indicator.
 
 :Schistosomiasis-Indicator rdfs:subClassOf :Disease-Indicator.
 :Total-Schistosomiasis-Cases rdfs:subClassOf :Schistosomiasis-Indicator.
