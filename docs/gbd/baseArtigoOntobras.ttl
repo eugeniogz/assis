@@ -14,30 +14,30 @@
   owl:versionIRI <http://ws1.assis.bhz.br/gbd/0.1>.
 
 hasco:StudyIndicator rdf:type owl:Class.
-:EnviromentIndicator rdfs:subClassOf  hasco:StudyIndicator.
-:SocioEconomicIndicator rdfs:subClassOf  hasco:StudyIndicator.
-:DiseaseIndicator rdfs:subClassOf  hasco:StudyIndicator.
+:Enviroment-Indicator rdfs:subClassOf  hasco:StudyIndicator.
+:SocioEconomic-Indicator rdfs:subClassOf  hasco:StudyIndicator.
+:Disease-Indicator rdfs:subClassOf  hasco:StudyIndicator.
 
-:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
-:Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomicIndicator.
+:Biome rdf:type owl:Class; rdfs:subClassOf :SocioEconomic-Indicator.
+:Region rdf:type owl:Class; rdfs:subClassOf :SocioEconomic-Indicator.
 :hasRegion  rdf:type owl:ObjectProperty; rdfs:domain :State; rdfs:range :Region.
 :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 
 :County rdf:type owl:Class.
 # :CountyName rdfs:subClassOf :SocioEconomicIndicator.
 # :hasName rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :CountyName.
-:ResidencesWithInadequateSanitation  rdfs:subClassOf :SocioEconomicIndicator.
-:hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :ResidencesWithInadequateSanitation.
-:hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :TotalPopulation.
+:Residences-WithInadequate-Sanitation  rdfs:subClassOf :SocioEconomic-Indicator.
+:hasResidencesWithInadequateSanitation rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Residences-WithInadequate-Sanitation.
+:hasTotalPopulation  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Total-Population.
 :TotalPopulation  rdfs:subClassOf :SocioEconomicIndicator.
 
-:SchistosomiasisIndicator rdfs:subClassOf :DiseaseIndicator.
-:TotalSchistosomiasisCases rdfs:subClassOf :SchistosomiasisIndicator.
-:hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisCases.
+:Schistosomiasis-Indicator rdfs:subClassOf :Disease-Indicator.
+:Total-Schistosomiasis-Cases rdfs:subClassOf :Schistosomiasis-Indicator.
+:hasTotalSchistosomiasisCases rdf:type owl:ObjectProperty; rdfs:domain :Total-Population; rdfs:range :Total-Schistosomiasis-Cases.
 
-:DengueIndicator rdfs:subClassOf :DiseaseIndicator.
-:TotalDengueCases rdfs:subClassOf :DengueIndicator.
-:hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalDengueCases.
+:Dengue-Indicator rdfs:subClassOf :Disease-Indicator.
+:Total-DengueCases rdfs:subClassOf :Dengue-Indicator.
+:hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :Total-Population; rdfs:range :Total-DengueCases.
 
 #:hasDengue rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :PopulationWithDengue.
 #:hasSchistosomiasis rdf:type owl:ObjectProperty;  rdfs:domain :TotalPopulation; rdfs:range :Schistosmiasis.
@@ -49,7 +49,7 @@ hasco:StudyIndicator rdf:type owl:Class.
 :Surface rdf:type owl:Class.
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 
-:AverageTemperature rdfs:subClassOf :EnviromentIndicator.
-:hasAverageTemperature  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :AverageTemperature.
-:AveragePrecipitation rdfs:subClassOf :EnviromentIndicator.
-:hasAveragePrecipitation  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :AveragePrecipitation.
+:Average-Temperature rdfs:subClassOf :EnviromentIndicator.
+:hasAverageTemperature  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :Average-Temperature.
+:Average-Precipitation rdfs:subClassOf :Enviroment-Indicator.
+:hasAveragePrecipitation  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :Average-Precipitation.
