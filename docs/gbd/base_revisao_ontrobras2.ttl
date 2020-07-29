@@ -33,11 +33,11 @@ hasco:StudyIndicator rdf:type owl:Class.
 :hasBiome  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Biome.
 :County rdf:type owl:Class.
 :Surface rdf:type owl:Class.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
+# :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :EnviromentIndicator; rdfs:range hasco:NamedTime.
 :hasSurface rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :Surface.
 :hasState  rdf:type owl:ObjectProperty; rdfs:domain :County; rdfs:range :State.
-:hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
-hasco:NamedTime rdf:type owl:Class.
+# :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :SocioEconomicIndicator; rdfs:range hasco:NamedTime.
+# hasco:NamedTime rdf:type owl:Class.
 :AverageTemperature rdfs:subClassOf :EnviromentIndicator.
 :hasAverageTemperature  rdf:type owl:ObjectProperty;  rdfs:domain :Surface; rdfs:range :AverageTemperature.
 
