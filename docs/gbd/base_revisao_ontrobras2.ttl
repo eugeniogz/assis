@@ -17,7 +17,7 @@ hasco:StudyIndicator rdf:type owl:Class.
 :Enviroment-Indicator rdfs:subClassOf  hasco:StudyIndicator.
 :SocioEconomic-Indicator rdfs:subClassOf  hasco:StudyIndicator.
 :Disease-Indicator rdfs:subClassOf  hasco:StudyIndicator.
-:Dengue-Indicator rdfs:subClassOf :DiseaseIndicator.
+:Dengue-Indicator rdfs:subClassOf :Disease-Indicator.
 :Total-Dengue-Cases rdfs:subClassOf :Dengue-Indicator.
 :hasTotalDengueCases rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :Total-Dengue-Cases.
 :Schistosomiasis-Indicator rdfs:subClassOf :Disease-Indicator.
@@ -53,7 +53,7 @@ hasco:StudyIndicator rdf:type owl:Class.
 # :Iliterate rdfs:subClassOf :SocioEconomicIndicator.
 # :hasIliterate rdf:type owl:ObjectProperty;  rdfs:domain :Greater15Population; rdfs:range :Iliterate.
 # :Greater15Population rdfs:subClassOf :TotalPopulation.
-# :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :DiseaseIndicator; rdfs:range hasco:NamedTime.
+# :hasYear  rdf:type owl:ObjectProperty; rdfs:domain :Disease-Indicator; rdfs:range hasco:NamedTime.
 
 # :TotalSchistosomiasisOn100Thousand rdfs:subClassOf :SchistosomiasisIndicator.
 # :hasTotalSchistosomiasisOn100Thousand rdf:type owl:ObjectProperty; rdfs:domain :TotalPopulation; rdfs:range :TotalSchistosomiasisOn100Thousand.
