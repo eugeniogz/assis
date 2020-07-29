@@ -8247,12 +8247,9 @@ webvowl.app =
 	  if (typeof newJSON != 'undefined' && newJSON !=null  && newJSON!='') {
 	   DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
 	 }
-
-	  
-	 
-
-
-
+	 ontologyMenu.clearCachedVersion();
+	 graph.clearGraphData();
+	 loadingModule.parseUrlAndLoadOntology(false);
 
 	  var conversion_sessionId;
 	  
