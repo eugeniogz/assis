@@ -8247,10 +8247,13 @@ webvowl.app =
 	  if (typeof newJSON != 'undefined' && newJSON !=null  && newJSON!='') {
 	   DEFAULT_JSON_NAME =  "./gbd/" + newJSON;
 	 }
-	 ontologyMenu.clearCachedVersion();
-	 graph.clearGraphData();
-	 loadingModule.parseUrlAndLoadOntology(false);
+	 try {
+		ontologyMenu.clearCachedVersion();
+		graph.clearGraphData();
+		loadingModule.parseUrlAndLoadOntology(false);
+	 } catch (e) {
 
+	 }
 	  var conversion_sessionId;
 	  
 	  /** variable defs **/
