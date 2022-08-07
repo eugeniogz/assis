@@ -1,4 +1,4 @@
-<title>SJCL decrypt/encrypt</title>
+<title>Criptografia simétrica</title>
 <script type="text/javascript">"use strict";var sjcl={cipher:{},hash:{},mode:{},misc:{},codec:{},exception:{corrupt:function(a){this.toString=function(){return"CORRUPT: "+this.message};this.message=a},invalid:function(a){this.toString=function(){return"INVALID: "+this.message};this.message=a},bug:function(a){this.toString=function(){return"BUG: "+this.message};this.message=a}}};
 sjcl.cipher.aes=function(a){this.h[0][0][0]||this.w();var b,c,d,e,f=this.h[0][4],g=this.h[1];b=a.length;var h=1;if(b!==4&&b!==6&&b!==8)throw new sjcl.exception.invalid("invalid aes key size");this.a=[d=a.slice(0),e=[]];for(a=b;a<4*b+28;a++){c=d[a-1];if(a%b===0||b===8&&a%b===4){c=f[c>>>24]<<24^f[c>>16&255]<<16^f[c>>8&255]<<8^f[c&255];if(a%b===0){c=c<<8^c>>>24^h<<24;h=h<<1^(h>>7)*283}}d[a]=d[a-b]^c}for(b=0;a;b++,a--){c=d[b&3?a:a-4];e[b]=a<=4||b<4?c:g[0][f[c>>>24]]^g[1][f[c>>16&255]]^g[2][f[c>>8&255]]^
 g[3][f[c&255]]}};
@@ -72,6 +72,8 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
         }
         
         upload(document.getElementById('texto').value);
+
+        
      }
      
      function decodificar()
@@ -152,7 +154,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
     if (isAuthorized) {
       $('#sign-in-or-out-button').html('Sign out');
       $('#revoke-access-button').css('display', 'inline-block');
-      $('#auth-status').html('Logged as ' + user.getBasicProfile().getEmail());
+      $('#user').val(user.getBasicProfile().getEmail());
       $('#auth-status').html('');
       //////////////////
       download();
@@ -168,7 +170,8 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
   function updateSigninStatus(isSignedIn) {
     setSigninStatus();
   }
-
+</script>
+<script>
 var fileName = 'SJCLDataApp.txt';
 function download()  {
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
@@ -205,8 +208,8 @@ function createFile() {
 var file = new Blob([''], {type: 'text/plain'});
 var metadata = {
     'name': fileName, // Filename at Google Drive
-    'mimeType': 'text/plain', // mimeType at Google Drive
-    'parents': ['appDataFolder'] // Folder ID at Google Drive, remove appDataFolder to save outside app folder 
+    'mimeType': 'text/plain', //, // mimeType at Google Drive
+    'parents': ['appDataFolder'], // Folder ID at Google Drive, remove appDataFolder to save outside app folder 
 };
 
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
@@ -248,7 +251,6 @@ var file = new Blob([fileContent], {type: 'text/plain'});
 var metadata = {
     'name': fileName, // Filename at Google Drive
     'mimeType': 'text/plain', // mimeType at Google Drive 
-  , 'parents': ['appDataFolder']
 };
 
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
@@ -271,13 +273,10 @@ xhr.send(form);
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <style>
   body {
      overflow-x:hidden;
-  }
-  td,p,textarea,input,button {
-     font-family:helvetica;
-     font-size:16px;
   }
   html, body {
     height: 100%;
@@ -293,7 +292,6 @@ xhr.send(form);
   }
   html, body, textarea {
     box-sizing: border-box;
-    font-family:helvetica;
   }
 
   html, body {
@@ -314,7 +312,7 @@ xhr.send(form);
 
 <body>
   <p>Store a criptographed text on Google drive, third party cookies must be enabled.</p>
-<form>
+<form action="#" target="emptyPageForLogin">
 <button id="sign-in-or-out-button" type="button" 
         style="margin-left: 2px">Sign In/Authorize</button>
 <button id="revoke-access-button" type="button" 
@@ -323,11 +321,14 @@ xhr.send(form);
 <div id="auth-status" style="display: inline; padding-left: 2px"></div><hr>
 
    <textarea id="texto"></textarea><BR/>
-   <TABLE><TR><TD>
-   Password:</TD><TD><input type="password" id="pwd" autocomplete="on"/></TD><TR><TD> 
-   Verify Password:</TD><TD><input type="password" id="pwdvrf" autocomplete="on"/></TD></TABLE><BR/>
-   <button type="button" onclick="codificar()">Encrypt</button>
-   <button type="button" onclick="decodificar()">Decrypt</button>
-   <button type="submit">Save Password</buttton>
+   <TABLE>
+   <TR><TD>Usuário</TD><TD><input type="text" id="user" readonly="readonly" autocomplete="on"/><!--User must be here, readonly Ok, disabled not works with save password in chrome--></TD></TR>
+   <TR><TD>
+   Password</TD><TD><input type="password" id="pwd" autocomplete="on"/></TD><TR><TD> 
+   Verify Password&nbsp;&nbsp;</TD><TD><input type="password" id="pwdvrf" autocomplete="off"/></TD></TABLE><BR/>
+   <button type="submit" onclick="codificar()">Encrypt</button>
+   <button type="button" onclick="decodificar()">Decrypt</button><!--This can't be submitted because reloads encrypted text-->
+   <!--button type="submit">Save Password</buttton-->
 </form>
+<iframe src="empty.html" id="emptyPageForLogin" name="emptyPageForLogin" style="display:none"></iframe>
 </body>
