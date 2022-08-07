@@ -153,6 +153,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
       $('#sign-in-or-out-button').html('Sign out');
       $('#revoke-access-button').css('display', 'inline-block');
       $('#auth-status').html('Logged as ' + user.getBasicProfile().getEmail());
+      $('#auth-status').html('');
       //////////////////
       download();
       //////////////////
@@ -167,8 +168,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
   function updateSigninStatus(isSignedIn) {
     setSigninStatus();
   }
-</script>
-<script>
+
 var fileName = 'SJCLDataApp.txt';
 function download()  {
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
