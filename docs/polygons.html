@@ -20,6 +20,21 @@
      }
 
    }
+	
+    function download() {
+     
+      var canvas = document.getElementById('canvas');
+  
+      var link = document.createElement("a");
+      link.download = 'canvas.png';
+      link.href = canvas.toDataURL("image/png");
+
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      delete link;
+   }
 
    function setup() {
      var size = document.forms.form1.strSize.value * 1.0;
@@ -145,7 +160,7 @@ The star polygons will be regular if the greatest common divisor between the ste
 <tr><td>Vertices</td><td><input enabled="true" id="strN" maxlength="3" name="strN" size="3" type="text" value="3" /></td></tr>
 <tr><td>Step</td><td><input enabled="true" id="strP" maxlength="3" name="strP" onchange="verifyP()" size="3" type="text" value="1" /></td></tr>
 <tr><td>Size</td><td><input enabled="true" id="strSize" maxlength="3" name="strSize" size="3" type="text" value="300" /></td></tr>
-<tr><td colspan="2"><input onclick="draw()" type="button" value="Draw" /><input onclick="drawComplete()" type="button" value="Complete Graph" /><input onclick="drawSemiComplete()" type="button" value="Semi-Complete Graph" /><input onclick="drawNext()" type="button" value="Next" /></td></tr>
+<tr><td colspan="2"><input onclick="draw()" type="button" value="Draw" /><input onclick="drawComplete()" type="button" value="Complete Graph" /><input onclick="drawSemiComplete()" type="button" value="Semi-Complete Graph" /><input onclick="drawNext()" type="button" value="Next" /><input class="btn" onclick="download()" type="button" value="Download" /></td></tr>
 </tbody></table>
 </form>
 <canvas width="100%" id="canvas">
