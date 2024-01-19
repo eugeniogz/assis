@@ -47,7 +47,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
      {
      
         
-        if (document.getElementById('texto').value!="iv:\"")
+        if (document.getElementById('texto').value.substring(1,5)!="iv:\"")
         {
            document.getElementById('texto').value = 
                sjcl.encrypt(document.getElementById('pwd').value , texto);
