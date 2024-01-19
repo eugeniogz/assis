@@ -44,11 +44,9 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
    
      function codificar()
      {
-        texto = document.getElementById('texto').value;
         document.getElementById('enc').value = 
-               sjcl.encrypt(document.getElementById('pwd').value , document.getElementById('texto').value);
+          sjcl.encrypt(document.getElementById('pwd').value , document.getElementById('texto').value);
         document.getElementById('form').submit();
-        document.getElementById('texto').value = texto;
      }
      
      function decodificar()
@@ -99,7 +97,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
 </style>
 
 
-<body>
+<body onload="decodificar()">
   <TABLE>
     <form id="form">
     <TR><TD>Password</TD><TD><input id="pwd" autocomplete="on"/></TD></TR>
