@@ -176,7 +176,7 @@ var fileName = 'SJCLDataApp.txt';
 function download()  {
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.googleapis.com/drive/v3/files?q=name%3D%27'+fileName+'%27');
+xhr.open('GET', 'https://www.googleapis.com/drive/v3/files?q=name%3D%27'+fileName+'%27&spaces=appDataFolder');
 //valid values for spaces are: drive, appDataFolder and Photos
 
 xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
@@ -209,7 +209,7 @@ var file = new Blob([''], {type: 'text/plain'});
 var metadata = {
     'name': fileName, // Filename at Google Drive
     'mimeType': 'text/plain', //, // mimeType at Google Drive
-    //'parents': ['drive'], // Folder ID at Google Drive, remove appDataFolder to save outside app folder 
+    'parents': ['appDataFolder'], // Folder ID at Google Drive, remove appDataFolder to save outside app folder 
 };
 
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
@@ -231,7 +231,7 @@ xhr.send(form);
 function upload(fileContent) {
 var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.googleapis.com/drive/v3/files?q=name%3D%27'+fileName+'%27');
+xhr.open('GET', 'https://www.googleapis.com/drive/v3/files?q=name%3D%27'+fileName+'%27&spaces=appDataFolder');
 //valid values for spaces are: drive, appDataFolder and Photos
 
 xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
