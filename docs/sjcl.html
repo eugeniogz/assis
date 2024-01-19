@@ -45,8 +45,6 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
   
      function codificar()
      {
-     
-        
         if (document.getElementById('texto').value.substring(1,5)!="iv:\"")
         {
            document.getElementById('texto').value = 
@@ -100,10 +98,9 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
 
 
 <body>
+  <TABLE>
+    <TR><TD>Password</TD><TD><input type="password" id="pwd" autocomplete="on"/></TD></TR></TABLE>
+    <button type="button" onclick="codificar()">Encrypt</button>
+    <button type="button" onclick="decodificar()">Decrypt</button><BR/>
    <textarea id="texto"></textarea><BR/>
-   <TABLE>
-   <TR><TD>Usuário</TD><TD><input type="text" id="user" readonly="readonly" autocomplete="on"/><!--User must be here, readonly Ok, disabled not works with save password in chrome--></TD></TR>
-   <TR><TD>Password</TD><TD><input type="password" id="pwd" autocomplete="on"/></TD></TR></TABLE><BR/>
-   <button type="button" onclick="codificar()">Encrypt</button>
-   <button type="button" onclick="decodificar()">Decrypt</button>
 </body>
