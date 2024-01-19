@@ -57,7 +57,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
      function decodificar()
      {
         try {
-          ocument.getElementById('texto').value = sjcl.decrypt(document.getElementById('pwd').value, texto);
+          document.getElementById('texto').value = sjcl.decrypt(document.getElementById('pwd').value, texto);
         } catch (e) {
           alert('Error occurred, password maybe wrong.');
         }
