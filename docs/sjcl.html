@@ -39,33 +39,9 @@ b.ct,b.iv,b.adata,b.tag);e.c(d,b);d.key=a;return sjcl.codec.utf8String.fromBits(
 undefined)a={};if(b===undefined)return a;var d;for(d in b)if(b.hasOwnProperty(d)){if(c&&a[d]!==undefined&&a[d]!==b[d])throw new sjcl.exception.invalid("required parameter overridden");a[d]=b[d]}return a},V:function(a,b){var c={},d;for(d in a)if(a.hasOwnProperty(d)&&a[d]!==b[d])c[d]=a[d];return c},W:function(a,b){var c={},d;for(d=0;d<b.length;d++)if(a[b[d]]!==undefined)c[b[d]]=a[b[d]];return c}};sjcl.encrypt=sjcl.json.encrypt;sjcl.decrypt=sjcl.json.decrypt;sjcl.misc.S={};
 sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c=c[a]=c[a]||{};d=c[d]=c[d]||{firstSalt:b.salt&&b.salt.length?b.salt.slice(0):sjcl.random.randomWords(2,0)};c=b.salt===undefined?d.firstSalt:b.salt;d[c]=d[c]||sjcl.misc.pbkdf2(a,c,b.iter);return{key:d[c].slice(0),salt:c.slice(0)}};
 </script>
-<!-- <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCY70IicrOo0p5Eetik57Y5bSDp5kvmmIk",
-    authDomain: "sjcl-794b5.firebaseapp.com",
-    projectId: "sjcl-794b5",
-    storageBucket: "sjcl-794b5.appspot.com",
-    messagingSenderId: "591697127419",
-    appId: "1:591697127419:web:6da2b80a08a5754524cd5e",
-    measurementId: "G-WB0MLFSPJQ"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script> -->
 <script type="text/javascript" >
    
-     //'{iv:"YOgEqOwrMVyuyQeXV/t8fg",salt:"8svAFD/kdUY",ct:"EpX53Alu9cB1HqykZ1XXE/H+hMXQ3WWMhwSLcmFIU7uUscK2Wvy47o05zjb9PGkJ1LgNdu6lfPfs/tTi/WMN3ZZQi/lU0z0Enl9vHJE5jk2DU8p5vbeAwVZoOmunpumN+X/S0mAr2nuEkawgbuKnAzPM5ZtqrR83Bx/MP68AZYJN56ZI5bLlntaq84SZzD62nOC7ne4eZ8d3sPWdASZkGmo31PWVv+vyzE99Eolh7Ybq0CuGYkhe8SvrafwE22Qn/K02hjzzvaIG0C/1sNA4OUPQYzoVXxOOzicSPvtPjdUI8R9++e2KmpAaoHEtD+qAy69LmXDo+CGYKuCLRbIpcOKii3ZRZ2KteqLp6oNrDInPFIVsKt+eC+3VUUyUB/dHSqf6TAKoMZBipmYrfe5vhqgHASRNK0LwYfO9HIZieiqPrbADpqDe2ysuZmMwSkkCmDTeCkjnqUIt3UaMCm2geROb8i7+mazbho3SIBgNv8yRv0SDmykn0BCMAENbX4Okf55Ih7N6+b+K5m1xMiE6wQbvC7MIzqg8+2KZ+qvfixgPfn9kLmI3DXPQ8ZjRGLJ6fzBkrhAiseq5qw3JGjamQ13wy9I2C8jd/LUEy9Gye5CgG0NNDs5e4/1ld3nfPU/fnW9GWzz4pbxrWa3d7Zo23LU7z1HnwiyVhTPbKGhvapyittVS6ergn4HPB5HMRwWU4XsufPECCgY1TUNA35VnUBgTJfAes2cCmjwNCZvP440wCJAoC0tx2p2VIrlijG+o2NQ/TYiApYfSxhjeXVpcaYpLhu2nVYc8jaoWc4U0r1Ue3da1YyUEunJWUunmlrazuY0/qw7OVc8TeqBU6hstY4OR62nqdLsvlvdG0WzHHXqYjWUleIkzhWutLrEGiG6JUpskKlSwQlutldhDNwCwmZ9e8ctBQ6UVZbXtSbg8XdIHmHfi+R5+CAPzM2Xlw19SWbjj/fTzKaXAkSnz+DNsbTi3h8YRAsOB6pWd3suBNmOaJVKxZsMWusCJz8iDK3FfvgLUyfHKz7JdRrx9nodhtLS8W4mEvWblzMDqDWGrWOnuqW1jic3iYNXRw6nW3y/ysaV2t7ubx8ykSpS99oUIzGsK405tVSXXfw89hDKIhjM++1PDB18SqYnL2E3QiZ2f2XssJg2/EzJlkQb579sNI15GkAeRl/QEkBEuLO7eipcI7DLfESeRKn15WADTtWfb3QKG6K74ywzU979QlHJmgH99sXZeswTpDUtp1m4nqeJU3cCdaNBtcFnAAWsGHZdLBcY4VfI0UkE7XNtshTkkZR8lO1POddg8aGfbgZQVKyvUZFcX2J4CF0xrOJ4FmqFg2bkWkVPzWs3Vr014LxDd6qlNzwGJremqe9Z/F38KNk3IH4Ka1XO7HMXlyDC9kHFNu74WF7lOsx3OuwQRv0Qt2HdlkKe9ZJPhYe9lFkxqmQ73g4LjSwkYheRSB9dOxcaCa5vFMj3V8oHxCgMlaJ11vc06UQrcLH3d49RIBKwiprL+PCm8jvaAPvjN0RJeNi23+2AMqPnGpMnRecv3zy/rdYaVZZJ4SloMwSvgf5ZPrQZo67Ac9/fEEKEzDQ1kywmRfWaL1VjzgmMm/SEjhRz0paA2iNI4epM6uEgLcLk7bIP3fGcL3jE2uBt394q41qTdodHRp6/xYxJIX3iohMqhyI6zqxsuSrGMrr3wmceobHgEMxKvxEG+Bu7GIZhbVaB9zyT17UJ5RUVcT2Yff4nboFswkG8QZezuFoc4lygz5MINjo5UHtAaZ1GzbWPoP27Lj/ggQcl8F8bJZGHhG2mMKVPwl3pa2X2ShC+7semVenjpDsmmMCYxtMUEZ0iYI1EV6Hn2pelNozWwaULqK4oibhsiqDaV3vPlibXZdSu0/qmvZRtmi+dcYk7tBuQeRkQj1bpQgDEslZ1rWJph8eShTrktE1CXmcDY8rF02zs8LDYqveafKrZfMzmTxGh38BT5uEv8KuLoEZojnQwY38vGNiJm+sX/U+LpGobKhFx3ZJE92FXvvUe2Sa1fc/OWRYXyIQ63/uxownbLB1UBhTNXKnt6YSYlZgFa7R5egTs+TXSorsh7pNFKHu/WdWBRYEle3iWLGbHwJkVPKLnqsxKhJ5ONlRqd17+WKxKxIFFqlPsTXdudOQ4FRZnTBFAGWq8"}';
-  
      function codificar()
      {
         document.getElementById('enc').value = 
@@ -124,7 +100,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
 <body>
   <TABLE>
     <form id="form">
-    <TR><TD>Password</TD><TD><input id="pwd" autocomplete="off"/></TD></TR>
+    <TR><TD>Password</TD><TD><input id="pwd" autocomplete="on"/></TD></TR>
     <TR><TD>Enc</TD><TD><input type="password" id="enc" autocomplete="on"/></TD></TR></TABLE>
     <button type="button" onclick="codificar()">Encrypt</button>
     <button type="button" onclick="decodificar()">Decrypt</button><BR/><BR/>
