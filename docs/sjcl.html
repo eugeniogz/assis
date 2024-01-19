@@ -47,7 +47,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
      {
      
         
-        if (texto.substring(1,5)!="iv:\"")
+        if (document.getElementById('texto').value!="iv:\"")
         {
            document.getElementById('texto').value = 
                sjcl.encrypt(document.getElementById('pwd').value , texto);
@@ -63,8 +63,6 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
         }
      }
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
 <style>
   body {
      overflow-x:hidden;
