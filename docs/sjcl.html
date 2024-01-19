@@ -39,238 +39,29 @@ b.ct,b.iv,b.adata,b.tag);e.c(d,b);d.key=a;return sjcl.codec.utf8String.fromBits(
 undefined)a={};if(b===undefined)return a;var d;for(d in b)if(b.hasOwnProperty(d)){if(c&&a[d]!==undefined&&a[d]!==b[d])throw new sjcl.exception.invalid("required parameter overridden");a[d]=b[d]}return a},V:function(a,b){var c={},d;for(d in a)if(a.hasOwnProperty(d)&&a[d]!==b[d])c[d]=a[d];return c},W:function(a,b){var c={},d;for(d=0;d<b.length;d++)if(a[b[d]]!==undefined)c[b[d]]=a[b[d]];return c}};sjcl.encrypt=sjcl.json.encrypt;sjcl.decrypt=sjcl.json.decrypt;sjcl.misc.S={};
 sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c=c[a]=c[a]||{};d=c[d]=c[d]||{firstSalt:b.salt&&b.salt.length?b.salt.slice(0):sjcl.random.randomWords(2,0)};c=b.salt===undefined?d.firstSalt:b.salt;d[c]=d[c]||sjcl.misc.pbkdf2(a,c,b.iter);return{key:d[c].slice(0),salt:c.slice(0)}};
 </script>
-  <script async defer src="https://apis.google.com/js/api.js" 
-        onload="this.onload=function(){};handleClientLoad()" 
-        onreadystatechange="if (this.readyState === 'complete') {this.onload()}">
-  </script>
-
-  <script type="text/javascript" >
+<script type="text/javascript" >
    
+     var texto = '{iv:"YOgEqOwrMVyuyQeXV/t8fg",salt:"8svAFD/kdUY",ct:"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"}';
   
-     function verifyPassword()
-     {
-        if (document.getElementById('pwd').value !=
-            document.getElementById('pwdvrf').value) 
-            {
-               alert('Passwords mismatch');
-               return false;
-            }
-        return true;
-     }
-     
      function codificar()
      {
      
-        if (!verifyPassword()) return;
-        
-        var texto = document.getElementById('texto').value;
         
         if (texto.substring(1,5)!="iv:\"")
         {
            document.getElementById('texto').value = 
                sjcl.encrypt(document.getElementById('pwd').value , texto);
         }
-        
-        upload(document.getElementById('texto').value);
-
-        
      }
      
      function decodificar()
      {
         try {
-          document.getElementById('texto').value = sjcl.decrypt(document.getElementById('pwd').value,
-          document.getElementById('texto').value);
-          document.getElementById('pwdvrf').value = document.getElementById('pwd').value;
+          ocument.getElementById('texto').value = sjcl.decrypt(document.getElementById('pwd').value, texto);
         } catch (e) {
           alert('Error occurred, password maybe wrong.');
         }
      }
-  </script>
-
-<script>
-  var GoogleAuth;
-  var SCOPE = 'https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file';
-  var SCOPE = 'https://www.googleapis.com/auth/drive.appdata';
-  
-  function handleClientLoad() {
-    // Load the API's client and auth2 modules.
-    // Call the initClient function after the modules load.
-    gapi.load('client:auth2', initClient);
-  }
-
-  function initClient() {
-    // Retrieve the discovery document for version 3 of Google Drive API.
-    // In practice, your app can retrieve one or more discovery documents.
-    var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
-
-    // Initialize the gapi.client object, which app uses to make API requests.
-    // Get API key and client ID from API Console.
-    // 'scope' field specifies space-delimited list of access scopes.
-    gapi.client.init({
-        'apiKey': 'AIzaSyBdUjU1Rm3PWTbbLWS6de_p-tyG2vp87KQ',
-        'discoveryDocs': [discoveryUrl],
-        'clientId': '714187266533-g9duqs1hlkfh8k00maoeek2bamnsc3co.apps.googleusercontent.com',
-        'scope': SCOPE
-    }).then(function () {
-      GoogleAuth = gapi.auth2.getAuthInstance();
-
-      // Listen for sign-in state changes.
-      GoogleAuth.isSignedIn.listen(updateSigninStatus);
-
-      // Handle initial sign-in state. (Determine if user is already signed in.)
-      var user = GoogleAuth.currentUser.get();
-      setSigninStatus();
-      
-
-      // Call handleAuthClick function when user clicks on
-      //      "Sign In/Authorize" button.
-      $('#sign-in-or-out-button').click(function() {
-        handleAuthClick();
-      }); 
-      $('#revoke-access-button').click(function() {
-        revokeAccess();
-      }); 
-    });
-  }
-
-  function handleAuthClick() {
-    if (GoogleAuth.isSignedIn.get()) {
-      // User is authorized and has clicked 'Sign out' button.
-      GoogleAuth.signOut();
-    } else {
-      // User is not signed in. Start Google auth flow.
-      GoogleAuth.signIn();
-    }
-  }
-
-  function revokeAccess() {
-    GoogleAuth.disconnect();
-  }
-
-  function setSigninStatus(isSignedIn) {
-    var user = GoogleAuth.currentUser.get();
-    var isAuthorized = user.hasGrantedScopes(SCOPE);
-    if (isAuthorized) {
-      $('#sign-in-or-out-button').html('Sign out');
-      $('#revoke-access-button').css('display', 'inline-block');
-      $('#user').val(user.getBasicProfile().getEmail());
-      $('#auth-status').html('');
-      //////////////////
-      download();
-      //////////////////
-    } else {
-      $('#sign-in-or-out-button').html('Sign In/Authorize');
-      //$('#revoke-access-button').css('display', 'none');
-      $('#auth-status').html('You have not authorized this app or you are ' +
-          'signed out.');
-    }
-  }
-
-  function updateSigninStatus(isSignedIn) {
-    setSigninStatus();
-  }
-</script>
-<script>
-var fileName = 'SJCLDataApp.txt';
-function download()  {
-var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.googleapis.com/drive/v3/files?q=name%3D%27'+fileName+'%27&spaces=appDataFolder');
-//valid values for spaces are: drive, appDataFolder and Photos
-
-xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-xhr.responseType = 'json';
-var contents = '';
-xhr.onload = () => {
-    if (xhr.response.files.length==0) {
-      createFile();
-    } else {
-      downloadFile(xhr.response.files[0].id);
-    } 
-};
-xhr.send();
-}
-function downloadFile(id)  {
-var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.googleapis.com/drive/v3/files/'+id+'?alt=media');
-xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-xhr.responseType = 'text';
-xhr.onload = () => {
-    document.getElementById('texto').value=xhr.responseText; 
-};
-xhr.send();
-
-}
-
-function createFile() {
-var file = new Blob([''], {type: 'text/plain'});
-var metadata = {
-    'name': fileName, // Filename at Google Drive
-    'mimeType': 'text/plain', //, // mimeType at Google Drive
-    'parents': ['appDataFolder'], // Folder ID at Google Drive, remove appDataFolder to save outside app folder 
-};
-
-var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-var form = new FormData();
-form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
-form.append('file', file);
-
-var xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id');
-xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-xhr.responseType = 'json';
-xhr.onload = () => {
-    console.log('Create File ' + xhr.response.id); // Retrieve uploaded file ID.
-};
-xhr.send(form);
-}
-
-
-function upload(fileContent) {
-var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.googleapis.com/drive/v3/files?q=name%3D%27'+fileName+'%27&spaces=appDataFolder');
-//valid values for spaces are: drive, appDataFolder and Photos
-
-xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-xhr.responseType = 'json';
-var contents = '';
-xhr.onload = () => {
-    uploadFile(fileContent,xhr.response.files[0].id);
-};
-xhr.send();
-
-}
-function uploadFile(fileContent, id) {
-var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-var xhr = new XMLHttpRequest();
-
-var file = new Blob([fileContent], {type: 'text/plain'});
-var metadata = {
-    'name': fileName, // Filename at Google Drive
-    'mimeType': 'text/plain', // mimeType at Google Drive 
-};
-
-var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
-var form = new FormData();
-form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
-form.append('file', file);
-
-var xhr = new XMLHttpRequest();
-xhr.open('PATCH', 'https://www.googleapis.com/upload/drive/v3/files/'+id+'?uploadType=multipart');
-xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-xhr.responseType = 'json';
-xhr.onload = () => {
-    console.log('Updated File ' + xhr.response.id);
-};
-xhr.send(form);
-
-
-}
-
-
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -311,24 +102,10 @@ xhr.send(form);
 
 
 <body>
-  <p>Store a criptographed text on Google drive, third party cookies must be enabled.</p>
-<form action="#" target="emptyPageForLogin">
-<button id="sign-in-or-out-button" type="button" 
-        style="margin-left: 2px">Sign In/Authorize</button>
-<button id="revoke-access-button" type="button" 
-        style="inline-block: none; margin-left: 2px">Revoke access</button>
-
-<div id="auth-status" style="display: inline; padding-left: 2px"></div><hr>
-
    <textarea id="texto"></textarea><BR/>
    <TABLE>
    <TR><TD>Usuário</TD><TD><input type="text" id="user" readonly="readonly" autocomplete="on"/><!--User must be here, readonly Ok, disabled not works with save password in chrome--></TD></TR>
-   <TR><TD>
-   Password</TD><TD><input type="password" id="pwd" autocomplete="on"/></TD><TR><TD> 
-   Verify Password&nbsp;&nbsp;</TD><TD><input type="password" id="pwdvrf" autocomplete="off"/></TD></TABLE><BR/>
-   <button type="submit" onclick="codificar()">Encrypt</button>
-   <button type="button" onclick="decodificar()">Decrypt</button><!--This can't be submitted because reloads encrypted text-->
-   <!--button type="submit">Save Password</buttton-->
-</form>
-<iframe src="empty.html" id="emptyPageForLogin" name="emptyPageForLogin" style="display:none"></iframe>
+   <TR><TD>Password</TD><TD><input type="password" id="pwd" autocomplete="on"/></TD></TR></TABLE><BR/>
+   <button type="button" onclick="codificar()">Encrypt</button>
+   <button type="button" onclick="decodificar()">Decrypt</button>
 </body>
