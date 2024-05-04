@@ -17,7 +17,7 @@ getEnc();
 
 // Get a list of cities from your database
 async function getEnc() {
-  const secret = collection(db, 'secret');
+  const secret = collection(db, '/secret');
   const docs = await getDocs(secret);
   const cityList = docs.docs.map(doc => doc.data());
   return cityList;
