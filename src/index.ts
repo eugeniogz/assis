@@ -16,7 +16,7 @@ const db = getFirestore(app);
 getEnc();
 
 // Get a list of cities from your database
-async function getEnc() {
+export async function getEnc() {
   const secret = collection(db, '/secret');
   const docs = await getDocs(secret);
   const cityList = docs.docs.map(doc => doc.data());
