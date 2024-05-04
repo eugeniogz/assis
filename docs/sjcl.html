@@ -44,14 +44,18 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
    
      function codificar()
      {
-        document.getElementById('enc').value = 
-          sjcl.encrypt(document.getElementById('pwd').value , document.getElementById('texto').value);
-        document.getElementById('form').submit();
+        localStorage.setItem('sjcl_enc', 
+          sjcl.encrypt(document.getElementById('pwd').value , document.getElementById('texto').value));
+        //document.getElementById('form').submit();
      }
      
      function decodificar()
      {
-        if (document.getElementById('enc').value.length==0) return;
+        if (document.getElementById('enc').value.length==0) {
+          if (localStorage.getItem('sjcl_enc')!=null) {
+            document.getElementById('enc').value=localStorage.getItem('sjcl_enc');
+          }
+        }
         try {
           document.getElementById('texto').value = sjcl.decrypt(document.getElementById('pwd').value, document.getElementById('enc').value);
         } catch (e) {
@@ -102,7 +106,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
   <TABLE>
     <form id="form">
     <TR><TD>Password</TD><TD><input id="pwd" autocomplete="on"/></TD></TR>
-    <TR><TD>Enc</TD><TD><input type="password" id="enc" autocomplete="on"/></TD></TR></TABLE>
+    <TR><TD>Enc</TD><TD><input type="password" id="enc"/></TD></TR></TABLE>
     <button type="button" onclick="codificar()">Encrypt</button>
     <button type="button" onclick="decodificar()">Decrypt</button><BR/><BR/>
     <textarea id="texto"></textarea><BR/>
