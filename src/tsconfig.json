@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+      "noImplicitAny": true,
+      "target": "ES6",
+      "module": "ES2015"
     },
-    "files": [ "index.ts"]
-  }
+    "files": [/* "index.ts", */ "test.ts"]
+}

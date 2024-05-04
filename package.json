@@ -3,7 +3,8 @@
     "firebase": "^10.11.1"
   },
   "scripts": {
-    "build": "webpack --mode=development"
+    "build-devel": "webpack --mode=development",
+    "build": "webpack --mode=production"
   },
   "devDependencies": {
     "ts-loader": "^9.5.1",
