@@ -46,9 +46,6 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
      {
         localStorage.setItem('sjcl_enc', 
           sjcl.encrypt(document.getElementById('pwd').value , document.getElementById('texto').value));
-        if (chrome.storage.sync!=null) {
-            chrome.storage.sync.set({ ['sjcl_enc']: localStorage.getItem('sjcl_enc') }, function(result) {});
-        }
         document.getElementById('form').submit();
      }
      
@@ -56,13 +53,7 @@ sjcl.misc.cachedPbkdf2=function(a,b){var c=sjcl.misc.S,d;b=b||{};d=b.iter||1E3;c
      {
         if (document.getElementById('pwd').value.length==0) return;
         if (document.getElementById('enc').value.length==0) {
-          if (chrome.storage.sync!=null) {
-            chrome.storage.sync.get('sjcl_enc', function(data) {
-              if (!chrome.runtime.lastError) {
-                document.getElementById('enc').value = data['sjcl_enc'] || localStorage.getItem('sjcl_enc');
-              }
-            });
-          } else if (localStorage.getItem('sjcl_enc')!=null) {
+          if (localStorage.getItem('sjcl_enc')!=null) {
             document.getElementById('enc').value=localStorage.getItem('sjcl_enc');
           }
         }
