@@ -44,7 +44,7 @@
 
         // Scene setup
         const scene = new THREE.Scene();
-
+        const raycaster = new THREE.Raycaster();
         // Camera setup
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 5;
@@ -84,6 +84,8 @@
         // Variables to track mouse position
         let mouseX = 0;
         let mouseY = 0;
+        let isRotating = false;
+        let startPosition = new THREE.Vector2();
 
         // Event listener for keydown to switch textures
         document.addEventListener('keydown', (event) => {
@@ -135,6 +137,46 @@
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
         });
+
+        function onTouchStart(event) {
+            // Obtém as coordenadas do toque normalizadas para a tela
+            const touch = event.touches[0];
+            const x = (touch.clientX / window.innerWidth) * 2 - 1;
+            const y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+            // Atualiza o raycaster com as coordenadas do toque
+            raycaster.setFromCamera({ x, y }, camera);
+
+            // Intersecta todos os objetos na cena
+            const intersects = raycaster.intersectObjects(scene.children);
+
+            // Se algum objeto foi intersectado, inicia a rotação
+            if (intersects.length > 0) {
+                isRotating = true;
+                startPosition.set(event.touches[0].clientX, event.touches[0].clientY);
+            }
+        }
+
+        function onTouchMove(event) {
+            if (isRotating) {
+                const currentPosition = new THREE.Vector2(event.touches[0].clientX, event.touches[0].clientY);
+                const deltaY = currentPosition.y - startPosition.y;
+                mesh.rotation.y += deltaX * 0.01; // Ajuste o fator de escala para controlar a velocidade de rotação
+                const deltaX = currentPosition.x - startPosition.x;
+                mesh.rotation.x += deltaX * 0.01; // Ajuste o fator de escala para controlar a velocidade de rotação
+                
+                startPosition.copy(currentPosition);
+            }
+        }
+
+        function onTouchEnd(event) {
+          isRotating = false;
+        }
+
+        renderer.domElement.addEventListener('touchstart', onTouchStart);
+        renderer.domElement.addEventListener('touchmove', onTouchMove);
+        renderer.domElement.addEventListener('touchend', onTouchEnd);   
+
     </script>
 </body>
 
