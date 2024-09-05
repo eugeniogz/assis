@@ -6,4 +6,5 @@
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
 	"git.smartCommitChanges": "all",
+	"svn.ignoreMissingSvnWarning": true,
 }
