@@ -15,6 +15,7 @@
             display: block;
         }
 
+
         #tutorial {
             position: absolute;
             top: 10px;
@@ -33,12 +34,10 @@
 
 <body>
     <div id="tutorial">
-        <p><b>MOUSE/TOQUE:</b> MOVER PARA ROTACIONAR A FIGURA 3D</p>
-        <p><b>TECLA ESPAÇO OU TOQUE DUPLO:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE
-        </p>
-        <p><b>PINCH:</b> ZOOM IN/OUT USANDO DOIS DEDOS</p>
-        <p><b>TOQUE SIMPLES OU TECLA +:</b> AVANÇA PARA A PRÓXIMA TEXTURA</p>
-        <p><b>TOQUE DUPLO OU TECLA -:</b> VOLTA PARA A TEXTURA ANTERIOR</p>
+        <p><b>MOUSE:</b> MOVA PARA ROTACIONAR A FIGURA 3 D</p>
+        <p><b>TECLA ESPAÇO:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE</p>
+        <p><b>TECLA +:</b> AVANÇA PARA A PRÓXIMA TEXTURA</p>
+        <p><b>TECLA -:</b> VOLTA PARA A TEXTURA ANTERIOR</p>
     </div>
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
@@ -55,7 +54,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        // Texture loader and URLs
         const textureLoader = new THREE.TextureLoader();
         const textureUrls =
             [
@@ -76,61 +74,29 @@
                 //"https://threejs.org/examples/textures/checker.png"
             ];
         let currentTextureIndex = 0;
-        const texture = textureLoader.load(textureUrls[currentTextureIndex]);
 
-        // Geometries array
-        const geometries = [
-            new THREE.SphereGeometry(1, 32, 32),
-            new THREE.ConeGeometry(1, 2, 32),
-            new THREE.CylinderGeometry(1, 1, 2, 32),
-            new THREE.BoxGeometry(2, 2, 2),
-            new THREE.ConeGeometry(1, 2, 4)
-        ];
-
+        const texture = textureLoader.load(textureUrls[0]); // URL da textura
+        const geometries = [new THREE.SphereGeometry(1, 32, 32),
+        new THREE.ConeGeometry(1, 2, 32),
+        new THREE.CylinderGeometry(1, 1, 2, 32),
+        new THREE.BoxGeometry(2, 2, 2),
+        new THREE.ConeGeometry(1, 2, 4)];
         let currentGeometryIndex = 0;
-        let geometry = geometries[currentGeometryIndex];
+        let geometry = geometries[0];
 
-        // Material with initial texture
+
+        // Aplicando a textura ao material
         const material = new THREE.MeshBasicMaterial({ map: texture });
+
         let mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
+        // Variables to track mouse position
+        let mouseX = 0;
+        let mouseY = 0;
+        let isRotating = false;
+        let startPosition = new THREE.Vector2();
 
-        // Variables for touch gestures
-        let isTouching = false;
-        let lastTouchX = 0;
-        let lastTouchY = 0;
-        let touchZoomDistance = 0;
-
-        // Variables for touch and double touch
-        let lastTap = 0;
-        let touchTimeout = null;
-
-        // Function to handle single tap (texture change)
-        function handleSingleTap() {
-            changeTexture(1);
-        }
-
-        // Function to handle double tap (geometry change)
-        function handleDoubleTap() {
-            changeGeometry();
-        }
-
-        // Change texture
-        function changeTexture(direction) {
-            currentTextureIndex = (currentTextureIndex + direction + textureUrls.length) % textureUrls.length;
-            material.map = textureLoader.load(textureUrls[currentTextureIndex]);
-            material.needsUpdate = true;
-        }
-
-        // Change geometry
-        function changeGeometry() {
-            currentGeometryIndex = (currentGeometryIndex + 1) % geometries.length;
-            scene.remove(mesh);
-            geometry = geometries[currentGeometryIndex];
-            mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-        }
-
+        // Event listener for keydown to switch textures
         document.addEventListener('keydown', (event) => {
             if (event.key === '+') {
                 currentTextureIndex = (currentTextureIndex + 1) % textureUrls.length;
@@ -154,78 +120,25 @@
 
         // Event listener to update mouse position
         document.addEventListener('mousemove', (event) => {
-            lastTouchX = (event.clientX / window.innerWidth) * 2 - 1;
-            lastTouchY = -(event.clientY / window.innerHeight) * 2 + 1;
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
         });
-
-
-        // Handle touch events for rotation and pinch zoom
-        document.addEventListener('touchstart', (event) => {
-            if (event.touches.length === 1) {
-                // Detect single or double tap
-                const currentTime = new Date().getTime();
-                const tapLength = currentTime - lastTap;
-                lastTap = currentTime;
-
-                if (tapLength < 300 && tapLength > 0) {
-                    clearTimeout(touchTimeout);
-                    handleDoubleTap(); // Double tap detected
-                } else {
-                    // Single tap with timeout to check if it's a double tap
-                    touchTimeout = setTimeout(() => {
-                        handleSingleTap();
-                    }, 300);
-                }
-
-                isTouching = true;
-                lastTouchX = event.touches[0].clientX;
-                lastTouchY = event.touches[0].clientY;
-            } else if (event.touches.length === 2) {
-                // Pinch zoom handling
-                touchZoomDistance = getDistance(event.touches[0], event.touches[1]);
-            }
-        });
-
-        document.addEventListener('touchmove', (event) => {
-            if (event.touches.length === 1 && isTouching) {
-                // Rotation based on single touch move
-                const deltaX = event.touches[0].clientX - lastTouchX;
-                const deltaY = event.touches[0].clientY - lastTouchY;
-
-                mesh.rotation.y += deltaX * 0.01;
-                mesh.rotation.x += deltaY * 0.01;
-
-                lastTouchX = event.touches[0].clientX;
-                lastTouchY = event.touches[0].clientY;
-            } else if (event.touches.length === 2) {
-                // Pinch zoom handling
-                const newDistance = getDistance(event.touches[0], event.touches[1]);
-                const zoomFactor = newDistance - touchZoomDistance;
-                camera.position.z -= zoomFactor * 0.01;
-                touchZoomDistance = newDistance;
-            }
-        });
-
-        document.addEventListener('touchend', () => {
-            isTouching = false;
-        });
-
-        // Helper function to calculate the distance between two touch points
-        function getDistance(touch1, touch2) {
-            const dx = touch2.clientX - touch1.clientX;
-            const dy = touch2.clientY - touch1.clientY;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
 
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
+
+            // Rotate the cone based on mouse position
+            mesh.rotation.x = mouseY * Math.PI;
+            mesh.rotation.y = mouseX * Math.PI;
+
             renderer.render(scene, camera);
         }
 
         animate();
 
-        // Adjust canvas size on window resize
+
+        // Responsividade ao redimensionar a janela
         window.addEventListener('resize', () => {
             const width = window.innerWidth;
             const height = window.innerHeight;
@@ -233,6 +146,45 @@
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
         });
+
+        function onTouchStart(event) {
+            // Obtém as coordenadas do toque normalizadas para a tela
+            const touch = event.touches[0];
+            const x = (touch.clientX / window.innerWidth) * 2 - 1;
+            const y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+            // Atualiza o raycaster com as coordenadas do toque
+            raycaster.setFromCamera({ x, y }, camera);
+
+            // Intersecta todos os objetos na cena
+            const intersects = raycaster.intersectObjects(scene.children);
+
+            // Se algum objeto foi intersectado, inicia a rotação
+            if (intersects.length > 0) {
+                isRotating = true;
+                startPosition.set(event.touches[0].clientX, event.touches[0].clientY);
+            }
+        }
+
+        function onTouchMove(event) {
+            if (isRotating) {
+                const currentPosition = new THREE.Vector2(event.touches[0].clientX, event.touches[0].clientY);
+                const deltaY = currentPosition.y - startPosition.y;
+                mesh.rotation.y += deltaX * 0.01; // Ajuste o fator de escala para controlar a velocidade de rotação
+                const deltaX = currentPosition.x - startPosition.x;
+                mesh.rotation.x += deltaX * 0.01; // Ajuste o fator de escala para controlar a velocidade de rotação
+
+                startPosition.copy(currentPosition);
+            }
+        }
+
+        function onTouchEnd(event) {
+            isRotating = false;
+        }
+
+        renderer.domElement.addEventListener('touchstart', onTouchStart);
+        renderer.domElement.addEventListener('touchmove', onTouchMove);
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
 
     </script>
 </body>
