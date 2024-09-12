@@ -41,7 +41,14 @@
     </div>
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
-
+ 
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        // Lista de palavras-chave comuns em user agents de dispositivos móveis
+        const mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i;
+        if (mobile.test(userAgent)) {
+            Response.redirect('mobile.html');
+        }
+        
         // Scene setup
         const scene = new THREE.Scene();
         const raycaster = new THREE.Raycaster();
