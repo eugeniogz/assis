@@ -130,6 +130,34 @@
             scene.add(mesh);
         }
 
+        document.addEventListener('keydown', (event) => {
+            if (event.key === '+') {
+                currentTextureIndex = (currentTextureIndex + 1) % textureUrls.length;
+                material.map = textureLoader.load(textureUrls[currentTextureIndex]);
+                material.needsUpdate = true;
+            } else if (event.key === '-') {
+                currentTextureIndex =
+                    (currentTextureIndex - 1 + textureUrls.length) % textureUrls.length;
+                material.map = textureLoader.load(textureUrls[currentTextureIndex]);
+                material.needsUpdate = true;
+            }
+            else if (event.key === ' ') {
+                currentGeometryIndex++;
+                if (currentGeometryIndex > geometries.length - 1) currentGeometryIndex = 0;
+                scene.remove(mesh);
+                geometry = geometries[currentGeometryIndex];
+                mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+            }
+        });
+
+        // Event listener to update mouse position
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+
         // Handle touch events for rotation and pinch zoom
         document.addEventListener('touchstart', (event) => {
             if (event.touches.length === 1) {
