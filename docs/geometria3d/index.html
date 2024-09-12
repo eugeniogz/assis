@@ -34,7 +34,8 @@
 <body>
     <div id="tutorial">
         <p><b>MOUSE/TOQUE:</b> MOVER PARA ROTACIONAR A FIGURA 3D</p>
-        <p><b>TECLA ESPAÇO OU TOQUE DUPLO:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE</p>
+        <p><b>TECLA ESPAÇO OU TOQUE DUPLO:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE
+        </p>
         <p><b>PINCH:</b> ZOOM IN/OUT USANDO DOIS DEDOS</p>
         <p><b>TOQUE SIMPLES OU TECLA +:</b> AVANÇA PARA A PRÓXIMA TEXTURA</p>
         <p><b>TOQUE DUPLO OU TECLA -:</b> VOLTA PARA A TEXTURA ANTERIOR</p>
@@ -153,8 +154,8 @@
 
         // Event listener to update mouse position
         document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            lastTouchX = (event.clientX / window.innerWidth) * 2 - 1;
+            lastTouchY = -(event.clientY / window.innerHeight) * 2 + 1;
         });
 
 
