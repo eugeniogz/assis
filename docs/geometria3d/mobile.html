@@ -104,7 +104,12 @@
 
         // Function to handle single tap (texture change)
         function handleSingleTap() {
-            changeTexture(1);
+            if (currentTextureIndex>=textureUrls.length) {
+                currentTextureIndex=0;
+                material.map = textureLoader.load(textureUrls[currentTextureIndex]);
+            material.needsUpdate = true;
+            } else 
+                changeTexture(1);
         }
 
         // Function to handle double tap (geometry change)
@@ -175,7 +180,7 @@
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
-            renderer.render(scene, camera);
+            renderer.render(mesh, camera);
         }
 
         animate();
