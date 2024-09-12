@@ -63,8 +63,15 @@
                 "https://threejs.org/examples/textures/waternormals.jpg",
                 "https://threejs.org/examples/textures/planets/earth_specular_2048.jpg",
                 "https://threejs.org/examples/textures/planets/moon_1024.jpg",
+                "Arthur.png",
+                "Lorenzo.png",
+                "Lucca.png",
+                "Nicole1.png",
+                "Nicole2.png",
+                "Pedro1.png",
+                "Pedro2.png"
                 //"https://threejs.org/examples/textures/checker.png"
-                ];
+            ];
         let currentTextureIndex = 0;
 
         const texture = textureLoader.load(textureUrls[0]); // URL da textura
@@ -165,18 +172,18 @@
                 mesh.rotation.y += deltaX * 0.01; // Ajuste o fator de escala para controlar a velocidade de rotação
                 const deltaX = currentPosition.x - startPosition.x;
                 mesh.rotation.x += deltaX * 0.01; // Ajuste o fator de escala para controlar a velocidade de rotação
-                
+
                 startPosition.copy(currentPosition);
             }
         }
 
         function onTouchEnd(event) {
-          isRotating = false;
+            isRotating = false;
         }
 
         renderer.domElement.addEventListener('touchstart', onTouchStart);
         renderer.domElement.addEventListener('touchmove', onTouchMove);
-        renderer.domElement.addEventListener('touchend', onTouchEnd);   
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
 
     </script>
 </body>
