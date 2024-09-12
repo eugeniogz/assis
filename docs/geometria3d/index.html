@@ -40,7 +40,6 @@
         <p><b>TECLA -:</b> VOLTA PARA A TEXTURA ANTERIOR</p>
     </div>
     <script type="module">
-        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
  
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         // Lista de palavras-chave comuns em user agents de dispositivos móveis
@@ -49,6 +48,8 @@
             Response.redirect('mobile.html');
         }
         
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
+
         // Scene setup
         const scene = new THREE.Scene();
         const raycaster = new THREE.Raycaster();
