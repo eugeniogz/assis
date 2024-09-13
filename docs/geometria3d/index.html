@@ -34,16 +34,24 @@
 
 <body>
     <div id="tutorial">
-        <p><b>MOUSE:</b> MOVA PARA ROTACIONAR A FIGURA 3 D</p>
-        <p><b>TECLA ESPAÇO:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE</p>
-        <p><b>TECLA +:</b> AVANÇA PARA A PRÓXIMA TEXTURA</p>
-        <p><b>TECLA -:</b> VOLTA PARA A TEXTURA ANTERIOR</p>
     </div>
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
 
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        
+        let mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i.test(userAgent);
+        if (!mobile) {
+            document.getElementById("tutorial").innerHTML = 
+            "<p><b>MOUSE:</b> MOVA PARA ROTACIONAR A FIGURA 3 D</p>" +
+            "<p><b>TECLA ESPAÇO:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE</p>"+
+            "<p><b>TECLA +:</b> AVANÇA PARA A PRÓXIMA TEXTURA</p>"+
+            "<p><b>TECLA -:</b> VOLTA PARA A TEXTURA ANTERIOR</p>";
+        } else {
+            document.getElementById("tutorial").innerHTML = 
+            "<p><b>ARRASTAR:</b> MOVER PARA ROTACIONAR A FIGURA 3D</p>"+
+            "<p><b>TOQUE SIMPLES</b> MUDA A TEXTURA</p>"+
+            "<p><b>TOQUE COM DOIS DEDOS:</b> TROCA A GEOMETRIA DA FIGURA ENTRE ESFERA, CONE, CILINDRO, CUBO E PIRÂMIDE</p>"; 
+        }
         // Scene setup
         const scene = new THREE.Scene();
         const raycaster = new THREE.Raycaster();
@@ -65,14 +73,14 @@
                 "https://threejs.org/examples/textures/waternormals.jpg",
                 "https://threejs.org/examples/textures/planets/earth_specular_2048.jpg",
                 "https://threejs.org/examples/textures/planets/moon_1024.jpg",
-                "Beatriz.png",
+             /*   "Beatriz.png",
                 "Arthur.png",
                 "Lorenzo.png",
                 "Lucca.png",
                 "Nicole1.png",
                 "Nicole2.png",
                 "Pedro1.png",
-                "Pedro2.png"
+                "Pedro2.png" */
                 //"https://threejs.org/examples/textures/checker.png"
             ];
         let currentTextureIndex = 0;
@@ -137,17 +145,20 @@
         // Handle touch events for rotation and pinch zoom
         document.addEventListener('touchstart', (event) => {
             if (event.touches.length === 1) {
+                event.preventDefault();
                 handleSingleTap();
                 isTouching = true;
                 lastTouchX = event.touches[0].clientX;
                 lastTouchY = event.touches[0].clientY;
             } else if (event.touches.length === 2) {
+                event.preventDefault();
                 handleDoubleTap();
             }
         });
 
         document.addEventListener('touchmove', (event) => {
             if (event.touches.length === 1 && isTouching) {
+                event.preventDefault();
                 // Rotation based on single touch move
                 const deltaX = event.touches[0].clientX - lastTouchX;
                 const deltaY = event.touches[0].clientY - lastTouchY;
@@ -158,11 +169,12 @@
                 lastTouchX = event.touches[0].clientX;
                 lastTouchY = event.touches[0].clientY;
             } else if (event.touches.length === 2) {
+                event.preventDefault();
                 // Pinch zoom handling
-                const newDistance = getDistance(event.touches[0], event.touches[1]);
-                const zoomFactor = newDistance - touchZoomDistance;
-                camera.position.z -= zoomFactor * 0.01;
-                touchZoomDistance = newDistance;
+                // const newDistance = getDistance(event.touches[0], event.touches[1]);
+                // const zoomFactor = newDistance - touchZoomDistance;
+                // camera.position.z -= zoomFactor * 0.01;
+                // touchZoomDistance = newDistance;
             }
         });
 
@@ -209,9 +221,7 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // Lista de palavras-chave comuns em user agents de dispositivos móveis
-            const mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i;
-            if (!mobile.test(userAgent)) {
+            if (!mobile) {
                 // Rotate the cone based on mouse position
                 mesh.rotation.x = mouseY * Math.PI;
                 mesh.rotation.y = mouseX * Math.PI;
