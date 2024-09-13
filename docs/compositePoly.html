@@ -1,130 +1,140 @@
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b'
+  xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 
-<html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
-<title>
-Assis
-</title>
-<style id='page-skin-1' type='text/css'><!--
-body {
-font-family: helvetica;
-color: #ffffff;
-background: #263238;
-padding: 0;
-margin: 0;
--webkit-text-size-adjust: none;
--moz-text-size-adjust: none;
--ms-text-size-adjust: none;
-}
-td {
-padding: 0;
-margin: 0;
-}
-.headBanner {
-background: #000000;
-border-style: solid;
-border-color: #000000;
-margin: 0;
-padding: 5px;
-top: 0;
-left: 0;
-right: 0;
-}
-.main {
-margin: 0px;
-font-family: helvetica;
-}
-a.menu:link, a.menu:visited {
-color: white;
-padding: 0px 10px;
-text-align: center;
-display: inline-block;
-text-decoration:none;
-}
-a.current {
-border-bottom-style:solid;
-border-color: white;
-}
+  <title>
+    Assis
+  </title>
+  <style id='page-skin-1' type='text/css'>
+    <!--
+    body {
+      font-family: helvetica;
+      color: #ffffff;
+      background: #263238;
+      padding: 0;
+      margin: 0;
+      -webkit-text-size-adjust: none;
+      -moz-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+    }
 
---></style>
+    td {
+      padding: 0;
+      margin: 0;
+    }
+
+    .headBanner {
+      background: #000000;
+      border-style: solid;
+      border-color: #000000;
+      margin: 0;
+      padding: 5px;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .main {
+      margin: 0px;
+      font-family: helvetica;
+    }
+
+    a.menu:link,
+    a.menu:visited {
+      color: white;
+      padding: 0px 10px;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    a.current {
+      border-bottom-style: solid;
+      border-color: white;
+    }
+    -->
+  </style>
 </head>
+
 <body>
   <div align="center" style="width:100%; height:100%" id="graph"></div>
   <script src="three.js"></script>
   <script>
-   var incx=0.01;
-   var incy=0.01;
-   var camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
-   var polyhedron = [];
-   var scene = [new THREE.Scene()];
-   var renderer = [new THREE.WebGLRenderer()];
-   camera.position.z = 5;
-   var material = new THREE.MeshNormalMaterial();
-   var width = window.innerHeight<window.innerWidth?window.innerHeight:window.innerWidth;
-   renderer[0].setSize( width, width);
-   document.getElementById("graph").appendChild( renderer[0].domElement );   
-    
-   for (i=0; i<2; i++) {
-    if (i==0) geometry = new THREE.DodecahedronGeometry(2, 0);
-    if (i==1) geometry = new THREE.IcosahedronGeometry(2.2, 0);
-    j = polyhedron.push(new THREE.Mesh( geometry, material ));    
-    scene[0].add( polyhedron[j-1]);
-    scene[0].background = new THREE.Color( 0x263238 );
-    if (i==0) {
-     polyhedron[j-1].rotation.y = Math.PI/2;
+    var incx = 0.01;
+    var incy = 0.01;
+    var camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    var polyhedron = [];
+    var scene = [new THREE.Scene()];
+    var renderer = [new THREE.WebGLRenderer()];
+    camera.position.z = 5;
+    var material = new THREE.MeshNormalMaterial();
+    var width = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+    renderer[0].setSize(width, width);
+    document.getElementById("graph").appendChild(renderer[0].domElement);
+
+    for (i = 0; i < 2; i++) {
+      if (i == 0) geometry = new THREE.DodecahedronGeometry(2, 0);
+      if (i == 1) geometry = new THREE.IcosahedronGeometry(2.2, 0);
+      j = polyhedron.push(new THREE.Mesh(geometry, material));
+      scene[0].add(polyhedron[j - 1]);
+      scene[0].background = new THREE.Color(0x263238);
+      if (i == 0) {
+        polyhedron[j - 1].rotation.y = Math.PI / 2;
+      }
     }
-   }   
-   renderer[0].render( scene[0], camera );
-   let mouseX = 0;
-   let mouseY = 0;
-        
-   document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    renderer[0].render(scene[0], camera);
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
     });
 
-   var animate = function () {
-    requestAnimationFrame( animate );
+    var animate = function () {
+      requestAnimationFrame(animate);
 
-    for (i=0;i<2;i++) {
-     polyhedron[i].rotation.x = mouseY * Math.PI;
-     polyhedron[i].rotation.y = mouseX * Math.PI;
-     renderer[0].render( scene[0], camera );
+      for (i = 0; i < 2; i++) {
+        polyhedron[i].rotation.y = mouseX * Math.PI + (i == 0 ? Math.PI / 2 : 0);
+        polyhedron[i].rotation.x = mouseY * Math.PI;
+        renderer[0].render(scene[0], camera);
+      };
+      renderer[0].render(scene[0], camera);
     };
-    renderer[0].render( scene[0], camera );
-   };
 
 
-   animate();
-   
-   //document.onkeydown = checkKey;
-   
-   window.onresize = function(){
-    var width = window.innerHeight<window.innerWidth?window.innerHeight:window.innerWidth;
-    renderer[0].setSize( width, width);
-    
-   };
-   
-   function checkKey(e) {
-       e = e || window.event;
-       if (e.keyCode == '38') {
-           // up arrow
-     incy += 0.01;
-       }
-       else if (e.keyCode == '40') {
-           // down arrow
-     incy -= 0.01;
-       }
-       else if (e.keyCode == '37') {
-     // left arrow
-           incx -= 0.01;
-       }
-       else if (e.keyCode == '39') {
-     // right arrow
-     incx += 0.01;
-       }
-    renderer[0].render( scene[0], camera );
+    animate();
 
-   }
+    //document.onkeydown = checkKey;
+
+    window.onresize = function () {
+      var width = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+      renderer[0].setSize(width, width);
+
+    };
+
+    function checkKey(e) {
+      e = e || window.event;
+      if (e.keyCode == '38') {
+        // up arrow
+        incy += 0.01;
+      }
+      else if (e.keyCode == '40') {
+        // down arrow
+        incy -= 0.01;
+      }
+      else if (e.keyCode == '37') {
+        // left arrow
+        incx -= 0.01;
+      }
+      else if (e.keyCode == '39') {
+        // right arrow
+        incx += 0.01;
+      }
+      renderer[0].render(scene[0], camera);
+
+    }
   </script>
 </body>
+
 </html>
