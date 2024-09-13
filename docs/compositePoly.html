@@ -74,13 +74,20 @@ border-color: white;
     }
    }   
    renderer[0].render( scene[0], camera );
-   
+   let mouseX = 0;
+   let mouseY = 0;
+        
+   document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+
    var animate = function () {
     requestAnimationFrame( animate );
 
     for (i=0;i<2;i++) {
-     polyhedron[i].rotation.x += incx;
-     polyhedron[i].rotation.y += incy;
+     polyhedron[i].rotation.x = mouseY * Math.PI;
+     polyhedron[i].rotation.y = mouseX * Math.PI;
      renderer[0].render( scene[0], camera );
     };
     renderer[0].render( scene[0], camera );
@@ -89,7 +96,7 @@ border-color: white;
 
    animate();
    
-   document.onkeydown = checkKey;
+   //document.onkeydown = checkKey;
    
    window.onresize = function(){
     var width = window.innerHeight<window.innerWidth?window.innerHeight:window.innerWidth;
