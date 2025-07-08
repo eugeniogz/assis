@@ -9,16 +9,13 @@
     <link rel="icon" href="images/icon-1024x1024.png"> </head>
 <body>
     <div class="container">
-        <p id="statusMessage"> </p>
-        <form id="form" method="post">
-        <input id="username" value="username" type="hidden" value="username">
         <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
         <button id="verifyPasswordBtn" type="submit">Check password</button>
         <button id="selectFileBtn">Select/Create File</button>
         <button id="saveFileBtn" disabled>Save</button>
         <button id="clearHandleBtn" disabled>Remove File Access</button>
         <textarea id="fileContent" rows="26" disabled></textarea>
-        </form>
+        <p id="statusMessage"> </p>
     </div>
     <script src="filehandledb.js"></script>
     <script src="sjcl.js"></script>
