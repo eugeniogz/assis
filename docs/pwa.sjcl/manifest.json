@@ -1,0 +1,26 @@
+{
+    "name": "SJCL File Encrypt",
+    "short_name": "SJCL Encrypt",
+    "description": "SJCL File Encrypt - PWA",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#333333",
+    "icons": [
+        {
+            "src": "images/icon-1024x1024.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color_media": [
+        {
+            "media": "(prefers-color-scheme: dark)",
+            "theme_color": "#333333"
+        },
+        {
+            "media": "(prefers-color-scheme: light)",
+            "theme_color": "#007bff"
+        }
+    ]
+}
