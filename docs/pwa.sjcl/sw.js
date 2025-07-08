@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sjcl-file-encrypt-v1.1.3'; // Nome do cache, pode ser alterado para forçar atualização
+const CACHE_NAME = 'sjcl-file-encrypt-v1.1.4'; // Nome do cache, pode ser alterado para forçar atualização
 const urlsToCache = [
     '/pwa.sjcl/',
     '/pwa.sjcl/index.html',
