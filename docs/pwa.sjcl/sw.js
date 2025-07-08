@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sjcl-file-encrypt-v1.1.2'; // Nome do cache, pode ser alterado para forçar atualização
+const CACHE_NAME = 'sjcl-file-encrypt-v1.1.3'; // Nome do cache, pode ser alterado para forçar atualização
 const urlsToCache = [
     '/pwa.sjcl/',
     '/pwa.sjcl/index.html',
@@ -23,7 +23,7 @@ self.addEventListener('fetch', event => {
                 return fetch(event.request).catch(() => {
                     // Fallback para páginas offline, se necessário
                     // Por exemplo, uma página offline genérica
-                    return caches.match('/offline.html');
+                    return caches.match('/pwa.sjcl/offline.html');
                 });
             })
     );
