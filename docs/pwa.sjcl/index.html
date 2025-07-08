@@ -10,14 +10,16 @@
 <body>
     <div class="container">
         <form>
+        <input id="email"  value="username" style="display: hidden;">
         <input type="password" id="password" placeholder="Password" />
         <button id="verifyPasswordBtn" type="submit">Check password</button>
         <button id="selectFileBtn">Select/Create File</button>
         <button id="saveFileBtn" disabled>Save</button>
         <button id="clearHandleBtn" disabled>Remove File Access</button>
+        <p id="statusMessage"> </p>
         <textarea id="fileContent" rows="26" disabled></textarea>
         </form>
-        <p id="statusMessage"> </p>
+        
     </div>
     <script src="filehandledb.js"></script>
     <script src="sjcl.js"></script>
