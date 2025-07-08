@@ -1,14 +1,14 @@
 const CACHE_NAME = 'sjcl-file-encrypt-v1.1.2'; // Nome do cache, pode ser alterado para forçar atualização
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/offline.html',
-    '/style.css',
-    '/filehandledb.js',
-    '/sjcl.js',
-    '/app.js',
-    '/manifest.json',
-    '/images/icon-1024x1024.png'
+    '/pwa.sjcl/',
+    '/pwa.sjcl/index.html',
+    '/pwa.sjcl/offline.html',
+    '/pwa.sjcl/style.css',
+    '/pwa.sjcl/filehandledb.js',
+    '/pwa.sjcl/sjcl.js',
+    '/pwa.sjcl/app.js',
+    '/pwa.sjcl/manifest.json',
+    '/pwa.sjcl/images/icon-1024x1024.png'
 ];
 
 self.addEventListener('fetch', event => {
