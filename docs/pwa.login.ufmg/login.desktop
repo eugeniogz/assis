@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Login UFMG
+Comment=Acesso rápido à página de login dos Sistemas UFMG
+Exec=firefox --new-window https://ws1.assis.bhz.br/pwa.login.ufmg/
+Icon=/home/jeugenio/gdrive/Work/Meus.Sites/ws1.assis.bhz.br/assis/docs/pwa.login.ufmg/ufmg116x116.png
+Terminal=false
+Categories=Network;WebBrowser;

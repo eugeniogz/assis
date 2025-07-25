@@ -1,0 +1,1 @@
+copiar o login.desktop em /home/jeugenio/Desktop
