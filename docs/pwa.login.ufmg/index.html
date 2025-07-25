@@ -19,17 +19,17 @@
             // Um pequeno atraso (ex: 1000ms = 1 segundo) permite que o navegador
             // processe o manifest e service worker antes de sair da página.
             setTimeout(() => {
-              window.location.href = 'https://sistemas.ufmg.br/portal';
+              window.location.href = 'https://projetos.ufmg.br/cecom/issues?query_id=1308';
             }, 1000); // Atraso de 1 segundos
           })
           .catch(err => {
             console.log('Falha no registro do Service Worker:', err);
             // Se o Service Worker falhar, redireciona imediatamente
-            window.location.href = 'https://sistemas.ufmg.br/portal';
+            window.location.href = 'https://projetos.ufmg.br/cecom/issues?query_id=1308';
           });
       } else {
         // Se o Service Worker não for suportado, redireciona imediatamente
-        window.location.href = 'https://sistemas.ufmg.br/portal';
+        window.location.href = 'https://projetos.ufmg.br/cecom/issues?query_id=1308';
       }
     </script>
     <style>
@@ -90,7 +90,7 @@
     <div class="container">
         <h1>Bem-vindo ao Login UFMG</h1>
         <p>Você está sendo redirecionado para a página de login dos Sistemas UFMG.</p>
-        <p>Se o redirecionamento não ocorrer automaticamente, <a href="https://sistemas.ufmg.br/portal">clique aqui para acessar</a>.</p>
+        <p>Se o redirecionamento não ocorrer automaticamente, <a href="https://projetos.ufmg.br/cecom/issues?query_id=1308">clique aqui para acessar</a>.</p>
 
         <div class="instructions">
             <p><strong>Para instalar este aplicativo na sua tela inicial:</strong></p>
