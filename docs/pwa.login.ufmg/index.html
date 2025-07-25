@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionando para Login UFMG...</title>
+    <!-- Redireciona imediatamente para a página de login da UFMG -->
+    <meta http-equiv="refresh" content="0;url=https://sistemas.ufmg.br/idp/login.jsp">
+    <meta name="theme-color" content="#005a9c">
+
+    <!-- Link para o arquivo de manifesto do PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Script para registrar o Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => console.log('Service Worker registrado com sucesso:', registration))
+          .catch(err => console.log('Falha no registro do Service Worker:', err));
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #005a9c;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Você está sendo redirecionado para a página de login da UFMG.</p>
+        <p>Se o redirecionamento não ocorrer automaticamente, <a href="https://sistemas.ufmg.br/idp/login.jsp">clique aqui</a>.</p>
+    </div>
+</body>
+</html>

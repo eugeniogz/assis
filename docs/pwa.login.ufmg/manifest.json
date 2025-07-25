@@ -1,0 +1,16 @@
+{
+  "name": "Login UFMG Rápido",
+  "short_name": "Login UFMG",
+  "description": "Acesso rápido à página de login dos Sistemas UFMG.",
+  "start_url": "https://sistemas.ufmg.br/idp/login.jsp",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#005a9c",
+  "icons": [
+    {
+      "src": "ufmg.png",
+      "sizes": "116x116",
+      "type": "image/png"
+    }
+  ]
+}
