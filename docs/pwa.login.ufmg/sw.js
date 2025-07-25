@@ -1,5 +1,5 @@
 // Nome do cache para armazenar os arquivos do PWA
-const CACHE_NAME = 'ufmg-login-pwa-v1';
+const CACHE_NAME = 'ufmg-login-pwa-v2';
 // Lista de arquivos para cachear durante a instalação
 const urlsToCache = [
   '/', // A raiz do seu site (index.html)

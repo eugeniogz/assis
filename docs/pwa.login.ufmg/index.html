@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecionando para Login UFMG...</title>
-    <!-- Redireciona imediatamente para a página de login da UFMG -->
-    <meta http-equiv="refresh" content="0;url=https://sistemas.ufmg.br/idp/login.jsp">
+    <title>Login UFMG</title>
     <meta name="theme-color" content="#005a9c">
 
     <!-- Link para o arquivo de manifesto do PWA -->
@@ -15,14 +13,30 @@
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
-          .then(registration => console.log('Service Worker registrado com sucesso:', registration))
-          .catch(err => console.log('Falha no registro do Service Worker:', err));
+          .then(registration => {
+            console.log('Service Worker registrado com sucesso:', registration);
+            // Após o registro, redireciona para a página de login da UFMG
+            // Um pequeno atraso (ex: 1000ms = 1 segundo) permite que o navegador
+            // processe o manifest e service worker antes de sair da página.
+            setTimeout(() => {
+              window.location.href = 'https://sistemas.ufmg.br/idp/login.jsp';
+            }, 15000); // Atraso de 1.5 segundos
+          })
+          .catch(err => {
+            console.log('Falha no registro do Service Worker:', err);
+            // Se o Service Worker falhar, redireciona imediatamente
+            window.location.href = 'https://sistemas.ufmg.br/idp/login.jsp';
+          });
+      } else {
+        // Se o Service Worker não for suportado, redireciona imediatamente
+        window.location.href = 'https://sistemas.ufmg.br/idp/login.jsp';
       }
     </script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -30,26 +44,61 @@
             background-color: #f0f2f5;
             color: #333;
             text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
-            padding: 20px;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 12px;
             background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #005a9c;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
         a {
             color: #005a9c;
             text-decoration: none;
+            font-weight: bold;
         }
         a:hover {
             text-decoration: underline;
+        }
+        .instructions {
+            margin-top: 25px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: #e6f7ff;
+            border-left: 5px solid #005a9c;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .instructions strong {
+            color: #003d6d;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <p>Você está sendo redirecionado para a página de login da UFMG.</p>
-        <p>Se o redirecionamento não ocorrer automaticamente, <a href="https://sistemas.ufmg.br/idp/login.jsp">clique aqui</a>.</p>
+        <h1>Bem-vindo ao Login UFMG</h1>
+        <p>Você está sendo redirecionado para a página de login dos Sistemas UFMG.</p>
+        <p>Se o redirecionamento não ocorrer automaticamente, <a href="https://sistemas.ufmg.br/idp/login.jsp">clique aqui para acessar</a>.</p>
+
+        <div class="instructions">
+            <p><strong>Para instalar este aplicativo na sua tela inicial:</strong></p>
+            <p>1. Aguarde esta página carregar completamente.</p>
+            <p>2. No seu navegador (Chrome, Edge, etc.), procure pelo botão de "Instalar" (geralmente um ícone de casa com um sinal de mais, ou uma opção no menu).</p>
+            <p>3. Toque em "Adicionar à tela inicial" ou "Instalar aplicativo".</p>
+            <p>Assim, você terá um ícone direto para o login da UFMG!</p>
+        </div>
     </div>
 </body>
 </html>
