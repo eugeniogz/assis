@@ -75,7 +75,7 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
         const categoria = transacao.categoria;
         const amount = transacao.TRNAMT;
 
-        if (transacao.TRNTYPE === 'debito') {
+        if (transacao.TRNTYPE === 'DEBIT') {
             // Soma as despesas (valores negativos)
             despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + Math.abs(amount);
         } else {

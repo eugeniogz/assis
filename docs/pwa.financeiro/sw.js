@@ -1,4 +1,4 @@
-const CACHE_NAME = 'financeiro-1.4.8'; // Nome do cache, pode ser alterado para forçar atualização
+const CACHE_NAME = 'financeiro-1.4.9'; // Nome do cache, pode ser alterado para forçar atualização
 const urlsToCache = [
     '/pwa.financeiro/',
     '/pwa.financeiro/index.html',
