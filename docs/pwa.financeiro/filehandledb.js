@@ -1,9 +1,9 @@
 // Nome do banco de dados e versão
-const DB_NAME = 'myPWAFileDB';
+const DB_NAME = 'myPWAFileFinanceiroDB';
 const DB_VERSION = 1;
 const OBJECT_STORE_NAME = 'fileHandles';
 
-let db; // Variável para armazenar a instância do banco de dados
+let findb; // Variável para armazenar a instância do banco de dados
 
 function openDb() {
     return new Promise((resolve, reject) => {
@@ -15,16 +15,16 @@ function openDb() {
         };
 
         request.onsuccess = (event) => {
-            db = event.target.result;
+            findb = event.target.result;
             console.log("IndexedDB aberto com sucesso!");
-            resolve(db);
+            resolve(findb);
         };
 
         // Este evento é disparado se a versão do banco de dados mudar (para upgrades)
         request.onupgradeneeded = (event) => {
-            db = event.target.result;
-            if (!db.objectStoreNames.contains(OBJECT_STORE_NAME)) {
-                db.createObjectStore(OBJECT_STORE_NAME);
+            findb = event.target.result;
+            if (!findb.objectStoreNames.contains(OBJECT_STORE_NAME)) {
+                findb.createObjectStore(OBJECT_STORE_NAME);
                 console.log(`Object Store '${OBJECT_STORE_NAME}' criada.`);
             }
         };
@@ -35,7 +35,7 @@ async function saveHandle(fileHandle) {
     try {
         await openDb(); // Garante que o banco de dados esteja aberto
 
-        const transaction = db.transaction([OBJECT_STORE_NAME], 'readwrite');
+        const transaction = findb.transaction([OBJECT_STORE_NAME], 'readwrite');
         const store = transaction.objectStore(OBJECT_STORE_NAME);
 
         const request = store.put(fileHandle, 'defaultFile'); // Salva o handle com a chave 'defaultFile'
@@ -61,7 +61,7 @@ async function removeHandle() {
     try {
         await openDb(); // Garante que o banco de dados esteja aberto
 
-        const transaction = db.transaction([OBJECT_STORE_NAME], 'readwrite');
+        const transaction = findb.transaction([OBJECT_STORE_NAME], 'readwrite');
         const store = transaction.objectStore(OBJECT_STORE_NAME);
 
         await store.delete('defaultFile'); // Deleta o item com a chave 'defaultFile'
@@ -79,7 +79,7 @@ async function loadHandle() {
     try {
         await openDb(); // Garante que o banco de dados esteja aberto
 
-        const transaction = db.transaction([OBJECT_STORE_NAME], 'readonly');
+        const transaction = findb.transaction([OBJECT_STORE_NAME], 'readonly');
         const store = transaction.objectStore(OBJECT_STORE_NAME);
 
         const request = store.get('defaultFile'); // Carrega o handle pela chave
