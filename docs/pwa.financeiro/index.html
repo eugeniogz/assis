@@ -14,7 +14,8 @@
             <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
             <button id="verifyPasswordBtn" type="submit">Check password</button>
             <input type="file" id="ofxInput" accept=".ofx" style="display:none" />
-            <button id="importOfxBtn">Importar OFX</button>
+            <button id="importOfxBtn">Import OFX</button>
+            <button id="showPieChartBtn">Pie Chart</button>
             <button id="backupBtn" type="button">Backup</button>
             <button id="restoreBtn" type="button">Restaurar</button>
             <input type="file" id="restoreInput" accept=".json" style="display:none" />
@@ -25,6 +26,7 @@
     <script src="filehandledb.js"></script>
     <script src="sjcl.js"></script>
     <script src="app.js"></script>
+    <script src="piechart.js"></script>
     <script>
         // Registrar o Service Worker
         if ('serviceWorker' in navigator) {

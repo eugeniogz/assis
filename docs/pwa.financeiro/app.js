@@ -142,7 +142,7 @@ const backupBtn = document.getElementById('backupBtn');
 const restoreBtn = document.getElementById('restoreBtn');
 const restoreInput = document.getElementById('restoreInput');
 
-// Backup: exporta o dado criptografado como arquivo .json
+//  : exporta o dado criptografado como arquivo .json
 backupBtn.addEventListener('click', async () => {
     await openDb();
     const tx = findb.transaction(['fileHandles'], 'readonly');
