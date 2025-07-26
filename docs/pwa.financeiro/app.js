@@ -114,6 +114,7 @@ ofxInput.addEventListener('change', async (event) => {
 
 // Exibir JSON ao checar senha
 verifyPasswordBtn.addEventListener('click', async () => {
+    showPage('verifyPasswordBtn');
     await openDb();
     let dadosCript = await new Promise((resolve) => {
         const tx = findb.transaction(['fileHandles'], 'readonly');
