@@ -23,6 +23,42 @@
         <textarea id="fileContent" rows="26" disabled></textarea>
         <p id="statusMessage"> </p>
     </div>
+
+    <div class="container bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-4xl">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Visão Geral Financeira</h1>
+
+        <!-- Seção para o gráfico de despesas por categoria -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Despesas por Categoria</h2>
+            <div class="relative h-80">
+                <canvas id="despesasChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Seção para o gráfico de recebimentos por categoria -->
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Recebimentos por Categoria</h2>
+            <div class="relative h-80">
+                <canvas id="recebimentosChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração do Tailwind para usar a fonte Inter -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Inclui a biblioteca Chart.js para criar gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="filehandledb.js"></script>
     <script src="sjcl.js"></script>
     <script src="app.js"></script>
