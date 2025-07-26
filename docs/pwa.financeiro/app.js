@@ -179,7 +179,7 @@ restoreInput.addEventListener('change', async (event) => {
     const text = await file.text();
     try {
         // Testa se é um JSON válido (criptografado)
-        JSON.parse(sjcl.decrypt(password.value, dadosCript));
+        JSON.parse(sjcl.decrypt(password.value, text));
         await openDb();
         const tx = findb.transaction(['fileHandles'], 'readwrite');
         const store = tx.objectStore('fileHandles');
