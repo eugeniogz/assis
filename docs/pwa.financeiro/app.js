@@ -92,6 +92,10 @@ ofxInput.addEventListener('change', async (event) => {
     dados = dados.concat(novas);
 
     // Criptografar e salvar no IndexedDB
+    if (password.value === '') {
+        showStatus('Senha não pode ser vazia.', true);
+        return;
+    }
     const dadosCriptografados = sjcl.encrypt(password.value, JSON.stringify(dados));
     await new Promise((resolve) => {
         const tx = findb.transaction(['fileHandles'], 'readwrite');
