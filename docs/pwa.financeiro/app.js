@@ -191,3 +191,42 @@ restoreInput.addEventListener('change', async (event) => {
         showStatus('Arquivo inválido.', true);
     }
 });
+
+function showPage(pageId) {
+    document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.add('hidden');
+    });
+    document.getElementById(pageId).classList.remove('hidden');
+
+    // Atualiza os gráficos apenas quando a página do dashboard é exibida
+    if (pageId === 'dashboardPage') {
+        updateCharts();
+    } else if (pageId === 'jsonViewPage') {
+        // Atualiza o JSON exibido quando a página é mostrada
+        document.getElementById('jsonDisplay').value = JSON.stringify(transacoes, null, 2);
+    } else if (pageId === 'categoryEditPage') {
+        // Atualiza a lista de categorias ao mostrar a página de edição
+        renderCategoriesList();
+    }
+}
+
+function updateCharts() {
+    const transacoesCategorizadas = categorizarTransacoes(transacoes, categoriasDict);
+    const dadosParaGrafico = processarDadosParaGrafico(transacoesCategorizadas);
+
+    renderizarGraficoPizza(
+        'despesasChart',
+        'Distribuição de Despesas (R$)',
+        dadosParaGrafico.despesas.labels,
+        dadosParaGrafico.despesas.values,
+        despesaColors
+    );
+
+    renderizarGraficoPizza(
+        'recebimentosChart',
+        'Distribuição de Recebimentos (R$)',
+        dadosParaGrafico.recebimentos.labels,
+        dadosParaGrafico.recebimentos.values,
+        recebimentoColors
+    );
+}

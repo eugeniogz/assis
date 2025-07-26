@@ -6,25 +6,24 @@
     <title>OFX Finance control</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="images/icon-1024x1024.png">
+    <link rel="icon" href="images/icon-1024x1024.svg">
 </head>
 <body>
-    <div class="container">
-        <div class="top-actions">
-            <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
-            <button id="verifyPasswordBtn" type="submit">Check password</button>
+    <!-- <div class="container"> -->
+    <div class="top-actions">
+        <nav class="mb-6 flex flex-wrap justify-center gap-2">
+            <button id="verifyPasswordBtn" type="submit">View Json</button>
             <input type="file" id="ofxInput" accept=".ofx" style="display:none" />
             <button id="importOfxBtn">Import OFX</button>
             <button id="showPieChartBtn">Pie Chart</button>
             <button id="backupBtn" type="button">Backup</button>
             <button id="restoreBtn" type="button">Restaurar</button>
             <input type="file" id="restoreInput" accept=".json" style="display:none" />
-        </div>
-        <textarea id="fileContent" rows="26" disabled></textarea>
-        <p id="statusMessage"> </p>
+        </nav>
     </div>
-
-    <div class="container bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-4xl">
+    <p id="statusMessage"> </p>
+    <!-- </div> -->
+    <div id="pieChartDiv" class="container bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-4xl">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Visão Geral Financeira</h1>
 
         <!-- Seção para o gráfico de despesas por categoria -->
@@ -44,19 +43,66 @@
         </div>
     </div>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuração do Tailwind para usar a fonte Inter -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <div id="categoryEditPage" class="page-content hidden">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Editar Categorias</h2>
+            <div class="p-4 border border-gray-300 rounded-lg mb-4">
+                <h3 class="font-bold text-lg mb-2">Categorias Atuais:</h3>
+                <ul id="currentCategoriesList" class="list-disc list-inside text-gray-700">
+                    <!-- Categorias serão carregadas aqui via JS -->
+                </ul>
+        </div>
+    <div class="flex flex-col md:flex-row gap-4">
+        <input type="text" id="newCategoryName" placeholder="Nome da Nova Categoria" class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="text" id="newCategoryKeywords" placeholder="Palavras-chave (separadas por vírgula)" class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button id="addCategoryBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            Adicionar Categoria
+        </button>
+    </div>
+    <p class="text-sm text-gray-600 mt-2">Ex: "lazer" para "cinema, restaurante"</p>
+    <button id="saveCategoriesBtn" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out w-full">
+        Salvar Categorias e Atualizar Gráficos
+    </button>
+    </div>
+
+    <!-- Página de Visualização do JSON -->
+    <div id="jsonViewPage" class="page-content hidden">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Visualizar JSON</h2>
+        <!-- <textarea id="fileContent" rows="26" disabled></textarea> -->
+        <textarea id="fileContent" class="w-full h-96 p-4 border border-gray-300 rounded-lg font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-purple-500" readonly></textarea>
+        <button id="copyJsonBtn" class="mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out w-full">
+            Copiar JSON
+        </button>
+        <div id="copyMessage" class="text-green-600 text-center mt-2 hidden">Copiado!</div>
+    </div>
+
+    <!-- Página de Backup e Restauração -->
+    <div id="backupRestorePage" class="page-content hidden">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Backup e Restauração</h2>
+        <div class="flex flex-col gap-4">
+            <button id="backupDataBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                Fazer Backup (LocalStorage)
+            </button>
+            <button id="restoreDataBtn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                Restaurar Backup (LocalStorage)
+            </button>
+        </div>
+        <p class="text-sm text-gray-600 mt-4 text-center">
+            O backup e restauração usam o LocalStorage do seu navegador. Isso significa que os dados são salvos apenas neste navegador e não são acessíveis em outros dispositivos ou navegadores.
+        </p>
+        <div id="backupRestoreMessage" class="text-center mt-2 hidden"></div>
+    </div>
+
+    <!-- Página de Senha-->
+    <div id="encryptionPage" class="page-content hidden">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Configuração de Criptografia</h2>
+        <p class="text-gray-700 mb-4 text-center">
+            Esta seção é um placeholder para futura implementação de criptografia.
+            A criptografia de dados sensíveis no lado do cliente requer bibliotecas e considerações de segurança avançadas.
+        </p>
+        <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
+        <button id="verifyPasswordBtn" type="submit">Define password</button>
+    </div>
+
     <!-- Inclui a biblioteca Chart.js para criar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="filehandledb.js"></script>

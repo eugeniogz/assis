@@ -223,6 +223,8 @@ showPieChartBtn.addEventListener('click', async () => {
     // 2. Processa os dados para o formato do gráfico
     const dadosGrafico = processarDadosParaGrafico(transacoesCategorizadas);
 
+    showPage('pieChartDiv');
+    
     // 3. Renderiza o gráfico de despesas (agora como pizza)
     renderizarGraficoPizza(
         'despesasChart',
