@@ -9,7 +9,7 @@ function showStatus(message, isError = false) {
 }
 
 // IndexedDB helpers (mantém openDb, OBJECT_STORE_NAME, findb)
-let findb;
+// let findb;
 
 async function openDb() {
     return new Promise((resolve, reject) => {
