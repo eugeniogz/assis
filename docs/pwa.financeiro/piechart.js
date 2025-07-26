@@ -3,6 +3,7 @@ const showPieChartBtn = document.getElementById('showPieChartBtn');
 // Dicionário para categorizar as transações com base em palavras-chave no campo 'memo'
 
 const categoriasDict = {
+    pix: ['pix'],
     supermercado: ['supermercado', 'mercado', 'atacado', 'hipermercado'],
     padaria: ['padaria', 'pão', 'confeitaria'],
     farmacia: ['drogaria', 'farmacia', 'medicamentos'],
@@ -16,7 +17,6 @@ const categoriasDict = {
     internet: ['claro', 'blink'],
     streaming: ['netflix', 'spotify', 'disney', 'globo', 'hbo'],
     pagamento_cartao: ['pagamento recebido', 'pagamento efetuado'],
-    pix: ['pix'],
     saude: ['medico', 'dentista', 'hospital', 'plano de saude', 'qualicorp', 'unimed'],
     outros_debitos: [], // Categoria padrão para débitos não classificados
     outros_creditos: [] // Categoria padrão para créditos não classificados
@@ -171,9 +171,19 @@ function renderizarGraficoPizza(elementId, title, labels, data, colorsArray) {
                                 label += ': ';
                             }
                             // Calcula a porcentagem para exibir no tooltip
-                            const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+                            // Filtra valores não numéricos para evitar NaN no total
+                            const validData = context.dataset.data.filter(val => typeof val === 'number' && !isNaN(val));
+                            const total = validData.reduce((sum, val) => sum + val, 0);
+
                             const value = context.parsed;
-                            const percentage = ((value / total) * 100).toFixed(2) + '%';
+
+                            // Evita divisão por zero ou NaN para a porcentagem
+                            let percentage = '0.00%';
+                            if (total > 0) { // Calcula a porcentagem apenas se o total for positivo
+                                percentage = ((value / total) * 100).toFixed(2) + '%';
+                            } else if (value === 0 && total === 0) {
+                                percentage = '0.00%'; // Se ambos são zero, a porcentagem é zero
+                            }
                             return `${label} R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} (${percentage})`;
                         }
                     }
