@@ -87,9 +87,9 @@ function categorizarTransacoes(transacoes, categoriasDict) {
 }
 
 /**
- * Processa as transações categorizadas para agrupar e somar os valores por categoria e tipo (débito/crédito).
+ * Processa as transações categorizadas para agrupar, somar e ordenar os valores por categoria e tipo (débito/crédito).
  * @param {Array<Object>} transacoesCategorizadas - O array de transações com o atributo `categoria`.
- * @returns {Object} Um objeto contendo dados formatados para o Chart.js, separados por despesas e recebimentos.
+ * @returns {Object} Um objeto contendo dados formatados para o Chart.js, separados por despesas e recebimentos, ambos ordenados do maior para o menor valor.
  */
 function processarDadosParaGrafico(transacoesCategorizadas) {
     const despesasPorCategoria = {};
@@ -100,29 +100,48 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
         const amount = transacao.TRNAMT;
 
         if (transacao.TRNTYPE === 'DEBIT') {
-            // Soma as despesas (valores negativos)
             despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + Math.abs(amount);
         } else {
             if (categoria !== 'pagamento_cartao') {
-                // Soma os recebimentos (valores positivos)
                 recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + Math.abs(amount);
             }
         }
     });
 
-    // Converte os objetos em arrays de labels e valores para o Chart.js
+    // Função auxiliar para ordenar labels e valores
+    const ordenarDados = (labels, values) => {
+        // Combina labels e valores em um array de objetos
+        const dadosCombinados = labels.map((label, index) => ({
+            label: label,
+            value: values[index]
+        }));
+
+        // Ordena o array de objetos pelo valor, do maior para o menor
+        dadosCombinados.sort((a, b) => b.value - a.value);
+
+        // Separa novamente os labels e os valores
+        const labelsOrdenados = dadosCombinados.map(item => item.label);
+        const valoresOrdenados = dadosCombinados.map(item => item.value);
+
+        return { labels: labelsOrdenados, values: valoresOrdenados };
+    };
+
+    // Aplica a ordenação para despesas e recebimentos
+    const despesasOrdenadas = ordenarDados(
+        Object.keys(despesasPorCategoria),
+        Object.values(despesasPorCategoria)
+    );
+
+    const recebimentosOrdenados = ordenarDados(
+        Object.keys(recebimentosPorCategoria),
+        Object.values(recebimentosPorCategoria)
+    );
+
     return {
-        despesas: {
-            labels: Object.keys(despesasPorCategoria),
-            values: Object.values(despesasPorCategoria)
-        },
-        recebimentos: {
-            labels: Object.keys(recebimentosPorCategoria),
-            values: Object.values(recebimentosPorCategoria)
-        }
+        despesas: despesasOrdenadas,
+        recebimentos: recebimentosOrdenados
     };
 }
-
 /**
  * Renderiza um gráfico de pizza usando Chart.js.
  * @param {string} elementId - O ID do elemento canvas onde o gráfico será renderizado.
