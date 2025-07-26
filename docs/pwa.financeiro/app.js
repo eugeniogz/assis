@@ -1,7 +1,7 @@
 const fileContentTextArea = document.getElementById('fileContent');
 const statusMessage = document.getElementById('statusMessage');
 const password = document.getElementById('password');
-const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
+const showOfxBtn = document.getElementById('verifyPasswordBtn');
 
 function showStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -113,8 +113,8 @@ ofxInput.addEventListener('change', async (event) => {
 });
 
 // Exibir JSON ao checar senha
-verifyPasswordBtn.addEventListener('click', async () => {
-    showPage('verifyPasswordBtn');
+showOfxBtn.addEventListener('click', async () => {
+    showPage('jsonViewPage');
     await openDb();
     let dadosCript = await new Promise((resolve) => {
         const tx = findb.transaction(['fileHandles'], 'readonly');
@@ -201,7 +201,6 @@ function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
         if (page.id === "jsonViewPage" ||
-            page.id === "restoreDataBtn" ||
             page.id === "pieChartDiv") {
             document.getElementById("passwordPage").style.display = 'block'; // Exibe a página selecionada
         }
