@@ -2,7 +2,7 @@
     "name": "Financeiro - PWA",
     "short_name": "Financeiro - PWA",
     "description": "Financeiro - PWA",
-    "start_url": "/pwa.fianaceiro/index.html",
+    "start_url": "/pwa.financeiro/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#333333",

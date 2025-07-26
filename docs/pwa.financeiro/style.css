@@ -93,7 +93,8 @@ textarea {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 1200px; /* aumente o limite */
+    width: 100%;
     margin: 30px auto;
     padding: 16px;
     background: var(--card-background, #f8f9fa);
@@ -102,7 +103,6 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    border: 1px solid var(--border-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -122,10 +122,11 @@ textarea {
 textarea#fileContent {
     width: 100%;
     min-height: 200px;
-    resize: vertical;
+    resize: both; /* permite esticar horizontal e vertical */
     font-family: monospace;
     font-size: 1em;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 @media (max-width: 600px) {

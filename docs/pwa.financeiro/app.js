@@ -137,3 +137,57 @@ verifyPasswordBtn.addEventListener('click', async () => {
 
 // Desabilite edição do textarea
 fileContentTextArea.disabled = true;
+
+const backupBtn = document.getElementById('backupBtn');
+const restoreBtn = document.getElementById('restoreBtn');
+const restoreInput = document.getElementById('restoreInput');
+
+// Backup: exporta o dado criptografado como arquivo .json
+backupBtn.addEventListener('click', async () => {
+    await openDb();
+    const tx = findb.transaction(['fileHandles'], 'readonly');
+    const store = tx.objectStore('fileHandles');
+    const req = store.get('ofxData');
+    req.onsuccess = () => {
+        if (!req.result) {
+            showStatus('Nenhum dado para backup.', true);
+            return;
+        }
+        const blob = new Blob([req.result], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'financeiro-backup.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showStatus('Backup exportado.');
+    };
+    req.onerror = () => showStatus('Erro ao exportar backup.', true);
+});
+
+// Restore: importa arquivo .json e grava no IndexedDB
+restoreBtn.addEventListener('click', () => {
+    restoreInput.value = '';
+    restoreInput.click();
+});
+
+restoreInput.addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const text = await file.text();
+    try {
+        // Testa se é um JSON válido (criptografado)
+        JSON.parse(text);
+        await openDb();
+        const tx = findb.transaction(['fileHandles'], 'readwrite');
+        const store = tx.objectStore('fileHandles');
+        store.put(text, 'ofxData');
+        tx.oncomplete = () => {
+            showStatus('Backup restaurado com sucesso!');
+        };
+    } catch (e) {
+        showStatus('Arquivo inválido.', true);
+    }
+});
