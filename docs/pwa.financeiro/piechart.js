@@ -4,9 +4,9 @@ const showPieChartBtn = document.getElementById('showPieChartBtn');
 
 const categoriasDict = {
     pix: ['pix'],
-    supermercado: ['supermercado', 'mercado', 'atacado', 'hipermercado'],
+    supermercado: ['ponto','hortifruti', 'super', 'sacolao', 'dma', 'supermercado', 'atacado', 'hipermercado','legum'],
     padaria: ['padaria', 'pão', 'confeitaria'],
-    farmacia: ['drogaria', 'farmacia', 'medicamentos'],
+    farmacia: ['raia', 'drogaria', 'farmacia', 'medicamentos'],
     salario: ['salário', 'salario'],
     aluguel: ['aluguel', 'aluguel recebido', 'aluguel pago'],
     contas: ['luz', 'água', 'gas', 'internet', 'telefone', 'conta'],
@@ -14,6 +14,10 @@ const categoriasDict = {
     educacao: ['escola', 'faculdade', 'curso', 'livro'],
     transporte: ['transporte', 'ônibus', 'metro', 'combustivel', 'uber', 'taxi'],
     amazon: ['amazon'],
+    brinquedos: ['traquitana'],
+    restaurantes: ['rocambole', 'avellan', 'premiattamajor', 'uluru', 'cafe', 'ifood', 'soul de queijo'],
+    aplicativos: ['googleplay'],
+    vestuario: ['insider'],
     internet: ['claro', 'blink'],
     streaming: ['netflix', 'spotify', 'disney', 'globo', 'hbo'],
     pagamento_cartao: ['pagamento recebido', 'pagamento efetuado'],
