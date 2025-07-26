@@ -40,7 +40,7 @@ function getRandomRgbaColor(opacity) {
  */
 function categorizarTransacoes(transacoes, categoriasDict) {
     return transacoes.map(transacao => {
-        const memoLowerCase = transacao.memo.toLowerCase();
+        const memoLowerCase = transacao.MEMO.toLowerCase();
         let categoriaEncontrada = '';
 
         // Itera sobre as categorias definidas no dicionário
@@ -54,7 +54,7 @@ function categorizarTransacoes(transacoes, categoriasDict) {
 
         // Se nenhuma categoria específica foi encontrada, atribui 'outros' com base no tipo
         if (!categoriaEncontrada) {
-            categoriaEncontrada = transacao.type === 'debito' ? 'outros_debito' : 'outros_credito';
+            categoriaEncontrada = transacao.TRNTYPE === 'debito' ? 'outros_debito' : 'outros_credito';
         }
 
         // Retorna um novo objeto de transação com a categoria adicionada
@@ -73,9 +73,9 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
 
     transacoesCategorizadas.forEach(transacao => {
         const categoria = transacao.categoria;
-        const amount = transacao.amount;
+        const amount = transacao.TRNAMT;
 
-        if (transacao.type === 'debito') {
+        if (transacao.TRNTYPE === 'debito') {
             // Soma as despesas (valores negativos)
             despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + Math.abs(amount);
         } else {
