@@ -13,6 +13,7 @@ const categoriasDict = {
     educacao: ['escola', 'faculdade', 'curso', 'livro'],
     transporte: ['transporte', 'ônibus', 'metro', 'combustivel', 'uber', 'taxi'],
     amazon: ['amazon'],
+    pagamento_cartao: ['Pagamento recebido', 'Pagamento efetuado', 'Pagamento'],
     pix: ['pix'],
     saude: ['medico', 'dentista', 'hospital', 'plano de saude'],
     outros_debito: [], // Categoria padrão para débitos não classificados
@@ -79,6 +80,7 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
             // Soma as despesas (valores negativos)
             despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + Math.abs(amount);
         } else {
+            if (categoria === 'outros_credito' && categoria !== 'pagamento_cartao') {
             // Soma os recebimentos (valores positivos)
             recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + amount;
         }
