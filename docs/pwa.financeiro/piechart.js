@@ -172,9 +172,9 @@ verifyPasswordBtn.addEventListener('click', async () => {
         fileContentTextArea.value = '';
         return;
     }
-
+    dados = {};
     try {
-        const dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
+        dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
         showStatus('Dados carregados.');
     } catch (e) {
         showStatus('Senha inválida ou dados corrompidos.', true);
