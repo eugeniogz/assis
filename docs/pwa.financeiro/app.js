@@ -194,9 +194,10 @@ restoreInput.addEventListener('change', async (event) => {
 
 function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
-        page.classList.add('hidden');
+        page.style.display = 'none'; // Oculta usando estilo inline
     });
-    document.getElementById(pageId).classList.remove('hidden');
+    document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
+
 
     // Atualiza os gráficos apenas quando a página do dashboard é exibida
     if (pageId === 'dashboardPage') {
