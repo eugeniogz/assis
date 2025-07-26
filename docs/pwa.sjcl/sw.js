@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sjcl-file-encrypt-v1.1.4'; // Nome do cache, pode ser alterado para forçar atualização
+const CACHE_NAME = 'sjcl-file-encrypt-v1.1.5'; // Nome do cache, pode ser alterado para forçar atualização
 const urlsToCache = [
     '/pwa.sjcl/',
     '/pwa.sjcl/index.html',
@@ -8,7 +8,7 @@ const urlsToCache = [
     '/pwa.sjcl/sjcl.js',
     '/pwa.sjcl/app.js',
     '/pwa.sjcl/manifest.json',
-    '/pwa.sjcl/images/icon-1024x1024.png'
+    '/pwa.sjcl/images/icon-1024x1024.svg'
 ];
 
 self.addEventListener('fetch', event => {
