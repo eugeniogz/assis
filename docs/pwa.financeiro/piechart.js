@@ -105,7 +105,7 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
         } else {
             if (categoria !== 'pagamento_cartao') {
                 // Soma os recebimentos (valores positivos)
-                recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + amount;
+                recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + Math.abs(amount);
             }
         }
     });
