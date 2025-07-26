@@ -6,7 +6,7 @@ const categoriasDict = {
     supermercado: ['supermercado', 'mercado', 'atacado', 'hipermercado'],
     padaria: ['padaria', 'pão', 'confeitaria'],
     farmacia: ['drogaria', 'farmacia', 'medicamentos'],
-    salario: ['salário', 'salario', 'pagamento'],
+    salario: ['salário', 'salario'],
     aluguel: ['aluguel', 'aluguel recebido', 'aluguel pago'],
     contas: ['luz', 'água', 'gas', 'internet', 'telefone', 'conta'],
     lazer: ['cinema', 'restaurante', 'bar', 'show', 'viagem'],
@@ -15,7 +15,7 @@ const categoriasDict = {
     amazon: ['amazon'],
     internet: ['claro', 'blink'],
     streaming: ['netflix', 'spotify', 'disney', 'globo', 'hbo'],
-    pagamento_cartao: ['pagamento recebido', 'pagamento efetuado', 'pagamento'],
+    pagamento_cartao: ['pagamento recebido', 'pagamento efetuado'],
     pix: ['pix'],
     saude: ['medico', 'dentista', 'hospital', 'plano de saude', 'qualicorp', 'unimed'],
     outros_debitos: [], // Categoria padrão para débitos não classificados
