@@ -179,7 +179,7 @@ restoreInput.addEventListener('change', async (event) => {
     const text = await file.text();
     try {
         // Testa se é um JSON válido (criptografado)
-        JSON.parse(text);
+        JSON.parse(sjcl.decrypt(password.value, dadosCript));
         await openDb();
         const tx = findb.transaction(['fileHandles'], 'readwrite');
         const store = tx.objectStore('fileHandles');
@@ -188,7 +188,7 @@ restoreInput.addEventListener('change', async (event) => {
             showStatus('Backup restaurado com sucesso!');
         };
     } catch (e) {
-        showStatus('Arquivo inválido.', true);
+        showStatus('Arquivo ou senha inválida.', true);
     }
 });
 
