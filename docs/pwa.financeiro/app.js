@@ -10,7 +10,6 @@ function showStatus(message, isError = false) {
 
 // IndexedDB helpers (mantém openDb, OBJECT_STORE_NAME, findb)
 let findb;
-const OBJECT_STORE_NAME = 'fileHandles';
 
 async function openDb() {
     return new Promise((resolve, reject) => {
@@ -22,8 +21,8 @@ async function openDb() {
         };
         request.onupgradeneeded = (event) => {
             findb = event.target.result;
-            if (!findb.objectStoreNames.contains(OBJECT_STORE_NAME)) {
-                findb.createObjectStore(OBJECT_STORE_NAME);
+            if (!findb.objectStoreNames.contains('fileHandles')) {
+                findb.createObjectStore('fileHandles');
             }
         };
     });
@@ -63,8 +62,8 @@ ofxInput.addEventListener('change', async (event) => {
 
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = findb.transaction([OBJECT_STORE_NAME], 'readonly');
-        const store = tx.objectStore(OBJECT_STORE_NAME);
+        const tx = findb.transaction(['fileHandles'], 'readonly');
+        const store = tx.objectStore('fileHandles');
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
         req.onerror = () => resolve(null);
@@ -89,8 +88,8 @@ ofxInput.addEventListener('change', async (event) => {
     // Criptografar e salvar no IndexedDB
     const dadosCriptografados = sjcl.encrypt(password.value, JSON.stringify(dados));
     await new Promise((resolve) => {
-        const tx = findb.transaction([OBJECT_STORE_NAME], 'readwrite');
-        const store = tx.objectStore(OBJECT_STORE_NAME);
+        const tx = findb.transaction(['fileHandles'], 'readwrite');
+        const store = tx.objectStore('fileHandles');
         store.put(dadosCriptografados, 'ofxData');
         tx.oncomplete = resolve;
     });
@@ -107,8 +106,8 @@ ofxInput.addEventListener('change', async (event) => {
 verifyPasswordBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = findb.transaction([OBJECT_STORE_NAME], 'readonly');
-        const store = tx.objectStore(OBJECT_STORE_NAME);
+        const tx = findb.transaction(['fileHandles'], 'readonly');
+        const store = tx.objectStore('fileHandles');
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
         req.onerror = () => resolve(null);
