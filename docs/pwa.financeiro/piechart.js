@@ -16,8 +16,8 @@ const categoriasDict = {
     pagamento_cartao: ['Pagamento recebido', 'Pagamento efetuado', 'Pagamento'],
     pix: ['pix'],
     saude: ['medico', 'dentista', 'hospital', 'plano de saude'],
-    outros_debito: [], // Categoria padrão para débitos não classificados
-    outros_credito: [] // Categoria padrão para créditos não classificados
+    outros_debitos: [], // Categoria padrão para débitos não classificados
+    outros_creditos: [] // Categoria padrão para créditos não classificados
 };
 
 /**
@@ -55,7 +55,7 @@ function categorizarTransacoes(transacoes, categoriasDict) {
 
         // Se nenhuma categoria específica foi encontrada, atribui 'outros' com base no tipo
         if (!categoriaEncontrada) {
-            categoriaEncontrada = transacao.TRNTYPE === 'DEBIT' ? 'outros_debito' : 'outros_credito';
+            categoriaEncontrada = transacao.TRNTYPE === 'DEBIT' ? 'outros_debitos' : 'outros_creditos';
         }
 
         // Retorna um novo objeto de transação com a categoria adicionada
@@ -80,9 +80,10 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
             // Soma as despesas (valores negativos)
             despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + Math.abs(amount);
         } else {
-            if (categoria === 'outros_credito' && categoria !== 'pagamento_cartao') {
-            // Soma os recebimentos (valores positivos)
-            recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + amount;
+            if (categoria === 'outros_creditos' && categoria !== 'pagamento_cartao') {
+                // Soma os recebimentos (valores positivos)
+                recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + amount;
+            }
         }
     });
 
