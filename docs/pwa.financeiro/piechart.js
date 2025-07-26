@@ -238,6 +238,7 @@ showPieChartBtn.addEventListener('click', async () => {
     } catch (e) {
         showStatus('Senha inválida ou dados corrompidos.', true);
         fileContentTextArea.value = '';
+        return;
     }
     // 1. Categoriza as transações
 

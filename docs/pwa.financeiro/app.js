@@ -114,7 +114,6 @@ ofxInput.addEventListener('change', async (event) => {
 
 // Exibir JSON ao checar senha
 showJsonBtn.addEventListener('click', async () => {
-    showPage('jsonViewPage');
     await openDb();
     let dadosCript = await new Promise((resolve) => {
         const tx = findb.transaction(['fileHandles'], 'readonly');
@@ -134,6 +133,7 @@ showJsonBtn.addEventListener('click', async () => {
         const dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
         fileContentTextArea.value = JSON.stringify(dados, null, 2);
         showStatus('Dados carregados.');
+        showPage('jsonViewPage');
     } catch (e) {
         showStatus('Senha inválida ou dados corrompidos.', true);
         fileContentTextArea.value = '';

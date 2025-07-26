@@ -119,7 +119,9 @@
                 navigator.serviceWorker.register('/pwa.financeiro/sw.js')
                     .then(reg => {
                         console.log('Service Worker registered:', reg);
-                        showPieChartBtn.click();
+                        setTimeout(() => {
+                            showPieChartBtn.click();
+                        }, 2000);
                     })
                     .catch(err => {
                         console.error('Service Worker Failure:', err);
