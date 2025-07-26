@@ -1,14 +1,14 @@
 const CACHE_NAME = 'financeiro-0.1.1'; // Nome do cache, pode ser alterado para forçar atualização
 const urlsToCache = [
-    '/pwa.sjcl/',
-    '/pwa.sjcl/index.html',
-    '/pwa.sjcl/offline.html',
-    '/pwa.sjcl/style.css',
-    '/pwa.sjcl/filehandledb.js',
-    '/pwa.sjcl/sjcl.js',
-    '/pwa.sjcl/app.js',
-    '/pwa.sjcl/manifest.json',
-    '/pwa.sjcl/images/icon-1024x1024.png'
+    '/pwa.financeiro/',
+    '/pwa.financeiro/index.html',
+    '/pwa.financeiro/offline.html',
+    '/pwa.financeiro/style.css',
+    '/pwa.financeiro/filehandledb.js',
+    '/pwa.financeiro/sjcl.js',
+    '/pwa.financeiro/app.js',
+    '/pwa.financeiro/manifest.json',
+    '/pwa.financeiro/images/icon-1024x1024.svg'
 ];
 
 self.addEventListener('fetch', event => {
@@ -23,7 +23,7 @@ self.addEventListener('fetch', event => {
                 return fetch(event.request).catch(() => {
                     // Fallback para páginas offline, se necessário
                     // Por exemplo, uma página offline genérica
-                    return caches.match('/pwa.sjcl/offline.html');
+                    return caches.match('/pwa.financeiro/offline.html');
                 });
             })
     );
