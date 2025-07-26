@@ -10,12 +10,14 @@
 </head>
 <body>
     <div class="container">
-        <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
-        <button id="verifyPasswordBtn" type="submit">Check password</button>
+        <div class="top-actions">
+            <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
+            <button id="verifyPasswordBtn" type="submit">Check password</button>
+            <input type="file" id="ofxInput" accept=".ofx" style="display:none" />
+            <button id="importOfxBtn">Importar OFX</button>
+        </div>
         <textarea id="fileContent" rows="26" disabled></textarea>
         <p id="statusMessage"> </p>
-        <input type="file" id="ofxInput" accept=".ofx" style="display:none" />
-        <button id="importOfxBtn">Importar OFX</button>
     </div>
     <script src="filehandledb.js"></script>
     <script src="sjcl.js"></script>

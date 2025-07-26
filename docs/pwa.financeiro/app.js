@@ -45,12 +45,18 @@ ofxInput.addEventListener('change', async (event) => {
 
     const ofxText = await file.text();
 
+    // Detecta origem do extrato
+    let origem = 'conta';
+    if (ofxText.includes('<CREDITCARDMSGSRSV1>')) {
+        origem = 'cartao';
+    }
+
     // Parse simples do OFX
     const transactions = [];
     const regex = /<STMTTRN>([\s\S]*?)<\/STMTTRN>/g;
     let match;
     while ((match = regex.exec(ofxText)) !== null) {
-        const trn = {};
+        const trn = { origem }; // Adiciona campo origem
         const fields = ['TRNTYPE', 'DTPOSTED', 'TRNAMT', 'MEMO'];
         for (const field of fields) {
             const fieldRegex = new RegExp(`<${field}>([^<\n\r]*)`);
