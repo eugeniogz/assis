@@ -12,40 +12,34 @@
 <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
 
     <div class="container bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-4xl">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Visão Geral Financeira</h1>
-
         <!-- Menu de Navegação (adaptado ao seu HTML) -->
         <nav class="mb-6 flex flex-wrap justify-center gap-2">
-            <button id="showPieChartBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            <button id="showPieChartBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out" type="submit">
                 Dashboard
             </button>
             <button id="navCategories" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Categorias
             </button>
-            <button id="verifyPasswordBtnMenu" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            <button id="verifyPasswordBtn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out" type="submit">
                 Ver JSON
             </button>
-            <button id="backupBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Backup/Restaurar
-            </button>
-            <button id="navEncryption" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Criptografia
-            </button>
             <!-- Botões de Import/Restore de arquivo que você já tinha, mantidos aqui mas sem funcionalidade JS neste script -->
-            <input type="file" id="ofxInput" accept=".ofx" class="hidden" />
+            <input type="file" id="ofxInput" accept=".ofx" style="display:none" />
             <button id="importOfxBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Import OFX
             </button>
-            <input type="file" id="restoreInput" accept=".json" class="hidden" />
-            <button id="restoreFileBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Restaurar Arquivo
+            <button id="backupBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                Backup
+            </button>
+            <input type="file" id="restoreInput" accept=".json" style="display:none" />
+            <button id="restoreBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                Restore
             </button>
         </nav>
 
         <p id="statusMessage" class="text-center text-gray-700 mb-4"></p>
 
         <!-- Seções das Páginas -->
-
         <!-- Página do Dashboard (Gráficos) -->
         <!-- Adicionada style="display: none;" para garantir ocultação inicial -->
         <div id="pieChartDiv" class="page-content">
@@ -84,15 +78,10 @@
                 Salvar Categorias e Atualizar Gráficos
             </button>
         </div>
-
         <!-- Página de Visualização do JSON -->
         <div id="jsonViewPage" class="page-content">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Visualizar JSON</h2>
             <textarea id="fileContent" class="w-full h-96 p-4 border border-gray-300 rounded-lg font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-purple-500" readonly></textarea>
-            <button id="copyJsonBtn" class="mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out w-full">
-                Copiar JSON
-            </button>
-            <div id="copyMessage" class="text-green-600 text-center mt-2 hidden">Copiado!</div>
         </div>
 
         <!-- Página de Backup e Restauração -->
@@ -100,10 +89,10 @@
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Backup e Restauração</h2>
             <div class="flex flex-col gap-4">
                 <button id="backupDataBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                    Fazer Backup (LocalStorage)
+                    Fazer Backup (File System)
                 </button>
                 <button id="restoreDataBtn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                    Restaurar Backup (LocalStorage)
+                    Restaurar Backup (File System)
                 </button>
             </div>
             <p class="text-sm text-gray-600 mt-4 text-center">
@@ -113,17 +102,8 @@
         </div>
 
         <!-- Página de Senha/Criptografia -->
-        <div id="encryptionPage" class="page-content">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Configuração de Criptografia</h2>
-            <p class="text-gray-700 mb-4 text-center">
-                Esta seção é um placeholder para futura implementação de criptografia.
-                A criptografia de dados sensíveis no lado do cliente requer bibliotecas e considerações de segurança avançadas.
-            </p>
+        <div id="passwordPage" class="page-content">
             <input type="password" id="password" autocomplete="current-password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
-            <button id="setEncryptionPasswordBtn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out w-full">
-                Definir Senha
-            </button>
-            <div id="encryptionMessage" class="text-center mt-2 hidden"></div>
         </div>
 
     </div>
