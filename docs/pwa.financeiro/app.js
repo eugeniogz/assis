@@ -8,8 +8,8 @@ function showStatus(message, isError = false) {
     statusMessage.style.color = isError ? 'var(--red)' : 'var(--green)';
 }
 
-// IndexedDB helpers (mantém openDb, OBJECT_STORE_NAME, db)
-let db;
+// IndexedDB helpers (mantém openDb, OBJECT_STORE_NAME, findb)
+let findb;
 const OBJECT_STORE_NAME = 'fileHandles';
 
 async function openDb() {
@@ -17,13 +17,13 @@ async function openDb() {
         const request = indexedDB.open('myPWAFileDB', 1);
         request.onerror = (event) => reject("Erro ao abrir IndexedDB");
         request.onsuccess = (event) => {
-            db = event.target.result;
-            resolve(db);
+            findb = event.target.result;
+            resolve(findb);
         };
         request.onupgradeneeded = (event) => {
-            db = event.target.result;
-            if (!db.objectStoreNames.contains(OBJECT_STORE_NAME)) {
-                db.createObjectStore(OBJECT_STORE_NAME);
+            findb = event.target.result;
+            if (!findb.objectStoreNames.contains(OBJECT_STORE_NAME)) {
+                findb.createObjectStore(OBJECT_STORE_NAME);
             }
         };
     });
@@ -63,7 +63,7 @@ ofxInput.addEventListener('change', async (event) => {
 
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = db.transaction([OBJECT_STORE_NAME], 'readonly');
+        const tx = findb.transaction([OBJECT_STORE_NAME], 'readonly');
         const store = tx.objectStore(OBJECT_STORE_NAME);
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
@@ -89,7 +89,7 @@ ofxInput.addEventListener('change', async (event) => {
     // Criptografar e salvar no IndexedDB
     const dadosCriptografados = sjcl.encrypt(password.value, JSON.stringify(dados));
     await new Promise((resolve) => {
-        const tx = db.transaction([OBJECT_STORE_NAME], 'readwrite');
+        const tx = findb.transaction([OBJECT_STORE_NAME], 'readwrite');
         const store = tx.objectStore(OBJECT_STORE_NAME);
         store.put(dadosCriptografados, 'ofxData');
         tx.oncomplete = resolve;
@@ -107,7 +107,7 @@ ofxInput.addEventListener('change', async (event) => {
 verifyPasswordBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = db.transaction([OBJECT_STORE_NAME], 'readonly');
+        const tx = findb.transaction([OBJECT_STORE_NAME], 'readonly');
         const store = tx.objectStore(OBJECT_STORE_NAME);
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
