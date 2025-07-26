@@ -1,7 +1,7 @@
 {
-    "name": "Financero - PWA",
-    "short_name": "Financero - PWA",
-    "description": "Financero - PWA",
+    "name": "Financeiro - PWA",
+    "short_name": "Financeiro - PWA",
+    "description": "Financeiro - PWA",
     "start_url": "/pwa.sjcl/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
