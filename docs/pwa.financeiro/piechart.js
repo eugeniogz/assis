@@ -54,7 +54,7 @@ function categorizarTransacoes(transacoes, categoriasDict) {
 
         // Se nenhuma categoria específica foi encontrada, atribui 'outros' com base no tipo
         if (!categoriaEncontrada) {
-            categoriaEncontrada = transacao.TRNTYPE === 'debito' ? 'outros_debito' : 'outros_credito';
+            categoriaEncontrada = transacao.TRNTYPE === 'DEBIT' ? 'outros_debito' : 'outros_credito';
         }
 
         // Retorna um novo objeto de transação com a categoria adicionada
