@@ -1,7 +1,7 @@
 {
-    "name": "SJCL File Encrypt",
-    "short_name": "SJCL Encrypt",
-    "description": "SJCL File Encrypt - PWA",
+    "name": "Financero - PWA",
+    "short_name": "Financero - PWA",
+    "description": "Financero - PWA",
     "start_url": "/pwa.sjcl/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
