@@ -198,7 +198,7 @@ function showPage(pageId) {
         if (page.id === "jsonViewPage" ||
             page.id === "restoreDataBtn" ||
             page.id === "pieChartDiv") {
-            document.getElementById(page.id).style.display = 'block'; // Exibe a página selecionada
+            document.getElementById("passwordPage").style.display = 'block'; // Exibe a página selecionada
         }
     });
     document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
