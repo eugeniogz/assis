@@ -13,7 +13,7 @@ const categoriasDict = {
     educacao: ['escola', 'faculdade', 'curso', 'livro'],
     transporte: ['transporte', 'ônibus', 'metro', 'combustivel', 'uber', 'taxi'],
     amazon: ['amazon'],
-    pagamento_cartao: ['Pagamento recebido', 'Pagamento efetuado', 'Pagamento'],
+    pagamento_cartao: ['pagamento recebido', 'pagamento efetuado', 'pagamento'],
     pix: ['pix'],
     saude: ['medico', 'dentista', 'hospital', 'plano de saude'],
     outros_debitos: [], // Categoria padrão para débitos não classificados
@@ -160,7 +160,7 @@ function renderizarGraficoPizza(elementId, title, labels, data) {
 }
 
 
-verifyPasswordBtn.addEventListener('click', async () => {
+showPieChartBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
         const tx = findb.transaction(['fileHandles'], 'readonly');
