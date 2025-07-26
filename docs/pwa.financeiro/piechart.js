@@ -22,6 +22,27 @@ const categoriasDict = {
     outros_creditos: [] // Categoria padrão para créditos não classificados
 };
 
+// Cores predefinidas para despesas (tons de vermelho, laranja, roxo)
+const despesaColors = [
+    'rgba(255, 99, 132, 0.8)', // Vermelho
+    'rgba(255, 159, 64, 0.8)', // Laranja
+    'rgba(255, 205, 86, 0.8)', // Amarelo
+    'rgba(201, 203, 207, 0.8)', // Cinza
+    'rgba(153, 102, 255, 0.8)',// Roxo
+    'rgba(54, 162, 235, 0.8)', // Azul
+    'rgba(75, 192, 192, 0.8)', // Verde Água
+    'rgba(255, 102, 102, 0.8)' // Vermelho claro
+];
+
+// Cores predefinidas para recebimentos (tons de verde, azul, roxo)
+const recebimentoColors = [
+    'rgba(75, 192, 192, 0.8)', // Verde Água
+    'rgba(54, 162, 235, 0.8)', // Azul
+    'rgba(153, 102, 255, 0.8)',// Roxo
+    'rgba(255, 205, 86, 0.8)', // Amarelo
+    'rgba(102, 255, 102, 0.8)', // Verde claro
+    'rgba(201, 203, 207, 0.8)' // Cinza
+];
 /**
  * Gera uma cor RGBA aleatória.
  * @param {number} opacity - A opacidade da cor (entre 0 e 1).
@@ -108,13 +129,14 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
  * @param {string} title - O título do dataset do gráfico.
  * @param {Array<string>} labels - Os rótulos para as fatias do gráfico (categorias).
  * @param {Array<number>} data - Os valores para as fatias do gráfico.
+ * @param {Array<string>} colorsArray - O array de cores a ser usado para as fatias.
  */
-function renderizarGraficoPizza(elementId, title, labels, data) {
+function renderizarGraficoPizza(elementId, title, labels, data, colorsArray) {
     const ctx = document.getElementById(elementId).getContext('2d');
 
-    // Gera um array de cores aleatórias para as fatias do gráfico
-    const backgroundColors = labels.map(() => getRandomRgbaColor(0.8));
-    const borderColors = backgroundColors.map(color => color.replace('0.8', '1'));
+    // Gera um array de cores a partir da paleta fornecida, ciclando se necessário
+    const backgroundColors = labels.map((_, index) => colorsArray[index % colorsArray.length]);
+    const borderColors = backgroundColors.map(color => color.replace('0.8', '1')); // Assume opacity 0.8 for background
 
     new Chart(ctx, {
         type: 'pie', // Tipo de gráfico alterado para 'pie' (pizza)
@@ -161,7 +183,6 @@ function renderizarGraficoPizza(elementId, title, labels, data) {
     });
 }
 
-
 showPieChartBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
@@ -197,7 +218,8 @@ showPieChartBtn.addEventListener('click', async () => {
         'despesasChart',
         'Distribuição de Despesas (R$)',
         dadosGrafico.despesas.labels,
-        dadosGrafico.despesas.values
+        dadosGrafico.despesas.values,
+        despesaColors
     );
 
     // 4. Renderiza o gráfico de recebimentos (agora como pizza)
@@ -205,6 +227,7 @@ showPieChartBtn.addEventListener('click', async () => {
         'recebimentosChart',
         'Distribuição de Recebimentos (R$)',
         dadosGrafico.recebimentos.labels,
-        dadosGrafico.recebimentos.values
+        dadosGrafico.recebimentos.values,
+        recebimentoColors
     );
 });
