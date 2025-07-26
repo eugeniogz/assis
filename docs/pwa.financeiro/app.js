@@ -1,7 +1,7 @@
 const fileContentTextArea = document.getElementById('fileContent');
 const statusMessage = document.getElementById('statusMessage');
 const password = document.getElementById('password');
-const showOfxBtn = document.getElementById('verifyPasswordBtn');
+const showJsonBtn = document.getElementById('showJsonBtn');
 
 function showStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -113,7 +113,7 @@ ofxInput.addEventListener('change', async (event) => {
 });
 
 // Exibir JSON ao checar senha
-showOfxBtn.addEventListener('click', async () => {
+showJsonBtn.addEventListener('click', async () => {
     showPage('jsonViewPage');
     await openDb();
     let dadosCript = await new Promise((resolve) => {
