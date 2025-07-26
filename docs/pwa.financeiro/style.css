@@ -149,3 +149,12 @@ textarea#fileContent {
     font-weight: bold;
     font-size: 0.8em;
 }
+
+/* Garante que as páginas comecem ocultas antes do JS carregar */
+.page-content {
+    display: none;
+}
+/* A classe 'hidden' do Tailwind CSS também pode ser usada para consistência */
+.page-content.hidden {
+    display: none !important;
+}
