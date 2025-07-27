@@ -130,8 +130,9 @@ showJsonBtn.addEventListener('click', async () => {
     }
 
     try {
-        const dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
-        fileContentTextArea.value = JSON.stringify(dados, null, 2);
+       // const dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
+        fileContentTextArea.value = sjcl.decrypt(password.value, dadosCript);
+            // JSON.stringify(dados, null, 2);
         showStatus('Dados carregados.');
         showPage('jsonViewPage');
     } catch (e) {
