@@ -162,7 +162,7 @@ textarea#fileContent {
     top: 0; /* Alinha ao topo */
     left: 0; /* Alinha à esquerda */
     width: 100%; /* Ocupa a largura total */
-    height: 20vh; /* Define a altura para 20% da altura da viewport */
+    height: 16vh; /* Define a altura para 20% da altura da viewport */
     background-color: var(--background-color);
     color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
@@ -180,7 +180,7 @@ textarea#fileContent {
     margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
     padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
     box-sizing: border-box; /* Importante para o cálculo da largura total */
-    top: 20vh; /* Inicia logo abaixo do topo */
+    top: 17vh; /* Inicia logo abaixo do topo */
     left: 0; /* Alinha à esquerda */
     background-color: var(--background-color);
     color: var(--text-color);
