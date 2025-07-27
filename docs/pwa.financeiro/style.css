@@ -173,10 +173,10 @@ textarea#fileContent {
     padding-right: 10px; /* Espaçamento final para os ícones */
 }
 .bottom-wrapper {
-    position: fixed;
+    position: relative;
     top: 20vh; /* Inicia logo abaixo do topo */
     left: 0; /* Alinha à esquerda */
-    width: 100%; /* Ocupa a largura total */
+    width: 100vw; /* Ocupa a largura total */
     background-color: var(--background-color);
     color: var(--text-color);
     display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
