@@ -132,7 +132,6 @@ showJsonBtn.addEventListener('click', async () => {
     try {
         const dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
         fileContentTextArea.value = JSON.stringify(dados, null, 2);
-        showStatus('Dados carregados.');
         showPage('jsonViewPage');
     } catch (e) {
         showStatus('Senha inválida ou dados corrompidos.', true);
@@ -198,6 +197,7 @@ restoreInput.addEventListener('change', async (event) => {
 });
 
 function showPage(pageId) {
+    showStatus('', false);
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
     });
