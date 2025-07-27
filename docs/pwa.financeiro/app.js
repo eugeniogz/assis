@@ -200,10 +200,6 @@ restoreInput.addEventListener('change', async (event) => {
 function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
-        if (page.id === "jsonViewPage" ||
-            page.id === "pieChartDiv") {
-            document.getElementById("passwordPage").style.display = 'block'; // Exibe a página selecionada
-        }
     });
     document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
 
