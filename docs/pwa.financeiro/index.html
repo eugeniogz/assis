@@ -11,30 +11,59 @@
     <body>
 <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div class="container bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-4xl">
-        <!-- Menu de Navegação (adaptado ao seu HTML) -->
-        <nav class="mb-6 flex flex-wrap justify-center gap-2">
-            <button id="showPieChartBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out" type="submit">
+    <div class="buttons-container">
+        <button id="showPieChartBtn" class="circular-button">
+            <span class="button-icon"><i class="fas fa-chart-line"></i></span>
+            <span class="button-text">Dashboard</span>
+        </button>
+
+        <button id="showJsonBtn" class="circular-button">
+            <span class="button-icon"><i class="fas fa-database"></i></span>
+            <span class="button-text">Show Data</span>
+        </button>
+
+        <button id="importOfxBtn" class="circular-button" type="submit">
+            <span class="button-icon"><i class="fas fa-file-import"></i></span>
+            <span class="button-text">Import OFX</span>
+        </button>
+
+        <button id="backupBtn" class="circular-button">
+            <span class="button-icon"><i class="fas fa-save"></i></span>
+            <span class="button-text">Backup</span>
+        </button>
+
+        <button id="restoreBtn" class="circular-button">
+            <span class="button-icon"><i class="fas fa-redo-alt"></i></span>
+            <span class="button-text">Restore</span>
+        </button>
+
+        <button id="navCategories" class="circular-button">
+            <span class="button-icon"><i class="fas fa-tags"></i></span>
+            <span class="button-text">Categories</span>
+        </button>
+    </div>
+
+            <!-- <button id="showPieChartBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out" type="submit">
                 Dashboard
-            </button>
-            <button id="navCategories" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            </button> -->
+            <!-- <button id="navCategories" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Categorias
-            </button>
-            <button id="showJsonBtn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out" type="submit">
+            </button> -->
+            <!-- <button id="showJsonBtn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out" type="submit">
                 Ver JSON
-            </button>
+            </button> -->
             <!-- Botões de Import/Restore de arquivo que você já tinha, mantidos aqui mas sem funcionalidade JS neste script -->
             <input type="file" id="ofxInput" accept=".ofx" style="display:none" />
-            <button id="importOfxBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            <!-- <button id="importOfxBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Import OFX
-            </button>
-            <button id="backupBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            </button> -->
+            <!-- <button id="backupBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Backup
-            </button>
+            </button> -->
             <input type="file" id="restoreInput" accept=".json" style="display:none" />
-            <button id="restoreBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+            <!-- <button id="restoreBtn" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                 Restore
-            </button>
+            </button> -->
             <!-- Senha -->
             <div id="passwordPage" class="pwd">
                 <input type="password" id="password" autocomplete="current-password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">

@@ -158,3 +158,89 @@ textarea#fileContent {
 .page-content.hidden {
     display: none !important;
 }
+
+/* Novo contêiner para a parte superior da tela */
+.top-icons-wrapper {
+    position: fixed; /* Fixa o contêiner no topo da tela */
+    top: 0; /* Alinha ao topo */
+    left: 0; /* Alinha à esquerda */
+    width: 100%; /* Ocupa a largura total */
+    height: 20vh; /* Define a altura para 20% da altura da viewport */
+    background-color: #ffffff; /* Cor de fundo para a área dos ícones */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
+    display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
+    align-items: center; /* Centraliza verticalmente o buttons-container */
+    overflow-x: auto; /* Habilita o scroll horizontal se o conteúdo for maior que a largura */
+    -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    padding-left: 10px; /* Espaçamento inicial para os ícones */
+    padding-right: 10px; /* Espaçamento final para os ícones */
+}
+
+/* Esconder a barra de rolagem, mantendo a funcionalidade (opcional, mas comum para UI) */
+.top-icons-wrapper::-webkit-scrollbar {
+    height: 6px; /* Altura da barra de rolagem */
+}
+
+.top-icons-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2); /* Cor da "alça" da barra de rolagem */
+    border-radius: 3px;
+}
+
+.top-icons-wrapper::-webkit-scrollbar-track {
+    background-color: transparent; /* Fundo transparente para a trilha da barra de rolagem */
+}
+
+
+/* O contêiner interno dos botões */
+.buttons-container {
+    display: flex; /* Faz com que os botões se alinhem horizontalmente */
+    flex-wrap: nowrap; /* Impede que os botões quebrem a linha */
+    gap: 15px; /* Espaço entre os botões */
+    align-items: center; /* Alinha os itens ao centro verticalmente dentro do container */
+    padding: 10px 0; /* Pequeno padding para os botões não ficarem colados nas bordas superior/inferior do wrapper */
+}
+
+/* Estilo para cada botão circular (mantido do exemplo anterior) */
+.circular-button {
+    flex-shrink: 0; /* Impede que os botões encolham */
+    width: 90px; /* Ajustei a largura para caber mais botões */
+    height: 90px; /* Ajustei a altura */
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.circular-button:hover {
+    background-color: #0056b3;
+}
+
+.circular-button:active {
+    background-color: #004085;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px); /* Efeito de "pressionar" */
+}
+
+.button-icon {
+    font-size: 32px; /* Ajustei o tamanho do ícone */
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.button-text {
+    font-size: 12px; /* Ajustei o tamanho do texto */
+    line-height: 1.2;
+    padding: 0 3px;
+    word-break: break-word;
+    max-width: 100%; /* Garante que o texto use a largura disponível */
+}
