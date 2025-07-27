@@ -217,8 +217,8 @@ textarea#fileContent {
 /* Estilo para cada botão circular (mantido do exemplo anterior) */
 .circular-button {
     flex-shrink: 0; /* Impede que os botões encolham */
-    width: 90px; /* Ajustei a largura para caber mais botões */
-    height: 90px; /* Ajustei a altura */
+    width: 70px; /* Ajustei a largura para caber mais botões */
+    height: 70px; /* Ajustei a altura */
     border-radius: 50%;
     background-color: #007bff;
     color: white;
@@ -245,13 +245,13 @@ textarea#fileContent {
 }
 
 .button-icon {
-    font-size: 32px; /* Ajustei o tamanho do ícone */
+    font-size: 28px; /* Ajustei o tamanho do ícone */
     margin-bottom: 5px;
     line-height: 1;
 }
 
 .button-text {
-    font-size: 12px; /* Ajustei o tamanho do texto */
+    font-size: 10px; /* Ajustei o tamanho do texto */
     line-height: 1.2;
     padding: 0 3px;
     word-break: break-word;
