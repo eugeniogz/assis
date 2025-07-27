@@ -134,7 +134,8 @@ showJsonBtn.addEventListener('click', async () => {
         fileContentTextArea.value = sjcl.decrypt(password.value, dadosCript);
             // JSON.stringify(dados, null, 2);
         showStatus('Dados carregados.');
-        showPage('jsonViewPage');
+        alert(fileContentTextArea.value);
+        //showPage('jsonViewPage');
     } catch (e) {
         showStatus('Senha inválida ou dados corrompidos.', true);
         fileContentTextArea.value = '';
