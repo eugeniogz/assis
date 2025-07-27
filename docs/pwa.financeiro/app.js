@@ -211,9 +211,9 @@ function showPage(pageId) {
     // Atualiza os gráficos apenas quando a página do dashboard é exibida
     if (pageId === 'dashboardPage') {
         updateCharts();
-    } else if (pageId === 'jsonViewPage') {
+  //  } else if (pageId === 'jsonViewPage') {
         // Atualiza o JSON exibido quando a página é mostrada
-        document.getElementById('jsonDisplay').value = JSON.stringify(transacoes, null, 2);
+  //      document.getElementById('jsonDisplay').value = JSON.stringify(transacoes, null, 2);
     } else if (pageId === 'categoryEditPage') {
         // Atualiza a lista de categorias ao mostrar a página de edição
         renderCategoriesList();
