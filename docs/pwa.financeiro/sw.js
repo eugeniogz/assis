@@ -9,7 +9,8 @@ const urlsToCache = [
     '/pwa.financeiro/app.js',
     '/pwa.financeiro/manifest.json',
     '/pwa.financeiro/piechart.js',
-    '/pwa.financeiro/images/icon-1024x1024.svg'
+    '/pwa.financeiro/images/icon-1024x1024.svg',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
 ];
 
 self.addEventListener('fetch', event => {

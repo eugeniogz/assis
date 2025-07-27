@@ -31,9 +31,6 @@ body {
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
@@ -61,9 +58,7 @@ button:hover:not(:disabled) {
 
 input[type="text"],
 input[type="email"], 
-input[type="password"],
-button,
-input[type="submit"] {
+input[type="password"] {
     padding: 10px 15px;
     margin: 10px 5px;
     font-size: 0.9em;
@@ -166,7 +161,8 @@ textarea#fileContent {
     left: 0; /* Alinha à esquerda */
     width: 100%; /* Ocupa a largura total */
     height: 20vh; /* Define a altura para 20% da altura da viewport */
-    background-color: #ffffff; /* Cor de fundo para a área dos ícones */
+    background-color: var(--background-color);
+    color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
     display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
     align-items: center; /* Centraliza verticalmente o buttons-container */
@@ -176,7 +172,19 @@ textarea#fileContent {
     padding-left: 10px; /* Espaçamento inicial para os ícones */
     padding-right: 10px; /* Espaçamento final para os ícones */
 }
-
+.bottom-wrapper {
+    position: fixed;
+    top: 20vh; /* Inicia logo abaixo do topo */
+    left: 0; /* Alinha à esquerda */
+    width: 100%; /* Ocupa a largura total */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
+    align-items: center; /* Centraliza verticalmente o buttons-container */
+    overflow-y: auto; /* Habilita o scroll vertical se o conteúdo for maior que a altura */
+    -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
+    padding: 10px; /* Espaçamento interno */
+}
 /* Esconder a barra de rolagem, mantendo a funcionalidade (opcional, mas comum para UI) */
 .top-icons-wrapper::-webkit-scrollbar {
     height: 6px; /* Altura da barra de rolagem */
