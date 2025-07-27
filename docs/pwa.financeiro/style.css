@@ -162,7 +162,7 @@ textarea#fileContent {
     top: 0; /* Alinha ao topo */
     left: 0; /* Alinha à esquerda */
     width: 100%; /* Ocupa a largura total */
-    height: 16vh; /* Define a altura para 20% da altura da viewport */
+    height: 13vh; /* Define a altura para 20% da altura da viewport */
     background-color: var(--background-color);
     color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
