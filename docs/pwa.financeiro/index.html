@@ -67,7 +67,7 @@
                 Restore
             </button> -->
             <!-- Senha -->
-            <div id="passwordPage" class="pwd">
+            <div document.getElementById("passwordPage").style.display" class="pwd">
                 <input type="password" id="password" autocomplete="current-password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
             </div>
 
@@ -151,6 +151,7 @@
                 navigator.serviceWorker.register('/pwa.financeiro/sw.js')
                     .then(reg => {
                         console.log('Service Worker registered:', reg);
+                        showPage("passwordPage");
                         setTimeout(() => {
                             showPieChartBtn.click();
                         }, 2000);
