@@ -235,6 +235,9 @@ showPieChartBtn.addEventListener('click', async () => {
     try {
         dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
     } catch (e) {
+        if (password.value === '') {
+            return;
+        }
         showStatus('Senha inválida ou dados corrompidos.', true);
         fileContentTextArea.value = '';
         return;
