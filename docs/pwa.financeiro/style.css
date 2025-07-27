@@ -31,10 +31,12 @@ body {
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     display: flex;
-    margin: 0;
+    margin: 0; /* É crucial remover a margem padrão do body para 100% da largura da tela */
+    padding: 0; /* Remover padding padrão do body também */
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
+    
 h1, h2, h3 {
     color: var(--text-color);
 }
@@ -174,9 +176,12 @@ textarea#fileContent {
 }
 .bottom-wrapper {
     position: relative;
+    width: 100%; /* Isso faz com que a div ocupe 100% da largura do seu elemento pai */
+    margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
+    padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
+    box-sizing: border-box; /* Importante para o cálculo da largura total */
     top: 20vh; /* Inicia logo abaixo do topo */
     left: 0; /* Alinha à esquerda */
-    width: 100vw; /* Ocupa a largura total */
     background-color: var(--background-color);
     color: var(--text-color);
     display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
