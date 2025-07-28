@@ -31,7 +31,7 @@ async function openDb() {
 const importOfxBtn = document.getElementById('importOfxBtn');
 const ofxInput = document.getElementById('ofxInput');
 
-passwordForm.addEventListener('submit', async function(event) { 
+passwordForm.addEventListener('click', async function(event) { 
     if (password.value === '') {
         showStatus('Senha não pode ser vazia.', true);
         return;
@@ -55,7 +55,6 @@ passwordForm.addEventListener('submit', async function(event) {
             }
         }
         loginOk();
-        
     } catch (e) {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
     }
