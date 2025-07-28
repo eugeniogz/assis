@@ -59,6 +59,28 @@ function getRandomRgbaColor(opacity) {
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
+// Não parece ser necessário
+// function showGraph(transacoesCategorizadas) {
+//     if (!transacoesCategorizadas || transacoesCategorizadas.length === 0) {
+//         const dadosParaGrafico = processarDadosParaGrafico(transacoesCategorizadas);
+
+//         renderizarGraficoPizza(
+//             'despesasChart',
+//             'Distribuição de Despesas (R$)',
+//             dadosParaGrafico.despesas.labels,
+//             dadosParaGrafico.despesas.values,
+//             despesaColors
+//         );
+
+//         renderizarGraficoPizza(
+//             'recebimentosChart',
+//             'Distribuição de Recebimentos (R$)',
+//             dadosParaGrafico.recebimentos.labels,
+//             dadosParaGrafico.recebimentos.values,
+//             recebimentoColors
+//         );
+//     }
+// }
 /**
  * Categoriza cada transação no array `transacoes` adicionando um atributo `categoria`.
  * A categorização é baseada em palavras-chave encontradas no campo `memo`.

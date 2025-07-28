@@ -273,29 +273,7 @@ function showPage(pageId) {
     }
 
     // Lógicas específicas de cada página
-    if (pageId === 'pieChartDiv') {
-        updateCharts();
-    } else if (pageId === 'categoryEditPage') {
+    if (pageId === 'categoryEditPage') {
         renderCategoriesList();
     }
-}
-function updateCharts() {
-    const transacoesCategorizadas = categorizarTransacoes(transacoes, categoriasDict);
-    const dadosParaGrafico = processarDadosParaGrafico(transacoesCategorizadas);
-
-    renderizarGraficoPizza(
-        'despesasChart',
-        'Distribuição de Despesas (R$)',
-        dadosParaGrafico.despesas.labels,
-        dadosParaGrafico.despesas.values,
-        despesaColors
-    );
-
-    renderizarGraficoPizza(
-        'recebimentosChart',
-        'Distribuição de Recebimentos (R$)',
-        dadosParaGrafico.recebimentos.labels,
-        dadosParaGrafico.recebimentos.values,
-        recebimentoColors
-    );
 }
