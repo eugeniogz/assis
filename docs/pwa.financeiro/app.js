@@ -245,8 +245,18 @@ function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
     });
-    document.getElementById('top-icons-wrapper').style.display = 'block'; // Exibe
-    document.getElementById('bottom-wrapper').style.display = 'block'; // Exibe
+    elemento = document.getElementById('passwordPage');
+    if (elemento) {
+        elemento.style.display = 'none';
+    }
+    elemento = document.getElementById('top-icons-wrapper');
+    if (elemento) {
+        elemento.style.display = 'flex'; /* Usar flexbox para centralizar o conteúdo verticalmente */
+    }
+    elemento = document.getElementById('bottom-wrapper');
+    if (elemento) {
+        elemento.style.display =  'flex'; /* Usar flexbox para centralizar o conteúdo verticalmente */
+    }
     document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
     // Atualiza os gráficos apenas quando a página do dashboard é exibida
     if (pageId === 'dashboardPage') {
