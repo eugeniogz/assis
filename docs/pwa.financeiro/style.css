@@ -156,6 +156,9 @@ textarea#fileContent {
     display: none !important;
 }
 
+.top-icons-wrapper.hidden {
+    display: none !important;
+}
 /* Novo contêiner para a parte superior da tela */
 .top-icons-wrapper {
     display: none;     /* Garante que a div comece oculta */
@@ -190,6 +193,9 @@ textarea#fileContent {
     overflow-y: auto; /* Habilita o scroll vertical se o conteúdo for maior que a altura */
     -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
     padding: 10px; /* Espaçamento interno */
+}
+.bottom-wrapper.hidden {
+    display: none !important;
 }
 .bottom-wrapper {
     display: none;     /* Garante que a div comece oculta */

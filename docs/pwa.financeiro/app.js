@@ -245,7 +245,7 @@ function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
     });
-    document.getElementById('.top-icons-wrapper').style.display = 'block'; // Exibe
+    document.getElementById('top-icons-wrapper').style.display = 'block'; // Exibe
     document.getElementById('bottom-wrapper').style.display = 'block'; // Exibe
     document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
     // Atualiza os gráficos apenas quando a página do dashboard é exibida
