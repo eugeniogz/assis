@@ -55,8 +55,7 @@ passwordForm.addEventListener('submit', async function(event) {
                 return;
             }
         }
-        setTimeout(loginOk(), 1000);
-        window.location.reload();
+        window.location.href = 'dummy.html';
         
     } catch (e) {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
