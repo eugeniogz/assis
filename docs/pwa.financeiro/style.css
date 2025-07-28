@@ -178,12 +178,13 @@ textarea#fileContent {
     padding-right: 10px; /* Espaçamento final para os ícones */
 }
 .center {
-    position: relative;
+    position: fixed;
     width: 100%; /* Isso faz com que a div ocupe 100% da largura do seu elemento pai */
+    height: 8vh;
     margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
     padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
     box-sizing: border-box; /* Importante para o cálculo da largura total */
-    top: 17vh; /* Inicia logo abaixo do topo */
+    top: 14vh; /* Inicia logo abaixo do topo */
     left: 0; /* Alinha à esquerda */
     background-color: var(--background-color);
     color: var(--text-color);
@@ -192,6 +193,26 @@ textarea#fileContent {
     -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
     padding: 10px; /* Espaçamento interno */
 }
+.password-wrapper {
+    position: relative;
+    width: 100%; /* Isso faz com que a div ocupe 100% da largura do seu elemento pai */
+    height: 100%;
+    margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
+    padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
+    box-sizing: border-box; /* Importante para o cálculo da largura total */
+    top: 0; /* Inicia logo abaixo do topo */
+    left: 0; /* Alinha à esquerda */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    align-items: center; /* Centraliza verticalmente o buttons-container */
+    overflow-y: auto; /* Habilita o scroll vertical se o conteúdo for maior que a altura */
+    -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
+    padding: 10px; /* Espaçamento interno */
+}
+.password-wrapper.hidden {
+    display: none !important;
+}
+/* Novo contêiner para a parte inferior da tela */
 .bottom-wrapper.hidden {
     display: none !important;
 }
@@ -202,7 +223,7 @@ textarea#fileContent {
     margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
     padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
     box-sizing: border-box; /* Importante para o cálculo da largura total */
-    top: 0; /* Inicia logo abaixo do topo */
+    top: 21vh; /* Inicia logo abaixo do topo */
     left: 0; /* Alinha à esquerda */
     background-color: var(--background-color);
     color: var(--text-color);
