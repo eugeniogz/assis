@@ -245,7 +245,7 @@ function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
     });
-    elemento = document.getElementById('passwordPage');
+    elemento = document.getElementById('password-wraper');
     if (elemento) {
         elemento.style.display = 'none';
     }
