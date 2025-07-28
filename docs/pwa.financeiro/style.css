@@ -209,9 +209,9 @@ textarea#fileContent {
 .buttons-container {
     display: flex; /* Faz com que os botões se alinhem horizontalmente */
     flex-wrap: nowrap; /* Impede que os botões quebrem a linha */
-    gap: 15px; /* Espaço entre os botões */
+    gap: 10px; /* Espaço entre os botões */
     align-items: center; /* Alinha os itens ao centro verticalmente dentro do container */
-    padding: 10px 0; /* Pequeno padding para os botões não ficarem colados nas bordas superior/inferior do wrapper */
+    padding: 7px 0; /* Pequeno padding para os botões não ficarem colados nas bordas superior/inferior do wrapper */
 }
 
 /* Estilo para cada botão circular (mantido do exemplo anterior) */
@@ -245,13 +245,13 @@ textarea#fileContent {
 }
 
 .button-icon {
-    font-size: 28px; /* Ajustei o tamanho do ícone */
+    font-size: 20px; /* Ajustei o tamanho do ícone */
     margin-bottom: 5px;
     line-height: 1;
 }
 
 .button-text {
-    font-size: 10px; /* Ajustei o tamanho do texto */
+    font-size: 8px; /* Ajustei o tamanho do texto */
     line-height: 1.2;
     padding: 0 3px;
     word-break: break-word;
