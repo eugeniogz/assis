@@ -32,7 +32,6 @@ const importOfxBtn = document.getElementById('importOfxBtn');
 const ofxInput = document.getElementById('ofxInput');
 
 passwordForm.addEventListener('submit', async function(event) { 
-    event.preventDefault();  
     if (password.value === '') {
         showStatus('Senha não pode ser vazia.', true);
         return;
