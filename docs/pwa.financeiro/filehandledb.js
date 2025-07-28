@@ -1,7 +1,7 @@
 // Nome do banco de dados e versão
 const DB_NAME = 'myPWAFileFinanceiroDB';
 const DB_VERSION = 1;
-const OBJECT_STORE_NAME = 'fileHandles';
+const OBJECT_STORE_NAME = 'financeiro';
 
 let findb; // Variável para armazenar a instância do banco de dados
 

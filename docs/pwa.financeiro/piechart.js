@@ -260,8 +260,8 @@ let recebimentosChartInstance = null;
 showPieChartBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = findb.transaction(['fileHandles'], 'readonly');
-        const store = tx.objectStore('fileHandles');
+        const tx = findb.transaction(['financeiro'], 'readonly');
+        const store = tx.objectStore('financeiro');
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
         req.onerror = () => resolve(null);

@@ -10,9 +10,6 @@ function showStatus(message, isError = false) {
     statusMessage.style.color = isError ? 'var(--red)' : 'var(--green)';
 }
 
-// IndexedDB helpers (mantém openDb, OBJECT_STORE_NAME, findb)
-// let findb;
-
 async function openDb() {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myPWAFileDB', 1);
@@ -23,8 +20,8 @@ async function openDb() {
         };
         request.onupgradeneeded = (event) => {
             findb = event.target.result;
-            if (!findb.objectStoreNames.contains('fileHandles')) {
-                findb.createObjectStore('fileHandles');
+            if (!findb.objectStoreNames.contains('financeiro')) {
+                findb.createObjectStore('financeiro');
             }
         };
     });
@@ -34,17 +31,17 @@ async function openDb() {
 const importOfxBtn = document.getElementById('importOfxBtn');
 const ofxInput = document.getElementById('ofxInput');
 
-passwordBtn.addEventListener('click', async () => {
+passwordForm.addEventListener('submit', async function(event) { 
+    event.preventDefault();  
     if (password.value === '') {
         showStatus('Senha não pode ser vazia.', true);
         return;
     }
-    passwordForm.submit(); // Envia o formulário para processar a senha
     try {
         await openDb();
         let dadosCript = await new Promise((resolve) => {
-            const tx = findb.transaction(['fileHandles'], 'readonly');
-            const store = tx.objectStore('fileHandles');
+            const tx = findb.transaction(['financeiro'], 'readonly');
+            const store = tx.objectStore('financeiro');
             const req = store.get('ofxData');
             req.onsuccess = () => resolve(req.result || null);
             req.onerror = () => resolve(null);
@@ -64,8 +61,6 @@ passwordBtn.addEventListener('click', async () => {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
     }
 });
-
-passwordForm.addEventListener('submit', function(event) { event.preventDefault();  });
 
 importOfxBtn.addEventListener('click', () => {
     ofxInput.value = '';
@@ -115,8 +110,8 @@ ofxInput.addEventListener('change', async (event) => {
 
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = findb.transaction(['fileHandles'], 'readonly');
-        const store = tx.objectStore('fileHandles');
+        const tx = findb.transaction(['financeiro'], 'readonly');
+        const store = tx.objectStore('financeiro');
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
         req.onerror = () => resolve(null);
@@ -145,8 +140,8 @@ ofxInput.addEventListener('change', async (event) => {
     }
     const dadosCriptografados = sjcl.encrypt(password.value, JSON.stringify(dados));
     await new Promise((resolve) => {
-        const tx = findb.transaction(['fileHandles'], 'readwrite');
-        const store = tx.objectStore('fileHandles');
+        const tx = findb.transaction(['financeiro'], 'readwrite');
+        const store = tx.objectStore('financeiro');
         store.put(dadosCriptografados, 'ofxData');
         tx.oncomplete = resolve;
     });
@@ -163,8 +158,8 @@ ofxInput.addEventListener('change', async (event) => {
 showJsonBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
-        const tx = findb.transaction(['fileHandles'], 'readonly');
-        const store = tx.objectStore('fileHandles');
+        const tx = findb.transaction(['financeiro'], 'readonly');
+        const store = tx.objectStore('financeiro');
         const req = store.get('ofxData');
         req.onsuccess = () => resolve(req.result || null);
         req.onerror = () => resolve(null);
@@ -196,8 +191,8 @@ const restoreInput = document.getElementById('restoreInput');
 //  : exporta o dado criptografado como arquivo .json
 backupBtn.addEventListener('click', async () => {
     await openDb();
-    const tx = findb.transaction(['fileHandles'], 'readonly');
-    const store = tx.objectStore('fileHandles');
+    const tx = findb.transaction(['financeiro'], 'readonly');
+    const store = tx.objectStore('financeiro');
     const req = store.get('ofxData');
     req.onsuccess = () => {
         if (!req.result) {
@@ -232,8 +227,8 @@ restoreInput.addEventListener('change', async (event) => {
         // Testa se é um JSON válido (criptografado)
         decrypt(password.value, text);
         await openDb();
-        const tx = findb.transaction(['fileHandles'], 'readwrite');
-        const store = tx.objectStore('fileHandles');
+        const tx = findb.transaction(['financeiro'], 'readwrite');
+        const store = tx.objectStore('financeiro');
         store.put(text, 'ofxData');
         tx.oncomplete = () => {
             showStatus('Backup restaurado com sucesso!');
