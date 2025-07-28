@@ -55,7 +55,7 @@ passwordForm.addEventListener('submit', async function(event) {
                 return;
             }
         }
-        //setTimeout(loginOk(), 5000);
+        loginOk();
     } catch (e) {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
     }
