@@ -179,10 +179,10 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
 function renderizarGraficoPizza(elementId, title, labels, data, colorsArray) {
     const ctx = document.getElementById(elementId).getContext('2d');
 
-     if (idCanvas === 'despesasChart' && despesasChartInstance) {
+     if (elementId === 'despesasChart' && despesasChartInstance) {
         despesasChartInstance.destroy();
         despesasChartInstance = null; // Limpa a referência
-    } else if (idCanvas === 'recebimentosChart' && recebimentosChartInstance) {
+    } else if (elementId === 'recebimentosChart' && recebimentosChartInstance) {
         recebimentosChartInstance.destroy();
         recebimentosChartInstance = null; // Limpa a referência
     }
@@ -247,9 +247,9 @@ function renderizarGraficoPizza(elementId, title, labels, data, colorsArray) {
         }
     });
 
-    if (idCanvas === 'despesasChart') {
+    if (elementId === 'despesasChart') {
         despesasChartInstance = chartInstance;
-    } else if (idCanvas === 'recebimentosChart') {
+    } else if (elementId === 'recebimentosChart') {
         recebimentosChartInstance = chartInstance;
     }
 }
