@@ -248,17 +248,17 @@ showPieChartBtn.addEventListener('click', async () => {
         req.onerror = () => resolve(null);
     });
 
-    // if (!dadosCript) {
-    //     showStatus('Nenhum dado OFX importado ainda.', true);
-    //     fileContentTextArea.value = '';
-    //     return;
-    // }
     dados = [];
-    try {
-        dados = decrypt(password.value, dadosCript);
-    } catch (e) {
-        showStatus(e.message, true);
-        return;
+    if (dadosCript) {
+        try {
+            dados = decrypt(password.value, dadosCript);
+        } catch (e) {
+            showStatus(e.message, true);
+            return;
+        }
+    } else {
+        showStatus('Nenhum dado OFX importado ainda.', true);
+        fileContentTextArea.value = '';
     }
     // 1. Categoriza as transações
 
