@@ -179,11 +179,21 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
 function renderizarGraficoPizza(elementId, title, labels, data, colorsArray) {
     const ctx = document.getElementById(elementId).getContext('2d');
 
+     if (idCanvas === 'despesasChart' && despesasChartInstance) {
+        despesasChartInstance.destroy();
+        despesasChartInstance = null; // Limpa a referência
+    } else if (idCanvas === 'recebimentosChart' && recebimentosChartInstance) {
+        recebimentosChartInstance.destroy();
+        recebimentosChartInstance = null; // Limpa a referência
+    }
+
+
+
     // Gera um array de cores a partir da paleta fornecida, ciclando se necessário
     const backgroundColors = labels.map((_, index) => colorsArray[index % colorsArray.length]);
     const borderColors = backgroundColors.map(color => color.replace('0.8', '1')); // Assume opacity 0.8 for background
 
-    new Chart(ctx, {
+    chartInstance = new Chart(ctx, {
         type: 'pie', // Tipo de gráfico alterado para 'pie' (pizza)
         data: {
             labels: labels,
@@ -236,7 +246,16 @@ function renderizarGraficoPizza(elementId, title, labels, data, colorsArray) {
             }
         }
     });
+
+    if (idCanvas === 'despesasChart') {
+        despesasChartInstance = chartInstance;
+    } else if (idCanvas === 'recebimentosChart') {
+        recebimentosChartInstance = chartInstance;
+    }
 }
+
+let despesasChartInstance = null;
+let recebimentosChartInstance = null;
 
 showPieChartBtn.addEventListener('click', async () => {
     await openDb();
@@ -268,6 +287,7 @@ showPieChartBtn.addEventListener('click', async () => {
     const dadosGrafico = processarDadosParaGrafico(transacoesCategorizadas);
 
     showPage('pieChartDiv');
+
     
     // 3. Renderiza o gráfico de despesas (agora como pizza)
     renderizarGraficoPizza(
