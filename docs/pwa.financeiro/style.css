@@ -170,7 +170,6 @@ textarea#fileContent {
     background-color: var(--background-color);
     color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
-    display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
     align-items: center; /* Centraliza verticalmente o buttons-container */
     overflow-x: auto; /* Habilita o scroll horizontal se o conteúdo for maior que a largura */
     -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
@@ -207,7 +206,6 @@ textarea#fileContent {
     left: 0; /* Alinha à esquerda */
     background-color: var(--background-color);
     color: var(--text-color);
-    display: none;
     align-items: center; /* Centraliza verticalmente o buttons-container */
     overflow-y: auto; /* Habilita o scroll vertical se o conteúdo for maior que a altura */
     -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
