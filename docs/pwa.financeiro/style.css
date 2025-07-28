@@ -158,6 +158,7 @@ textarea#fileContent {
 
 /* Novo contêiner para a parte superior da tela */
 .top-icons-wrapper {
+    display: none;     /* Garante que a div comece oculta */
     position: fixed; /* Fixa o contêiner no topo da tela */
     top: 0; /* Alinha ao topo */
     left: 0; /* Alinha à esquerda */
@@ -174,13 +175,30 @@ textarea#fileContent {
     padding-left: 10px; /* Espaçamento inicial para os ícones */
     padding-right: 10px; /* Espaçamento final para os ícones */
 }
-.bottom-wrapper {
+.center {
     position: relative;
     width: 100%; /* Isso faz com que a div ocupe 100% da largura do seu elemento pai */
     margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
     padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
     box-sizing: border-box; /* Importante para o cálculo da largura total */
     top: 17vh; /* Inicia logo abaixo do topo */
+    left: 0; /* Alinha à esquerda */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex; /* Usar flexbox para centralizar o conteúdo verticalmente */
+    align-items: center; /* Centraliza verticalmente o buttons-container */
+    overflow-y: auto; /* Habilita o scroll vertical se o conteúdo for maior que a altura */
+    -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
+    padding: 10px; /* Espaçamento interno */
+}
+.bottom-wrapper {
+    display: none;     /* Garante que a div comece oculta */
+    position: relative;
+    width: 100%; /* Isso faz com que a div ocupe 100% da largura do seu elemento pai */
+    margin: 0; /* Remova margens padrão que podem causar scroll horizontal indesejado */
+    padding: 0; /* Remova paddings padrão que podem causar scroll horizontal indesejado */
+    box-sizing: border-box; /* Importante para o cálculo da largura total */
+    top: 0; /* Inicia logo abaixo do topo */
     left: 0; /* Alinha à esquerda */
     background-color: var(--background-color);
     color: var(--text-color);

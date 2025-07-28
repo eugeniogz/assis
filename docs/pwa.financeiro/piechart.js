@@ -231,15 +231,11 @@ showPieChartBtn.addEventListener('click', async () => {
         fileContentTextArea.value = '';
         return;
     }
-    dados = {};
+    dados = [];
     try {
-        dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
+        dados = decrypt(password.value, dadosCript);
     } catch (e) {
-        if (password.value === '') {
-            return;
-        }
-        showStatus('Senha inválida ou dados corrompidos.', true);
-        fileContentTextArea.value = '';
+        showStatus(e.message, true);
         return;
     }
     // 1. Categoriza as transações

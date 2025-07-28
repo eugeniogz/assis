@@ -2,6 +2,7 @@ const fileContentTextArea = document.getElementById('fileContent');
 const statusMessage = document.getElementById('statusMessage');
 const password = document.getElementById('password');
 const showJsonBtn = document.getElementById('showJsonBtn');
+const passwordBtn = document.getElementById('passwordBtn');
 
 function showStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -32,10 +33,53 @@ async function openDb() {
 const importOfxBtn = document.getElementById('importOfxBtn');
 const ofxInput = document.getElementById('ofxInput');
 
+passwordBtn.addEventListener('click', async () => {
+    if (password.value === '') {
+        showStatus('Senha não pode ser vazia.', true);
+        return;
+    }
+    try {
+        await openDb();
+        let dadosCript = await new Promise((resolve) => {
+            const tx = findb.transaction(['fileHandles'], 'readonly');
+            const store = tx.objectStore('fileHandles');
+            const req = store.get('ofxData');
+            req.onsuccess = () => resolve(req.result || null);
+            req.onerror = () => resolve(null);
+        });
+
+        let dados = [];
+        if (dadosCript) {
+            try {
+                dados = decrypt(password.value, dadosCript);
+            } catch (e) {
+                showStatus(e.getmessage, true);
+                return;
+            }
+        }
+
+        showPage('dashboardPage'); // Exibe a página do dashboard
+    } catch (e) {
+        showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
+    }
+});
+
 importOfxBtn.addEventListener('click', () => {
     ofxInput.value = '';
     ofxInput.click();
 });
+
+function decrypt(password, dadosCript) {
+    try {
+        return JSON.parse(sjcl.decrypt(password, dadosCript));
+    } catch (e) {
+        if (password === '') {
+            throw new Error('Senha não pode ser vazia.');
+        } else {
+            throw new Error('Senha inválida ou dados corrompidos.');
+        }
+    }
+}
 
 ofxInput.addEventListener('change', async (event) => {
     const file = event.target.files[0];
@@ -78,9 +122,9 @@ ofxInput.addEventListener('change', async (event) => {
     let dados = [];
     if (dadosCript) {
         try {
-            dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
+            dados = decrypt(password.value, dadosCript);
         } catch (e) {
-            showStatus('Senha inválida ou dados corrompidos.', true);
+            showStatus(e.getmessage, true);
             return;
         }
     }
@@ -130,12 +174,12 @@ showJsonBtn.addEventListener('click', async () => {
     }
 
     try {
-        const dados = JSON.parse(sjcl.decrypt(password.value, dadosCript));
+        const dados = decrypt(password.value, dadosCript);
         fileContentTextArea.value = JSON.stringify(dados, null, 2);
         showPage('jsonViewPage');
     } catch (e) {
-        showStatus('Senha inválida ou dados corrompidos.', true);
         fileContentTextArea.value = '';
+        showStatus(e.getmessage, true);
     }
 });
 
@@ -183,7 +227,7 @@ restoreInput.addEventListener('change', async (event) => {
     const text = await file.text();
     try {
         // Testa se é um JSON válido (criptografado)
-        JSON.parse(sjcl.decrypt(password.value, text));
+        decrypt(password.value, text);
         await openDb();
         const tx = findb.transaction(['fileHandles'], 'readwrite');
         const store = tx.objectStore('fileHandles');
@@ -192,7 +236,7 @@ restoreInput.addEventListener('change', async (event) => {
             showStatus('Backup restaurado com sucesso!');
         };
     } catch (e) {
-        showStatus('Arquivo ou senha inválida.', true);
+        showStatus(e.getmessage, true);
     }
 });
 
@@ -201,9 +245,9 @@ function showPage(pageId) {
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none'; // Oculta usando estilo inline
     });
+    document.getElementById('.top-icons-wrapper').style.display = 'block'; // Exibe
+    document.getElementById('bottom-wrapper').style.display = 'block'; // Exibe
     document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
-
-
     // Atualiza os gráficos apenas quando a página do dashboard é exibida
     if (pageId === 'dashboardPage') {
         updateCharts();
