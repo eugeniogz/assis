@@ -55,8 +55,7 @@ passwordForm.addEventListener('submit', async function(event) {
                 return;
             }
         }
-
-        showPieChartBtn.click(); // Exibe a página do dashboard
+        loginOk();
     } catch (e) {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
     }
@@ -238,9 +237,7 @@ restoreInput.addEventListener('change', async (event) => {
     }
 });
 
-function showPage(pageId) {
-    showStatus('', false);
-
+function loginOk() {
     // Oculta todos os containers de conteúdo
     document.querySelectorAll('.page-content').forEach(page => {
         page.style.display = 'none';
@@ -262,6 +259,10 @@ function showPage(pageId) {
     if (bottomWrapper) {
         bottomWrapper.style.display = 'flex';
     }
+
+}
+function showPage(pageId) {
+    showStatus('', false);
 
     // Tenta exibir a página selecionada somente se ela existir
     const selectedPage = document.getElementById(pageId);

@@ -6,9 +6,6 @@ const statusMessage = document.getElementById('statusMessage');
 
 let fileHandle = null; // Armazena a referência ao arquivo
 
-// document.getElementById('form').addEventListener('submit', function(event) {
-//         event.preventDefault();
-// });
 
 // Função para exibir mensagens de status
 function showStatus(message, isError = false) {
