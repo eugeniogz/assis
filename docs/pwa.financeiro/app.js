@@ -3,6 +3,7 @@ const statusMessage = document.getElementById('statusMessage');
 const password = document.getElementById('password');
 const showJsonBtn = document.getElementById('showJsonBtn');
 const passwordBtn = document.getElementById('passwordBtn');
+const passwordForm = document.getElementById('passwordForm');
 
 function showStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -38,6 +39,8 @@ passwordBtn.addEventListener('click', async () => {
         showStatus('Senha não pode ser vazia.', true);
         return;
     }
+    passwordForm.password.value = password.value; // Atualiza o campo do formulário
+    passwordForm.submit(); // Envia o formulário para processar a senha
     try {
         await openDb();
         let dadosCript = await new Promise((resolve) => {

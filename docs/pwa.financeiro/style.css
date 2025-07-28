@@ -89,33 +89,6 @@ textarea {
     border-radius: 5px;
 }
 
-.container {
-    max-width: 1200px; /* aumente o limite */
-    width: 100%;
-    margin: 30px auto;
-    padding: 16px;
-    background: var(--card-background, #f8f9fa);
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-@media (prefers-color-scheme: dark) {
-    .container {
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* box shadow dark theme */
-    }
-}
-
-.top-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-}
-
 textarea#fileContent {
     width: 100%;
     min-height: 200px;
@@ -127,14 +100,6 @@ textarea#fileContent {
 }
 
 @media (max-width: 600px) {
-    .container {
-        max-width: 98vw;
-        padding: 6vw 2vw;
-    }
-    .top-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
     textarea#fileContent {
         font-size: 0.95em;
         min-height: 120px;
