@@ -3,6 +3,7 @@ const urlsToCache = [
     '/pwa.financeiro/',
     '/pwa.financeiro/index.html',
     '/pwa.financeiro/offline.html',
+    '/pwa.financeiro/dummy.html',
     '/pwa.financeiro/style.css',
     '/pwa.financeiro/filehandledb.js',
     '/pwa.financeiro/sjcl.js',
