@@ -3,7 +3,6 @@ const statusMessage = document.getElementById('statusMessage');
 const password = document.getElementById('password');
 const showJsonBtn = document.getElementById('showJsonBtn');
 const passwordBtn = document.getElementById('passwordBtn');
-const passwordForm = document.getElementById('passwordForm');
 
 function showStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -31,7 +30,7 @@ async function openDb() {
 const importOfxBtn = document.getElementById('importOfxBtn');
 const ofxInput = document.getElementById('ofxInput');
 
-passwordForm.addEventListener('click', async function(event) { 
+passwordBtn.addEventListener('click', async function(event) { 
     if (password.value === '') {
         showStatus('Senha não pode ser vazia.', true);
         return;
