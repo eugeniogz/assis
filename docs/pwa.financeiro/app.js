@@ -48,7 +48,6 @@ passwordBtn.addEventListener('click', async () => {
             req.onerror = () => resolve(null);
         });
 
-        let dados = [];
         if (dadosCript) {
             try {
                 dados = decrypt(password.value, dadosCript);
@@ -58,7 +57,7 @@ passwordBtn.addEventListener('click', async () => {
             }
         }
 
-        showPage('dashboardPage'); // Exibe a página do dashboard
+        showPieChartBtn.click(); // Exibe a página do dashboard
     } catch (e) {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
     }
