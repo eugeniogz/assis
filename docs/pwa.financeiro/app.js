@@ -39,7 +39,6 @@ passwordBtn.addEventListener('click', async () => {
         showStatus('Senha não pode ser vazia.', true);
         return;
     }
-    passwordForm.password.value = password.value; // Atualiza o campo do formulário
     passwordForm.submit(); // Envia o formulário para processar a senha
     try {
         await openDb();
@@ -65,6 +64,8 @@ passwordBtn.addEventListener('click', async () => {
         showStatus('Erro ao acessar o banco de dados: ' + e.message, true);
     }
 });
+
+passwordForm.addEventListener('submit', function(event) { event.preventDefault();  });
 
 importOfxBtn.addEventListener('click', () => {
     ofxInput.value = '';
