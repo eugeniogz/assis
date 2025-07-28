@@ -236,11 +236,6 @@ restoreInput.addEventListener('change', async (event) => {
 });
 
 function loginOk() {
-    // Oculta todos os containers de conteúdo
-    document.querySelectorAll('.page-content').forEach(page => {
-        page.style.display = 'none';
-    });
-
     // Oculta wrappers específicos
     const passwordWrapper = document.getElementById('password-wraper');
     if (passwordWrapper) {
@@ -261,6 +256,9 @@ function loginOk() {
 }
 function showPage(pageId) {
     showStatus('', false);
+    document.querySelectorAll('.page-content').forEach(page => {
+        page.style.display = 'none';
+    });
 
     // Tenta exibir a página selecionada somente se ela existir
     const selectedPage = document.getElementById(pageId);
