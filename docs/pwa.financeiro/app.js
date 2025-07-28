@@ -242,34 +242,44 @@ restoreInput.addEventListener('change', async (event) => {
 
 function showPage(pageId) {
     showStatus('', false);
+
+    // Oculta todos os containers de conteúdo
     document.querySelectorAll('.page-content').forEach(page => {
-        page.style.display = 'none'; // Oculta usando estilo inline
+        page.style.display = 'none';
     });
-    elemento = document.getElementById('password-wraper');
-    if (elemento) {
-        elemento.style.display = 'none';
+
+    // Oculta wrappers específicos
+    const passwordWrapper = document.getElementById('password-wraper');
+    if (passwordWrapper) {
+        passwordWrapper.style.display = 'none';
     }
-    elemento = document.getElementById('top-icons-wrapper');
-    if (elemento) {
-        elemento.style.display = 'flex'; /* Usar flexbox para centralizar o conteúdo verticalmente */
+    
+    // Mostra os wrappers fixos que devem estar sempre visíveis
+    const topIconsWrapper = document.getElementById('top-icons-wrapper');
+    if (topIconsWrapper) {
+        topIconsWrapper.style.display = 'flex';
     }
-    elemento = document.getElementById('bottom-wrapper');
-    if (elemento) {
-        elemento.style.display =  'flex'; /* Usar flexbox para centralizar o conteúdo verticalmente */
+
+    const bottomWrapper = document.getElementById('bottom-wrapper');
+    if (bottomWrapper) {
+        bottomWrapper.style.display = 'flex';
     }
-    document.getElementById(pageId).style.display = 'block'; // Exibe a página selecionada
-    // Atualiza os gráficos apenas quando a página do dashboard é exibida
-    if (pageId === 'dashboardPage') {
+
+    // Tenta exibir a página selecionada somente se ela existir
+    const selectedPage = document.getElementById(pageId);
+    if (selectedPage) {
+        selectedPage.style.display = 'block';
+    } else {
+        console.error(`Erro: Elemento com o ID "${pageId}" não encontrado.`);
+    }
+
+    // Lógicas específicas de cada página
+    if (pageId === 'pieChartDiv') {
         updateCharts();
-  //  } else if (pageId === 'jsonViewPage') {
-        // Atualiza o JSON exibido quando a página é mostrada
-  //      document.getElementById('jsonDisplay').value = JSON.stringify(transacoes, null, 2);
     } else if (pageId === 'categoryEditPage') {
-        // Atualiza a lista de categorias ao mostrar a página de edição
         renderCategoriesList();
     }
 }
-
 function updateCharts() {
     const transacoesCategorizadas = categorizarTransacoes(transacoes, categoriasDict);
     const dadosParaGrafico = processarDadosParaGrafico(transacoesCategorizadas);
