@@ -116,8 +116,8 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
         }
     });
 
-    // Lógica para agrupar despesas menores que 5% do total de despesas
-    const threshold = totalDespesas * 0.05; 
+    // Lógica para agrupar despesas menores que 2,5% do total de despesas
+    const threshold = totalDespesas * 0.025; 
     let outrosDebitosAgregados = 0;
     const categoriasParaManter = {};
 
