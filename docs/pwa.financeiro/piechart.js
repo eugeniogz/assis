@@ -30,10 +30,10 @@ const categoriasDict = {
 const despesaColors = [
     'rgba(255, 99, 132, 0.8)', // Vermelho
     'rgba(255, 159, 64, 0.8)', // Laranja
-    'rgba(255, 205, 86, 0.8)', // Amarelo
-    'rgba(201, 203, 207, 0.8)', // Cinza
     'rgba(153, 102, 255, 0.8)',// Roxo
+    'rgba(201, 203, 207, 0.8)', // Cinza
     'rgba(54, 162, 235, 0.8)', // Azul
+    'rgba(255, 205, 86, 0.8)', // Amarelo
     'rgba(75, 192, 192, 0.8)', // Verde Água
     'rgba(255, 102, 102, 0.8)' // Vermelho claro
 ];
@@ -59,28 +59,6 @@ function getRandomRgbaColor(opacity) {
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
-// Não parece ser necessário
-// function showGraph(transacoesCategorizadas) {
-//     if (!transacoesCategorizadas || transacoesCategorizadas.length === 0) {
-//         const dadosParaGrafico = processarDadosParaGrafico(transacoesCategorizadas);
-
-//         renderizarGraficoPizza(
-//             'despesasChart',
-//             'Distribuição de Despesas (R$)',
-//             dadosParaGrafico.despesas.labels,
-//             dadosParaGrafico.despesas.values,
-//             despesaColors
-//         );
-
-//         renderizarGraficoPizza(
-//             'recebimentosChart',
-//             'Distribuição de Recebimentos (R$)',
-//             dadosParaGrafico.recebimentos.labels,
-//             dadosParaGrafico.recebimentos.values,
-//             recebimentoColors
-//         );
-//     }
-// }
 /**
  * Categoriza cada transação no array `transacoes` adicionando um atributo `categoria`.
  * A categorização é baseada em palavras-chave encontradas no campo `memo`.
@@ -114,25 +92,48 @@ function categorizarTransacoes(transacoes, categoriasDict) {
 
 /**
  * Processa as transações categorizadas para agrupar, somar e ordenar os valores por categoria e tipo (débito/crédito).
+ * Inclui lógica para agrupar despesas menores que 10% do total na categoria 'outros_debitos'.
  * @param {Array<Object>} transacoesCategorizadas - O array de transações com o atributo `categoria`.
  * @returns {Object} Um objeto contendo dados formatados para o Chart.js, separados por despesas e recebimentos, ambos ordenados do maior para o menor valor.
  */
 function processarDadosParaGrafico(transacoesCategorizadas) {
     const despesasPorCategoria = {};
     const recebimentosPorCategoria = {};
+    let totalDespesas = 0;
 
     transacoesCategorizadas.forEach(transacao => {
         const categoria = transacao.categoria;
         const amount = transacao.TRNAMT;
 
         if (transacao.TRNTYPE === 'DEBIT') {
-            despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + Math.abs(amount);
+            const absAmount = Math.abs(amount);
+            despesasPorCategoria[categoria] = (despesasPorCategoria[categoria] || 0) + absAmount;
+            totalDespesas += absAmount;
         } else {
             if (categoria !== 'pagamento_cartao') {
                 recebimentosPorCategoria[categoria] = (recebimentosPorCategoria[categoria] || 0) + Math.abs(amount);
             }
         }
     });
+
+    // Lógica para agrupar despesas menores que 10%
+    const threshold = totalDespesas * 0.10; // 10% do total de despesas
+    let outrosDebitosAgregados = 0;
+    const categoriasParaManter = {};
+
+    for (const categoria in despesasPorCategoria) {
+        if (despesasPorCategoria[categoria] < threshold && categoria !== 'outros_debitos') {
+            outrosDebitosAgregados += despesasPorCategoria[categoria];
+        } else {
+            categoriasParaManter[categoria] = despesasPorCategoria[categoria];
+        }
+    }
+
+    // Adiciona os valores agregados à categoria 'outros_debitos' existente ou cria se não existir
+    if (outrosDebitosAgregados > 0) {
+        categoriasParaManter['outros_debitos'] = (categoriasParaManter['outros_debitos'] || 0) + outrosDebitosAgregados;
+    }
+
 
     // Função auxiliar para ordenar labels e valores
     const ordenarDados = (labels, values) => {
@@ -154,8 +155,8 @@ function processarDadosParaGrafico(transacoesCategorizadas) {
 
     // Aplica a ordenação para despesas e recebimentos
     const despesasOrdenadas = ordenarDados(
-        Object.keys(despesasPorCategoria),
-        Object.values(despesasPorCategoria)
+        Object.keys(categoriasParaManter), // Usa as categorias pós-agrupamento
+        Object.values(categoriasParaManter)
     );
 
     const recebimentosOrdenados = ordenarDados(
@@ -288,7 +289,7 @@ showPieChartBtn.addEventListener('click', async () => {
 
     showPage('pieChartDiv');
 
-    
+
     // 3. Renderiza o gráfico de despesas (agora como pizza)
     renderizarGraficoPizza(
         'despesasChart',
