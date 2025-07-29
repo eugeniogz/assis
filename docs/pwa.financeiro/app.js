@@ -237,7 +237,7 @@ restoreInput.addEventListener('change', async (event) => {
 
 function loginOk() {
     // Oculta wrappers específicos
-    const passwordWrapper = document.getElementById('password-wraper');
+    const passwordWrapper = document.getElementById('password-wrapper');
     if (passwordWrapper) {
         passwordWrapper.style.display = 'none';
     }
