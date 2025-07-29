@@ -161,7 +161,7 @@ textarea#fileContent {
 }
 .password-wrapper {
     position: fixed;
-    width: 100%;
+    width: 90%;
     height: 100vh;
     top: 0;
     left: 0; /* Add left: 0 for fixed positioning to span full width */
@@ -170,11 +170,12 @@ textarea#fileContent {
     margin: 0 auto;
     background-color: var(--background-color);
     color: var(--text-color);
-    padding: 10px;
+    padding: 20px;
     overflow-y: auto;
+    gap: 15px; /* Espaçamento entre os elementos internos (p, input, button) */
     -webkit-overflow-scrolling: touch;
     box-sizing: border-box; /* Ensures padding is included in the width/height */
-
+    text-align: center;
     /* Flexbox properties to center content inside this div */
     display: flex; /* Make it a flex container */
     flex-direction: column; /* Stack items vertically */
