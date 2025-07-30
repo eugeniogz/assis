@@ -28,10 +28,12 @@ const categoriasDict = {
 
 // Cores predefinidas para despesas (tons de vermelho, laranja, roxo)
 const colors = [
-    'rgba(234, 74, 34, 0.82)',
+    'rgba(232, 98, 98, 0.82)',
+    'rgba(236, 67, 24, 0.82)',
     'rgba(249, 145, 42, 0.89)',
     'rgba(243, 228, 13, 0.94)',
     'rgba(68, 247, 24, 0.96)',
+    'rgba(69, 247, 24, 0.33)',
     'rgba(34, 243, 225, 1)',
     'rgba(45, 61, 247, 0.8)',
     'rgba(208, 112, 237, 0.8)',
