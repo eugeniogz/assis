@@ -278,7 +278,7 @@ showPieChartBtn.addEventListener('click', async () => {
     const dadosGrafico = processarDadosParaGrafico(transacoesCategorizadas);
 
     showPage('pieChartDiv');
-
+    let colorsRecebimentos = [...colors].reverse();
 
     // 3. Renderiza o gráfico de despesas (agora como pizza)
     renderizarGraficoPizza(
@@ -289,7 +289,6 @@ showPieChartBtn.addEventListener('click', async () => {
         colors
     );
 
-    let colorsRecebimentos = [...colors].reverse();
     // 4. Renderiza o gráfico de recebimentos (agora como pizza)
     renderizarGraficoPizza(
         'recebimentosChart',
