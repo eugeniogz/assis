@@ -27,26 +27,16 @@ const categoriasDict = {
 };
 
 // Cores predefinidas para despesas (tons de vermelho, laranja, roxo)
-const despesaColors = [
-    'rgba(255, 99, 132, 0.8)', // Vermelho
-    'rgba(255, 159, 64, 0.8)', // Laranja
-    'rgba(153, 102, 255, 0.8)',// Roxo
-    'rgba(201, 203, 207, 0.8)', // Cinza
-    'rgba(54, 162, 235, 0.8)', // Azul
-    'rgba(255, 205, 86, 0.8)', // Amarelo
-    'rgba(75, 192, 192, 0.8)', // Verde Água
-    'rgba(255, 102, 102, 0.8)' // Vermelho claro
+const colors = [
+    'rgba(234, 74, 34, 0.82)',
+    'rgba(249, 145, 42, 0.89)',
+    'rgba(243, 228, 13, 0.94)',
+    'rgba(68, 247, 24, 0.96)',
+    'rgba(34, 243, 225, 1)',
+    'rgba(45, 61, 247, 0.8)',
+    'rgba(208, 112, 237, 0.8)',
 ];
 
-// Cores predefinidas para recebimentos (tons de verde, azul, roxo)
-const recebimentoColors = [
-    'rgba(75, 192, 192, 0.8)', // Verde Água
-    'rgba(54, 162, 235, 0.8)', // Azul
-    'rgba(153, 102, 255, 0.8)',// Roxo
-    'rgba(255, 205, 86, 0.8)', // Amarelo
-    'rgba(102, 255, 102, 0.8)', // Verde claro
-    'rgba(201, 203, 207, 0.8)' // Cinza
-];
 /**
  * Gera uma cor RGBA aleatória.
  * @param {number} opacity - A opacidade da cor (entre 0 e 1).
@@ -296,15 +286,16 @@ showPieChartBtn.addEventListener('click', async () => {
         'Distribuição de Despesas (R$)',
         dadosGrafico.despesas.labels,
         dadosGrafico.despesas.values,
-        despesaColors
+        colors
     );
 
+    let colorsRecebimentos = [...colors].reverse();
     // 4. Renderiza o gráfico de recebimentos (agora como pizza)
     renderizarGraficoPizza(
         'recebimentosChart',
         'Distribuição de Recebimentos (R$)',
         dadosGrafico.recebimentos.labels,
         dadosGrafico.recebimentos.values,
-        recebimentoColors
+        colorsRecebimentos
     );
 });

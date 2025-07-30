@@ -158,12 +158,15 @@ textarea#fileContent {
     overflow-y: auto; /* Habilita o scroll vertical se o conteúdo for maior que a altura */
     -webkit-overflow-scrolling: touch; /* Melhoria de scroll para iOS */
     padding: 10px; /* Espaçamento interno */
+    display: flex; /* Make it a flex container */
+    justify-content: center; /* Center items along the main axis (vertically for column) */
+    align-items: center;
 }
 .password-wrapper {
     position: fixed;
     width: 90%;
-    height: 100vh;
-    top: 0;
+    height: 56vh;
+    top: 22vh;
     left: 0; /* Add left: 0 for fixed positioning to span full width */
     right: 0; /* Add right: 0 for fixed positioning to span full width */
     max-width: 400px;
@@ -172,13 +175,10 @@ textarea#fileContent {
     color: var(--text-color);
     padding: 20px;
     overflow-y: auto;
-    gap: 15px; /* Espaçamento entre os elementos internos (p, input, button) */
     -webkit-overflow-scrolling: touch;
     box-sizing: border-box; /* Ensures padding is included in the width/height */
-    text-align: center;
     /* Flexbox properties to center content inside this div */
     display: flex; /* Make it a flex container */
-    flex-direction: column; /* Stack items vertically */
     justify-content: center; /* Center items along the main axis (vertically for column) */
     align-items: center; /* Center items along the cross axis (horizontally for column) */
 }
