@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A VARANDA DE AURORA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos globais para o corpo do documento */
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: large;
+            background-color: #f3f4f6;
+            color: #374151;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            /* Garante que o padding não cause rolagem horizontal */
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        /* Container principal com estilização e espaçamento */
+        .main-container {
+            background-color: #fff;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            /* Garante que o padding não cause rolagem horizontal */
+            box-sizing: border-box;
+        }
+
+        /* Container de navegação */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        /* Estilo dos botões */
+        .nav-button {
+            background-color: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition-property: background-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+            cursor: pointer;
+            border: none;
+        }
+        .nav-button:hover {
+            background-color: #2563eb;
+        }
+        .nav-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Estilo para a página inteira em telas menores */
+        .page {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-box {
+            width: 100%;
+        }
+
+        .page-image {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .text-box {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding: 1.5rem;
+        }
+
+        /* Media queries para telas maiores (a partir de 768px) */
+        @media (min-width: 768px) {
+            .main-container {
+                padding: 3rem;
+            }
+
+            .page {
+                flex-direction: row;
+                margin-bottom: 0;
+            }
+
+            .image-box, .text-box {
+                width: 50%;
+                max-height: calc(100vh - 14rem);
+            }
+            
+            .text-box {
+                text-align: left;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Container principal com layout flexível, se adaptando a diferentes telas -->
+    <div class="main-container">
+
+        <!-- Seção de Páginas - O conteúdo será gerado dinamicamente via JavaScript -->
+        <div id="page-container" class="w-full h-auto flex-grow flex items-center justify-center overflow-y-auto">
+            <!-- As páginas serão inseridas aqui via JavaScript -->
+        </div>
+
+        <!-- Botões de navegação (visíveis apenas em telas grandes) -->
+        <div id="navigation-buttons" class="navigation-buttons">
+            <button id="prev-btn" class="nav-button">
+                Anterior
+            </button>
+            <button id="next-btn" class="nav-button">
+                Próximo
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Script para gerar o conteúdo dinamicamente -->
+    <script>
+        const imagens = [
+            "capa.png",
+            "pg1.png",
+            "pg2.png",
+            "pg3.png",
+            "pg4.png",
+            "pg5.png",
+            "pg6.png",
+            "pg7.png",
+            "pg8.png",
+            "pg9.png",
+            "pg10.png"
+        ];
+        const texto = [
+"A VARANDA DE AURORA<BR/></BR>José Eugênio",
+
+"AURORA ADORAVA A VARANDA DO DÉCIMO PRIMEIRO ANDAR. ERA SEU LUGAR SECRETO PARA PENSAR E SENTIR.",
+
+"O SOL MORNO FAZIA CÓCEGAS EM SEU ROSTO, E O VENTO SUAVE BAGUNÇAVA SEUS CABELOS.",
+
+"DE REPENTE, UM CORAL DE PÁSSAROS COMEÇAVA A CANTAR. ELA RECONHECIA CADA NOTA, CADA MELODIA.",
+
+"LÁ EMBAIXO, OS RUÍDOS DA CIDADE PARECIAM UMA CANÇÃO DISTANTE. BUZINAS, RISADAS, O MOVIMENTO DOS CARROS. TUDO FAZIA PARTE DA MÚSICA.",
+
+"ELA VIA OS PRÉDIOS ALTOS E AS ÁRVORES VERDES QUE BROTAVAM DO CHÃO, COMO GIGANTES AMIGÁVEIS.",
+
+"AS NUVENS NO CÉU AZUL MUDAVAM DE FORMA, PARECENDO ANIMAIS OU CASTELOS FLUTUANTES.",
+
+"CADA PESSOA QUE OLHAVA PARA O MESMO CÉU VIA ALGO DIFERENTE. ERA COMO SE CADA OLHAR PINTASSE UMA IMAGEM ÚNICA.",
+
+"CADA RESPIRAÇÃO DE AURORA ERA UMA PEQUENA HISTÓRIA. UMA HISTÓRIA SÓ DELA, CHEIA DE SENTIMENTOS E DESCOBERTAS.",
+
+"ELA APRENDEU QUE NÃO PRECISAVA TER PRESSA. O MELHOR ERA PARAR, SENTIR E DEIXAR A MENTE VOAR.",
+
+"POIS É NO SOSSEGO QUE NOSSO ESPÍRITO ENCONTRA FORÇA PARA SONHAR E CRIAR. E AURORA SABIA QUE SUA VARANDA ERA SEU LUGAR ESPECIAL PARA ISSO."
+        ]
+
+        const pageContainer = document.getElementById('page-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const navigationButtons = document.getElementById('navigation-buttons');
+        let currentPageIndex = 0;
+
+        // Função para gerar o HTML de uma única página
+        function createPageHTML(imagem, texto) {
+            return `
+                <div class="page">
+                    <!-- Contêiner da imagem da página. A altura máxima é definida para evitar rolagem. -->
+                    <div class="image-box">
+                        <img src="${imagem}" alt="Imagem da página" class="page-image">
+                    </div>
+                    <!-- Contêiner do texto da página. Adicionada rolagem caso o texto seja muito grande. -->
+                    <div class="text-box">
+                        <p class="text-gray-700 leading-relaxed">${texto}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função principal para renderizar as páginas com base no tamanho da tela
+        function renderPages() {
+            // Limpa o conteúdo atual
+            pageContainer.innerHTML = '';
+            
+            // Define o ponto de quebra para telas maiores
+            const isLargeScreen = window.innerWidth >= 768;
+            
+            if (isLargeScreen) {
+                // Modo de tela grande: paginação com botões
+                navigationButtons.style.display = 'flex';
+                pageContainer.innerHTML = createPageHTML(imagens[currentPageIndex], texto[currentPageIndex]);
+                updateButtons();
+            } else {
+                // Modo de tela pequena: todas as páginas em uma coluna
+                navigationButtons.style.display = 'none';
+                for (let i = 0; i < imagens.length; i++) {
+                    pageContainer.innerHTML += createPageHTML(imagens[i], texto[i]);
+                };
+            }
+        }
+
+        // Função para atualizar o estado dos botões de navegação
+        function updateButtons() {
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex === imagens.length - 1;
+        }
+
+        // Adiciona um listener de evento para o botão "Próximo"
+        nextBtn.addEventListener('click', () => {
+            if (currentPageIndex < imagens.length - 1) {
+                currentPageIndex++;
+                renderPages();
+            }
+        });
+
+        // Adiciona um listener de evento para o botão "Anterior"
+        prevBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                renderPages();
+            }
+        });
+
+        // Renderiza as páginas na carga inicial da página
+        document.addEventListener('DOMContentLoaded', renderPages);
+
+        // Renderiza as páginas novamente em caso de redimensionamento da janela
+        window.addEventListener('resize', renderPages);
+    </script>
+</body>
+</html>
