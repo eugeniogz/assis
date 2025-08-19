@@ -148,42 +148,33 @@
 
     <!-- Script para gerar o conteúdo dinamicamente -->
     <script>
-        const imagens = [
-            "capa.png",
-            "pg1.png",
-            "pg2.png",
-            "pg3.png",
-            "pg4.png",
-            "pg5.png",
-            "pg6.png",
-            "pg7.png",
-            "pg8.png",
-            "pg9.png",
-            "pg10.png"
-        ];
-        const texto = [
-"A VARANDA DE AURORA<BR/></BR>José Eugênio",
+        // Gera dinamicamente o array de imagens para evitar repetição.
+        const imagens = ["capa.png"];
+        const numeroDePaginas = 10; // Defina o número total de páginas (sem contar a capa)
+        for (let i = 1; i <= numeroDePaginas; i++) {
+            imagens.push(`pg${i}.png`);
+        }
 
-"AURORA ADORAVA A VARANDA DO DÉCIMO PRIMEIRO ANDAR. ERA SEU LUGAR SECRETO PARA PENSAR E SENTIR.",
+        // Usando template literals (crases) para criar uma string de múltiplas linhas.
+        // O separador " --- " é usado entre o título e o autor para facilitar a digitação.
+        const storyText = `A VARANDA DE AURORA --- José Eugênio
+AURORA ADORAVA A VARANDA DO DÉCIMO PRIMEIRO ANDAR. ERA SEU LUGAR SECRETO PARA PENSAR E SENTIR.
+O SOL MORNO FAZIA CÓCEGAS EM SEU ROSTO, E O VENTO SUAVE BAGUNÇAVA SEUS CABELOS.
+DE REPENTE, UM CORAL DE PÁSSAROS COMEÇAVA A CANTAR. ELA RECONHECIA CADA NOTA, CADA MELODIA.
+LÁ EMBAIXO, OS RUÍDOS DA CIDADE PARECIAM UMA CANÇÃO DISTANTE. BUZINAS, RISADAS, O MOVIMENTO DOS CARROS. TUDO FAZIA PARTE DA MÚSICA.
+ELA VIA OS PRÉDIOS ALTOS E AS ÁRVORES VERDES QUE BROTAVAM DO CHÃO, COMO GIGANTES AMIGÁVEIS.
+AS NUVENS NO CÉU AZUL MUDAVAM DE FORMA, PARECENDO ANIMAIS OU CASTELOS FLUTUANTES.
+CADA PESSOA QUE OLHAVA PARA O MESMO CÉU VIA ALGO DIFERENTE. ERA COMO SE CADA OLHAR PINTASSE UMA IMAGEM ÚNICA.
+CADA RESPIRAÇÃO DE AURORA ERA UMA PEQUENA HISTÓRIA. UMA HISTÓRIA SÓ DELA, CHEIA DE SENTIMENTOS E DESCOBERTAS.
+ELA APRENDEU QUE NÃO PRECISAVA TER PRESSA. O MELHOR ERA PARAR, SENTIR E DEIXAR A MENTE VOAR.
+POIS É NO SOSSEGO QUE NOSSO ESPÍRITO ENCONTRA FORÇA PARA SONHAR E CRIAR. E AURORA SABIA QUE SUA VARANDA ERA SEU LUGAR ESPECIAL PARA ISSO.`;
 
-"O SOL MORNO FAZIA CÓCEGAS EM SEU ROSTO, E O VENTO SUAVE BAGUNÇAVA SEUS CABELOS.",
+        // Substitui o separador do autor por tags <br> para a quebra de linha na exibição.
+        // A tag <br><br> é usada para criar um espaço maior.
+        const processedStoryText = storyText.replace(' --- ', '<br><br>');
 
-"DE REPENTE, UM CORAL DE PÁSSAROS COMEÇAVA A CANTAR. ELA RECONHECIA CADA NOTA, CADA MELODIA.",
-
-"LÁ EMBAIXO, OS RUÍDOS DA CIDADE PARECIAM UMA CANÇÃO DISTANTE. BUZINAS, RISADAS, O MOVIMENTO DOS CARROS. TUDO FAZIA PARTE DA MÚSICA.",
-
-"ELA VIA OS PRÉDIOS ALTOS E AS ÁRVORES VERDES QUE BROTAVAM DO CHÃO, COMO GIGANTES AMIGÁVEIS.",
-
-"AS NUVENS NO CÉU AZUL MUDAVAM DE FORMA, PARECENDO ANIMAIS OU CASTELOS FLUTUANTES.",
-
-"CADA PESSOA QUE OLHAVA PARA O MESMO CÉU VIA ALGO DIFERENTE. ERA COMO SE CADA OLHAR PINTASSE UMA IMAGEM ÚNICA.",
-
-"CADA RESPIRAÇÃO DE AURORA ERA UMA PEQUENA HISTÓRIA. UMA HISTÓRIA SÓ DELA, CHEIA DE SENTIMENTOS E DESCOBERTAS.",
-
-"ELA APRENDEU QUE NÃO PRECISAVA TER PRESSA. O MELHOR ERA PARAR, SENTIR E DEIXAR A MENTE VOAR.",
-
-"POIS É NO SOSSEGO QUE NOSSO ESPÍRITO ENCONTRA FORÇA PARA SONHAR E CRIAR. E AURORA SABIA QUE SUA VARANDA ERA SEU LUGAR ESPECIAL PARA ISSO."
-        ]
+        // Divide o texto processado em um array, onde cada linha é uma página.
+        const texto = processedStoryText.split('\n');
 
         const pageContainer = document.getElementById('page-container');
         const prevBtn = document.getElementById('prev-btn');
