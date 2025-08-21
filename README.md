@@ -1,3 +1,9 @@
+## José Eugênio - Index
+
+**Story books**
+https://ws1.assis.bhz.br/odisseiaInterior
+https://ws1.assis.bhz.br/a_varanda_de_aurora
+
 ## Resources used in José Eugênio 's doctoral thesis
 ## Artefacts genereated for data ingestion on HADatAc V 1.1.12 (http://hadatac.org)
 
