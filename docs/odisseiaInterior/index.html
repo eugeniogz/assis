@@ -158,7 +158,7 @@
         // Usando template literals (crases) para criar uma string de múltiplas linhas.
         // O separador " --- " é usado entre o título e o autor para facilitar a digitação.
         const storyText = `Odisseia Interior --- José Eugênio
-Dirce vivia perdida num dédalo de incertos caminhos. Tentava escapar com quiméricas e frágeis asas. Pintadas pela imaginação.
+Dirce vivia perdida num dédalo de incertos caminhos. Tentando escapar em vão, inventando quiméricas e frágeis asas. Pintadas pela imaginação.
 Tecendo incontáveis ilíadas, batalhas intermináveis, sem vislumbrar a odisseia do retorno. Como Sísifo castigo, se via presa no labirinto a fugir do minotauro.
 Luzes da ignorância ofuscavam seu glorioso Ulisses interior.
 Náufraga no oceano da informação, Dirce sentia-se sem escolha, como se estivesse presa entre Cila e Caríbdis.
@@ -183,19 +183,86 @@ Sentindo, então, a centelha divina a guiar seus serenos passos. Como uma bússo
         let currentPageIndex = 0;
 
         // Função para gerar o HTML de uma única página
-        function createPageHTML(imagem, texto) {
-            return `
-                <div class="page">
-                    <!-- Contêiner da imagem da página. A altura máxima é definida para evitar rolagem. -->
-                    <div class="image-box">
-                        <img src="${imagem}" alt="Imagem da página" class="page-image">
-                    </div>
-                    <!-- Contêiner do texto da página. Adicionada rolagem caso o texto seja muito grande. -->
-                    <div class="text-box">
-                        <p class="text-gray-700 leading-relaxed">${texto}</p>
-                    </div>
+        function createPageHTML(imagem, texto, smallScreen) {
+            divImagem = `
+                <!-- Contêiner da imagem da página. A altura máxima é definida para evitar rolagem. -->
+                <div class="image-box">
+                    <img src="${imagem}" alt="Imagem da página" class="page-image">
                 </div>
             `;
+            divTexto = `
+                <!-- Contêiner do texto da página. Adicionada rolagem caso o texto seja muito grande. -->
+                <div class="text-box">
+                    <p class="text-gray-700 leading-relaxed">${texto}</p>
+                </div>
+            `;
+            if (smallScreen) {
+                return `
+                <div class="page">
+                ${divTexto}    
+                ${divImagem}    
+                </div>
+                `;
+            } else {
+                return `
+                <div class="page">
+                ${divImagem}    
+                ${divTexto}    
+                </div>
+                `;
+            }
+        }
+
+        // Função para carregar e exibir uma única página (telas grandes)
+        function loadAndShowPage(index) {
+            // Mostra um indicador de carregamento e desabilita botões
+            pageContainer.innerHTML = `<p style="text-align: center;">Carregando página...</p>`;
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+
+            const imageToLoad = new Image();
+            imageToLoad.src = imagens[index];
+
+            imageToLoad.onload = () => {
+                // Imagem carregada, renderiza o conteúdo da página
+                pageContainer.innerHTML = createPageHTML(imagens[index], texto[index], false);
+                currentPageIndex = index;
+                updateButtons(); // Reabilita os botões conforme necessário
+            };
+
+            imageToLoad.onerror = () => {
+                // Erro ao carregar a imagem
+                pageContainer.innerHTML = `<p style="text-align: center;">Erro ao carregar a página. Tente novamente.</p>`;
+                // Mantém os botões desabilitados ou os reabilita para o usuário tentar novamente
+                updateButtons();
+            };
+        }
+
+        // Função para carregar todas as páginas de uma vez (telas pequenas)
+        function loadAllPages() {
+            pageContainer.innerHTML = `<p style="text-align: center;">Carregando história...</p>`;
+            
+            const imagePromises = imagens.map(src => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(src);
+                });
+            });
+
+            Promise.all(imagePromises)
+                .then(() => {
+                    // Todas as imagens carregaram com sucesso
+                    pageContainer.innerHTML = ''; // Limpa o "Carregando..."
+                    for (let i = 0; i < imagens.length; i++) {
+                        pageContainer.innerHTML += createPageHTML(imagens[i], texto[i], true);
+                    }
+                })
+                .catch(failedSrc => {
+                    // Pelo menos uma imagem falhou ao carregar
+                    pageContainer.innerHTML = `<p style="text-align: center;">Erro ao carregar a imagem: ${failedSrc}. Por favor, recarregue a página.</p>`;
+                });
         }
 
         // Função principal para renderizar as páginas com base no tamanho da tela
@@ -209,14 +276,11 @@ Sentindo, então, a centelha divina a guiar seus serenos passos. Como uma bússo
             if (isLargeScreen) {
                 // Modo de tela grande: paginação com botões
                 navigationButtons.style.display = 'flex';
-                pageContainer.innerHTML = createPageHTML(imagens[currentPageIndex], texto[currentPageIndex]);
-                updateButtons();
+                loadAndShowPage(currentPageIndex);
             } else {
                 // Modo de tela pequena: todas as páginas em uma coluna
                 navigationButtons.style.display = 'none';
-                for (let i = 0; i < imagens.length; i++) {
-                    pageContainer.innerHTML += createPageHTML(imagens[i], texto[i]);
-                };
+                loadAllPages();
             }
         }
 
