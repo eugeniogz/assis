@@ -1,8 +1,10 @@
-const fileContentTextArea = document.getElementById('fileContent');
 const statusMessage = document.getElementById('statusMessage');
 const password = document.getElementById('password');
 const showJsonBtn = document.getElementById('showJsonBtn');
 const passwordBtn = document.getElementById('passwordBtn');
+const transactionsTableContainer = document.getElementById('transactionsTableContainer');
+const monthFilter = document.getElementById('monthFilter');
+let allTransactions = [];
 
 function showStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -49,7 +51,7 @@ passwordBtn.addEventListener('click', async function(event) {
             try {
                 dados = decrypt(password.value, dadosCript);
             } catch (e) {
-                showStatus(e.getmessage, true);
+                showStatus(e.message, true);
                 return;
             }
         }
@@ -119,7 +121,7 @@ ofxInput.addEventListener('change', async (event) => {
         try {
             dados = decrypt(password.value, dadosCript);
         } catch (e) {
-            showStatus(e.getmessage, true);
+            showStatus(e.message, true);
             return;
         }
     }
@@ -145,13 +147,52 @@ ofxInput.addEventListener('change', async (event) => {
 
     showStatus(`Importação concluída: ${novas.length} novas transações.`);
 
-    // Exibe o JSON atualizado no textarea
-    fileContentTextArea.value = JSON.stringify(dados, null, 2);
-
     alert('Arquivo processado! Mova manualmente para /tmp: ' + file.name);
 });
 
-// Exibir JSON ao checar senha
+function formatDtPosted(dtPosted) {
+    if (!dtPosted || dtPosted.length < 8) return 'N/A';
+    const year = dtPosted.substring(2, 4);
+    const month = dtPosted.substring(4, 6);
+    const day = dtPosted.substring(6, 8);
+    return `${day}/${month}/${year}`;
+}
+
+function renderTransactionsTable(month) {
+    const filteredData = allTransactions.filter(trn => {
+        if (!trn.DTPOSTED) return false;
+        const trnMonth = trn.DTPOSTED.substring(0, 6); // YYYYMM
+        return trnMonth === month.replace('-', '');
+    });
+
+    // Sort by date descending
+    filteredData.sort((a, b) => (b.DTPOSTED || '').localeCompare(a.DTPOSTED || ''));
+
+    if (filteredData.length === 0) {
+        transactionsTableContainer.innerHTML = '<p style="text-align: center;">Nenhuma transação para este mês.</p>';
+        return;
+    }
+
+    let tableHTML = '<table class="transactions-table"><thead><tr><th>Data</th><th>Descrição (MEMO)</th><th>Origem</th><th>Tipo</th><th style="text-align:right">Valor</th></tr></thead><tbody>';
+
+    filteredData.forEach(trn => {
+        const amount = parseFloat(trn.TRNAMT);
+        const amountClass = amount < 0 ? 'debit' : 'credit';
+        tableHTML += `
+            <tr>
+                <td>${formatDtPosted(trn.DTPOSTED)}</td>
+                <td>${trn.MEMO}</td>
+                <td>${trn.origem}</td>
+                <td>${trn.TRNTYPE}</td>
+                <td class="${amountClass}" style="text-align:right">${amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+            </tr>
+        `;
+    });
+
+    tableHTML += '</tbody></table>';
+    transactionsTableContainer.innerHTML = tableHTML;
+}
+
 showJsonBtn.addEventListener('click', async () => {
     await openDb();
     let dadosCript = await new Promise((resolve) => {
@@ -164,22 +205,51 @@ showJsonBtn.addEventListener('click', async () => {
 
     if (!dadosCript) {
         showStatus('Nenhum dado OFX importado ainda.', true);
-        fileContentTextArea.value = '';
+        if (transactionsTableContainer) transactionsTableContainer.innerHTML = '';
+        if (monthFilter) monthFilter.innerHTML = '';
         return;
     }
 
     try {
-        const dados = decrypt(password.value, dadosCript);
-        fileContentTextArea.value = JSON.stringify(dados, null, 2);
+        allTransactions = decrypt(password.value, dadosCript);
+
+        // Populate month filter
+        const months = [...new Set(allTransactions.map(trn => (trn.DTPOSTED || '').substring(0, 6)))].filter(m => m);
+        months.sort().reverse(); // Newest first
+
+        if (monthFilter) {
+            monthFilter.innerHTML = '';
+            months.forEach(monthStr => {
+                const year = monthStr.substring(0, 4);
+                const month = monthStr.substring(4, 6);
+                const option = document.createElement('option');
+                option.value = `${year}-${month}`;
+                option.textContent = `${month}/${year}`;
+                monthFilter.appendChild(option);
+            });
+        }
+
+        if (months.length > 0 && monthFilter) {
+            renderTransactionsTable(monthFilter.value);
+        } else if (transactionsTableContainer) {
+            transactionsTableContainer.innerHTML = '<p style="text-align: center;">Nenhuma transação encontrada.</p>';
+        }
+
         showPage('jsonViewPage');
     } catch (e) {
-        fileContentTextArea.value = '';
-        showStatus(e.getmessage, true);
+        if (transactionsTableContainer) transactionsTableContainer.innerHTML = '';
+        if (monthFilter) monthFilter.innerHTML = '';
+        showStatus(e.message, true);
     }
 });
 
-// Desabilite edição do textarea
-fileContentTextArea.disabled = true;
+if (monthFilter) {
+    monthFilter.addEventListener('change', () => {
+        if (allTransactions.length > 0) {
+            renderTransactionsTable(monthFilter.value);
+        }
+    });
+}
 
 const backupBtn = document.getElementById('backupBtn');
 const restoreBtn = document.getElementById('restoreBtn');
@@ -231,7 +301,7 @@ restoreInput.addEventListener('change', async (event) => {
             showStatus('Backup restaurado com sucesso!');
         };
     } catch (e) {
-        showStatus(e.getmessage, true);
+        showStatus(e.message, true);
     }
 });
 

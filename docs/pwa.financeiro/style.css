@@ -272,3 +272,31 @@ textarea#fileContent {
     word-break: break-word;
     max-width: 100%; /* Garante que o texto use a largura disponível */
 }
+
+/* Table Styles */
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9em;
+}
+
+.transactions-table th,
+.transactions-table td {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    text-align: left;
+}
+
+.transactions-table th {
+    background-color: var(--card-background);
+    font-weight: bold;
+}
+
+.transactions-table td.debit {
+    color: var(--red);
+}
+
+.transactions-table td.credit {
+    color: var(--green);
+}
