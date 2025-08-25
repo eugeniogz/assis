@@ -133,7 +133,7 @@ ofxInput.addEventListener('change', async (event) => {
     dados = dados.concat(novas);
 
     // Ordena todos os dados por data (do mais recente para o mais antigo) antes de salvar
-    dados.sort((a, b) => (b.DTPOSTED || '').localeCompare(a.DTPOSTED || ''));
+    dados.sort((a, b) => (a.DTPOSTED || '').localeCompare(b.DTPOSTED || ''));
 
     // Criptografar e salvar no IndexedDB
     if (password.value === '') {
@@ -217,7 +217,7 @@ showJsonBtn.addEventListener('click', async () => {
         allTransactions = decrypt(password.value, dadosCript);
 
         // Garante que os dados estejam sempre ordenados ao serem carregados
-        allTransactions.sort((a, b) => (b.DTPOSTED || '').localeCompare(a.DTPOSTED || ''));
+        allTransactions.sort((a, b) => (a.DTPOSTED || '').localeCompare(b.DTPOSTED || ''));
 
         // Populate month filter
         const months = [...new Set(allTransactions.map(trn => (trn.DTPOSTED || '').substring(0, 6)))].filter(m => m);
