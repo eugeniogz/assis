@@ -132,6 +132,9 @@ ofxInput.addEventListener('change', async (event) => {
     );
     dados = dados.concat(novas);
 
+    // Ordena todos os dados por data (do mais recente para o mais antigo) antes de salvar
+    dados.sort((a, b) => (b.DTPOSTED || '').localeCompare(a.DTPOSTED || ''));
+
     // Criptografar e salvar no IndexedDB
     if (password.value === '') {
         showStatus('Senha não pode ser vazia.', true);
@@ -165,8 +168,8 @@ function renderTransactionsTable(month) {
         return trnMonth === month.replace('-', '');
     });
 
-    // Sort by date descending
-    filteredData.sort((a, b) => (b.DTPOSTED || '').localeCompare(a.DTPOSTED || ''));
+    // A ordenação agora é feita ao carregar os dados em `allTransactions`,
+    // então a lista `filteredData` já estará na ordem correta.
 
     if (filteredData.length === 0) {
         transactionsTableContainer.innerHTML = '<p style="text-align: center;">Nenhuma transação para este mês.</p>';
@@ -212,6 +215,9 @@ showJsonBtn.addEventListener('click', async () => {
 
     try {
         allTransactions = decrypt(password.value, dadosCript);
+
+        // Garante que os dados estejam sempre ordenados ao serem carregados
+        allTransactions.sort((a, b) => (b.DTPOSTED || '').localeCompare(a.DTPOSTED || ''));
 
         // Populate month filter
         const months = [...new Set(allTransactions.map(trn => (trn.DTPOSTED || '').substring(0, 6)))].filter(m => m);
