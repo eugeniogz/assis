@@ -22,6 +22,15 @@ let savedCursorY = 0;
 let textHistory = [];
 let cursorInterval = null;
 
+// Variáveis de ciclo de cores e feedback
+const colors = ['#000000', '#FF0000', '#0000FF', '#008000', '#FFA500', '#800080']; // Preto, Vermelho, Azul, Verde, Laranja, Roxo
+let currentColorIndex = 0;
+let currentColor = colors[currentColorIndex];
+let feedbackTimeout = null;
+let savedFeedbackData = null;
+let savedFeedbackX = 0;
+let savedFeedbackY = 0;
+
 // Input oculto para lidar com composição de texto (acentos, etc.)
 const hiddenInput = document.createElement('input');
 hiddenInput.type = 'text';
@@ -59,7 +68,7 @@ function drawCursor() {
     ctx.beginPath();
     ctx.moveTo(textCursorX, textCursorY + cursorYOffset);
     ctx.lineTo(textCursorX, textCursorY + cursorYOffset + cursorHeight);
-    ctx.strokeStyle = '#000';
+    ctx.strokeStyle = currentColor;
     ctx.lineWidth = lineWidth;
     ctx.lineCap = 'butt';
     ctx.stroke();
@@ -85,18 +94,67 @@ function startBlinking() {
     }, 500);
 }
 
+function showColorFeedback(x, y) {
+    clearTimeout(feedbackTimeout);
+    if (savedFeedbackData) {
+        ctx.putImageData(savedFeedbackData, savedFeedbackX, savedFeedbackY);
+    }
+
+    const text = `COR `;
+    ctx.font = '16px Roboto, sans-serif';
+    const textMetrics = ctx.measureText(text);
+    const feedbackWidth = textMetrics.width + 40;
+    const feedbackHeight = 30;
+
+    // Posiciona a caixa de feedback acima do cursor, evitando as bordas da tela
+    let feedbackX = x;
+    let feedbackY = y - feedbackHeight - 10;
+    if (feedbackY < 0) feedbackY = y + 10;
+    if (feedbackX + feedbackWidth > canvas.width) feedbackX = canvas.width - feedbackWidth;
+
+    // Salva uma área um pouco maior para garantir que a borda (stroke) seja completamente apagada.
+    const savePadding = 2;
+    savedFeedbackX = feedbackX - savePadding;
+    savedFeedbackY = feedbackY - savePadding;
+    const saveWidth = feedbackWidth + savePadding * 2;
+    const saveHeight = feedbackHeight + savePadding * 2;
+    savedFeedbackData = ctx.getImageData(savedFeedbackX, savedFeedbackY, saveWidth, saveHeight);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.fillRect(feedbackX, feedbackY, feedbackWidth, feedbackHeight);
+    ctx.strokeStyle = '#AAA';
+    ctx.strokeRect(feedbackX, feedbackY, feedbackWidth, feedbackHeight);
+
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, feedbackX + 10, feedbackY + feedbackHeight / 2);
+
+    const swatchX = feedbackX + 10 + ctx.measureText('COR ').width;
+    ctx.fillStyle = currentColor;
+    ctx.fillRect(swatchX, feedbackY + (feedbackHeight / 2) - 7, 14, 14);
+
+    feedbackTimeout = setTimeout(() => {
+        if (savedFeedbackData) {
+            ctx.putImageData(savedFeedbackData, savedFeedbackX, savedFeedbackY);
+            savedFeedbackData = null;
+        }
+    }, 2000);
+}
+
 function handleInput() {
     if (!isTyping) return;
     const text = hiddenInput.value;
     if (text.length > 0) {
         stopBlinking();
-        
-        ctx.fillStyle = '#000';
+
+        ctx.fillStyle = currentColor;
         ctx.font = '20px Roboto, sans-serif';
-        
+        ctx.textBaseline = 'alphabetic';
+
         for (const char of text) {
             const charWidth = ctx.measureText(char).width;
-            textHistory.push({ char, width: charWidth, x: textCursorX, y: textCursorY });
+            textHistory.push({ char, width: charWidth, x: textCursorX, y: textCursorY, color: currentColor });
             ctx.fillText(char, textCursorX, textCursorY);
             textCursorX += charWidth;
         }
@@ -129,7 +187,7 @@ function draw(e) {
         isTyping = false; // Stop typing when drawing
         hiddenInput.blur();
     }
-    ctx.strokeStyle = '#000';
+    ctx.strokeStyle = currentColor;
     ctx.lineWidth = 2;
     ctx.lineCap = 'round';
     ctx.beginPath();
@@ -147,6 +205,15 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
 canvas.addEventListener('mousemove', draw);
+
+canvas.addEventListener('dblclick', (e) => {
+    isDrawing = false;
+
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+    currentColor = colors[currentColorIndex];
+
+    showColorFeedback(e.offsetX, e.offsetY);
+});
 
 window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -189,10 +256,14 @@ window.addEventListener('keydown', (e) => {
                 textCursorY = lastAction.y;
 
                 ctx.fillStyle = 'white';
-                const fontHeight = 20; // Aproximação do tamanho da fonte
-                const yErase = lastAction.y - fontHeight;
+                // A área de limpeza precisa ser grande o suficiente para cobrir
+                // ascendentes e descendentes da fonte (e.g., 'j', 'f', 'Á').
+                const fontAscent = 20;
+                const fontDescent = 8;
+                const yErase = lastAction.y - fontAscent;
+                const eraseHeight = fontAscent + fontDescent;
                 // Adiciona um preenchimento para limpar completamente o caractere com anti-aliasing
-                ctx.fillRect(lastAction.x, yErase, lastAction.width, fontHeight + 5);
+                ctx.fillRect(lastAction.x - 1, yErase, lastAction.width + 2, eraseHeight);
             }
             startBlinking();
         }
@@ -213,6 +284,13 @@ window.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('resize', () => {
+    // Limpa qualquer feedback temporário antes de redimensionar
+    clearTimeout(feedbackTimeout);
+    if (savedFeedbackData) {
+        ctx.putImageData(savedFeedbackData, savedFeedbackX, savedFeedbackY);
+        savedFeedbackData = null;
+    }
+
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
