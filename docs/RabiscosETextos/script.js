@@ -22,6 +22,15 @@ let savedCursorY = 0;
 let textHistory = [];
 let cursorInterval = null;
 
+// Input oculto para lidar com composição de texto (acentos, etc.)
+const hiddenInput = document.createElement('input');
+hiddenInput.type = 'text';
+hiddenInput.style.position = 'absolute';
+hiddenInput.style.opacity = '0';
+hiddenInput.style.pointerEvents = 'none';
+hiddenInput.style.zIndex = '-1';
+document.body.appendChild(hiddenInput);
+
 ctx.fillStyle = 'white';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -76,11 +85,49 @@ function startBlinking() {
     }, 500);
 }
 
+function handleInput() {
+    if (!isTyping) return;
+    const text = hiddenInput.value;
+    if (text.length > 0) {
+        stopBlinking();
+        
+        ctx.fillStyle = '#000';
+        ctx.font = '20px Roboto, sans-serif';
+        
+        for (const char of text) {
+            const charWidth = ctx.measureText(char).width;
+            textHistory.push({ char, width: charWidth, x: textCursorX, y: textCursorY });
+            ctx.fillText(char, textCursorX, textCursorY);
+            textCursorX += charWidth;
+        }
+        
+        startBlinking();
+        hiddenInput.value = '';
+    }
+}
+
+let isComposing = false;
+
+hiddenInput.addEventListener('compositionstart', () => {
+    isComposing = true;
+});
+
+hiddenInput.addEventListener('compositionend', () => {
+    isComposing = false;
+    handleInput();
+});
+
+hiddenInput.addEventListener('input', (e) => {
+    if (isComposing) return;
+    handleInput();
+});
+
 function draw(e) {
     if (!isDrawing) return;
     if (isTyping) {
         stopBlinking();
         isTyping = false; // Stop typing when drawing
+        hiddenInput.blur();
     }
     ctx.strokeStyle = '#000';
     ctx.lineWidth = 2;
@@ -107,6 +154,7 @@ window.addEventListener('mousemove', (e) => {
     if (isTyping) {
         stopBlinking();
         isTyping = false; // Reset typing sequence on mouse move
+        hiddenInput.blur();
     }
 });
 
@@ -123,6 +171,7 @@ window.addEventListener('keydown', (e) => {
             textCursorY += 25; // Altura da linha
             textCursorX = lineStartX;
             startBlinking();
+            hiddenInput.value = '';
         }
     } else if (e.key === 'Backspace') {
         if (isTyping && textHistory.length > 0) {
@@ -147,26 +196,19 @@ window.addEventListener('keydown', (e) => {
             }
             startBlinking();
         }
-    } else if (e.key.length === 1) { // Only printable characters
-        if (isTyping) {
-            stopBlinking();
-        }
-        if (!isTyping) {
+    } else if (!isTyping && (e.key.length === 1 || e.key === 'Dead')) {
             isTyping = true;
             lineStartX = mouseX;
             textCursorX = mouseX;
             textCursorY = mouseY;
             textHistory = []; // Começa um novo histórico para a nova sequência de digitação
-        }
-        ctx.fillStyle = '#000';
-        ctx.font = '20px Roboto, sans-serif';
-        const char = e.key;
-        const charWidth = ctx.measureText(char).width;
-        // Adiciona o caractere ao histórico antes de desenhar
-        textHistory.push({ char, width: charWidth, x: textCursorX, y: textCursorY });
-        ctx.fillText(char, textCursorX, textCursorY);
-        textCursorX += charWidth;
-        startBlinking();
+            
+            hiddenInput.style.left = `${textCursorX}px`;
+            hiddenInput.style.top = `${textCursorY}px`;
+            hiddenInput.value = '';
+            hiddenInput.focus();
+    } else if (isTyping) {
+        hiddenInput.focus();
     }
 });
 
