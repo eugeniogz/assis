@@ -25,9 +25,9 @@ function generateFixedMap(id) {
     while (curr.y > 0) {
         let r = seededRandom();
         // Tenta mover para os lados, mas prioriza subir
-        if (r < 0.2 && curr.x < 7 && !path.includes(`${curr.x+1},${curr.y}`)) {
+        if (r < 0.3 && curr.x < 7 && !path.includes(`${curr.x+1},${curr.y}`)) {
             curr.x++; 
-        } else if (r > 0.8 && curr.x > 0 && !path.includes(`${curr.x-1},${curr.y}`)) {
+        } else if (r > 0.7 && curr.x > 0 && !path.includes(`${curr.x-1},${curr.y}`)) {
             curr.x--;
         } else {
             curr.y--;
@@ -42,7 +42,7 @@ function initGame(newMap = false, start = true) {
         mapID++;
         if (mapID > 12) mapID = 1;
     } else if (start) {
-        mapID = Math.floor(Math.random() * 12.999);
+        mapID = Math.floor(Math.random() * 12) + 1;
     } else {
         mapID = 1;
     }
