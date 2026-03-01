@@ -51,7 +51,7 @@ function generateFixedMap(id) {
         }
 
         let stuck = false;
-        while (curr.y > 0) {
+        while (true) {
             let r = seededRandom();
             let moved = false;
 
@@ -70,8 +70,11 @@ function generateFixedMap(id) {
             }
             
             if (!moved) {
-                if (isSafe(curr.x, curr.y - 1)) {
+                if (curr.y > 0 && isSafe(curr.x, curr.y - 1)) {
                     curr.y--;
+                } else if (curr.y === 0) {
+                    // Se já estamos na linha de chegada e não movemos para os lados, paramos.
+                    break;
                 } else {
                     stuck = true;
                     break;
@@ -79,6 +82,9 @@ function generateFixedMap(id) {
             }
             
             path.push(`${curr.x},${curr.y}`);
+
+            // Se chegou na linha 0, decide se continua andando ou para (40% de chance de parar a cada passo)
+            if (curr.y === 0 && seededRandom() > 0.6) break;
         }
 
         if (!stuck && leftCount >= 5 && rightCount >= 5) return path;
@@ -109,7 +115,8 @@ function initGame(newMap = false, start = true) {
             cell.classList.add('cell');
             if (currentPath.includes(`${x},${y}`)) cell.classList.add('path-true');
             if (y === 7 && x === playerPos.x) cell.classList.add('start');
-            if (y === 0 && currentPath.includes(`${x},0`)) {
+            const lastPathPos = currentPath[currentPath.length - 1];
+            if (`${x},${y}` === lastPathPos) {
                 cell.classList.add('end');
                 cell.innerText = '🏡';
             }
@@ -120,7 +127,6 @@ function initGame(newMap = false, start = true) {
 }
 
 function updatePlayerUI() {
-    //🧒🤵🧖🐶
     document.querySelectorAll('.cell').forEach(c => { if (c.innerText === '🐶') c.innerText = ''; });
     const pCell = document.getElementById(`c-${playerPos.x}-${playerPos.y}`);
     if (pCell) pCell.innerText = '🐶';
@@ -155,6 +161,16 @@ function setupLongPress(btnId, ringId, callback) {
 
 setupLongPress('btn-reiniciar', 'ring-reiniciar', () => initGame(false, false));
 setupLongPress('btn-novo', 'ring-novo', () => initGame(true, false));
+document.onkeydown = function (e) {
+    // Bloqueia as teclas de função (F1-F12) usando a propriedade 'key' em vez da obsoleta 'keyCode'.
+    if (/^F([1-9]|1[0-2])$/.test(e.key)) return false;
+
+    // Bloqueia Alt+P para impedir impressão ou outras ações do navegador no modo quiosque.
+    if (e.altKey && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        return false;
+    }
+};
 
 window.addEventListener('keydown', (e) => {
     if (!gameActive) return;
@@ -165,8 +181,6 @@ window.addEventListener('keydown', (e) => {
         return;
     }
 
-    // Atalho de Gabarito (Alt+P)
-    if (e.altKey && e.key.toLowerCase() === 'p') { window.print(); return; }
 
     let next = { ...playerPos };
     if (e.key === 'ArrowUp') next.y--;
@@ -178,7 +192,7 @@ window.addEventListener('keydown', (e) => {
     if (next.x >= 0 && next.x < 8 && next.y >= 0 && next.y < 8) {
         if (currentPath.includes(`${next.x},${next.y}`)) {
             // Preenche com árvores as células da linha atual que não são do caminho (apenas se mudar de linha)
-            if (next.y !== playerPos.y) {
+            if (next.y < playerPos.y) {
                 for (let x = 0; x < 8; x++) {
                     if (!currentPath.includes(`${x},${playerPos.y}`)) {
                         const cell = document.getElementById(`c-${x}-${playerPos.y}`);
@@ -192,7 +206,16 @@ window.addEventListener('keydown', (e) => {
 
             playerPos = next;
             updatePlayerUI();
-            if (playerPos.y === 0) { 
+            const lastPathPos = currentPath[currentPath.length - 1];
+            if (playerPos.x === parseInt(lastPathPos.split(',')[0]) && playerPos.y === parseInt(lastPathPos.split(',')[1])) { 
+                // Preenche a linha de chegada com árvores nas células que não são do caminho
+                for (let x = 0; x < 8; x++) {
+                    if (!currentPath.includes(`${x},0`)) {
+                        const cell = document.getElementById(`c-${x}-0`);
+                        if (cell) cell.innerText = '🌳';
+                    }
+                }
+
                 msgDisplay.innerText = "VITÓRIA! VOCÊ CONSEGUIU! 🎉"; 
                 msgDisplay.style.color = "green";
                 gameActive = false; 

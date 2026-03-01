@@ -1,7 +1,14 @@
 // Impede o menu de contexto e teclas de sistema (Modo Kiosk)
 document.addEventListener('contextmenu', event => event.preventDefault());
 document.onkeydown = function (e) {
-    if (e.keyCode >= 112 && e.keyCode <= 123) return false;
+    // Bloqueia as teclas de função (F1-F12) usando a propriedade 'key' em vez da obsoleta 'keyCode'.
+    if (/^F([1-9]|1[0-2])$/.test(e.key)) return false;
+
+    // Bloqueia Alt+P para impedir impressão ou outras ações do navegador no modo quiosque.
+    if (e.altKey && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        return false;
+    }
 };
 
 const canvas = document.getElementById('canvas');
