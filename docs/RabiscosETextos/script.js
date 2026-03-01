@@ -17,6 +17,7 @@ let lastX = 0, lastY = 0, mouseX = 0, mouseY = 0;
 let isTyping = false, textCursorX = 0, textCursorY = 0, lineStartX = 0;
 let savedCursorData = null, savedCursorX = 0, savedCursorY = 0, cursorInterval = null;
 let textHistory = [];
+let savedFeedbackData = null, savedFeedbackX = 0, savedFeedbackY = 0, feedbackTimeout = null;
 
 const colors = ['#000000', '#FF0000', '#0000FF', '#008000', '#FFA500', '#800080'];
 let currentColorIndex = 0;

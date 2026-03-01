@@ -40,7 +40,8 @@ function generateFixedMap(id) {
 function initGame(newMap = false) {
     if (newMap) {
         let oldID = mapID;
-        while(mapID === oldID) mapID = Math.floor(Math.random() * 12) + 1;
+        mapID = oldID ++;
+        if (mapID > 12) mapID = 1;
     }
     
     gridContainer.innerHTML = '';
