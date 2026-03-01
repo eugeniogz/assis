@@ -1,114 +1,50 @@
-/* print.css */
-
-/* Estilos para visualização em tela */
-body {
-    font-family: sans-serif;
-    margin: 0;
-    background-color: #f0f0f0;
+body { font-family: sans-serif; margin: 0; }
+#print-container { display: flex; flex-wrap: wrap; gap: 0; justify-content: center; }
+.map-wrapper { 
+    width: 45%; 
+    break-inside: avoid; 
+    page-break-inside: avoid; 
+    margin-bottom: 0; 
+    margin-left: 0; /* Garante margem esquerda mínima */
+    overflow: visible;
 }
-
-#print-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 10px;
+.map-header { text-align: center; font-weight: bold; margin-bottom: 5px; }
+.grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: repeat(8, 40px);
+    border: 2px solid #000;
+    margin: 0 auto; 
+    position: relative; /* Para posicionar as linhas laterais */
 }
-
-.map-wrapper {
-    box-sizing: border-box;
-    width: calc(50% - 20px); /* Duas colunas em tela */
-    margin: 10px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.map-header {
-    font-weight: bold;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    border: 2px solid black;
-    width: 300px; /* Tamanho fixo para consistência em tela */
-    height: 300px;
-}
-
-.cell {
-    box-sizing: border-box;
-    border: 1px solid #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.cell { 
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     font-size: 24px;
-    background-color: white;
+    box-sizing: border-box;
+    line-height: 1; 
 }
 
-.path-true {
-    background-color: #e8f5e9; /* Verde claro para o caminho */
+/* Linhas laterais estendidas para o topo e fim da página */
+.grid-container::before, .grid-container::after {
+    content: '';
+    position: absolute;
+    top: -5mm; bottom: -5mm;
+    width: 2px;
+    background-color: #000;
+    z-index: 1;
 }
+.grid-container::before { left: -2px; }
+.grid-container::after { right: -2px; }
 
-
-/* --- ESTILOS DE IMPRESSÃO --- */
 @media print {
     @page {
         size: A4;
-        margin: 5mm; /* Margem pequena na folha */
+        margin: 5mm; 
     }
-
-    body {
-        background: none;
-    }
-
-    #print-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0;
-        padding: 0;
-        margin: 0;
-    }
-
-    .map-wrapper {
-        width: 50%;
-        height: calc((297mm - 10mm) / 2); /* Metade da altura A4 (menos margens da página) */
-        box-sizing: border-box;
-        padding: 8mm;
-        margin: 0;
-        border: 1px dashed #888; /* Guia de corte simples e eficaz */
-        page-break-inside: avoid; /* Evita que um mapa seja cortado entre páginas */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .map-header {
-        font-size: 14pt;
-        margin-bottom: 5px;
-    }
-
-    .grid-container {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1; /* Mantém o grid quadrado */
-        border: 2px solid black;
-    }
-
-    .cell {
-        font-size: 12pt; /* Tamanho de fonte adequado para impressão */
-        border: 1px solid #eee;
-    }
-
-    .path-true {
-        background-color: #f0f0f0 !important; /* Cinza claro para economizar tinta */
-    }
+    .map-wrapper { width: 45%; margin-left: 0; }
 }

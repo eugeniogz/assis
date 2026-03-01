@@ -100,7 +100,7 @@ function initGame(newMap = false, start = true) {
     } else if (start) {
         mapID = Math.floor(Math.random() * 12) + 1;
     }
-    
+    if (!gridContainer) return;
     gridContainer.innerHTML = '';
     currentPath = generateFixedMap(mapID);
     mapNumDisplay.innerText = mapID;
@@ -138,6 +138,8 @@ function setupLongPress(btnId, ringId, callback) {
     const ring = document.getElementById(ringId);
     let timer;
     const duration = 1200;
+
+    if (!btn || !ring) return;
 
     const start = (e) => {
         e.preventDefault();
