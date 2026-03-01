@@ -12,16 +12,13 @@ function renderAllMaps() {
         const mapWrapper = document.createElement('div');
         mapWrapper.className = 'map-wrapper';
 
-        const header = document.createElement('div');
-        header.className = 'map-header';
-        header.innerText = `Mapa ${mapId}`;
-        mapWrapper.appendChild(header);
-
         const grid = document.createElement('div');
         grid.className = 'grid-container';
 
         const startPos = path[0];
         const endPos = path[path.length - 1];
+        let mapNumberPlaced = false;
+
         // Preenche o grid 8x8
         for (let y = 0; y < 8; y++) {
             for (let x = 0; x < 8; x++) {
@@ -37,7 +34,14 @@ function renderAllMaps() {
                         cell.innerText = '🏡';
                     }
                 } else {
-                    cell.innerText = '🌳'; // Árvore fora do caminho
+                    if (y === 0 && !mapNumberPlaced) {
+                        cell.style.fontSize = '14px';
+                        cell.style.flexDirection = 'column';
+                        cell.innerHTML = `<b>${mapId}</b><span style="line-height: 1;">🌳</span>`;
+                        mapNumberPlaced = true;
+                    } else {
+                        cell.innerText = '🌳'; // Árvore fora do caminho
+                    }
                 }
                 grid.appendChild(cell);
             }
