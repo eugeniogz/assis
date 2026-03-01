@@ -37,11 +37,14 @@ function generateFixedMap(id) {
     return path;
 }
 
-function initGame(newMap = false) {
+function initGame(newMap = false, start = true) {
     if (newMap) {
-        let oldID = mapID;
-        mapID = oldID ++;
+        mapID++;
         if (mapID > 12) mapID = 1;
+    } else if (start) {
+        mapID = Math.floor(Math.random() * 12.999);
+    } else {
+        mapID = 1;
     }
     
     gridContainer.innerHTML = '';
@@ -101,8 +104,8 @@ function setupLongPress(btnId, ringId, callback) {
     btn.addEventListener('touchend', stop);
 }
 
-setupLongPress('btn-reiniciar', 'ring-reiniciar', () => initGame(false));
-setupLongPress('btn-novo', 'ring-novo', () => initGame(true));
+setupLongPress('btn-reiniciar', 'ring-reiniciar', () => initGame(false, false));
+setupLongPress('btn-novo', 'ring-novo', () => initGame(true, false));
 
 window.addEventListener('keydown', (e) => {
     if (!gameActive) return;
