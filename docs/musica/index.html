@@ -80,6 +80,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
 
         .btn:active {
@@ -162,7 +163,7 @@
         /* Controles de Modificação (Oitava e Duração) */
         .painel-modificadores {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -276,7 +277,7 @@
         }
 
         /* Custom Estilização para o Player do ABCJS */
-        .abcjs-audio-player {
+        #audio-controls .abcjs-audio-player {
             background-color: #f8fafc !important;
             border: 2px solid #e2e8f0 !important;
             border-radius: 15px !important;
@@ -286,9 +287,18 @@
             gap: 15px !important;
         }
 
-        .abcjs-btn {
+        #audio-controls .abcjs-inline-audio {
+            background: transparent !important;
+            border: none !important;
+            height: auto !important;
+            width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            padding: 0 !important;
+        }
+
+        #audio-controls .abcjs-btn {
             background-color: #334155 !important;
-            fill: #ffffff !important;
             border: none !important;
             border-radius: 10px !important;
             width: 40px !important;
@@ -298,31 +308,56 @@
             justify-content: center !important;
             cursor: pointer !important;
             transition: all 0.2s !important;
+            margin-right: 8px !important;
+            padding: 0 !important;
         }
 
-        .abcjs-btn:hover {
+        #audio-controls .abcjs-btn g {
+            fill: #ffffff !important;
+            stroke: #ffffff !important;
+        }
+
+        #audio-controls .abcjs-btn:hover {
             background-color: #475569 !important;
             transform: scale(1.05) !important;
         }
 
-        .abcjs-btn:active {
+        #audio-controls .abcjs-btn:hover g {
+            fill: #ffffff !important;
+            stroke: #ffffff !important;
+        }
+
+        #audio-controls .abcjs-btn:active {
             transform: scale(0.95) !important;
         }
 
-        .abcjs-midi-progress-background {
-            background-color: #cbd5e1 !important;
+        #audio-controls .abcjs-midi-progress-background {
+            background-color: #e2e8f0 !important;
+            border: 1px solid #cbd5e1 !important;
             border-radius: 6px !important;
             height: 8px !important;
             cursor: pointer !important;
+            position: relative !important;
         }
 
-        .abcjs-midi-progress-bar {
+        #audio-controls .abcjs-midi-progress-bar {
             background-color: #8e44ad !important;
             border-radius: 6px !important;
             height: 8px !important;
         }
 
-        .abcjs-audio-player .abcjs-text {
+        #audio-controls .abcjs-midi-progress-indicator {
+            background-color: #8e44ad !important;
+            border: 2px solid #ffffff !important;
+            border-radius: 50% !important;
+            width: 16px !important;
+            height: 16px !important;
+            top: -4px !important;
+            position: absolute !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+        }
+
+        #audio-controls .abcjs-audio-player .abcjs-text {
             color: #475569 !important;
             font-weight: 600 !important;
             font-size: 14px !important;
@@ -336,7 +371,9 @@
         <h1>🎼 Estúdio Orquestra ABC</h1>
         <div class="aluno-info">
             <input type="text" id="nome-aluno" placeholder="Nome do Compositor">
-            <button class="btn btn-warning" id="btn-copiar">📋 Copiar Código</button>
+            <button class="btn btn-primary" id="btn-salvar" style="background-color: #27ae60;">💾 Salvar Música</button>
+            <button class="btn btn-primary" id="btn-carregar" style="background-color: #2980b9;">📂 Carregar Música</button>
+            <input type="file" id="input-arquivo-abc" accept=".abc" style="display: none;">
         </div>
     </header>
 
@@ -365,6 +402,12 @@
                 <button class="btn-toggle" id="dur-2" onclick="setDuracao(2)">🦒 Passo Gigante</button>
             </div>
         </div>
+        <div class="grupo-controle">
+            <h3>Velocidade (BPM: <span id="val-bpm">120</span>)</h3>
+            <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-top: 8px;">
+                <input type="range" id="bpm-slider" min="80" max="180" step="10" value="120" oninput="mudarBPM(this.value)" style="width: 100%; accent-color: #8e44ad; cursor: pointer;">
+            </div>
+        </div>
     </section>
 
     <section class="teclado">
@@ -382,8 +425,10 @@
         <button class="btn btn-primary" id="btn-toggle-partitura" style="background-color: #8e44ad;">👁️ Revelar Mapa Secreto (Partitura)</button>
     </section>
 
+    <!-- Tocador de Áudio (Sempre Visível) -->
+    <div id="audio-controls" style="margin-top: 15px; margin-bottom: 20px;"></div>
+
     <div id="area-partitura" class="hidden">
-        <div id="audio-controls" style="margin-bottom: 20px;"></div>
         <div id="notation"></div>
     </div>
 </div>
@@ -416,6 +461,7 @@
     window.addEventListener('DOMContentLoaded', () => {
         atualizarInterfacePistas();
         configurarEventosGlobais();
+        renderizarPartitura(); // Inicializa o player sempre visível
     });
 
     function configurarEventosGlobais() {
@@ -468,6 +514,32 @@
             navigator.clipboard.writeText(codigoFinal).then(() => {
                 alert("Código musical copiado com sucesso! Agora é só colar na tarefa.");
             });
+        });
+
+        // Botão Salvar Música ABC
+        document.getElementById('btn-salvar').addEventListener('click', () => {
+            salvarMusicaABC();
+        });
+
+        // Botão Carregar Música ABC
+        const btnCarregar = document.getElementById('btn-carregar');
+        const inputArquivo = document.getElementById('input-arquivo-abc');
+        
+        btnCarregar.addEventListener('click', () => {
+            inputArquivo.click();
+        });
+
+        inputArquivo.addEventListener('change', (e) => {
+            const arquivo = e.target.files[0];
+            if (!arquivo) return;
+
+            const leitor = new FileReader();
+            leitor.onload = (evt) => {
+                carregarMusicaABC(evt.target.result);
+                // Resetar o valor para permitir carregar o mesmo arquivo consecutivamente
+                inputArquivo.value = '';
+            };
+            leitor.readAsText(arquivo);
         });
 
         // Event listener para teclado físico
@@ -555,12 +627,19 @@
 
     function mudarInstrumento(index, idInstrumento) {
         composicao.vozes[index].instrumento = parseInt(idInstrumento);
-        if (partituraVisivel) renderizarPartitura();
+        renderizarPartitura();
+    }
+
+    function mudarBPM(valor) {
+        bpmSelecionado = parseInt(valor);
+        document.getElementById('val-bpm').innerText = valor;
+        renderizarPartitura();
     }
 
     // Configurações do Sintetizador de Som (Web Audio API)
     let audioCtx = null;
     let synthControl = null;
+    let bpmSelecionado = 120;
 
     function initAudio() {
         if (!audioCtx) {
@@ -759,7 +838,7 @@
             const voz = composicao.vozes[composicao.vozAtivaIndex];
             const instId = voz.instrumento;
 
-            let duracaoSegundos = 0.5;
+            let duracaoSegundos = 60 / bpmSelecionado;
             const matchDuracao = nota.match(/\d+$/);
             if (matchDuracao) {
                 duracaoSegundos *= parseInt(matchDuracao[0]);
@@ -791,7 +870,7 @@
         composicao.vozes[composicao.vozAtivaIndex].notas.push(notaFormatada);
         
         atualizarInterfacePistas();
-        if (partituraVisivel) renderizarPartitura();
+        renderizarPartitura();
 
         // Toca a nota no sintetizador
         reproduzirSomNota(notaFormatada);
@@ -800,12 +879,12 @@
     function desfazerUltimaNota() {
         composicao.vozes[composicao.vozAtivaIndex].notas.pop();
         atualizarInterfacePistas();
-        if (partituraVisivel) renderizarPartitura();
+        renderizarPartitura();
     }
 
     function compilarParaABC() {
         const nomeCompositor = document.getElementById('nome-aluno').value || "Pequeno Maestro";
-        let abcText = `X:1\nT:${composicao.titulo}\nC:${nomeCompositor}\nM:4/4\nL:1/4\nK:C`;
+        let abcText = `X:1\nT:${composicao.titulo}\nC:${nomeCompositor}\nM:4/4\nL:1/4\nQ:1/4=${bpmSelecionado}\nK:C`;
 
         composicao.vozes.forEach(voz => {
             abcText += `\nV:${voz.id}\n`;
@@ -824,7 +903,6 @@
 
     // Renderização do Motor Gráfico ABCJS e Configuração do Tocador de Áudio
     function renderizarPartitura() {
-        if (!partituraVisivel) return;
         const codigoABC = compilarParaABC();
         const visualObj = ABCJS.renderAbc("notation", codigoABC, {
             responsive: "resize",
@@ -860,6 +938,114 @@
                 console.warn("ABCJS Synth: Failed to initialize synth instance:", err);
             });
         }
+    }
+
+    function salvarMusicaABC() {
+        const codigoABC = compilarParaABC();
+        const nomeCompositor = document.getElementById('nome-aluno').value || "Pequeno Maestro";
+        const nomeArquivo = `${composicao.titulo.replace(/\s+/g, '_')}_-_${nomeCompositor.replace(/\s+/g, '_')}.abc`;
+
+        const blob = new Blob([codigoABC], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = nomeArquivo;
+        document.body.appendChild(a);
+        a.click();
+        
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function carregarMusicaABC(conteudo) {
+        try {
+            const linhas = conteudo.split('\n');
+            let novoTitulo = "Minha Composição Fantástica";
+            let novoCompositor = "";
+            let novoBpm = 120;
+            let novasVozes = [];
+            let vozAtual = null;
+
+            linhas.forEach(linha => {
+                linha = inlineTrim(linha);
+                if (linha.startsWith('T:')) {
+                    novoTitulo = linha.substring(2).trim();
+                } else if (linha.startsWith('C:')) {
+                    novoCompositor = linha.substring(2).trim();
+                } else if (linha.startsWith('Q:')) {
+                    const matchBpm = linha.match(/=(\d+)/);
+                    if (matchBpm) {
+                        novoBpm = parseInt(matchBpm[1]);
+                    }
+                } else if (linha.startsWith('V:')) {
+                    const idVoz = linha.substring(2).trim();
+                    vozAtual = {
+                        id: idVoz,
+                        nome: `Instrumento ${idVoz}`,
+                        instrumento: 0,
+                        notas: []
+                    };
+                    novasVozes.push(vozAtual);
+                } else if (linha.startsWith('%%MIDI program')) {
+                    if (vozAtual) {
+                        const matchInst = inlineMatchProgram(linha);
+                        if (matchInst) {
+                            vozAtual.instrumento = parseInt(matchInst[1]);
+                        }
+                    }
+                } else if (linha && !linha.startsWith('X:') && !linha.startsWith('M:') && !linha.startsWith('L:') && !linha.startsWith('K:')) {
+                    if (vozAtual) {
+                        let notasTexto = linha.replace(/\|/g, '').trim();
+                        if (notasTexto && notasTexto !== "z4") {
+                            const notasArray = notasTexto.split(/\s+/);
+                            vozAtual.notas.push(...notasArray);
+                        }
+                    }
+                }
+            });
+
+            if (novasVozes.length > 0) {
+                composicao.titulo = novoTitulo;
+                composicao.vozes = novasVozes;
+                composicao.vozAtivaIndex = 0;
+                
+                document.getElementById('nome-aluno').value = novoCompositor;
+                document.getElementById('bpm-slider').value = novoBpm;
+                bpmSelecionado = novoBpm;
+                document.getElementById('val-bpm').innerText = novoBpm;
+
+                // Resetar botão Adicionar Instrumento caso a orquestra estivesse cheia
+                const btnAdd = document.getElementById('btn-add-pista');
+                if (composicao.vozes.length < LIMITE_VOZES) {
+                    btnAdd.disabled = false;
+                    btnAdd.innerText = "➕ Adicionar Instrumento";
+                    btnAdd.className = "btn btn-success";
+                } else {
+                    btnAdd.disabled = true;
+                    btnAdd.innerText = "❌ Orquestra Cheia";
+                    btnAdd.className = "btn btn-danger";
+                }
+
+                atualizarInterfacePistas();
+                renderizarPartitura();
+
+                alert("Música carregada com sucesso!");
+            } else {
+                alert("Formato de partitura inválido ou sem instrumentos declarados.");
+            }
+        } catch (e) {
+            console.error("Erro ao ler partitura:", e);
+            alert("Erro ao ler o arquivo .abc. Certifique-se de que é um arquivo válido.");
+        }
+    }
+
+    function inlineTrim(str) {
+        return str.trim();
+    }
+
+    function inlineMatchProgram(str) {
+        return str.match(/program\s+(\d+)/);
     }
 </script>
 
