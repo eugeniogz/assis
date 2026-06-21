@@ -314,13 +314,13 @@
     </section>
 
     <section class="teclado">
-        <button class="tecla c" onclick="tocarNota('C')">C <span>Dó</span></button>
-        <button class="tecla d" onclick="tocarNota('D')">D <span>Ré</span></button>
-        <button class="tecla e" onclick="tocarNota('E')">E <span>Mi</span></button>
-        <button class="tecla f" onclick="tocarNota('F')">F <span>Fá</span></button>
-        <button class="tecla g" onclick="tocarNota('G')">G <span>Sol</span></button>
-        <button class="tecla a" onclick="tocarNota('A')">A <span>Lá</span></button>
-        <button class="tecla b" onclick="tocarNota('B')">B <span>Si</span></button>
+        <button class="tecla c" onclick="tocarNota('C')">C <span>Dó [A]</span></button>
+        <button class="tecla d" onclick="tocarNota('D')">D <span>Ré [S]</span></button>
+        <button class="tecla e" onclick="tocarNota('E')">E <span>Mi [D]</span></button>
+        <button class="tecla f" onclick="tocarNota('F')">F <span>Fá [F]</span></button>
+        <button class="tecla g" onclick="tocarNota('G')">G <span>Sol [G]</span></button>
+        <button class="tecla a" onclick="tocarNota('A')">A <span>Lá [H]</span></button>
+        <button class="tecla b" onclick="tocarNota('B')">B <span>Si [J]</span></button>
     </section>
 
     <section class="acoes-inferiores">
@@ -348,7 +348,7 @@
     let composicao = {
         titulo: "Minha Composição Fantástica",
         vozes: [
-            { id: "V:1", nome: "Instrumento 1", instrumento: 13, notas: [] }
+            { id: "1", nome: "Instrumento 1", instrumento: 13, notas: [] }
         ],
         vozAtivaIndex: 0
     };
@@ -371,7 +371,7 @@
 
             const novoNum = qtdAtual + 1;
             composicao.vozes.push({
-                id: `V:${novoNum}`,
+                id: `${novoNum}`,
                 nome: `Instrumento ${novoNum}`,
                 instrumento: instrumentosDisponiveis[qtdAtual]?.id || 0,
                 notas: []
@@ -413,6 +413,41 @@
             navigator.clipboard.writeText(codigoFinal).then(() => {
                 alert("Código musical copiado com sucesso! Agora é só colar na tarefa.");
             });
+        });
+
+        // Event listener para teclado físico
+        window.addEventListener('keydown', (e) => {
+            // Se o foco estiver em um input de texto, não toca a nota
+            if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+                return;
+            }
+
+            const tecla = e.key.toUpperCase();
+            const mapaTeclado = {
+                'A': 'C',
+                'S': 'D',
+                'D': 'E',
+                'F': 'F',
+                'G': 'G',
+                'H': 'A',
+                'J': 'B'
+            };
+
+            const nota = mapaTeclado[tecla];
+            if (nota) {
+                tocarNota(nota);
+
+                // Feedback visual simulando o clique na tecla
+                const btnTecla = document.querySelector(`.tecla.${nota.toLowerCase()}`);
+                if (btnTecla) {
+                    btnTecla.style.transform = "translateY(4px)";
+                    btnTecla.style.boxShadow = "none";
+                    setTimeout(() => {
+                        btnTecla.style.transform = "";
+                        btnTecla.style.boxShadow = "";
+                    }, 100);
+                }
+            }
         });
     }
 
@@ -468,6 +503,218 @@
         if (partituraVisivel) renderizarPartitura();
     }
 
+    // Configurações do Sintetizador de Som (Web Audio API)
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    const FREQUENCIAS_BASE = {
+        'C': 261.63,
+        'D': 293.66,
+        'E': 329.63,
+        'F': 349.23,
+        'G': 392.00,
+        'A': 440.00,
+        'B': 493.88
+    };
+
+    function obterFrequencia(nomeNota) {
+        const notaBasica = nomeNota.match(/[A-Ga-g]/)[0];
+        let freq = FREQUENCIAS_BASE[notaBasica.toUpperCase()];
+        if (notaBasica === notaBasica.toLowerCase()) {
+            freq *= 2;
+        } else if (nomeNota.includes(',')) {
+            freq /= 2;
+        }
+        return freq;
+    }
+
+    function tocarInstrumento(freq, instId, duracao) {
+        const time = audioCtx.currentTime;
+        const masterGain = audioCtx.createGain();
+        masterGain.connect(audioCtx.destination);
+        const volumeGeral = 0.15;
+
+        switch (instId) {
+            case 13: // Xilofone
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, time);
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral, time + 0.005);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + duracao * 0.6);
+                    osc.connect(masterGain);
+                    osc.start(time);
+                    osc.stop(time + duracao * 0.6);
+
+                    const oscClique = audioCtx.createOscillator();
+                    oscClique.type = 'sine';
+                    oscClique.frequency.setValueAtTime(freq * 5.2, time);
+                    const cliqueGain = audioCtx.createGain();
+                    cliqueGain.gain.setValueAtTime(volumeGeral * 0.4, time);
+                    cliqueGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.03);
+                    oscClique.connect(cliqueGain);
+                    cliqueGain.connect(audioCtx.destination);
+                    oscClique.start(time);
+                    oscClique.stop(time + 0.05);
+                }
+                break;
+            case 0: // Piano
+                {
+                    const osc1 = audioCtx.createOscillator();
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(freq, time);
+                    const osc2 = audioCtx.createOscillator();
+                    osc2.type = 'triangle';
+                    osc2.frequency.setValueAtTime(freq * 2, time);
+
+                    const gain1 = audioCtx.createGain();
+                    gain1.gain.setValueAtTime(volumeGeral * 0.7, time);
+                    const gain2 = audioCtx.createGain();
+                    gain2.gain.setValueAtTime(volumeGeral * 0.3, time);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(1.0, time + 0.008);
+                    masterGain.gain.exponentialRampToValueAtTime(0.3, time + 0.3);
+                    masterGain.gain.setValueAtTime(0.3, time + duracao);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + duracao + 0.5);
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    gain1.connect(masterGain);
+                    gain2.connect(masterGain);
+                    osc1.start(time);
+                    osc2.start(time);
+                    osc1.stop(time + duracao + 0.6);
+                    osc2.stop(time + duracao + 0.6);
+                }
+                break;
+            case 80: // Videogame
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(freq * 1.5, time);
+                    osc.frequency.exponentialRampToValueAtTime(freq, time + 0.08);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 0.7, time + 0.002);
+                    masterGain.gain.setValueAtTime(volumeGeral * 0.7, time + duracao - 0.05);
+                    masterGain.gain.linearRampToValueAtTime(0.0001, time + duracao);
+
+                    osc.connect(masterGain);
+                    osc.start(time);
+                    osc.stop(time + duracao);
+                }
+                break;
+            case 24: // Violão
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(freq, time);
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.Q.setValueAtTime(1, time);
+                    filter.frequency.setValueAtTime(freq * 4, time);
+                    filter.frequency.exponentialRampToValueAtTime(freq * 1.2, time + 0.4);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 0.8, time + 0.015);
+                    masterGain.gain.exponentialRampToValueAtTime(0.05, time + 0.4);
+                    masterGain.gain.setValueAtTime(0.05, time + duracao);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + duracao + 0.3);
+
+                    osc.connect(filter);
+                    filter.connect(masterGain);
+                    osc.start(time);
+                    osc.stop(time + duracao + 0.4);
+                }
+                break;
+            case 56: // Trompete
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(freq, time);
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.Q.setValueAtTime(2, time);
+                    filter.frequency.setValueAtTime(freq, time);
+                    filter.frequency.linearRampToValueAtTime(freq * 3, time + 0.12);
+                    filter.frequency.setValueAtTime(freq * 3, time + duracao - 0.05);
+                    filter.frequency.linearRampToValueAtTime(freq, time + duracao);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 0.6, time + 0.08);
+                    masterGain.gain.setValueAtTime(volumeGeral * 0.6, time + duracao - 0.05);
+                    masterGain.gain.linearRampToValueAtTime(0.0001, time + duracao);
+
+                    osc.connect(filter);
+                    filter.connect(masterGain);
+                    osc.start(time);
+                    osc.stop(time + duracao);
+                }
+                break;
+            case 115: // Bloco de Madeira
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq * 1.8, time);
+                    osc.frequency.exponentialRampToValueAtTime(freq, time + 0.015);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 0.9, time + 0.001);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.08);
+
+                    osc.connect(masterGain);
+                    osc.start(time);
+                    osc.stop(time + 0.1);
+                }
+                break;
+            default:
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, time);
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral, time + 0.01);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + duracao);
+                    osc.connect(masterGain);
+                    osc.start(time);
+                    osc.stop(time + duracao);
+                }
+        }
+    }
+
+    function reproduzirSomNota(nota) {
+        try {
+            initAudio();
+            if (!audioCtx) return;
+
+            const freq = obterFrequencia(nota);
+            const voz = composicao.vozes[composicao.vozAtivaIndex];
+            const instId = voz.instrumento;
+
+            let duracaoSegundos = 0.5;
+            const matchDuracao = nota.match(/\d+$/);
+            if (matchDuracao) {
+                duracaoSegundos *= parseInt(matchDuracao[0]);
+            }
+
+            tocarInstrumento(freq, instId, duracaoSegundos);
+        } catch (e) {
+            console.error("Erro ao tocar áudio:", e);
+        }
+    }
+
     // Inserção e Manipulação de Notas Musicais
     function tocarNota(nomeNota) {
         let notaFormatada = nomeNota;
@@ -489,6 +736,9 @@
         
         atualizarInterfacePistas();
         if (partituraVisivel) renderizarPartitura();
+
+        // Toca a nota no sintetizador
+        reproduzirSomNota(notaFormatada);
     }
 
     function desfazerUltimaNota() {
