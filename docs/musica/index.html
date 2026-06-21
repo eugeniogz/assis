@@ -210,7 +210,7 @@
         /* Teclado Musical */
         .teclado {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(8, 1fr);
             gap: 10px;
             margin-bottom: 25px;
         }
@@ -249,6 +249,7 @@
         .tecla.g { background-color: var(--cor-g); color: #333; }
         .tecla.a { background-color: var(--cor-a); }
         .tecla.b { background-color: var(--cor-b); }
+        .tecla.z { background-color: #64748b; }
 
         /* Controles de Ação Inferiores */
         .acoes-inferiores {
@@ -418,6 +419,7 @@
         <button class="tecla g" onclick="tocarNota('G')">G <span>Sol [G]</span></button>
         <button class="tecla a" onclick="tocarNota('A')">A <span>Lá [H]</span></button>
         <button class="tecla b" onclick="tocarNota('B')">B <span>Si [J]</span></button>
+        <button class="tecla z" onclick="tocarNota('z')">Z <span>Pausa [Z]</span></button>
     </section>
 
     <section class="acoes-inferiores">
@@ -557,7 +559,8 @@
                 'F': 'F',
                 'G': 'G',
                 'H': 'A',
-                'J': 'B'
+                'J': 'B',
+                'Z': 'z'
             };
 
             const nota = mapaTeclado[tecla];
@@ -830,6 +833,9 @@
     }
 
     function reproduzirSomNota(nota) {
+        if (nota.toLowerCase().startsWith('z')) {
+            return;
+        }
         try {
             initAudio();
             if (!audioCtx) return;
@@ -854,11 +860,13 @@
     function tocarNota(nomeNota) {
         let notaFormatada = nomeNota;
 
-        // Regra de Oitavas
-        if (oitavaSelecionada === "alta") {
-            notaFormatada = nomeNota.toLowerCase();
-        } else if (oitavaSelecionada === "baixa") {
-            notaFormatada = nomeNota + ",";
+        // Regra de Oitavas (apenas para notas musicais de A-G, não para silêncio 'z')
+        if (nomeNota !== 'z') {
+            if (oitavaSelecionada === "alta") {
+                notaFormatada = nomeNota.toLowerCase();
+            } else if (oitavaSelecionada === "baixa") {
+                notaFormatada = nomeNota + ",";
+            }
         }
 
         // Regra de Duração
