@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Música Digital</title>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.3.0/dist/abcjs-basic-min.js" type="text/javascript"></script>
+    
+    <style>
+        :root {
+            --cor-c: #FF3B30; /* Dó - Vermelho */
+            --cor-d: #FF9500; /* Ré - Laranja */
+            --cor-e: #FFCC00; /* Mi - Amarelo */
+            --cor-f: #4CD964; /* Fá - Verde */
+            --cor-g: #5AC8FA; /* Sol - Azul Claro */
+            --cor-a: #5856D6; /* Lá - Azul Escuro */
+            --cor-b: #FF2D55; /* Si - Rosa */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            user-select: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #f0f4f8;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #2c3e50;
+        }
+
+        .aluno-info {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4a90e2;
+        }
+
+        .btn {
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary { background-color: #4a90e2; color: white; }
+        .btn-success { background-color: #2ecc71; color: white; }
+        .btn-danger { background-color: #e74c3c; color: white; }
+        .btn-warning { background-color: #f1c40f; color: #333; }
+
+        /* Área das Pistas / Vozes */
+        .painel-pistas {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .pistas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .lista-pistas {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pista-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .pista-row.ativa {
+            border-color: #4a90e2;
+            background-color: #ebf5ff;
+            box-shadow: 0 0 0 2px #4a90e2;
+        }
+
+        .pista-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pista-nome {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .select-instrumento {
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+        }
+
+        .pista-preview {
+            font-family: monospace;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Controles de Modificação (Oitava e Duração) */
+        .painel-modificadores {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .grupo-controle {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .grupo-controle h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-toggle {
+            background: white;
+            border: 2px solid #cbd5e1;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .btn-toggle.ativo {
+            background-color: #334155;
+            color: white;
+            border-color: #334155;
+        }
+
+        /* Teclado Musical */
+        .teclado {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tecla {
+            height: 100px;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+            transition: all 0.1s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tecla span {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .tecla:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .tecla.c { background-color: var(--cor-c); }
+        .tecla.d { background-color: var(--cor-d); }
+        .tecla.e { background-color: var(--cor-e); color: #333; }
+        .tecla.f { background-color: var(--cor-f); }
+        .tecla.g { background-color: var(--cor-g); color: #333; }
+        .tecla.a { background-color: var(--cor-a); }
+        .tecla.b { background-color: var(--cor-b); }
+
+        /* Controles de Ação Inferiores */
+        .acoes-inferiores {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Área Ocultável da Partitura */
+        .hidden {
+            display: none !important;
+        }
+
+        #area-partitura {
+            background: #fff;
+            border: 2px dashed #cbd5e1;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        #notation {
+            width: 100%;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🎼 Estúdio Orquestra ABC</h1>
+        <div class="aluno-info">
+            <input type="text" id="nome-aluno" placeholder="Nome do Compositor">
+            <button class="btn btn-warning" id="btn-copiar">📋 Copiar Código</button>
+        </div>
+    </header>
+
+    <section class="painel-pistas">
+        <div class="pistas-header">
+            <h2>Instrumentos da Orquestra</h2>
+            <button class="btn btn-success" id="btn-add-pista">➕ Adicionar Instrumento</button>
+        </div>
+        <div class="lista-pistas" id="lista-pistas-container">
+            </div>
+    </section>
+
+    <section class="painel-modificadores">
+        <div class="grupo-controle">
+            <h3>Altura do Som (Oitava)</h3>
+            <div class="btn-group">
+                <button class="btn-toggle" id="oct-baixa" onclick="setOitava('baixa')">🐻 Grave</button>
+                <button class="btn-toggle ativo" id="oct-normal" onclick="setOitava('normal')">🐦 Normal</button>
+                <button class="btn-toggle" id="oct-alta" onclick="setOitava('alta')">🐱 Agudo</button>
+            </div>
+        </div>
+        <div class="grupo-controle">
+            <h3>Tamanho da Nota (Ritmo)</h3>
+            <div class="btn-group">
+                <button class="btn-toggle ativo" id="dur-1" onclick="setDuracao(1)">🚶 Passo Normal</button>
+                <button class="btn-toggle" id="dur-2" onclick="setDuracao(2)">🦒 Passo Gigante</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="teclado">
+        <button class="tecla c" onclick="tocarNota('C')">C <span>Dó</span></button>
+        <button class="tecla d" onclick="tocarNota('D')">D <span>Ré</span></button>
+        <button class="tecla e" onclick="tocarNota('E')">E <span>Mi</span></button>
+        <button class="tecla f" onclick="tocarNota('F')">F <span>Fá</span></button>
+        <button class="tecla g" onclick="tocarNota('G')">G <span>Sol</span></button>
+        <button class="tecla a" onclick="tocarNota('A')">A <span>Lá</span></button>
+        <button class="tecla b" onclick="tocarNota('B')">B <span>Si</span></button>
+    </section>
+
+    <section class="acoes-inferiores">
+        <button class="btn btn-danger" id="btn-desfazer" onclick="desfazerUltimaNota()">↩️ Apagar Última Nota</button>
+        <button class="btn btn-primary" id="btn-toggle-partitura" style="background-color: #8e44ad;">👁️ Revelar Mapa Secreto (Partitura)</button>
+    </section>
+
+    <div id="area-partitura" class="hidden">
+        <div id="notation"></div>
+    </div>
+</div>
+
+<script>
+    // Configurações e Estado Inicial da Aplicação
+    const LIMITE_VOZES = 6;
+    const instrumentosDisponiveis = [
+        { id: 13, nome: "🪵 Xilofone" },
+        { id: 0,  nome: "🎹 Piano" },
+        { id: 80, nome: "👾 Videogame (Synth)" },
+        { id: 24, nome: "🎸 Violão" },
+        { id: 56, nome: "🎺 Trompete" },
+        { id: 115, nome: "🥁 Bloco de Madeira" }
+    ];
+
+    let composicao = {
+        titulo: "Minha Composição Fantástica",
+        vozes: [
+            { id: "V:1", nome: "Instrumento 1", instrumento: 13, notas: [] }
+        ],
+        vozAtivaIndex: 0
+    };
+
+    let oitavaSelecionada = "normal"; 
+    let duracaoSelecionada = 1;        
+    let partituraVisivel = false;
+
+    // Inicialização da Interface ao carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+        atualizarInterfacePistas();
+        configurarEventosGlobais();
+    });
+
+    function configurarEventosGlobais() {
+        // Botão Adicionar Instrumento
+        document.getElementById('btn-add-pista').addEventListener('click', () => {
+            const qtdAtual = composicao.vozes.length;
+            if (qtdAtual >= LIMITE_VOZES) return;
+
+            const novoNum = qtdAtual + 1;
+            composicao.vozes.push({
+                id: `V:${novoNum}`,
+                nome: `Instrumento ${novoNum}`,
+                instrumento: instrumentosDisponiveis[qtdAtual]?.id || 0,
+                notas: []
+            });
+
+            composicao.vozAtivaIndex = qtdAtual;
+            atualizarInterfacePistas();
+            
+            if (composicao.vozes.length === LIMITE_VOZES) {
+                const btn = document.getElementById('btn-add-pista');
+                btn.disabled = true;
+                btn.innerText = "❌ Orquestra Cheia";
+                btn.className = "btn btn-danger";
+            }
+            if (partituraVisivel) renderizarPartitura();
+        });
+
+        // Botão de Alternar Visibilidade da Partitura
+        const btnToggle = document.getElementById('btn-toggle-partitura');
+        const areaPartitura = document.getElementById('area-partitura');
+        
+        btnToggle.addEventListener('click', () => {
+            partituraVisivel = !partituraVisivel;
+            if (partituraVisivel) {
+                areaPartitura.classList.remove('hidden');
+                btnToggle.innerText = "🙈 Esconder Mapa Secreto";
+                btnToggle.style.backgroundColor = "#34495e";
+                renderizarPartitura();
+            } else {
+                areaPartitura.classList.add('hidden');
+                btnToggle.innerText = "👁️ Revelar Mapa Secreto (Partitura)";
+                btnToggle.style.backgroundColor = "#8e44ad";
+            }
+        });
+
+        // Botão Copiar Código ABC
+        document.getElementById('btn-copiar').addEventListener('click', () => {
+            const codigoFinal = compilarParaABC();
+            navigator.clipboard.writeText(codigoFinal).then(() => {
+                alert("Código musical copiado com sucesso! Agora é só colar na tarefa.");
+            });
+        });
+    }
+
+    // Gerenciamento dos Seletores de Oitava e Duração
+    function setOitava(tipo) {
+        oitavaSelecionada = tipo;
+        document.querySelectorAll('[id^="oct-"]').forEach(el => el.classList.remove('ativo'));
+        document.getElementById(`oct-${tipo}`).classList.add('ativo');
+    }
+
+    function setDuracao(valor) {
+        duracaoSelecionada = valor;
+        document.querySelectorAll('[id^="dur-"]').forEach(el => el.classList.remove('ativo'));
+        document.getElementById(`dur-${valor}`).classList.add('ativo');
+    }
+
+    // Renderização Visual das Pistas na Tela das Crianças
+    function atualizarInterfacePistas() {
+        const container = document.getElementById('lista-pistas-container');
+        container.innerHTML = '';
+
+        composicao.vozes.forEach((voz, index) => {
+            const div = document.createElement('div');
+            div.className = `pista-row ${index === composicao.vozAtivaIndex ? 'ativa' : ''}`;
+            div.onclick = (e) => {
+                if(e.target.tagName !== 'SELECT') {
+                    composicao.vozAtivaIndex = index;
+                    atualizarInterfacePistas();
+                }
+            };
+
+            // Constrói o Seletor de Instrumentos
+            let selectOptions = '';
+            instrumentosDisponiveis.forEach(inst => {
+                selectOptions += `<option value="${inst.id}" ${voz.instrumento == inst.id ? 'selected' : ''}>${inst.nome}</option>`;
+            });
+
+            div.innerHTML = `
+                <div class="pista-info">
+                    <span class="pista-nome">🎵 Pista ${index + 1}</span>
+                    <select class="select-instrumento" onchange="mudarInstrumento(${index}, this.value)">
+                        ${selectOptions}
+                    </select>
+                </div>
+                <div class="pista-preview">${voz.notas.length > 0 ? voz.notas.join(' ') : 'Vazia (toque as notas)'}</div>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    function mudarInstrumento(index, idInstrumento) {
+        composicao.vozes[index].instrumento = parseInt(idInstrumento);
+        if (partituraVisivel) renderizarPartitura();
+    }
+
+    // Inserção e Manipulação de Notas Musicais
+    function tocarNota(nomeNota) {
+        let notaFormatada = nomeNota;
+
+        // Regra de Oitavas
+        if (oitavaSelecionada === "alta") {
+            notaFormatada = nomeNota.toLowerCase();
+        } else if (oitavaSelecionada === "baixa") {
+            notaFormatada = nomeNota + ",";
+        }
+
+        // Regra de Duração
+        if (duracaoSelecionada > 1) {
+            notaFormatada += duracaoSelecionada;
+        }
+
+        // Adiciona a nota à voz que está atualmente selecionada
+        composicao.vozes[composicao.vozAtivaIndex].notas.push(notaFormatada);
+        
+        atualizarInterfacePistas();
+        if (partituraVisivel) renderizarPartitura();
+    }
+
+    function desfazerUltimaNota() {
+        composicao.vozes[composicao.vozAtivaIndex].notas.pop();
+        atualizarInterfacePistas();
+        if (partituraVisivel) renderizarPartitura();
+    }
+
+    // Compilador Estrutural de Dados para Padrão de Texto ABC
+    function compilarParaABC() {
+        const nomeCompositor = document.getElementById('nome-aluno').value || "Pequeno Maestro";
+        let abcText = `X:1\nT:${composicao.titulo}\nC:${nomeCompositor}\nM:4/4\nL:1/4\nK:C\n`;
+
+        composicao.vozes.forEach(voz => {
+            abcText += `\nV:${voz.id}\n`;
+            abcText += `%%MIDI program ${voz.instrumento}\n`;
+            
+            if (voz.notas.length === 0) {
+                abcText += "z4 |"; // Preenche automaticamente com silêncio se estiver vazia
+            } else {
+                // Insere barras de compasso visuais básicas a cada lote de notas
+                abcText += voz.notas.join(' ') + " |";
+            }
+        });
+
+        return abcText;
+    }
+
+    // Renderização do Motor Gráfico ABCJS
+    function renderizarPartitura() {
+        if (!partituraVisivel) return;
+        const codigoABC = compilarParaABC();
+        ABCJS.renderAbc("notation", codigoABC, {
+            responsive: "resize",
+            scale: 1.2,
+            add_classes: true
+        });
+    }
+</script>
+
+</body>
+</html>
