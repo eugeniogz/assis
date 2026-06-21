@@ -510,14 +510,6 @@
             }
         });
 
-        // Botão Copiar Código ABC
-        document.getElementById('btn-copiar').addEventListener('click', () => {
-            const codigoFinal = compilarParaABC();
-            navigator.clipboard.writeText(codigoFinal).then(() => {
-                alert("Código musical copiado com sucesso! Agora é só colar na tarefa.");
-            });
-        });
-
         // Botão Salvar Música ABC
         document.getElementById('btn-salvar').addEventListener('click', () => {
             salvarMusicaABC();
