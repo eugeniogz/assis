@@ -55,6 +55,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         input[type="text"] {
@@ -135,6 +136,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-shrink: 0;
         }
 
         .pista-nome {
@@ -154,10 +156,11 @@
             background: #f1f5f9;
             padding: 4px 10px;
             border-radius: 6px;
-            max-width: 300px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            flex: 1;
+            margin-left: 20px;
+            white-space: normal;
+            word-wrap: break-word;
+            text-align: left;
         }
 
         /* Controles de Modificação (Oitava e Duração) */
@@ -371,6 +374,7 @@
     <header>
         <h1>🎼 Estúdio Orquestra ABC</h1>
         <div class="aluno-info">
+            <input type="text" id="titulo-composicao" placeholder="Título da Composição">
             <input type="text" id="nome-aluno" placeholder="Nome do Compositor">
             <button class="btn btn-primary" id="btn-salvar" style="background-color: #27ae60;">💾 Salvar Música</button>
             <button class="btn btn-primary" id="btn-carregar" style="background-color: #2980b9;">📂 Carregar Música</button>
@@ -424,7 +428,7 @@
 
     <section class="acoes-inferiores">
         <button class="btn btn-danger" id="btn-desfazer" onclick="desfazerUltimaNota()">↩️ Apagar Última Nota</button>
-        <button class="btn btn-primary" id="btn-toggle-partitura" style="background-color: #8e44ad;">👁️ Revelar Mapa Secreto (Partitura)</button>
+        <button class="btn btn-primary" id="btn-toggle-partitura" style="background-color: #8e44ad;">Mostrar Partitura</button>
     </section>
 
     <!-- Tocador de Áudio (Sempre Visível) -->
@@ -432,7 +436,7 @@
 
     <div id="area-partitura" class="hidden">
         <div id="notation"></div>
-    </div>
+    </div> 
 </div>
 
 <script>
@@ -448,7 +452,7 @@
     ];
 
     let composicao = {
-        titulo: "Minha Composição Fantástica",
+        titulo: "",
         vozes: [
             { id: "1", nome: "Instrumento 1", instrumento: 13, notas: [] }
         ],
@@ -467,6 +471,15 @@
     });
 
     function configurarEventosGlobais() {
+        // Input do Título da Composição
+        const inputTitulo = document.getElementById('titulo-composicao');
+        inputTitulo.addEventListener('input', (e) => {
+            composicao.titulo = e.target.value || "";
+        });
+        inputTitulo.addEventListener('change', () => {
+            renderizarPartitura();
+        });
+
         // Botão Adicionar Instrumento
         document.getElementById('btn-add-pista').addEventListener('click', () => {
             const qtdAtual = composicao.vozes.length;
@@ -500,12 +513,12 @@
             partituraVisivel = !partituraVisivel;
             if (partituraVisivel) {
                 areaPartitura.classList.remove('hidden');
-                btnToggle.innerText = "🙈 Esconder Mapa Secreto";
+                btnToggle.innerText = "🙈 Esconder Partitura";
                 btnToggle.style.backgroundColor = "#34495e";
                 renderizarPartitura();
             } else {
                 areaPartitura.classList.add('hidden');
-                btnToggle.innerText = "👁️ Revelar Mapa Secreto (Partitura)";
+                btnToggle.innerText = "👁️ Mostrar Partitura";
                 btnToggle.style.backgroundColor = "#8e44ad";
             }
         });
@@ -883,7 +896,7 @@
     }
 
     function compilarParaABC() {
-        const nomeCompositor = document.getElementById('nome-aluno').value || "Pequeno Maestro";
+        const nomeCompositor = document.getElementById('nome-aluno').value || "";
         let abcText = `X:1\nT:${composicao.titulo}\nC:${nomeCompositor}\nM:4/4\nL:1/4\nQ:1/4=${bpmSelecionado}\nK:C`;
 
         composicao.vozes.forEach(voz => {
@@ -941,9 +954,12 @@
     }
 
     function salvarMusicaABC() {
+        let nomeCompositor = document.getElementById('nome-aluno').value || "";
+        nomeCompositor = (nomeCompositor == "" ? "" : (composicao.titulo==""?  "": "-")) + nomeCompositor;
+        composicao.titulo = composicao.titulo==""? nomeCompositor == ""? "Sem Título": "": composicao.titulo;
+        let nomeComposicao = composicao.titulo.replace(/\s+/g, '_');
         const codigoABC = compilarParaABC();
-        const nomeCompositor = document.getElementById('nome-aluno').value || "Pequeno Maestro";
-        const nomeArquivo = `${composicao.titulo.replace(/\s+/g, '_')}_-_${nomeCompositor.replace(/\s+/g, '_')}.abc`;
+        const nomeArquivo = `${nomeComposicao}${nomeCompositor}.abc`;
 
         const blob = new Blob([codigoABC], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
@@ -961,7 +977,7 @@
     function carregarMusicaABC(conteudo) {
         try {
             const linhas = conteudo.split('\n');
-            let novoTitulo = "Minha Composição Fantástica";
+            let novoTitulo = "";
             let novoCompositor = "";
             let novoBpm = 120;
             let novasVozes = [];
@@ -994,6 +1010,8 @@
                             vozAtual.instrumento = parseInt(matchInst[1]);
                         }
                     }
+                } else if (linha.startsWith('w:') || linha.startsWith('W:')) {
+                    // Ignora linhas de letra de música ao carregar as pistas
                 } else if (linha && !linha.startsWith('X:') && !linha.startsWith('M:') && !linha.startsWith('L:') && !linha.startsWith('K:')) {
                     if (vozAtual) {
                         let notasTexto = linha.replace(/\|/g, '').trim();
@@ -1010,6 +1028,7 @@
                 composicao.vozes = novasVozes;
                 composicao.vozAtivaIndex = 0;
                 
+                document.getElementById('titulo-composicao').value = novoTitulo;
                 document.getElementById('nome-aluno').value = novoCompositor;
                 document.getElementById('bpm-slider').value = novoBpm;
                 bpmSelecionado = novoBpm;
