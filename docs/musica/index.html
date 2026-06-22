@@ -366,6 +366,16 @@
             font-weight: 600 !important;
             font-size: 14px !important;
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .btn-gravando {
+            animation: pulse 1.5s infinite;
+            background-color: #c0392b !important;
+        }
     </style>
 </head>
 <body>
@@ -378,6 +388,7 @@
             <input type="text" id="nome-aluno" placeholder="Nome do Compositor">
             <button class="btn btn-primary" id="btn-salvar" style="background-color: #27ae60;">💾 Salvar Música</button>
             <button class="btn btn-primary" id="btn-carregar" style="background-color: #2980b9;">📂 Carregar Música</button>
+            <button class="btn btn-warning" id="btn-gravar-wav" style="background-color: #e67e22; color: white;">🔴 Gravar WAV</button>
             <input type="file" id="input-arquivo-abc" accept=".abc" style="display: none;">
         </div>
     </header>
@@ -528,6 +539,12 @@
             salvarMusicaABC();
         });
 
+        // Botão Gravar WAV
+        const btnGravar = document.getElementById('btn-gravar-wav');
+        btnGravar.addEventListener('click', () => {
+            alternarGravacao();
+        });
+
         // Botão Carregar Música ABC
         const btnCarregar = document.getElementById('btn-carregar');
         const inputArquivo = document.getElementById('input-arquivo-abc');
@@ -648,10 +665,28 @@
     let audioCtx = null;
     let synthControl = null;
     let bpmSelecionado = 120;
+    let mainGainNode = null;
+    let isRecording = false;
+    let recordBufferLeft = [];
+    let recordBufferRight = [];
+    let recorderNode = null;
 
     function initAudio() {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Cria um nó de ganho principal para receber todo o áudio do app
+            mainGainNode = audioCtx.createGain();
+            mainGainNode.connect(audioCtx.destination);
+            
+            // Intercepta todas as conexões direcionadas a audioCtx.destination
+            const originalConnect = AudioNode.prototype.connect;
+            AudioNode.prototype.connect = function(destination, output, input) {
+                if (destination && destination.context === audioCtx && destination === audioCtx.destination && this !== mainGainNode && mainGainNode) {
+                    return originalConnect.call(this, mainGainNode, output, input);
+                }
+                return originalConnect.call(this, destination, output, input);
+            };
         }
         if (audioCtx.state === 'suspended') {
             audioCtx.resume();
@@ -935,9 +970,11 @@
                 });
             }
 
+            initAudio(); // Garante que o contexto e a interceptação estejam prontos
             const synthInstance = new ABCJS.synth.CreateSynth();
             synthInstance.init({
                 visualObj: visualObj[0],
+                audioContext: audioCtx, // Passa o contexto compartilhado para a gravação
                 options: {
                     soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
                 }
@@ -972,6 +1009,167 @@
         
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+    }
+
+    function alternarGravacao() {
+        if (isRecording) {
+            pararGravacao();
+        } else {
+            iniciarGravacao();
+        }
+    }
+
+    function iniciarGravacao() {
+        if (isRecording) return;
+        initAudio();
+        
+        recordBufferLeft = [];
+        recordBufferRight = [];
+        
+        // ScriptProcessorNode para capturar o áudio (buffer de 4096 frames, 2 canais entrada, 2 canais saída)
+        recorderNode = audioCtx.createScriptProcessor(4096, 2, 2);
+        
+        recorderNode.onaudioprocess = function(e) {
+            if (!isRecording) return;
+            
+            const left = e.inputBuffer.getChannelData(0);
+            const right = e.inputBuffer.getChannelData(1);
+            
+            recordBufferLeft.push(new Float32Array(left));
+            recordBufferRight.push(new Float32Array(right));
+            
+            // Passa o áudio adiante para não silenciar
+            const outLeft = e.outputBuffer.getChannelData(0);
+            const outRight = e.outputBuffer.getChannelData(1);
+            outLeft.set(left);
+            outRight.set(right);
+        };
+        
+        // Conecta o nó de ganho global ao recorderNode e este ao destino final
+        mainGainNode.connect(recorderNode);
+        recorderNode.connect(audioCtx.destination);
+        
+        isRecording = true;
+        
+        // Feedback visual no botão
+        const btn = document.getElementById('btn-gravar-wav');
+        btn.innerText = "⏹️ Parar Gravação";
+        btn.classList.add('btn-gravando');
+    }
+
+    function pararGravacao() {
+        if (!isRecording) return;
+        isRecording = false;
+        
+        if (recorderNode) {
+            recorderNode.disconnect();
+            mainGainNode.disconnect(recorderNode);
+            recorderNode = null;
+        }
+        
+        // Restaura feedback visual no botão
+        const btn = document.getElementById('btn-gravar-wav');
+        btn.innerText = "🔴 Gravar WAV";
+        btn.classList.remove('btn-gravando');
+        
+        if (recordBufferLeft.length === 0) {
+            alert("Nenhum áudio foi capturado para gravação.");
+            return;
+        }
+        
+        const blob = exportarWav(recordBufferLeft, recordBufferRight, audioCtx.sampleRate);
+        const url = URL.createObjectURL(blob);
+        
+        let nomeComposicao = (composicao.titulo || "sem_titulo").replace(/\s+/g, '_');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${nomeComposicao}.wav`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function mergeBuffers(channelBuffer, totalLength) {
+        let result = new Float32Array(totalLength);
+        let offset = 0;
+        for (let i = 0; i < channelBuffer.length; i++) {
+            result.set(channelBuffer[i], offset);
+            offset += channelBuffer[i].length;
+        }
+        return result;
+    }
+
+    function interleave(inputL, inputR) {
+        let length = inputL.length + inputR.length;
+        let result = new Float32Array(length);
+        let index = 0;
+        let inputIndex = 0;
+        while (index < length) {
+            result[index++] = inputL[inputIndex];
+            result[index++] = inputR[inputIndex];
+            inputIndex++;
+        }
+        return result;
+    }
+
+    function writeString(view, offset, string) {
+        for (let i = 0; i < string.length; i++) {
+            view.setUint8(offset + i, string.charCodeAt(i));
+        }
+    }
+
+    function encodeWAV(samples, sampleRate) {
+        let buffer = new ArrayBuffer(44 + samples.length * 2);
+        let view = new DataView(buffer);
+
+        /* RIFF identifier */
+        writeString(view, 0, 'RIFF');
+        /* file length */
+        view.setUint32(4, 36 + samples.length * 2, true);
+        /* RIFF type */
+        writeString(view, 8, 'WAVE');
+        /* format chunk identifier */
+        writeString(view, 12, 'fmt ');
+        /* format chunk length */
+        view.setUint32(16, 16, true);
+        /* sample format (raw PCM) */
+        view.setUint16(20, 1, true);
+        /* channel count (stereo) */
+        view.setUint16(22, 2, true);
+        /* sample rate */
+        view.setUint32(24, sampleRate, true);
+        /* byte rate (sample rate * block align) */
+        view.setUint32(28, sampleRate * 4, true);
+        /* block align (channel count * bytes per sample) */
+        view.setUint16(32, 4, true);
+        /* bits per sample (16-bit) */
+        view.setUint16(34, 16, true);
+        /* data chunk identifier */
+        writeString(view, 36, 'data');
+        /* data chunk length */
+        view.setUint32(40, samples.length * 2, true);
+
+        // Escreve os samples convertendo para Int16 PCM
+        let offset = 44;
+        for (let i = 0; i < samples.length; i++, offset += 2) {
+            let s = Math.max(-1, Math.min(1, samples[i]));
+            view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+        }
+
+        return new Blob([view], { type: 'audio/wav' });
+    }
+
+    function exportarWav(buffersL, buffersR, sampleRate) {
+        let totalLength = 0;
+        for (let i = 0; i < buffersL.length; i++) {
+            totalLength += buffersL[i].length;
+        }
+        
+        let mergedL = mergeBuffers(buffersL, totalLength);
+        let mergedR = mergeBuffers(buffersR, totalLength);
+        let interleaved = interleave(mergedL, mergedR);
+        return encodeWAV(interleaved, sampleRate);
     }
 
     function carregarMusicaABC(conteudo) {
