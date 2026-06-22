@@ -366,16 +366,6 @@
             font-weight: 600 !important;
             font-size: 14px !important;
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .btn-gravando {
-            animation: pulse 1.5s infinite;
-            background-color: #c0392b !important;
-        }
     </style>
 </head>
 <body>
@@ -388,7 +378,7 @@
             <input type="text" id="nome-aluno" placeholder="Nome do Compositor">
             <button class="btn btn-primary" id="btn-salvar" style="background-color: #27ae60;">💾 Salvar Música</button>
             <button class="btn btn-primary" id="btn-carregar" style="background-color: #2980b9;">📂 Carregar Música</button>
-            <button class="btn btn-warning" id="btn-gravar-wav" style="background-color: #e67e22; color: white;">🔴 Gravar WAV</button>
+            <button class="btn btn-warning" id="btn-gravar-wav" style="background-color: #e67e22; color: white;">💾 Gerar WAV</button>
             <input type="file" id="input-arquivo-abc" accept=".abc" style="display: none;">
         </div>
     </header>
@@ -539,10 +529,10 @@
             salvarMusicaABC();
         });
 
-        // Botão Gravar WAV
+        // Botão Gerar WAV
         const btnGravar = document.getElementById('btn-gravar-wav');
         btnGravar.addEventListener('click', () => {
-            alternarGravacao();
+            baixarWavPartitura();
         });
 
         // Botão Carregar Música ABC
@@ -665,28 +655,12 @@
     let audioCtx = null;
     let synthControl = null;
     let bpmSelecionado = 120;
-    let mainGainNode = null;
-    let isRecording = false;
-    let recordBufferLeft = [];
-    let recordBufferRight = [];
-    let recorderNode = null;
+    let currentSynth = null;
+    let currentSynthPromise = null;
 
     function initAudio() {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
-            // Cria um nó de ganho principal para receber todo o áudio do app
-            mainGainNode = audioCtx.createGain();
-            mainGainNode.connect(audioCtx.destination);
-            
-            // Intercepta todas as conexões direcionadas a audioCtx.destination
-            const originalConnect = AudioNode.prototype.connect;
-            AudioNode.prototype.connect = function(destination, output, input) {
-                if (destination && destination.context === audioCtx && destination === audioCtx.destination && this !== mainGainNode && mainGainNode) {
-                    return originalConnect.call(this, mainGainNode, output, input);
-                }
-                return originalConnect.call(this, destination, output, input);
-            };
         }
         if (audioCtx.state === 'suspended') {
             audioCtx.resume();
@@ -971,18 +945,28 @@
             }
 
             initAudio(); // Garante que o contexto e a interceptação estejam prontos
-            const synthInstance = new ABCJS.synth.CreateSynth();
-            synthInstance.init({
+            currentSynth = new ABCJS.synth.CreateSynth();
+            currentSynthPromise = currentSynth.init({
                 visualObj: visualObj[0],
                 audioContext: audioCtx, // Passa o contexto compartilhado para a gravação
                 options: {
                     soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
                 }
-            }).then(() => {
-                synthControl.setTune(visualObj[0], true).then(() => {
-                    console.log("ABCJS Synth: Tune set successfully");
+            });
+
+            currentSynthPromise.then(() => {
+                currentSynth.prime().then(() => {
+                    console.log("ABCJS Synth: currentSynth primed successfully");
+                    synthControl.setTune(visualObj[0], true, {
+                        audioContext: audioCtx,
+                        soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
+                    }).then(() => {
+                        console.log("ABCJS Synth: Tune set successfully");
+                    }).catch(err => {
+                        console.warn("ABCJS Synth: Failed to set tune on controller:", err);
+                    });
                 }).catch(err => {
-                    console.warn("ABCJS Synth: Failed to set tune on controller:", err);
+                    console.warn("ABCJS Synth: currentSynth priming failed:", err);
                 });
             }).catch(err => {
                 console.warn("ABCJS Synth: Failed to initialize synth instance:", err);
@@ -1011,93 +995,97 @@
         URL.revokeObjectURL(url);
     }
 
-    function alternarGravacao() {
-        if (isRecording) {
-            pararGravacao();
-        } else {
-            iniciarGravacao();
-        }
-    }
-
-    function iniciarGravacao() {
-        if (isRecording) return;
-        initAudio();
-        
-        recordBufferLeft = [];
-        recordBufferRight = [];
-        
-        // ScriptProcessorNode para capturar o áudio (buffer de 4096 frames, 2 canais entrada, 2 canais saída)
-        recorderNode = audioCtx.createScriptProcessor(4096, 2, 2);
-        
-        recorderNode.onaudioprocess = function(e) {
-            if (!isRecording) return;
-            
-            const left = e.inputBuffer.getChannelData(0);
-            const right = e.inputBuffer.getChannelData(1);
-            
-            recordBufferLeft.push(new Float32Array(left));
-            recordBufferRight.push(new Float32Array(right));
-            
-            // Passa o áudio adiante para não silenciar
-            const outLeft = e.outputBuffer.getChannelData(0);
-            const outRight = e.outputBuffer.getChannelData(1);
-            outLeft.set(left);
-            outRight.set(right);
-        };
-        
-        // Conecta o nó de ganho global ao recorderNode e este ao destino final
-        mainGainNode.connect(recorderNode);
-        recorderNode.connect(audioCtx.destination);
-        
-        isRecording = true;
-        
-        // Feedback visual no botão
-        const btn = document.getElementById('btn-gravar-wav');
-        btn.innerText = "⏹️ Parar Gravação";
-        btn.classList.add('btn-gravando');
-    }
-
-    function pararGravacao() {
-        if (!isRecording) return;
-        isRecording = false;
-        
-        if (recorderNode) {
-            recorderNode.disconnect();
-            mainGainNode.disconnect(recorderNode);
-            recorderNode = null;
-        }
-        
-        // Restaura feedback visual no botão
-        const btn = document.getElementById('btn-gravar-wav');
-        btn.innerText = "🔴 Gravar WAV";
-        btn.classList.remove('btn-gravando');
-        
-        if (recordBufferLeft.length === 0) {
-            alert("Nenhum áudio foi capturado para gravação.");
+    function baixarWavPartitura() {
+        if (!currentSynth || !currentSynthPromise) {
+            alert("A partitura não foi carregada ou inicializada ainda.");
             return;
         }
         
-        const blob = exportarWav(recordBufferLeft, recordBufferRight, audioCtx.sampleRate);
-        const url = URL.createObjectURL(blob);
-        
         let nomeComposicao = (composicao.titulo || "sem_titulo").replace(/\s+/g, '_');
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${nomeComposicao}.wav`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        const nomeArquivo = `${nomeComposicao}.wav`;
+        
+        const btn = document.getElementById('btn-gravar-wav');
+        const originalText = btn.innerText;
+        btn.innerText = "⏳ Gerando WAV...";
+        btn.disabled = true;
+        
+        function dispararDownload() {
+            try {
+                // Usamos diretamente o exportador manual do AudioBuffer, que é 100% confiável
+                // e funciona disparando o clique em um link de download temporário do navegador.
+                const audioBuffer = currentSynth.getAudioBuffer();
+                if (audioBuffer) {
+                    const wavBlob = exportarWavDeBuffer(audioBuffer);
+                    const url = URL.createObjectURL(wavBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = nomeArquivo;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    console.log("Download manual via AudioBuffer concluído.");
+                } else {
+                    alert("O áudio da partitura não pôde ser gerado.");
+                }
+            } catch (e) {
+                console.error("Erro ao disparar download do WAV:", e);
+                alert("Erro ao exportar o WAV: " + e.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+        
+        currentSynthPromise.then(() => {
+            try {
+                const buffer = currentSynth.getAudioBuffer();
+                if (buffer) {
+                    dispararDownload();
+                } else {
+                    console.log("AudioBuffer não encontrado. Chamando prime() antes de baixar...");
+                    currentSynth.prime().then(() => {
+                        dispararDownload();
+                    }).catch(err => {
+                        console.error("Erro ao primar sintetizador:", err);
+                        alert("Não foi possível gerar o áudio da partitura (verifique se possui conexão de internet para carregar os SoundFonts).");
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                    });
+                }
+            } catch (e) {
+                console.log("Erro ao checar AudioBuffer, tentando prime():", e);
+                currentSynth.prime().then(() => {
+                    dispararDownload();
+                }).catch(err => {
+                    console.error("Erro no fallback de prime:", err);
+                    alert("Erro ao gerar áudio: " + err.message);
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+            }
+        }).catch(err => {
+            console.error("Erro na inicialização da partitura para download:", err);
+            alert("Não foi possível inicializar o sintetizador de áudio da partitura.");
+            btn.innerText = originalText;
+            btn.disabled = false;
+        });
     }
 
-    function mergeBuffers(channelBuffer, totalLength) {
-        let result = new Float32Array(totalLength);
-        let offset = 0;
-        for (let i = 0; i < channelBuffer.length; i++) {
-            result.set(channelBuffer[i], offset);
-            offset += channelBuffer[i].length;
+    function exportarWavDeBuffer(audioBuffer) {
+        const channelCount = audioBuffer.numberOfChannels;
+        const sampleRate = audioBuffer.sampleRate;
+        
+        let interleaved = null;
+        if (channelCount === 2) {
+            const left = audioBuffer.getChannelData(0);
+            const right = audioBuffer.getChannelData(1);
+            interleaved = interleave(left, right);
+        } else {
+            interleaved = audioBuffer.getChannelData(0);
         }
-        return result;
+        
+        return encodeWAV(interleaved, sampleRate, channelCount);
     }
 
     function interleave(inputL, inputR) {
@@ -1119,7 +1107,7 @@
         }
     }
 
-    function encodeWAV(samples, sampleRate) {
+    function encodeWAV(samples, sampleRate, channelCount = 2) {
         let buffer = new ArrayBuffer(44 + samples.length * 2);
         let view = new DataView(buffer);
 
@@ -1135,14 +1123,14 @@
         view.setUint32(16, 16, true);
         /* sample format (raw PCM) */
         view.setUint16(20, 1, true);
-        /* channel count (stereo) */
-        view.setUint16(22, 2, true);
+        /* channel count */
+        view.setUint16(22, channelCount, true);
         /* sample rate */
         view.setUint32(24, sampleRate, true);
-        /* byte rate (sample rate * block align) */
-        view.setUint32(28, sampleRate * 4, true);
+        /* byte rate (sample rate * channelCount * 2) */
+        view.setUint32(28, sampleRate * channelCount * 2, true);
         /* block align (channel count * bytes per sample) */
-        view.setUint16(32, 4, true);
+        view.setUint16(32, channelCount * 2, true);
         /* bits per sample (16-bit) */
         view.setUint16(34, 16, true);
         /* data chunk identifier */
@@ -1158,18 +1146,6 @@
         }
 
         return new Blob([view], { type: 'audio/wav' });
-    }
-
-    function exportarWav(buffersL, buffersR, sampleRate) {
-        let totalLength = 0;
-        for (let i = 0; i < buffersL.length; i++) {
-            totalLength += buffersL[i].length;
-        }
-        
-        let mergedL = mergeBuffers(buffersL, totalLength);
-        let mergedR = mergeBuffers(buffersR, totalLength);
-        let interleaved = interleave(mergedL, mergedR);
-        return encodeWAV(interleaved, sampleRate);
     }
 
     function carregarMusicaABC(conteudo) {
