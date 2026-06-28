@@ -152,15 +152,79 @@
         }
 
         .pista-preview {
-            font-family: monospace;
             background: #f1f5f9;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 8px 12px;
+            border-radius: 12px;
             flex: 1;
             margin-left: 20px;
-            white-space: normal;
-            word-wrap: break-word;
-            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            min-height: 40px;
+            box-sizing: border-box;
+        }
+
+        .bloquinho-nota {
+            height: 24px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            font-family: inherit;
+        }
+        
+        .bloquinho-nota.dur-0_5 { width: 15px; font-size: 9px; }
+        .bloquinho-nota.dur-1 { width: 30px; }
+        .bloquinho-nota.dur-2 { width: 50px; }
+
+        .bloquinho-nota.nota-c { background-color: var(--cor-c); color: white; }
+        .bloquinho-nota.nota-d { background-color: var(--cor-d); color: white; }
+        .bloquinho-nota.nota-e { background-color: var(--cor-e); color: #333; }
+        .bloquinho-nota.nota-f { background-color: var(--cor-f); color: white; }
+        .bloquinho-nota.nota-g { background-color: var(--cor-g); color: #333; }
+        .bloquinho-nota.nota-a { background-color: var(--cor-a); color: white; }
+        .bloquinho-nota.nota-b { background-color: var(--cor-b); color: white; }
+        .bloquinho-nota.nota-z { background-color: #cbd5e1; border: 2px dashed #94a3b8; box-sizing: border-box; color: #475569; }
+
+        .pista-acoes {
+            display: flex;
+            gap: 8px;
+            margin-left: 15px;
+        }
+
+        .btn-pista-acao {
+            background-color: #f1f5f9;
+            border: 2px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #475569;
+        }
+
+        .btn-pista-acao:hover {
+            background-color: #e2e8f0;
+            border-color: #94a3b8;
+            color: #1e293b;
+        }
+
+        .btn-pista-acao:active {
+            transform: scale(0.95);
+        }
+
+        .btn-pista-acao.desabilitado {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         /* Controles de Modificação (Oitava e Duração) */
@@ -202,6 +266,11 @@
             font-weight: bold;
             font-size: 14px;
             flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 68px;
+            box-sizing: border-box;
         }
 
         .btn-toggle.ativo {
@@ -282,13 +351,14 @@
 
         /* Custom Estilização para o Player do ABCJS */
         #audio-controls .abcjs-audio-player {
-            background-color: #f8fafc !important;
+            background: linear-gradient(135deg, #ffffff, #f1f5f9) !important;
             border: 2px solid #e2e8f0 !important;
-            border-radius: 15px !important;
-            padding: 10px 15px !important;
+            border-radius: 20px !important;
+            padding: 12px 20px !important;
             display: flex !important;
             align-items: center !important;
-            gap: 15px !important;
+            gap: 20px !important;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04) !important;
         }
 
         #audio-controls .abcjs-inline-audio {
@@ -302,69 +372,90 @@
         }
 
         #audio-controls .abcjs-btn {
-            background-color: #334155 !important;
             border: none !important;
-            border-radius: 10px !important;
-            width: 40px !important;
-            height: 40px !important;
+            width: 44px !important;
+            height: 44px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             cursor: pointer !important;
-            transition: all 0.2s !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             margin-right: 8px !important;
             padding: 0 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
         }
 
-        #audio-controls .abcjs-btn g {
-            fill: #ffffff !important;
-            stroke: #ffffff !important;
+        /* Botões de Controle (Play, Pause, Reset, etc.) - Estilo Circular Branco */
+        #audio-controls .abcjs-btn {
+            background: #ffffff !important;
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 50% !important;
+            color: #475569 !important;
         }
 
+        #audio-controls .abcjs-btn g, 
+        #audio-controls .abcjs-btn path {
+            fill: #64748b !important;
+            stroke: #64748b !important;
+            transition: fill 0.3s, stroke 0.3s !important;
+        }
+
+        /* Efeitos de Hover para todos os botões do player */
         #audio-controls .abcjs-btn:hover {
-            background-color: #475569 !important;
-            transform: scale(1.05) !important;
+            background: #f8fafc !important;
+            border-color: #cbd5e1 !important;
+            transform: scale(1.1) translateY(-2px) !important;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08) !important;
         }
 
-        #audio-controls .abcjs-btn:hover g {
-            fill: #ffffff !important;
-            stroke: #ffffff !important;
+        #audio-controls .abcjs-btn:hover g,
+        #audio-controls .abcjs-btn:hover path {
+            fill: #334155 !important;
+            stroke: #334155 !important;
         }
 
+        /* Active click */
         #audio-controls .abcjs-btn:active {
-            transform: scale(0.95) !important;
+            transform: scale(0.95) translateY(0) !important;
         }
 
+        /* Barra de Progresso */
         #audio-controls .abcjs-midi-progress-background {
             background-color: #e2e8f0 !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 6px !important;
-            height: 8px !important;
+            border: none !important;
+            border-radius: 10px !important;
+            height: 10px !important;
             cursor: pointer !important;
             position: relative !important;
         }
 
         #audio-controls .abcjs-midi-progress-bar {
-            background-color: #8e44ad !important;
-            border-radius: 6px !important;
-            height: 8px !important;
+            background: linear-gradient(90deg, #8e44ad, #d35400) !important;
+            border-radius: 10px !important;
+            height: 10px !important;
         }
 
         #audio-controls .abcjs-midi-progress-indicator {
-            background-color: #8e44ad !important;
-            border: 2px solid #ffffff !important;
+            background-color: #ffffff !important;
+            border: 3px solid #8e44ad !important;
             border-radius: 50% !important;
-            width: 16px !important;
-            height: 16px !important;
-            top: -4px !important;
+            width: 20px !important;
+            height: 20px !important;
+            top: -5px !important;
             position: absolute !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+            box-shadow: 0 3px 6px rgba(142, 68, 173, 0.4) !important;
+            transition: transform 0.1s !important;
+        }
+
+        #audio-controls .abcjs-midi-progress-indicator:hover {
+            transform: scale(1.2) !important;
         }
 
         #audio-controls .abcjs-audio-player .abcjs-text {
             color: #475569 !important;
-            font-weight: 600 !important;
+            font-weight: 700 !important;
             font-size: 14px !important;
+            font-family: 'Courier New', Courier, monospace !important;
         }
     </style>
 </head>
@@ -404,6 +495,7 @@
         <div class="grupo-controle">
             <h3>Tamanho da Nota (Ritmo)</h3>
             <div class="btn-group">
+                <button class="btn-toggle" id="dur-0.5" onclick="setDuracao(0.5)">🏃 Passo Rápido</button>
                 <button class="btn-toggle ativo" id="dur-1" onclick="setDuracao(1)">🚶 Passo Normal</button>
                 <button class="btn-toggle" id="dur-2" onclick="setDuracao(2)">🦒 Passo Gigante</button>
             </div>
@@ -469,6 +561,7 @@
     let oitavaSelecionada = "normal"; 
     let duracaoSelecionada = 1;        
     let partituraVisivel = false;
+    let notasCopiadas = null;
 
     // Inicialização da Interface ao carregar a página
     window.addEventListener('DOMContentLoaded', () => {
@@ -621,7 +714,7 @@
             const div = document.createElement('div');
             div.className = `pista-row ${index === composicao.vozAtivaIndex ? 'ativa' : ''}`;
             div.onclick = (e) => {
-                if(e.target.tagName !== 'SELECT') {
+                if(e.target.tagName !== 'SELECT' && !e.target.closest('.btn-pista-acao')) {
                     composicao.vozAtivaIndex = index;
                     atualizarInterfacePistas();
                 }
@@ -633,6 +726,29 @@
                 selectOptions += `<option value="${inst.id}" ${voz.instrumento == inst.id ? 'selected' : ''}>${inst.nome}</option>`;
             });
 
+            // Constrói os bloquinhos coloridos para representar as notas
+            let bloquinhosHtml = '';
+            if (voz.notas.length > 0) {
+                voz.notas.forEach(nota => {
+                    const matchNota = nota.match(/[A-Ga-gzZ]/);
+                    const notaLetra = matchNota ? matchNota[0].toLowerCase() : 'z';
+                    const letraExibida = notaLetra.toUpperCase();
+                    
+                    let durClass = 'dur-1';
+                    if (nota.includes('/')) {
+                        durClass = 'dur-0_5';
+                    } else {
+                        const matchMult = nota.match(/\d+$/);
+                        if (matchMult && parseInt(matchMult[0]) > 1) {
+                            durClass = 'dur-2';
+                        }
+                    }
+                    bloquinhosHtml += `<div class="bloquinho-nota nota-${notaLetra} ${durClass}">${letraExibida}</div>`;
+                });
+            } else {
+                bloquinhosHtml = '<span style="color: #94a3b8; font-size: 14px; font-style: italic;">Vazia (toque as notas)</span>';
+            }
+
             div.innerHTML = `
                 <div class="pista-info">
                     <span class="pista-nome">🎵 Pista ${index + 1}</span>
@@ -640,10 +756,28 @@
                         ${selectOptions}
                     </select>
                 </div>
-                <div class="pista-preview">${voz.notas.length > 0 ? voz.notas.join(' ') : 'Vazia (toque as notas)'}</div>
+                <div class="pista-preview">${bloquinhosHtml}</div>
+                <div class="pista-acoes">
+                    <button class="btn-pista-acao" onclick="copiarPista(${index}, event)" title="Copiar Notas de Música">📋 Copiar</button>
+                    <button class="btn-pista-acao ${notasCopiadas ? '' : 'desabilitado'}" onclick="colarPista(${index}, event)" title="Colar Notas de Música">📥 Colar</button>
+                </div>
             `;
             container.appendChild(div);
         });
+    }
+
+    function copiarPista(index, event) {
+        if (event) event.stopPropagation();
+        notasCopiadas = [...composicao.vozes[index].notas];
+        atualizarInterfacePistas();
+    }
+
+    function colarPista(index, event) {
+        if (event) event.stopPropagation();
+        if (!notasCopiadas) return;
+        composicao.vozes[index].notas = [...notasCopiadas];
+        atualizarInterfacePistas();
+        renderizarPartitura();
     }
 
     function mudarInstrumento(index, idInstrumento) {
@@ -1058,10 +1192,19 @@
             const instId = voz.instrumento;
 
             let duracaoSegundos = 60 / bpmSelecionado;
-            const matchDuracao = nota.match(/\d+$/);
-            if (matchDuracao) {
-                duracaoSegundos *= parseInt(matchDuracao[0]);
+            let fatorDuracao = 1;
+            if (nota.includes('/')) {
+                const partes = nota.split('/');
+                const divisorText = partes[partes.length - 1];
+                const divisor = parseInt(divisorText) || 2;
+                fatorDuracao = 1 / divisor;
+            } else {
+                const matchMultiplicador = nota.match(/\d+$/);
+                if (matchMultiplicador) {
+                    fatorDuracao = parseInt(matchMultiplicador[0]);
+                }
             }
+            duracaoSegundos *= fatorDuracao;
 
             tocarInstrumento(freq, instId, duracaoSegundos);
         } catch (e) {
@@ -1083,7 +1226,9 @@
         }
 
         // Regra de Duração
-        if (duracaoSelecionada > 1) {
+        if (duracaoSelecionada === 0.5) {
+            notaFormatada += '/';
+        } else if (duracaoSelecionada > 1) {
             notaFormatada += duracaoSelecionada;
         }
 
@@ -1123,6 +1268,8 @@
     }
 
     // Renderização do Motor Gráfico ABCJS e Configuração do Tocador de Áudio
+    let debouncedAudioTimeout = null;
+
     function renderizarPartitura() {
         const codigoABC = compilarParaABC();
         const visualObj = ABCJS.renderAbc("notation", codigoABC, {
@@ -1143,33 +1290,43 @@
                 });
             }
 
-            initAudio(); // Garante que o contexto e a interceptação estejam prontos
-            currentSynth = new ABCJS.synth.CreateSynth();
-            currentSynthPromise = currentSynth.init({
-                visualObj: visualObj[0],
-                audioContext: audioCtx, // Passa o contexto compartilhado para a gravação
-                options: {
-                    soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
-                }
-            });
+            if (debouncedAudioTimeout) {
+                clearTimeout(debouncedAudioTimeout);
+            }
 
-            currentSynthPromise.then(() => {
-                currentSynth.prime().then(() => {
-                    console.log("ABCJS Synth: currentSynth primed successfully");
-                    synthControl.setTune(visualObj[0], true, {
-                        audioContext: audioCtx,
-                        soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
-                    }).then(() => {
-                        console.log("ABCJS Synth: Tune set successfully");
-                    }).catch(err => {
-                        console.warn("ABCJS Synth: Failed to set tune on controller:", err);
+            debouncedAudioTimeout = setTimeout(() => {
+                try {
+                    initAudio(); // Garante que o contexto e a interceptação estejam prontos
+                    currentSynth = new ABCJS.synth.CreateSynth();
+                    currentSynthPromise = currentSynth.init({
+                        visualObj: visualObj[0],
+                        audioContext: audioCtx, // Passa o contexto compartilhado para a gravação
+                        options: {
+                            soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
+                        }
                     });
-                }).catch(err => {
-                    console.warn("ABCJS Synth: currentSynth priming failed:", err);
-                });
-            }).catch(err => {
-                console.warn("ABCJS Synth: Failed to initialize synth instance:", err);
-            });
+
+                    currentSynthPromise.then(() => {
+                        currentSynth.prime().then(() => {
+                            console.log("ABCJS Synth: currentSynth primed successfully");
+                            synthControl.setTune(visualObj[0], true, {
+                                audioContext: audioCtx,
+                                soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/FluidR3_GM/"
+                            }).then(() => {
+                                console.log("ABCJS Synth: Tune set successfully");
+                            }).catch(err => {
+                                console.warn("ABCJS Synth: Failed to set tune on controller:", err);
+                            });
+                        }).catch(err => {
+                            console.warn("ABCJS Synth: currentSynth priming failed:", err);
+                        });
+                    }).catch(err => {
+                        console.warn("ABCJS Synth: Failed to initialize synth instance:", err);
+                    });
+                } catch (e) {
+                    console.error("Erro na inicialização do sintetizador:", e);
+                }
+            }, 800);
         }
     }
 
