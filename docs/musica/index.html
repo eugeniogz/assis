@@ -449,7 +449,13 @@
         { id: 80, nome: "👾 Videogame (Synth)" },
         { id: 24, nome: "🎸 Violão" },
         { id: 56, nome: "🎺 Trompete" },
-        { id: 115, nome: "🥁 Bloco de Madeira" }
+        { id: 115, nome: "🥁 Bloco de Madeira" },
+        { id: 10, nome: "🔔 Caixinha de Música" },
+        { id: 73, nome: "🪈 Flauta" },
+        { id: 40, nome: "🎻 Violino" },
+        { id: 46, nome: "🧸 Harpa" },
+        { id: 21, nome: "🪗 Acordeão" },
+        { id: 116, nome: "🥁 Tambor" }
     ];
 
     let composicao = {
@@ -829,6 +835,199 @@
                     osc.connect(masterGain);
                     osc.start(time);
                     osc.stop(time + 0.1);
+                }
+                break;
+            case 10: // Caixinha de Música
+                {
+                    const osc1 = audioCtx.createOscillator();
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(freq, time);
+
+                    const osc2 = audioCtx.createOscillator();
+                    osc2.type = 'sine';
+                    osc2.frequency.setValueAtTime(freq * 4, time);
+
+                    const gain1 = audioCtx.createGain();
+                    gain1.gain.setValueAtTime(volumeGeral * 0.8, time);
+                    gain1.gain.exponentialRampToValueAtTime(0.0001, time + duracao * 0.8);
+
+                    const gain2 = audioCtx.createGain();
+                    gain2.gain.setValueAtTime(volumeGeral * 0.4, time);
+                    gain2.gain.exponentialRampToValueAtTime(0.0001, time + 0.15);
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    gain1.connect(masterGain);
+                    gain2.connect(masterGain);
+
+                    osc1.start(time);
+                    osc2.start(time);
+                    osc1.stop(time + duracao);
+                    osc2.stop(time + 0.2);
+                }
+                break;
+            case 73: // Flauta
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, time);
+
+                    // Vibrato (LFO)
+                    const lfo = audioCtx.createOscillator();
+                    lfo.frequency.setValueAtTime(6, time);
+                    const lfoGain = audioCtx.createGain();
+                    lfoGain.gain.setValueAtTime(freq * 0.015, time);
+
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(osc.frequency);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 0.8, time + 0.08);
+                    masterGain.gain.setValueAtTime(volumeGeral * 0.8, time + duracao - 0.08);
+                    masterGain.gain.linearRampToValueAtTime(0.0001, time + duracao);
+
+                    osc.connect(masterGain);
+                    lfo.start(time);
+                    osc.start(time);
+                    lfo.stop(time + duracao);
+                    osc.stop(time + duracao);
+                }
+                break;
+            case 40: // Violino
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(freq, time);
+
+                    // Vibrato
+                    const lfo = audioCtx.createOscillator();
+                    lfo.frequency.setValueAtTime(5.5, time);
+                    const lfoGain = audioCtx.createGain();
+                    lfoGain.gain.setValueAtTime(freq * 0.02, time);
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(osc.frequency);
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.setValueAtTime(freq * 2, time);
+                    filter.Q.setValueAtTime(1.5, time);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 0.6, time + 0.12);
+                    masterGain.gain.setValueAtTime(volumeGeral * 0.6, time + duracao - 0.08);
+                    masterGain.gain.linearRampToValueAtTime(0.0001, time + duracao);
+
+                    osc.connect(filter);
+                    filter.connect(masterGain);
+                    lfo.start(time);
+                    osc.start(time);
+                    lfo.stop(time + duracao);
+                    osc.stop(time + duracao);
+                }
+                break;
+            case 21: // Acordeão
+                {
+                    const osc1 = audioCtx.createOscillator();
+                    osc1.type = 'triangle';
+                    osc1.frequency.setValueAtTime(freq, time);
+
+                    const osc2 = audioCtx.createOscillator();
+                    osc2.type = 'sawtooth';
+                    osc2.frequency.setValueAtTime(freq * 1.008, time);
+
+                    const gain1 = audioCtx.createGain();
+                    gain1.gain.setValueAtTime(volumeGeral * 0.5, time);
+                    const gain2 = audioCtx.createGain();
+                    gain2.gain.setValueAtTime(volumeGeral * 0.25, time);
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(freq * 3, time);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(1.0, time + 0.05);
+                    masterGain.gain.setValueAtTime(1.0, time + duracao - 0.05);
+                    masterGain.gain.linearRampToValueAtTime(0.0001, time + duracao);
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    gain1.connect(filter);
+                    gain2.connect(filter);
+                    filter.connect(masterGain);
+
+                    osc1.start(time);
+                    osc2.start(time);
+                    osc1.stop(time + duracao);
+                    osc2.stop(time + duracao);
+                }
+                break;
+            case 46: // Harpa
+                {
+                    const osc1 = audioCtx.createOscillator();
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(freq, time);
+
+                    const osc2 = audioCtx.createOscillator();
+                    osc2.type = 'triangle';
+                    osc2.frequency.setValueAtTime(freq * 2, time);
+
+                    const gain1 = audioCtx.createGain();
+                    gain1.gain.setValueAtTime(volumeGeral * 0.6, time);
+                    const gain2 = audioCtx.createGain();
+                    gain2.gain.setValueAtTime(volumeGeral * 0.2, time);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(1.0, time + 0.005);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + duracao * 1.5);
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    gain1.connect(masterGain);
+                    gain2.connect(masterGain);
+
+                    osc1.start(time);
+                    osc2.start(time);
+                    osc1.stop(time + duracao * 1.5);
+                    osc2.stop(time + duracao * 1.5);
+                }
+                break;
+            case 116: // Tambor
+                {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(150, time);
+                    osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.15);
+
+                    const bufferSize = audioCtx.sampleRate * 0.1;
+                    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        data[i] = Math.random() * 2 - 1;
+                    }
+                    const noise = audioCtx.createBufferSource();
+                    noise.buffer = buffer;
+
+                    const noiseFilter = audioCtx.createBiquadFilter();
+                    noiseFilter.type = 'lowpass';
+                    noiseFilter.frequency.setValueAtTime(300, time);
+
+                    const noiseGain = audioCtx.createGain();
+                    noiseGain.gain.setValueAtTime(volumeGeral * 1.5, time);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.05);
+
+                    noise.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
+                    noiseGain.connect(masterGain);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(volumeGeral * 2.0, time + 0.002);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.25);
+
+                    osc.connect(masterGain);
+                    osc.start(time);
+                    noise.start(time);
+                    osc.stop(time + 0.3);
+                    noise.stop(time + 0.3);
                 }
                 break;
             default:
