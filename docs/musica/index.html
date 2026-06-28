@@ -181,13 +181,34 @@
         .bloquinho-nota.dur-1 { width: 30px; }
         .bloquinho-nota.dur-2 { width: 40px; }
 
-        .bloquinho-nota.nota-c { background-color: var(--cor-c); color: white; }
-        .bloquinho-nota.nota-d { background-color: var(--cor-d); color: white; }
-        .bloquinho-nota.nota-e { background-color: var(--cor-e); color: #333; }
-        .bloquinho-nota.nota-f { background-color: var(--cor-f); color: white; }
-        .bloquinho-nota.nota-g { background-color: var(--cor-g); color: #333; }
-        .bloquinho-nota.nota-a { background-color: var(--cor-a); color: white; }
-        .bloquinho-nota.nota-b { background-color: var(--cor-b); color: white; }
+        /* Normal (Tom Normal) */
+        .bloquinho-nota.tom-normal.nota-c { background-color: var(--cor-c); color: white; }
+        .bloquinho-nota.tom-normal.nota-d { background-color: var(--cor-d); color: white; }
+        .bloquinho-nota.tom-normal.nota-e { background-color: var(--cor-e); color: #333; }
+        .bloquinho-nota.tom-normal.nota-f { background-color: var(--cor-f); color: white; }
+        .bloquinho-nota.tom-normal.nota-g { background-color: var(--cor-g); color: #333; }
+        .bloquinho-nota.tom-normal.nota-a { background-color: var(--cor-a); color: white; }
+        .bloquinho-nota.tom-normal.nota-b { background-color: var(--cor-b); color: white; }
+
+        /* Graves (Tom Grave - Cores mais escuras/profundas) */
+        .bloquinho-nota.tom-grave.nota-c { background-color: #991B1B; color: white; }
+        .bloquinho-nota.tom-grave.nota-d { background-color: #9A3412; color: white; }
+        .bloquinho-nota.tom-grave.nota-e { background-color: #854D0E; color: white; }
+        .bloquinho-nota.tom-grave.nota-f { background-color: #166534; color: white; }
+        .bloquinho-nota.tom-grave.nota-g { background-color: #075985; color: white; }
+        .bloquinho-nota.tom-grave.nota-a { background-color: #3730A3; color: white; }
+        .bloquinho-nota.tom-grave.nota-b { background-color: #9D174D; color: white; }
+
+        /* Agudos (Tom Agudo - Cores mais claras/pastel/brilhantes) */
+        .bloquinho-nota.tom-agudo.nota-c { background-color: #FCA5A5; color: #1e293b; }
+        .bloquinho-nota.tom-agudo.nota-d { background-color: #FED7AA; color: #1e293b; }
+        .bloquinho-nota.tom-agudo.nota-e { background-color: #FEF08A; color: #1e293b; }
+        .bloquinho-nota.tom-agudo.nota-f { background-color: #BBF7D0; color: #1e293b; }
+        .bloquinho-nota.tom-agudo.nota-g { background-color: #BAE6FD; color: #1e293b; }
+        .bloquinho-nota.tom-agudo.nota-a { background-color: #C7D2FE; color: #1e293b; }
+        .bloquinho-nota.tom-agudo.nota-b { background-color: #FBCFE8; color: #1e293b; }
+
+        /* Pausa */
         .bloquinho-nota.nota-z { background-color: #cbd5e1; border: 2px dashed #94a3b8; box-sizing: border-box; color: #475569; }
 
         .pista-acoes {
@@ -487,9 +508,9 @@
         <div class="grupo-controle">
             <h3>Altura do Som (Oitava)</h3>
             <div class="btn-group">
-                <button class="btn-toggle" id="oct-baixa" onclick="setOitava('baixa')">🐻 Grave</button>
-                <button class="btn-toggle ativo" id="oct-normal" onclick="setOitava('normal')">🐦 Normal</button>
                 <button class="btn-toggle" id="oct-alta" onclick="setOitava('alta')">🐱 Agudo</button>
+                <button class="btn-toggle ativo" id="oct-normal" onclick="setOitava('normal')">🐦 Normal</button>
+                <button class="btn-toggle" id="oct-baixa" onclick="setOitava('baixa')">🐻 Grave</button>
             </div>
         </div>
         <div class="grupo-controle">
@@ -509,18 +530,18 @@
     </section>
 
     <section class="teclado">
-        <button class="tecla c" onclick="tocarNota('C')">C <span>Dó [A]</span></button>
-        <button class="tecla d" onclick="tocarNota('D')">D <span>Ré [S]</span></button>
-        <button class="tecla e" onclick="tocarNota('E')">E <span>Mi [D]</span></button>
-        <button class="tecla f" onclick="tocarNota('F')">F <span>Fá [F]</span></button>
-        <button class="tecla g" onclick="tocarNota('G')">G <span>Sol [G]</span></button>
-        <button class="tecla a" onclick="tocarNota('A')">A <span>Lá [H]</span></button>
-        <button class="tecla b" onclick="tocarNota('B')">B <span>Si [J]</span></button>
-        <button class="tecla z" onclick="tocarNota('z')">Z <span>Pausa [Z]</span></button>
+        <button class="tecla c" onclick="tocarNota('C')">C <span class="legenda-nota" data-nota="C">Dó [A]</span></button>
+        <button class="tecla d" onclick="tocarNota('D')">D <span class="legenda-nota" data-nota="D">Ré [S]</span></button>
+        <button class="tecla e" onclick="tocarNota('E')">E <span class="legenda-nota" data-nota="E">Mi [D]</span></button>
+        <button class="tecla f" onclick="tocarNota('F')">F <span class="legenda-nota" data-nota="F">Fá [F]</span></button>
+        <button class="tecla g" onclick="tocarNota('G')">G <span class="legenda-nota" data-nota="G">Sol [G]</span></button>
+        <button class="tecla a" onclick="tocarNota('A')">A <span class="legenda-nota" data-nota="A">Lá [H]</span></button>
+        <button class="tecla b" onclick="tocarNota('B')">B <span class="legenda-nota" data-nota="B">Si [J]</span></button>
+        <button class="tecla z" onclick="tocarNota('z')">Z <span class="legenda-nota" data-nota="z">Pausa [Espaço]</span></button>
     </section>
 
     <section class="acoes-inferiores">
-        <button class="btn btn-danger" id="btn-desfazer" onclick="desfazerUltimaNota()">↩️ Apagar Última Nota</button>
+        <button class="btn btn-danger" id="btn-desfazer" onclick="desfazerUltimaNota()">↩️ Apagar Última Nota [Backspace]</button>
         <button class="btn btn-primary" id="btn-toggle-partitura" style="background-color: #8e44ad;">Mostrar Partitura</button>
     </section>
 
@@ -567,6 +588,7 @@
     window.addEventListener('DOMContentLoaded', () => {
         atualizarInterfacePistas();
         configurarEventosGlobais();
+        atualizarLegendasTeclado();
         renderizarPartitura(); // Inicializa o player sempre visível
     });
 
@@ -663,18 +685,36 @@
             }
 
             const tecla = e.key.toUpperCase();
-            const mapaTeclado = {
-                'A': 'C',
-                'S': 'D',
-                'D': 'E',
-                'F': 'F',
-                'G': 'G',
-                'H': 'A',
-                'J': 'B',
-                'Z': 'z'
+            
+            const mapaGrave = {
+                'Q': 'C', 'W': 'D', 'E': 'E', 'R': 'F', 'T': 'G', 'Y': 'A', 'U': 'B'
+            };
+            const mapaNormal = {
+                'A': 'C', 'S': 'D', 'D': 'E', 'F': 'F', 'G': 'G', 'H': 'A', 'J': 'B'
+            };
+            const mapaAgudo = {
+                'Z': 'C', 'X': 'D', 'C': 'E', 'V': 'F', 'B': 'G', 'N': 'A', 'M': 'B'
             };
 
-            const nota = mapaTeclado[tecla];
+            let nota = null;
+
+            if (mapaGrave[tecla]) {
+                setOitava('baixa');
+                nota = mapaGrave[tecla];
+            } else if (mapaNormal[tecla]) {
+                setOitava('normal');
+                nota = mapaNormal[tecla];
+            } else if (mapaAgudo[tecla]) {
+                setOitava('alta');
+                nota = mapaAgudo[tecla];
+            } else if (e.key === ' ' || e.code === 'Space') {
+                nota = 'z';
+                e.preventDefault(); // Evita rolar a página com a barra de espaço
+            } else if (e.key === 'Backspace') {
+                desfazerUltimaNota();
+                e.preventDefault(); // Evita comportamento de retroceder página
+            }
+
             if (nota) {
                 tocarNota(nota);
 
@@ -697,12 +737,36 @@
         oitavaSelecionada = tipo;
         document.querySelectorAll('[id^="oct-"]').forEach(el => el.classList.remove('ativo'));
         document.getElementById(`oct-${tipo}`).classList.add('ativo');
+        atualizarLegendasTeclado();
     }
 
     function setDuracao(valor) {
         duracaoSelecionada = valor;
         document.querySelectorAll('[id^="dur-"]').forEach(el => el.classList.remove('ativo'));
         document.getElementById(`dur-${valor}`).classList.add('ativo');
+    }
+
+    function atualizarLegendasTeclado() {
+        const nomesNotas = {
+            'C': 'Dó', 'D': 'Ré', 'E': 'Mi', 'F': 'Fá', 'G': 'Sol', 'A': 'Lá', 'B': 'Si'
+        };
+
+        const atalhosOitava = {
+            'baixa':  { 'C': 'Q', 'D': 'W', 'E': 'E', 'F': 'R', 'G': 'T', 'A': 'Y', 'B': 'U' },
+            'normal': { 'C': 'A', 'D': 'S', 'E': 'D', 'F': 'F', 'G': 'G', 'A': 'H', 'B': 'J' },
+            'alta':   { 'C': 'Z', 'D': 'X', 'E': 'C', 'F': 'V', 'G': 'B', 'A': 'N', 'B': 'M' }
+        };
+
+        document.querySelectorAll('.legenda-nota').forEach(span => {
+            const nota = span.getAttribute('data-nota');
+            if (nota === 'z') {
+                span.innerText = 'Pausa [Espaço]';
+            } else {
+                const nome = nomesNotas[nota];
+                const atalho = atalhosOitava[oitavaSelecionada][nota];
+                span.innerText = `${nome} [${atalho}]`;
+            }
+        });
     }
 
     // Renderização Visual das Pistas na Tela das Crianças
@@ -731,8 +795,26 @@
             if (voz.notas.length > 0) {
                 voz.notas.forEach(nota => {
                     const matchNota = nota.match(/[A-Ga-gzZ]/);
-                    const notaLetra = matchNota ? matchNota[0].toLowerCase() : 'z';
-                    const letraExibida = notaLetra.toUpperCase();
+                    const baseNotaChar = matchNota ? matchNota[0] : 'z';
+                    const ehPausa = baseNotaChar.toLowerCase() === 'z';
+                    
+                    let tom = 'normal';
+                    let letraExibida = baseNotaChar;
+                    
+                    if (!ehPausa) {
+                        if (baseNotaChar === baseNotaChar.toLowerCase()) {
+                            tom = 'agudo';
+                            letraExibida = baseNotaChar;
+                        } else if (nota.includes(',')) {
+                            tom = 'grave';
+                            letraExibida = baseNotaChar + ',';
+                        } else {
+                            tom = 'normal';
+                            letraExibida = baseNotaChar;
+                        }
+                    } else {
+                        letraExibida = 'Z';
+                    }
                     
                     let durClass = 'dur-1';
                     if (nota.includes('/')) {
@@ -743,7 +825,7 @@
                             durClass = 'dur-2';
                         }
                     }
-                    bloquinhosHtml += `<div class="bloquinho-nota nota-${notaLetra} ${durClass}">${letraExibida}</div>`;
+                    bloquinhosHtml += `<div class="bloquinho-nota nota-${baseNotaChar.toLowerCase()} tom-${tom} ${durClass}">${letraExibida}</div>`;
                 });
             } else {
                 bloquinhosHtml = '<span style="color: #94a3b8; font-size: 14px; font-style: italic;">Vazia (toque as notas)</span>';
