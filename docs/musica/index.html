@@ -179,7 +179,10 @@
         
         .bloquinho-nota.dur-0_5 { width: 20px; }
         .bloquinho-nota.dur-1 { width: 30px; }
+        .bloquinho-nota.dur-1_5 { width: 35px; }
         .bloquinho-nota.dur-2 { width: 40px; }
+        .bloquinho-nota.dur-3 { width: 50px; }
+        .bloquinho-nota.dur-4 { width: 60px; }
 
         /* Normal (Tom Normal) */
         .bloquinho-nota.tom-normal.nota-c { background-color: var(--cor-c); color: white; }
@@ -258,15 +261,21 @@
 
         .grupo-controle {
             background: #f8fafc;
-            padding: 12px;
+            padding: 14px 12px;
             border-radius: 15px;
             border: 2px solid #e2e8f0;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 12px;
+            box-sizing: border-box;
         }
 
         .grupo-controle h3 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
+            margin: 0;
+            font-size: 13px;
             color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -274,24 +283,28 @@
 
         .btn-group {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
         }
 
         .btn-toggle {
             background: white;
             border: 2px solid #cbd5e1;
-            padding: 10px 15px;
+            padding: 8px 4px;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             flex: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            height: 68px;
+            height: 52px;
             box-sizing: border-box;
+            text-align: center;
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.2;
         }
 
         .btn-toggle.ativo {
@@ -489,7 +502,7 @@
             <input type="text" id="titulo-composicao" placeholder="Título da Composição">
             <input type="text" id="nome-aluno" placeholder="Nome do Compositor">
             <button class="btn btn-primary" id="btn-salvar" style="background-color: #27ae60;">💾 Salvar Música</button>
-            <button class="btn btn-primary" id="btn-carregar" style="background-color: #2980b9;">📂 Carregar Música</button>
+            <label class="btn btn-primary" id="btn-carregar" for="input-arquivo-abc" style="background-color: #2980b9; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; user-select: none;">📂 Carregar Música</label>
             <button class="btn btn-warning" id="btn-gravar-wav" style="background-color: #e67e22; color: white;">💾 Gerar WAV</button>
             <input type="file" id="input-arquivo-abc" accept=".abc" style="display: none;">
         </div>
@@ -507,7 +520,7 @@
     <section class="painel-modificadores">
         <div class="grupo-controle">
             <h3>Altura do Som (Oitava)</h3>
-            <div class="btn-group">
+            <div class="btn-group" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%;">
                 <button class="btn-toggle" id="oct-alta" onclick="setOitava('alta')">🐱 Agudo</button>
                 <button class="btn-toggle ativo" id="oct-normal" onclick="setOitava('normal')">🐦 Normal</button>
                 <button class="btn-toggle" id="oct-baixa" onclick="setOitava('baixa')">🐻 Grave</button>
@@ -515,10 +528,22 @@
         </div>
         <div class="grupo-controle">
             <h3>Tamanho da Nota (Ritmo)</h3>
-            <div class="btn-group">
-                <button class="btn-toggle" id="dur-0.5" onclick="setDuracao(0.5)">🏃 Passo Rápido</button>
-                <button class="btn-toggle ativo" id="dur-1" onclick="setDuracao(1)">🚶 Passo Normal</button>
-                <button class="btn-toggle" id="dur-2" onclick="setDuracao(2)">🦒 Passo Gigante</button>
+            <div class="btn-group" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%;">
+                <button class="btn-toggle" id="dur-0.5" onclick="setDuracao(0.5)">🏃 Rápido (1/2)</button>
+                <button class="btn-toggle ativo" id="dur-1" onclick="setDuracao(1)">🚶 Normal (1)</button>
+                <button class="btn-toggle" id="dur-1.5" onclick="setDuracao(1.5)">🦌 Médio (3/2)</button>
+                <button class="btn-toggle" id="dur-2" onclick="setDuracao(2)">🦒 Longo (2)</button>
+                <button class="btn-toggle" id="dur-3" onclick="setDuracao(3)">🐘 Triplo (3)</button>
+                <button class="btn-toggle" id="dur-4" onclick="setDuracao(4)">🐳 Máximo (4)</button>
+            </div>
+        </div>
+        <div class="grupo-controle">
+            <h3>Repetir Música</h3>
+            <div class="btn-group" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%;">
+                <button class="btn-toggle ativo" id="rep-1" onclick="setRepeticoes(1)">1x</button>
+                <button class="btn-toggle" id="rep-2" onclick="setRepeticoes(2)">2x</button>
+                <button class="btn-toggle" id="rep-3" onclick="setRepeticoes(3)">3x</button>
+                <button class="btn-toggle" id="rep-4" onclick="setRepeticoes(4)">4x</button>
             </div>
         </div>
         <div class="grupo-controle">
@@ -568,7 +593,9 @@
         { id: 40, nome: "🎻 Violino" },
         { id: 46, nome: "🧸 Harpa" },
         { id: 21, nome: "🪗 Acordeão" },
-        { id: 116, nome: "🥁 Tambor" }
+        { id: 116, nome: "🥁 Tambor" },
+        { id: 9,  nome: "🔔 Glockenspiel" },
+        { id: 6,  nome: "🎹 Cravo" }
     ];
 
     let composicao = {
@@ -576,7 +603,8 @@
         vozes: [
             { id: "1", nome: "Instrumento 1", instrumento: 13, notas: [] }
         ],
-        vozAtivaIndex: 0
+        vozAtivaIndex: 0,
+        repeticoes: 1
     };
 
     let oitavaSelecionada = "normal"; 
@@ -657,12 +685,7 @@
         });
 
         // Botão Carregar Música ABC
-        const btnCarregar = document.getElementById('btn-carregar');
         const inputArquivo = document.getElementById('input-arquivo-abc');
-        
-        btnCarregar.addEventListener('click', () => {
-            inputArquivo.click();
-        });
 
         inputArquivo.addEventListener('change', (e) => {
             const arquivo = e.target.files[0];
@@ -746,6 +769,14 @@
         document.getElementById(`dur-${valor}`).classList.add('ativo');
     }
 
+    function setRepeticoes(valor) {
+        composicao.repeticoes = valor;
+        document.querySelectorAll('[id^="rep-"]').forEach(el => el.classList.remove('ativo'));
+        const btnRep = document.getElementById(`rep-${valor}`);
+        if (btnRep) btnRep.classList.add('ativo');
+        renderizarPartitura();
+    }
+
     function atualizarLegendasTeclado() {
         const nomesNotas = {
             'C': 'Dó', 'D': 'Ré', 'E': 'Mi', 'F': 'Fá', 'G': 'Sol', 'A': 'Lá', 'B': 'Si'
@@ -817,12 +848,20 @@
                     }
                     
                     let durClass = 'dur-1';
-                    if (nota.includes('/')) {
-                        durClass = 'dur-0_5';
+                    const matchFraction = nota.match(/(\d+)?\/(\d+)?$/);
+                    if (matchFraction) {
+                        const num = matchFraction[1] ? parseInt(matchFraction[1]) : 1;
+                        const den = matchFraction[2] ? parseInt(matchFraction[2]) : 2;
+                        const ratio = num / den;
+                        if (ratio === 0.5) durClass = 'dur-0_5';
+                        else if (ratio === 1.5) durClass = 'dur-1_5';
                     } else {
                         const matchMult = nota.match(/\d+$/);
-                        if (matchMult && parseInt(matchMult[0]) > 1) {
-                            durClass = 'dur-2';
+                        if (matchMult) {
+                            const val = parseInt(matchMult[0]);
+                            if (val === 2) durClass = 'dur-2';
+                            else if (val === 3) durClass = 'dur-3';
+                            else if (val === 4) durClass = 'dur-4';
                         }
                     }
                     bloquinhosHtml += `<div class="bloquinho-nota nota-${baseNotaChar.toLowerCase()} tom-${tom} ${durClass}">${letraExibida}</div>`;
@@ -833,7 +872,7 @@
 
             div.innerHTML = `
                 <div class="pista-info">
-                    <span class="pista-nome">🎵 Pista ${index + 1}</span>
+                    <span class="pista-nome">🎵 Pista ${index + 1} (${voz.notas.length}/60)</span>
                     <select class="select-instrumento" onchange="mudarInstrumento(${index}, this.value)">
                         ${selectOptions}
                     </select>
@@ -857,7 +896,7 @@
     function colarPista(index, event) {
         if (event) event.stopPropagation();
         if (!notasCopiadas) return;
-        composicao.vozes[index].notas = [...notasCopiadas];
+        composicao.vozes[index].notas = [...notasCopiadas].slice(0, 60);
         atualizarInterfacePistas();
         renderizarPartitura();
     }
@@ -1082,6 +1121,85 @@
                     osc2.stop(time + 0.2);
                 }
                 break;
+            case 9: // Glockenspiel
+                {
+                    const osc1 = audioCtx.createOscillator();
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(freq, time);
+
+                    const osc2 = audioCtx.createOscillator();
+                    osc2.type = 'sine';
+                    osc2.frequency.setValueAtTime(freq * 2, time);
+
+                    const osc3 = audioCtx.createOscillator();
+                    osc3.type = 'sine';
+                    osc3.frequency.setValueAtTime(freq * 3.5, time);
+
+                    const gain1 = audioCtx.createGain();
+                    gain1.gain.setValueAtTime(volumeGeral * 0.8, time);
+                    gain1.gain.exponentialRampToValueAtTime(0.0001, time + duracao * 0.5);
+
+                    const gain2 = audioCtx.createGain();
+                    gain2.gain.setValueAtTime(volumeGeral * 0.4, time);
+                    gain2.gain.exponentialRampToValueAtTime(0.0001, time + duracao * 0.3);
+
+                    const gain3 = audioCtx.createGain();
+                    gain3.gain.setValueAtTime(volumeGeral * 0.2, time);
+                    gain3.gain.exponentialRampToValueAtTime(0.0001, time + 0.15);
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    osc3.connect(gain3);
+                    gain1.connect(masterGain);
+                    gain2.connect(masterGain);
+                    gain3.connect(masterGain);
+
+                    osc1.start(time);
+                    osc2.start(time);
+                    osc3.start(time);
+                    osc1.stop(time + duracao * 0.5);
+                    osc2.stop(time + duracao * 0.3);
+                    osc3.stop(time + 0.15);
+                }
+                break;
+            case 6: // Cravo
+                {
+                    const osc1 = audioCtx.createOscillator();
+                    osc1.type = 'triangle';
+                    osc1.frequency.setValueAtTime(freq, time);
+
+                    const osc2 = audioCtx.createOscillator();
+                    osc2.type = 'sawtooth';
+                    osc2.frequency.setValueAtTime(freq * 2, time);
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'highpass';
+                    filter.frequency.setValueAtTime(freq, time);
+                    filter.Q.setValueAtTime(1, time);
+
+                    const gain1 = audioCtx.createGain();
+                    gain1.gain.setValueAtTime(volumeGeral * 0.5, time);
+                    
+                    const gain2 = audioCtx.createGain();
+                    gain2.gain.setValueAtTime(volumeGeral * 0.25, time);
+
+                    masterGain.gain.setValueAtTime(0, time);
+                    masterGain.gain.linearRampToValueAtTime(1.0, time + 0.002);
+                    masterGain.gain.exponentialRampToValueAtTime(0.1, time + 0.2);
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, time + duracao);
+
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    gain1.connect(filter);
+                    gain2.connect(filter);
+                    filter.connect(masterGain);
+
+                    osc1.start(time);
+                    osc2.start(time);
+                    osc1.stop(time + duracao);
+                    osc2.stop(time + duracao);
+                }
+                break;
             case 73: // Flauta
                 {
                     const osc = audioCtx.createOscillator();
@@ -1275,11 +1393,11 @@
 
             let duracaoSegundos = 60 / bpmSelecionado;
             let fatorDuracao = 1;
-            if (nota.includes('/')) {
-                const partes = nota.split('/');
-                const divisorText = partes[partes.length - 1];
-                const divisor = parseInt(divisorText) || 2;
-                fatorDuracao = 1 / divisor;
+            const matchFraction = nota.match(/(\d+)?\/(\d+)?$/);
+            if (matchFraction) {
+                const num = matchFraction[1] ? parseInt(matchFraction[1]) : 1;
+                const den = matchFraction[2] ? parseInt(matchFraction[2]) : 2;
+                fatorDuracao = num / den;
             } else {
                 const matchMultiplicador = nota.match(/\d+$/);
                 if (matchMultiplicador) {
@@ -1296,6 +1414,12 @@
 
     // Inserção e Manipulação de Notas Musicais
     function tocarNota(nomeNota) {
+        const vozAtiva = composicao.vozes[composicao.vozAtivaIndex];
+        if (vozAtiva.notas.length >= 60) {
+            alert("Limite máximo de 60 notas atingido para este instrumento!");
+            return;
+        }
+
         let notaFormatada = nomeNota;
 
         // Regra de Oitavas (apenas para notas musicais de A-G, não para silêncio 'z')
@@ -1310,6 +1434,8 @@
         // Regra de Duração
         if (duracaoSelecionada === 0.5) {
             notaFormatada += '/';
+        } else if (duracaoSelecionada === 1.5) {
+            notaFormatada += '3/2';
         } else if (duracaoSelecionada > 1) {
             notaFormatada += duracaoSelecionada;
         }
@@ -1330,21 +1456,85 @@
         renderizarPartitura();
     }
 
-    function compilarParaABC() {
+    function compilarParaABC(forSave = false) {
         const nomeCompositor = document.getElementById('nome-aluno').value || "";
-        let abcText = `X:1\nT:${composicao.titulo}\nC:${nomeCompositor}\nM:4/4\nL:1/4\nQ:1/4=${bpmSelecionado}\nK:C`;
+        const numRepeticoes = forSave ? 1 : (composicao.repeticoes || 1);
+        const headerRep = forSave ? `\n%%REPEATS ${composicao.repeticoes || 1}` : "";
+        let abcText = `X:1\nT:${composicao.titulo}\nC:${nomeCompositor}\nM:4/4\nL:1/4\nQ:1/4=${bpmSelecionado}${headerRep}\nK:C`;
 
-        composicao.vozes.forEach(voz => {
-            abcText += `\nV:${voz.id}\n`;
-            abcText += `%%MIDI program ${voz.instrumento}\n`;
-            
-            if (voz.notas.length === 0) {
-                abcText += "z4 |"; // Preenche automaticamente com silêncio se estiver vazia
-            } else {
-                // Insere barras de compasso visuais básicas a cada lote de notas
-                abcText += voz.notas.join(' ') + " |";
+        function converterNotasEmCompassos(notas) {
+            let measures = [];
+            let currentMeasureNotes = [];
+            let currentMeasureDuration = 0;
+
+            notas.forEach(nota => {
+                let dur = 1.0;
+                const matchFraction = nota.match(/(\d+)?\/(\d+)?$/);
+                if (matchFraction) {
+                    const num = matchFraction[1] ? parseInt(matchFraction[1]) : 1;
+                    const den = matchFraction[2] ? parseInt(matchFraction[2]) : 2;
+                    dur = num / den;
+                } else {
+                    const matchMult = nota.match(/\d+$/);
+                    if (matchMult) {
+                        dur = parseFloat(matchMult[0]);
+                    }
+                }
+                currentMeasureNotes.push(nota);
+                currentMeasureDuration += dur;
+
+                if (currentMeasureDuration >= 3.99) {
+                    measures.push(currentMeasureNotes.join(' '));
+                    currentMeasureNotes = [];
+                    currentMeasureDuration = 0;
+                }
+            });
+
+            if (currentMeasureNotes.length > 0) {
+                measures.push(currentMeasureNotes.join(' '));
             }
+
+            return measures;
+        }
+
+        let vozesCompassos = composicao.vozes.map(voz => {
+            let baseMeasures = converterNotasEmCompassos(voz.notas);
+            let totalMeasures = [];
+            for (let i = 0; i < numRepeticoes; i++) {
+                totalMeasures.push(...baseMeasures);
+            }
+            return {
+                id: voz.id,
+                instrumento: voz.instrumento,
+                measures: totalMeasures
+            };
         });
+
+        let maxMeasures = Math.max(...vozesCompassos.map(v => v.measures.length));
+        if (maxMeasures === 0) maxMeasures = 1;
+
+        if (!forSave) {
+            vozesCompassos.forEach(vc => {
+                while (vc.measures.length < maxMeasures) {
+                    vc.measures.push("z4");
+                }
+            });
+        }
+
+        let numBlocks = Math.ceil(maxMeasures / 8);
+
+        for (let b = 0; b < numBlocks; b++) {
+            vozesCompassos.forEach(vc => {
+                let blockMeasures = vc.measures.slice(b * 8, (b + 1) * 8);
+                if (blockMeasures.length > 0) {
+                    abcText += `\nV:${vc.id}\n`;
+                    if (b === 0) {
+                        abcText += `%%MIDI program ${vc.instrumento}\n`;
+                    }
+                    abcText += blockMeasures.join(' | ') + " |";
+                }
+            });
+        }
 
         return abcText;
     }
@@ -1353,7 +1543,7 @@
     let debouncedAudioTimeout = null;
 
     function renderizarPartitura() {
-        const codigoABC = compilarParaABC();
+        const codigoABC = compilarParaABC(false);
         const visualObj = ABCJS.renderAbc("notation", codigoABC, {
             responsive: "resize",
             scale: 1.2,
@@ -1417,7 +1607,7 @@
         nomeCompositor = (nomeCompositor == "" ? "" : (composicao.titulo==""?  "": "-")) + nomeCompositor;
         composicao.titulo = composicao.titulo==""? nomeCompositor == ""? "Sem Título": "": composicao.titulo;
         let nomeComposicao = composicao.titulo.replace(/\s+/g, '_');
-        const codigoABC = compilarParaABC();
+        const codigoABC = compilarParaABC(true);
         const nomeArquivo = `${nomeComposicao}${nomeCompositor}.abc`;
 
         const blob = new Blob([codigoABC], { type: 'text/plain;charset=utf-8' });
@@ -1594,6 +1784,7 @@
             let novoBpm = 120;
             let novasVozes = [];
             let vozAtual = null;
+            let repeticoesCarregadas = 1;
 
             linhas.forEach(linha => {
                 linha = inlineTrim(linha);
@@ -1606,15 +1797,25 @@
                     if (matchBpm) {
                         novoBpm = parseInt(matchBpm[1]);
                     }
+                } else if (linha.startsWith('%%REPEATS')) {
+                    const matchRep = linha.match(/%%REPEATS\s+(\d+)/);
+                    if (matchRep) {
+                        repeticoesCarregadas = parseInt(matchRep[1]);
+                    }
                 } else if (linha.startsWith('V:')) {
                     const idVoz = linha.substring(2).trim();
-                    vozAtual = {
-                        id: idVoz,
-                        nome: `Instrumento ${idVoz}`,
-                        instrumento: 0,
-                        notas: []
-                    };
-                    novasVozes.push(vozAtual);
+                    let existingVoz = novasVozes.find(v => v.id === idVoz);
+                    if (existingVoz) {
+                        vozAtual = existingVoz;
+                    } else {
+                        vozAtual = {
+                            id: idVoz,
+                            nome: `Instrumento ${idVoz}`,
+                            instrumento: 0,
+                            notas: []
+                        };
+                        novasVozes.push(vozAtual);
+                    }
                 } else if (linha.startsWith('%%MIDI program')) {
                     if (vozAtual) {
                         const matchInst = inlineMatchProgram(linha);
@@ -1629,7 +1830,10 @@
                         let notasTexto = linha.replace(/\|/g, '').trim();
                         if (notasTexto && notasTexto !== "z4") {
                             const notasArray = notasTexto.split(/\s+/);
-                            vozAtual.notas.push(...notasArray);
+                            if (vozAtual.notas.length < 60) {
+                                const vagasRestantes = 60 - vozAtual.notas.length;
+                                vozAtual.notas.push(...notasArray.slice(0, vagasRestantes));
+                            }
                         }
                     }
                 }
@@ -1639,12 +1843,20 @@
                 composicao.titulo = novoTitulo;
                 composicao.vozes = novasVozes;
                 composicao.vozAtivaIndex = 0;
+                composicao.repeticoes = repeticoesCarregadas;
                 
                 document.getElementById('titulo-composicao').value = novoTitulo;
                 document.getElementById('nome-aluno').value = novoCompositor;
                 document.getElementById('bpm-slider').value = novoBpm;
                 bpmSelecionado = novoBpm;
                 document.getElementById('val-bpm').innerText = novoBpm;
+
+                // Atualizar UI dos botões de repetição
+                document.querySelectorAll('[id^="rep-"]').forEach(el => el.classList.remove('ativo'));
+                const btnRep = document.getElementById(`rep-${repeticoesCarregadas}`);
+                if (btnRep) {
+                    btnRep.classList.add('ativo');
+                }
 
                 // Resetar botão Adicionar Instrumento caso a orquestra estivesse cheia
                 const btnAdd = document.getElementById('btn-add-pista');
