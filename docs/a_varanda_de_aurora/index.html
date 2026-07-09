@@ -111,6 +111,9 @@
         #page-container {
             flex: 1;
             min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         /* ── Página (imagem + texto) ── */
@@ -118,13 +121,16 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            opacity: 0;
-            transform: translateY(8px);
-            animation: fadeInUp var(--transition-page) forwards;
+            min-height: 0;
+            animation-name: fadeInUp;
+            animation-duration: 0.35s;
+            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            animation-fill-mode: both;
         }
 
         @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0);   }
         }
 
         .image-box {
@@ -132,13 +138,16 @@
             flex-shrink: 0;
             overflow: hidden;
             background: #f5ede3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .page-image {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover;
+            object-fit: contain;
             aspect-ratio: 4/3;
         }
 
@@ -147,8 +156,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem);
+            padding: clamp(1.25rem, 4vw, 2.5rem);
             gap: 1rem;
+            box-sizing: border-box;
         }
 
         .page-number-badge {
@@ -202,6 +212,9 @@
             padding: clamp(0.75rem, 2.5vw, 1.25rem) clamp(1rem, 3vw, 2rem);
             border-top: 1px solid var(--color-border);
             gap: 1rem;
+            position: relative;
+            z-index: 10;
+            background-color: var(--color-card);
         }
 
         .nav-button {
@@ -284,20 +297,61 @@
 
         /* ── Mobile: todas as páginas em coluna ── */
         @media (max-width: 767px) {
+            body {
+                padding: 0.5rem;
+            }
+
             .main-container {
-                border-radius: 1rem;
+                border-radius: 0.75rem;
+                box-shadow: none;
+                background-color: transparent;
+            }
+
+            .page {
+                background-color: var(--color-card);
+                border-radius: var(--radius-card);
+                box-shadow: var(--shadow-card);
+                margin-bottom: 1.5rem;
+                overflow: hidden;
             }
 
             .page + .page {
-                border-top: 1px solid var(--color-border);
+                border-top: none;
+            }
+
+            .image-box {
+                width: 100%;
+                background: transparent;
+                padding: 0;
+            }
+
+            .page-image {
+                aspect-ratio: auto;
+                object-fit: cover;
+                width: 100%;
+                height: auto;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .text-box {
+                padding: 1.5rem;
+                max-width: 32rem;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
+            }
+
+            .page-number-badge {
+                display: none !important;
             }
 
             .swipe-hint {
-                display: block;
+                display: none !important;
             }
 
             #page-container.mobile-all .page {
-                animation: none;
+                animation-name: none;
                 opacity: 1;
                 transform: none;
             }
@@ -313,29 +367,39 @@
             }
 
             .main-container {
-                max-height: calc(100vh - 3rem);
+                height: 85vh;
+                max-height: 48rem;
+                min-height: 32rem;
             }
 
             .page {
                 flex-direction: row;
-                min-height: 0;
+                height: 100%;
             }
 
             .image-box {
-                width: 48%;
-                flex-shrink: 0;
+                width: 50%;
+                height: 100%;
+                padding: 1.5rem;
+                box-sizing: border-box;
             }
 
             .page-image {
-                aspect-ratio: unset;
-                height: 100%;
-                object-fit: cover;
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                aspect-ratio: auto;
+                object-fit: contain;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+                border-radius: 0.5rem;
             }
 
             .text-box {
-                width: 52%;
+                width: 50%;
+                height: 100%;
                 overflow-y: auto;
-                max-height: calc(100vh - 14rem);
+                padding: 3rem;
                 scrollbar-width: thin;
                 scrollbar-color: var(--color-border) transparent;
             }
@@ -458,32 +522,67 @@ POIS É NO SOSSEGO QUE NOSSO ESPÍRITO ENCONTRA FORÇA PARA SONHAR E CRIAR. E AU
             updateProgress(currentPageIndex);
         }
 
-        function renderDesktop() {
-            navFooter.style.display = 'flex';
-            swipeHint.style.display = 'none';
-            pageContainer.classList.remove('mobile-all');
-            pageContainer.innerHTML = createPageHTML(imagens[currentPageIndex], texto[currentPageIndex], currentPageIndex);
-            updateButtons();
+        function loadAndShowPage(index) {
+            pageContainer.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <span>Carregando…</span>
+                </div>`;
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+
+            const img = new Image();
+            img.src = imagens[index];
+            img.onload = () => {
+                pageContainer.innerHTML = createPageHTML(imagens[index], texto[index], index);
+                currentPageIndex = index;
+                updateButtons();
+            };
+            img.onerror = () => {
+                pageContainer.innerHTML = `<div class="loading-state">Erro ao carregar a página. Tente novamente.</div>`;
+                updateButtons();
+            };
         }
 
-        function renderMobile() {
-            navFooter.style.display = 'none';
-            swipeHint.style.display = 'block';
-            pageContainer.classList.add('mobile-all');
-            pageContainer.innerHTML = '';
-            for (let i = 0; i < imagens.length; i++) {
-                pageContainer.innerHTML += createPageHTML(imagens[i], texto[i], i);
-            }
-            progressFill.style.width = '100%';
-            pageCounter.textContent = '';
+        function loadAllPages() {
+            pageContainer.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <span>Carregando história…</span>
+                </div>`;
+
+            const promises = imagens.map(src => new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve();
+                img.onerror = () => reject(src);
+            }));
+
+            Promise.all(promises)
+                .then(() => {
+                    pageContainer.innerHTML = '';
+                    for (let i = 0; i < imagens.length; i++) {
+                        pageContainer.innerHTML += createPageHTML(imagens[i], texto[i], i);
+                    }
+                    progressFill.style.width = '100%';
+                })
+                .catch(failed => {
+                    pageContainer.innerHTML = `<div class="loading-state">Erro ao carregar: ${failed}. Recarregue a página.</div>`;
+                });
         }
 
         function renderPages() {
             isLargeScreen = window.innerWidth >= 768;
             if (isLargeScreen) {
-                renderDesktop();
+                navFooter.style.display = 'flex';
+                swipeHint.style.display = 'none';
+                pageContainer.classList.remove('mobile-all');
+                loadAndShowPage(currentPageIndex);
             } else {
-                renderMobile();
+                navFooter.style.display = 'none';
+                swipeHint.style.display = 'block';
+                pageContainer.classList.add('mobile-all');
+                loadAllPages();
             }
         }
 
@@ -528,7 +627,8 @@ POIS É NO SOSSEGO QUE NOSSO ESPÍRITO ENCONTRA FORÇA PARA SONHAR E CRIAR. E AU
             resizeTimer = setTimeout(renderPages, 200);
         });
 
-        document.addEventListener('DOMContentLoaded', renderPages);
+        // Script está no final do <body> — o DOM já está pronto, chamar diretamente.
+        renderPages();
     </script>
 </body>
 </html>
