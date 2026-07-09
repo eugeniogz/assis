@@ -25,9 +25,17 @@
           <p lang="pt">Portfólio Acadêmico & Criativo</p>
         </div>
         
-        <div class="lang-selector" aria-label="Language Selector / Seletor de Idioma">
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="pt">PT</button>
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <a href="https://wingene.com.br" style="font-family: inherit; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: var(--text-muted); border: 1px solid var(--card-border); padding: 0.4rem 1rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.4rem;" id="back-to-wingene">
+            <span>←</span>
+            <span lang="en">Back to Wingene</span>
+            <span lang="pt">Voltar para Wingene</span>
+          </a>
+          
+          <div class="lang-selector" aria-label="Language Selector / Seletor de Idioma">
+            <button type="button" data-lang="en" class="active">EN</button>
+            <button type="button" data-lang="pt">PT</button>
+          </div>
         </div>
       </div>
     </header>
@@ -185,6 +193,13 @@
           <h2 class="section-title" lang="en">Creative Writing</h2>
           <h2 class="section-title" lang="pt">Livros de Histórias</h2>
           
+          <p lang="en" style="margin-top: -1rem; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+            These fictional works and poetic narrative representations are part of the creative and literary pillar of the <strong><a href="https://wingene.com.br" style="color: var(--accent-color); text-decoration: none;">Wingene</a></strong> project.
+          </p>
+          <p lang="pt" style="margin-top: -1rem; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+            Estas obras de ficção e narrativas poéticas reflexivas integram o pilar criativo e literário do projeto <strong><a href="https://wingene.com.br" style="color: var(--accent-color); text-decoration: none;">Wingene</a></strong>.
+          </p>
+          
           <div class="grid-3" style="grid-template-columns: 1fr;">
             <!-- Book 1 -->
             <div class="card">
@@ -226,6 +241,13 @@
         <section id="education">
           <h2 class="section-title" lang="en">Children's Education</h2>
           <h2 class="section-title" lang="pt">Recursos Educacionais</h2>
+          
+          <p lang="en" style="margin-top: -1rem; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+            Pedagogical and interactive children's activities focusing on learning and geography, reflecting the "generational heritage" pillar of the <strong><a href="https://wingene.com.br" style="color: var(--accent-color); text-decoration: none;">Wingene</a></strong> project.
+          </p>
+          <p lang="pt" style="margin-top: -1rem; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+            Atividades lúdico-pedagógicas infantis focadas no aprendizado e geografia, materializando o pilar de "herança geracional e transmissão" do projeto <strong><a href="https://wingene.com.br" style="color: var(--accent-color); text-decoration: none;">Wingene</a></strong>.
+          </p>
           
           <div class="grid-3" style="grid-template-columns: 1fr;">
             <!-- Mapas -->
@@ -359,6 +381,17 @@
             setLanguage(btn.dataset.lang);
           });
         });
+
+        // Adjust links if running locally
+        if (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          const wingeneLinks = document.querySelectorAll('a[href^="https://wingene.com.br"]');
+          wingeneLinks.forEach(link => {
+            let href = link.getAttribute('href');
+            if (href) {
+              link.setAttribute('href', href.replace('https://wingene.com.br', '../../wingene.com.br/docs/index.html'));
+            }
+          });
+        }
       });
     </script>
   </body>
