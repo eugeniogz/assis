@@ -1779,6 +1779,98 @@
         return new Blob([view], { type: 'audio/wav' });
     }
 
+    function obterDeslocamentoTonal(tom) {
+        if (!tom) return 0;
+        const tomTrim = tom.trim();
+        const match = tomTrim.toUpperCase().match(/^([A-G][#B]?)(.*)$/);
+        if (!match) return 0;
+        
+        const tomLetraBase = match[1][0];
+        const degrees = { 'C': 0, 'D': 1, 'E': 2, 'F': 3, 'G': 4, 'A': 5, 'B': 6 };
+        const grauOrigem = degrees[tomLetraBase];
+        
+        const ehMenor = /^[A-G][#B]?m($|\b)/.test(tomTrim) || 
+                        /minor/i.test(tomTrim) || 
+                        /min/i.test(tomTrim);
+        
+        if (ehMenor) {
+            return (12 - grauOrigem) % 7;
+        } else {
+            return (7 - grauOrigem) % 7;
+        }
+    }
+
+    function transporNota(notaStr, shift) {
+        if (shift === 0) return notaStr;
+        const match = notaStr.match(/^([\^_=\s]*)([A-Ga-gzZ])([,']*)(.*)$/);
+        if (!match) return notaStr;
+        
+        const accidental = match[1];
+        const noteName = match[2];
+        const octaveChar = match[3];
+        const suffix = match[4];
+        
+        if (noteName.toLowerCase() === 'z') {
+            return notaStr;
+        }
+        
+        const baseNote = noteName + octaveChar;
+        const escalaNotas = [
+            "C,", "D,", "E,", "F,", "G,", "A,", "B,",
+            "C",  "D",  "E",  "F",  "G",  "A",  "B",
+            "c",  "d",  "e",  "f",  "g",  "a",  "b",
+            "c'", "d'", "e'", "f'", "g'", "a'", "b'"
+        ];
+        
+        let oldIndex = escalaNotas.indexOf(baseNote);
+        if (oldIndex === -1) {
+            return notaStr;
+        }
+        
+        let newIndex = oldIndex + shift;
+        newIndex = Math.max(0, Math.min(escalaNotas.length - 1, newIndex));
+        const novaNotaBase = escalaNotas[newIndex];
+        return novaNotaBase + suffix;
+    }
+
+    function ajustarDuracaoNota(notaStr, factor) {
+        if (factor === 1) return notaStr;
+        const match = notaStr.match(/^([^0-9/]+)(.*)$/);
+        if (!match) return notaStr;
+        const notePrefix = match[1];
+        const suffix = match[2];
+        
+        let dur = 1.0;
+        if (suffix) {
+            const matchFraction = suffix.match(/^(\d+)?\/(\d+)?$/);
+            if (matchFraction) {
+                const num = matchFraction[1] ? parseInt(matchFraction[1]) : 1;
+                const den = matchFraction[2] ? parseInt(matchFraction[2]) : 2;
+                dur = num / den;
+            } else {
+                const matchMult = suffix.match(/^\d+$/);
+                if (matchMult) {
+                    dur = parseFloat(matchMult[0]);
+                }
+            }
+        }
+        
+        const novaDur = dur * factor;
+        if (novaDur === 1) {
+            return notePrefix;
+        } else if (novaDur === 0.5) {
+            return notePrefix + '/';
+        } else if (novaDur === 1.5) {
+            return notePrefix + '3/2';
+        } else if (Number.isInteger(novaDur)) {
+            return notePrefix + novaDur;
+        } else {
+            if (novaDur === 0.25) return notePrefix + '/4';
+            if (novaDur === 0.75) return notePrefix + '3/4';
+            return notePrefix + Math.round(novaDur * 100) / 100;
+        }
+    }
+
     function carregarMusicaABC(conteudo) {
         try {
             const linhas = conteudo.split('\n');
@@ -1789,6 +1881,48 @@
             let vozAtual = null;
             let repeticoesCarregadas = 1;
 
+            // Extrair cabeçalhos para transposição
+            let M = "4/4";
+            let L = "1/4";
+            let K = "C";
+            let Q_base = "1/4";
+            let fileBpm = 120;
+
+            linhas.forEach(linha => {
+                linha = inlineTrim(linha);
+                if (linha.startsWith('M:')) {
+                    M = linha.substring(2).trim();
+                } else if (linha.startsWith('L:')) {
+                    L = linha.substring(2).trim();
+                } else if (linha.startsWith('K:')) {
+                    K = linha.substring(2).trim();
+                } else if (linha.startsWith('Q:')) {
+                    const matchBaseBpm = linha.match(/(?:(\d+\/\d+)=)?(\d+)/);
+                    if (matchBaseBpm) {
+                        if (matchBaseBpm[1]) Q_base = matchBaseBpm[1];
+                        fileBpm = parseInt(matchBaseBpm[2]);
+                    }
+                }
+            });
+
+            // Calcular fatores de transposição de andamento e duração
+            let lDen = 4;
+            const matchLFraction = L.match(/\/(\d+)/);
+            if (matchLFraction) {
+                lDen = parseInt(matchLFraction[1]);
+            }
+            const durationFactor = 4 / lDen;
+
+            let qDen = 4;
+            const matchQFraction = Q_base.match(/\/(\d+)/);
+            if (matchQFraction) {
+                qDen = parseInt(matchQFraction[1]);
+            }
+            novoBpm = Math.round(fileBpm * (4 / qDen));
+            novoBpm = Math.max(80, Math.min(180, novoBpm));
+
+            const keyShift = obterDeslocamentoTonal(K);
+
             linhas.forEach(linha => {
                 linha = inlineTrim(linha);
                 if (linha.startsWith('T:')) {
@@ -1796,10 +1930,7 @@
                 } else if (linha.startsWith('C:')) {
                     novoCompositor = linha.substring(2).trim();
                 } else if (linha.startsWith('Q:')) {
-                    const matchBpm = linha.match(/=(\d+)/);
-                    if (matchBpm) {
-                        novoBpm = parseInt(matchBpm[1]);
-                    }
+                    // Já processado acima
                 } else if (linha.startsWith('%%REPEATS')) {
                     const matchRep = linha.match(/%%REPEATS\s+(\d+)/);
                     if (matchRep) {
@@ -1833,7 +1964,7 @@
                     if (matchInst) {
                         vozAtual.instrumento = parseInt(matchInst[1]);
                     }
-                } else if (linha.startsWith('w:') || linha.startsWith('W:')) {
+                } else if (linha.startsWith('w:') || inlineTrim(linha).startsWith('W:')) {
                     // Ignora linhas de letra de música ao carregar as pistas
                 } else if (linha.startsWith('%')) {
                     // Ignora comentários e diretivas do ABC
@@ -1850,9 +1981,17 @@
                     let notasTexto = linha.replace(/\|/g, '').trim();
                     if (notasTexto && notasTexto !== "z4") {
                         const notasArray = notasTexto.split(/\s+/);
+                        
+                        // Transpor e ajustar cada nota
+                        const notasProcessadas = notasArray.map(nota => {
+                            let notaTransposta = transporNota(nota, keyShift);
+                            let notaAjustada = ajustarDuracaoNota(notaTransposta, durationFactor);
+                            return notaAjustada;
+                        });
+
                         if (vozAtual.notas.length < 60) {
                             const vagasRestantes = 60 - vozAtual.notas.length;
-                            vozAtual.notas.push(...notasArray.slice(0, vagasRestantes));
+                            vozAtual.notas.push(...notasProcessadas.slice(0, vagasRestantes));
                         }
                     }
                 }

@@ -1,31 +1,365 @@
-<!--p>José Assis - PHD Thesis archives</p-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lang-en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Title Tags -->
+    <title lang="en">José Eugênio de Assis Gonçalves | Portfolio</title>
+    <title lang="pt">José Eugênio de Assis Gonçalves | Portfólio</title>
+    
+    <!-- SEO Meta Descriptions -->
+    <meta name="description" lang="en" content="Academic portfolio and creative works of José Eugênio de Assis Gonçalves. Contains PhD thesis, master dissertation, and educational resources.">
+    <meta name="description" lang="pt" content="Portfólio acadêmico e trabalhos criativos de José Eugênio de Assis Gonçalves. Contém tese de doutorado, dissertação de mestrado e recursos educacionais.">
+    
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <h2>Story books</h2>
-    <ul>
-      <li><a href="odisseiaInterior/index.html">Odisseia Interior</a></li>
-      <li><a href="a_varanda_de_aurora/index.html">A Varanda de Aurora</a></li>
-    </ul>     
-    <h2>Graph experiments</h2>
-    <ul>
-      <li><a href="polygons.html">Polygons</a></li>
-      <li><a href="compositePoly.html">Composite Poly</a></li>
-      <li><a href="geometria3d/index.html">Geometria 3D</a></li>
-    </ul>
-    <h2>Resources used in José Eugênio's doctoral thesis</h2>
-    Artefacts genereated for data ingestion on (<a href="http://hadatac.org">HADatAc V 1.1.12</a>)
-   <ul>
-      <li>Smartbands data templates (Fitbit e Miband): <a href="https://github.com/eugeniogz/assis/tree/master/demo_templates">demo_templates</a></li>
-      <li>Main experiment templates containing dengue and schistosomiasis diseases epidemological data associated with socioeconomic and enviromental data: <a href="https://github.com/eugeniogz/assis/tree/master/gbd_templates">demo_gbd</a></li>
-      <li>Last version of the 'Base ontology' for the <b>smartbands</b> demonstration: <a href="http://ws1.assis.bhz.br/demo/demo-ont.ttl">demo-ont.ttl</a></li>
-      <li>Last version of the 'Base ontology' for the <b>main</b> experiment: <a href="http://ws1.assis.bhz.br/gbd/base.ttl">base.ttl</a> and a simplified <a href="http://ws1.assis.bhz.br/graph.html">base  graph</a></li>
-    </ul>
+    
+    <!-- Top sticky header -->
+    <header>
+      <div class="container header-content">
+        <div class="logo-section">
+          <h1>José Eugênio</h1>
+          <p lang="en">Academic & Creative Portfolio</p>
+          <p lang="pt">Portfólio Acadêmico & Criativo</p>
+        </div>
+        
+        <div class="lang-selector" aria-label="Language Selector / Seletor de Idioma">
+          <button type="button" data-lang="en" class="active">EN</button>
+          <button type="button" data-lang="pt">PT</button>
+        </div>
+      </div>
+    </header>
 
+    <main class="container">
+      
+      <!-- Academic Production Section -->
+      <section id="academic">
+        <h2 class="section-title" lang="en">Academic Production</h2>
+        <h2 class="section-title" lang="pt">Produção Acadêmica</h2>
+        
+        <div class="grid-2">
+          <!-- Doctoral Thesis -->
+          <div class="card academic-card">
+            <div>
+              <div class="badge-container">
+                <span class="badge badge-purple" lang="en">PhD Thesis</span>
+                <span class="badge badge-purple" lang="pt">Tese de Doutorado</span>
+                <span class="badge badge-blue">UFMG</span>
+              </div>
+              <h4 lang="en">Doctoral Thesis</h4>
+              <h4 lang="pt">Tese de Doutorado</h4>
+              <h3>
+                <span lang="en">Agile Method for Semantic Integration of Scientific Data Based on Ontologies</span>
+                <span lang="pt">Método Ágil de Integração Semântica de Dados Científicos Baseado em Ontologias</span>
+              </h3>
+              <p lang="en">Developed the agile method "Odin" for semantic data integration to ingest heterogeneous scientific data from sensors, smartbands, and epidemiological databases into RDF knowledge graphs.</p>
+              <p lang="pt">Desenvolvimento do método ágil "Odin" de integração semântica de dados para ingerir dados científicos heterogêneos de sensores, smartbands e bases epidemiológicas em grafos de conhecimento RDF.</p>
+              
+              <div class="academic-meta">
+                <span>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7"/></svg>
+                  <span lang="en">Advisor: Prof. Dr. Marcello Peixoto Bax</span>
+                  <span lang="pt">Orientador: Prof. Dr. Marcello Peixoto Bax</span>
+                </span>
+                <span>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>2020</span>
+                </span>
+              </div>
+            </div>
+            
+            <a href="tese_jeugenio_pdf_a.pdf" class="card-link" download>
+              <span lang="en">Download PDF Thesis</span>
+              <span lang="pt">Baixar PDF da Tese</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+          </div>
+
+          <!-- Master Dissertation -->
+          <div class="card academic-card">
+            <div>
+              <div class="badge-container">
+                <span class="badge badge-purple" lang="en">Master's Dissertation</span>
+                <span class="badge badge-purple" lang="pt">Dissertação de Mestrado</span>
+                <span class="badge badge-blue">USP</span>
+              </div>
+              <h4 lang="en">Master Dissertation</h4>
+              <h4 lang="pt">Dissertação de Mestrado</h4>
+              <h3>
+                <span lang="en">Performance Comparison: Linux × Windows NT</span>
+                <span lang="pt">Comparação de desempenho Linux × Windows NT</span>
+              </h3>
+              <p lang="en">A comparative methodology evaluated on identical hardware, measuring wall-clock times under synthetic workloads, multiprogrammed network clients (TCP/IP and HTTP), and Linpack benchmarks.</p>
+              <p lang="pt">Metodologia comparativa avaliada em hardware idêntico, medindo tempos de execução sob cargas de trabalho sintéticas, clientes de rede multiprogramados (TCP/IP e HTTP) e benchmarks Linpack.</p>
+              
+              <div class="academic-meta">
+                <span>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2 2H5a2 2 0 01-2-2v-7"/></svg>
+                  <span lang="en">Advisor: Prof. Dr. Marco Dimas Gubitoso</span>
+                  <span lang="pt">Orientador: Prof. Dr. Marco Dimas Gubitoso</span>
+                </span>
+                <span>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>2001</span>
+                </span>
+              </div>
+            </div>
+            
+            <a href="dissertacao_jeugenio.pdf" class="card-link" download>
+              <span lang="en">Download PDF Dissertation</span>
+              <span lang="pt">Baixar PDF da Dissertação</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Doctoral Research Resources -->
+      <section id="resources">
+        <h2 class="section-title" lang="en">Doctoral Research Artifacts</h2>
+        <h2 class="section-title" lang="pt">Recursos da Tese de Doutorado</h2>
+        
+        <div class="card">
+          <p lang="en" style="margin-bottom: 1.5rem;">Artifacts and semantic mappings generated for data ingestion using <strong>HADatAc V 1.1.12</strong>, an ontology-driven platform for semantic integration of scientific data.</p>
+          <p lang="pt" style="margin-bottom: 1.5rem;">Artefatos e mapeamentos semânticos gerados para ingestão de dados utilizando <strong>HADatAc V 1.1.12</strong>, uma plataforma orientada a ontologias para integração de dados científicos.</p>
+          
+          <ul class="resource-list">
+            <!-- Smartbands -->
+            <li class="resource-item">
+              <span class="resource-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </span>
+              <div class="resource-content">
+                <h4 lang="en">Smartbands Data Templates</h4>
+                <h4 lang="pt">Modelos de Dados de Smartbands</h4>
+                <p lang="en">Metadata templates for ingestion of Fitbit and Mi Band activity and physiological logs.</p>
+                <p lang="pt">Modelos de metadados para ingestão de registros de atividade física e dados fisiológicos das pulseiras Fitbit e Mi Band.</p>
+                <div class="resource-links">
+                  <a href="https://github.com/eugeniogz/assis/tree/master/demo_templates" class="resource-btn" target="_blank">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    demo_templates
+                  </a>
+                  <a href="http://ws1.assis.bhz.br/demo/demo-ont.ttl" class="resource-btn" target="_blank">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    demo-ont.ttl (Ontology)
+                  </a>
+                </div>
+              </div>
+            </li>
+            
+            <!-- Epidemiological Templates -->
+            <li class="resource-item">
+              <span class="resource-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"/></svg>
+              </span>
+              <div class="resource-content">
+                <h4 lang="en">Main Experiment & Epidemiological Mappings</h4>
+                <h4 lang="pt">Experimento Principal & Mapeamentos Epidemiológicos</h4>
+                <p lang="en">Ingestion templates and ontologies representing Dengue and Schistosomiasis data in Brazil integrated with environmental variables (temperature, precipitation) and socioeconomic metrics.</p>
+                <p lang="pt">Templates de ingestão e ontologias representando dados de Dengue e Esquistossomose no Brasil integrados a variáveis ambientais (temperatura, precipitação) e métricas socioeconômicas.</p>
+                <div class="resource-links">
+                  <a href="https://github.com/eugeniogz/assis/tree/master/gbd_templates" class="resource-btn" target="_blank">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    demo_gbd
+                  </a>
+                  <a href="http://ws1.assis.bhz.br/gbd/base.ttl" class="resource-btn" target="_blank">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    base.ttl (Base Ontology)
+                  </a>
+                  <a href="http://ws1.assis.bhz.br/graph.html" class="resource-btn" target="_blank">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="12" x2="19" y2="5"/><line x1="12" y1="12" x2="5" y2="19"/><line x1="12" y1="12" x2="5" y2="5"/><line x1="12" y1="12" x2="19" y2="19"/></svg>
+                    base graph
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="grid-2">
+        <!-- Story books Section -->
+        <section id="stories">
+          <h2 class="section-title" lang="en">Creative Writing</h2>
+          <h2 class="section-title" lang="pt">Livros de Histórias</h2>
+          
+          <div class="grid-3" style="grid-template-columns: 1fr;">
+            <!-- Book 1 -->
+            <div class="card">
+              <div>
+                <div class="card-icon">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <h3>Odisseia Interior</h3>
+                <p lang="en">Immersive narrative detailing internal emotional journeys and personal discovery.</p>
+                <p lang="pt">Narrativa imersiva que detalha jornadas emocionais internas e de autodescoberta.</p>
+              </div>
+              <a href="odisseiaInterior/index.html" class="card-link">
+                <span lang="en">Read book</span>
+                <span lang="pt">Ler livro</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="card">
+              <div>
+                <div class="card-icon">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <h3>A Varanda de Aurora</h3>
+                <p lang="en">A poetic narrative framing life and perspectives viewed from Aurora's balcony.</p>
+                <p lang="pt">Uma narrativa poética que enquadra a vida e as perspectivas sob a varanda de Aurora.</p>
+              </div>
+              <a href="a_varanda_de_aurora/index.html" class="card-link">
+                <span lang="en">Read book</span>
+                <span lang="pt">Ler livro</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Children's Educational Resources -->
+        <section id="education">
+          <h2 class="section-title" lang="en">Children's Education</h2>
+          <h2 class="section-title" lang="pt">Recursos Educacionais</h2>
+          
+          <div class="grid-3" style="grid-template-columns: 1fr;">
+            <!-- Mapas -->
+            <div class="card">
+              <div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 4L9 7"/></svg>
+                </div>
+                <h3>Mapas</h3>
+                <p lang="en">Interactive educational maps designed for children's learning and geography.</p>
+                <p lang="pt">Mapas educacionais interativos projetados para o aprendizado e geografia das crianças.</p>
+              </div>
+              <a href="Mapas/index.html" class="card-link">
+                <span lang="en">View resources</span>
+                <span lang="pt">Visualizar recursos</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <!-- Rabiscos e Textos -->
+            <div class="card">
+              <div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                </div>
+                <h3>Rabiscos e Textos</h3>
+                <p lang="en">Educational exercises blending writing, drawing, and creative play.</p>
+                <p lang="pt">Exercícios educativos combinando redação, desenho e jogos criativos.</p>
+              </div>
+              <a href="RabiscosETextos/index.html" class="card-link">
+                <span lang="en">View resources</span>
+                <span lang="pt">Visualizar recursos</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <!-- Geometria 3D -->
+            <div class="card">
+              <div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <h3>Geometria 3D</h3>
+                <p lang="en">Visual and spatial reasoning geometry activities featuring 3D representations.</p>
+                <p lang="pt">Atividades geométricas de raciocínio espacial e visual com modelos 3D interativos.</p>
+              </div>
+              <a href="geometria3d/index.html" class="card-link">
+                <span lang="en">View resources</span>
+                <span lang="pt">Visualizar recursos</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Graph Experiments Section -->
+      <section id="graphs">
+        <h2 class="section-title" lang="en">Graph Experiments</h2>
+        <h2 class="section-title" lang="pt">Experimentos com Grafos</h2>
+        
+        <div class="grid-2">
+          <!-- Polygons -->
+          <div class="card">
+            <div>
+              <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+              </div>
+              <h3 lang="en">Polygons Graph Visualizations</h3>
+              <h3 lang="pt">Polígonos</h3>
+              <p lang="en">Scientific graph representations analyzing polygon patterns, shapes, and layouts.</p>
+              <p lang="pt">Representações gráficas científicas analisando padrões geométricos, formas e layouts.</p>
+            </div>
+            <a href="polygons.html" class="card-link">
+              <span lang="en">Launch experiment</span>
+              <span lang="pt">Iniciar experimento</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Composite Poly -->
+          <div class="card">
+            <div>
+              <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+              <h3 lang="en">Composite Poly Experiments</h3>
+              <h3 lang="pt">Polígonos Compostos</h3>
+              <p lang="en">Advanced modeling of complex, multi-layered, composite polygon relationships.</p>
+              <p lang="pt">Modelagem avançada de relacionamentos geométricos complexos e compostos multicamadas.</p>
+            </div>
+            <a href="compositePoly.html" class="card-link">
+              <span lang="en">Launch experiment</span>
+              <span lang="pt">Iniciar experimento</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="container">
+      <p>&copy; 2026 José Eugênio de Assis Gonçalves. <span lang="en">All rights reserved.</span><span lang="pt">Todos os direitos reservados.</span></p>
+    </footer>
+
+    <!-- Script for browser language detection and manual toggle persistence -->
+    <script>
+      const getInitialLanguage = () => {
+        const savedLang = localStorage.getItem('portfolio-lang');
+        if (savedLang) return savedLang;
+        const browserLang = navigator.language || navigator.userLanguage;
+        return browserLang.startsWith('pt') ? 'pt' : 'en';
+      };
+
+      const setLanguage = (lang) => {
+        document.documentElement.className = `lang-${lang}`;
+        document.querySelectorAll('.lang-selector button').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        localStorage.setItem('portfolio-lang', lang);
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const initialLang = getInitialLanguage();
+        setLanguage(initialLang);
+
+        document.querySelectorAll('.lang-selector button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            setLanguage(btn.dataset.lang);
+          });
+        });
+      });
+    </script>
   </body>
 </html>
-
-
