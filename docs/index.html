@@ -211,7 +211,7 @@
                 <p lang="en">Immersive narrative detailing internal emotional journeys and personal discovery.</p>
                 <p lang="pt">Narrativa imersiva que detalha jornadas emocionais internas e de autodescoberta.</p>
               </div>
-              <a href="odisseiaInterior/index.html" class="card-link">
+              <a href="https://blog.wingene.com.br/odisseiaInterior/" class="card-link">
                 <span lang="en">Read story</span>
                 <span lang="pt">Ler conto</span>
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
@@ -228,7 +228,7 @@
                 <p lang="en">A poetic narrative framing life and perspectives viewed from Aurora's balcony.</p>
                 <p lang="pt">Uma narrativa poética que enquadra a vida e as perspectivas sob a varanda de Aurora.</p>
               </div>
-              <a href="a_varanda_de_aurora/index.html" class="card-link">
+              <a href="https://blog.wingene.com.br/a_varanda_de_aurora/" class="card-link">
                 <span lang="en">Read story</span>
                 <span lang="pt">Ler conto</span>
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
@@ -389,6 +389,18 @@
             let href = link.getAttribute('href');
             if (href) {
               link.setAttribute('href', href.replace('https://wingene.com.br', '../../wingene.com.br/docs/index.html'));
+            }
+          });
+
+          const blogLinks = document.querySelectorAll('a[href^="https://blog.wingene.com.br"]');
+          blogLinks.forEach(link => {
+            let href = link.getAttribute('href');
+            if (href) {
+              let localPath = href.replace('https://blog.wingene.com.br', '../../eugeniogz.github.io');
+              if (localPath.endsWith('/')) {
+                localPath += 'index.html';
+              }
+              link.setAttribute('href', localPath);
             }
           });
         }
