@@ -1,30 +1,72 @@
+// DOM Elements
 const selectFileBtn = document.getElementById('selectFileBtn');
 const saveFileBtn = document.getElementById('saveFileBtn');
 const clearHandleBtn = document.getElementById('clearHandleBtn');
 const fileContentTextArea = document.getElementById('fileContent');
 const statusMessage = document.getElementById('statusMessage');
+const statusCard = document.getElementById('statusCard');
+const passwordInput = document.getElementById('password');
+const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
+const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+const activeFileName = document.getElementById('activeFileName');
+const fileChip = document.getElementById('fileChip');
+const charCountSpan = document.getElementById('charCount');
+const lineCountSpan = document.getElementById('lineCount');
 
-let fileHandle = null; // Armazena a referência ao arquivo
+let fileHandle = null; // Stores file reference
+let content = '';      // Raw encrypted file content
 
+// Helper function to update character and line counts
+function updateEditorStats() {
+    if (!fileContentTextArea) return;
+    const text = fileContentTextArea.value;
+    const charCount = text.length;
+    const lineCount = text ? text.split('\n').length : 0;
+    
+    if (charCountSpan) charCountSpan.textContent = `${charCount} caractere${charCount !== 1 ? 's' : ''}`;
+    if (lineCountSpan) lineCountSpan.textContent = `${lineCount} linha${lineCount !== 1 ? 's' : ''}`;
+}
 
-// Função para exibir mensagens de status
+// Function to update File Chip in Header
+function updateFileChip() {
+    if (!activeFileName || !fileChip) return;
+    if (fileHandle && fileHandle.name) {
+        activeFileName.textContent = fileHandle.name;
+        fileChip.classList.add('active-file');
+    } else {
+        activeFileName.textContent = 'Nenhum arquivo selecionado';
+        fileChip.classList.remove('active-file');
+    }
+}
+
+// Function to display status messages with visual style
 function showStatus(message, isError = false) {
+    if (!statusMessage) return;
     statusMessage.textContent = message;
-    statusMessage.style.color = isError ? 'var(--red)' : 'var(--green)';
+    
+    if (statusCard) {
+        statusCard.classList.remove('status-success', 'status-error');
+        if (isError) {
+            statusCard.classList.add('status-error');
+        } else if (message && !message.includes('Aguardando')) {
+            statusCard.classList.add('status-success');
+        }
+    }
 }
 
-// Habilitar/Desabilitar botões e textarea
+// Enable/Disable buttons and textarea
 function updateUI() {
-    const fileDecryped = fileContentTextArea.value !== '';
-    saveFileBtn.disabled = !fileDecryped;
-    clearHandleBtn.disabled = !fileDecryped;
-    fileContentTextArea.disabled = !fileDecryped;
+    const fileDecrypted = fileContentTextArea.value !== '';
+    saveFileBtn.disabled = !fileDecrypted;
+    clearHandleBtn.disabled = !fileHandle && !fileDecrypted;
+    fileContentTextArea.disabled = !fileDecrypted;
+    updateFileChip();
+    updateEditorStats();
 }
 
-// 1. Selecionar ou Criar o Arquivo
+// 1. Select or Create File
 selectFileBtn.addEventListener('click', async () => {
     try {
-        // Tentar abrir um arquivo existente primeiro
         const openOptions = {
             types: [
                 {
@@ -36,25 +78,20 @@ selectFileBtn.addEventListener('click', async () => {
             ],
         };
 
-        // window.showOpenFilePicker retorna um array de handles
         const [selectedHandle] = await window.showOpenFilePicker(openOptions);
-        
-        fileHandle = selectedHandle; // Armazena o handle do arquivo selecionado
-        showStatus(`File '${fileHandle.name}' selected.`);
+        fileHandle = selectedHandle;
+        showStatus(`Arquivo '${fileHandle.name}' selecionado com sucesso.`);
 
-        // Ler o conteúdo do arquivo
+        // Read file content
         await readFile();
         updateUI();
         await saveHandle(fileHandle);
 
     } catch (openError) {
-        // Se o usuário cancelou a seleção de arquivo ou houve outro erro ao abrir
         if (openError.name === 'AbortError') {
-            showStatus('File selection aborted..', false); // Mensagem informativa, não de erro fatal
-            // Perguntar ao usuário se ele quer criar um novo arquivo
-            if (confirm("Create a new file?")) {
+            showStatus('Seleção de arquivo cancelada.', false);
+            if (confirm("Deseja criar um novo arquivo criptografado?")) {
                 try {
-                    // Opções para salvar/criar um novo arquivo
                     const saveOptions = {
                         types: [
                             {
@@ -64,31 +101,29 @@ selectFileBtn.addEventListener('click', async () => {
                                 },
                             },
                         ],
-                        suggestedName: 'SJCLDataApp.txt', // Sugere o nome do arquivo
+                        suggestedName: 'SJCLDataApp.txt',
                     };
                     fileHandle = await window.showSaveFilePicker(saveOptions);
-                    showStatus(`File '${fileHandle.name}' created`);
-                    fileContentTextArea.value = ''; // Limpa a área de texto para um novo arquivo
+                    showStatus(`Arquivo '${fileHandle.name}' criado com sucesso.`);
+                    fileContentTextArea.value = '';
                     updateUI();
                     await saveHandle(fileHandle);
                 } catch (saveError) {
                     if (saveError.name === 'AbortError') {
-                        showStatus('File creation canceled.', true);
+                        showStatus('Criação do arquivo cancelada.', true);
                     } else {
-                        showStatus(`Error creating file: ${saveError.message}`, true);
+                        showStatus(`Erro ao criar arquivo: ${saveError.message}`, true);
                         console.error('Error creating file:', saveError);
                     }
                     fileHandle = null;
                     updateUI();
                 }
             } else {
-                // Se o usuário não quis abrir nem criar
-                showStatus('File action not realized.', false);
-                fileHandle = null;
+                showStatus('Nenhuma ação de arquivo realizada.', false);
                 updateUI();
             }
         } else {
-            showStatus(`Unexpected error opening file: ${openError.message}`, true);
+            showStatus(`Erro ao abrir arquivo: ${openError.message}`, true);
             console.error('Unexpected error opening file:', openError);
             fileHandle = null;
             updateUI();
@@ -96,140 +131,191 @@ selectFileBtn.addEventListener('click', async () => {
     }
 });
 
-// 2. Ler o Conteúdo do Arquivo
-content = '';
-
+// 2. Read File Content
 async function readFile() {
     if (!fileHandle) {
-        showStatus('No file selected to read.', true);
+        showStatus('Nenhum arquivo selecionado para leitura.', true);
         return;
     }
 
     try {
         const file = await fileHandle.getFile();
         content = await file.text();
-        showStatus(`File '${fileHandle.name}' loaded.`);
+        showStatus(`Arquivo '${fileHandle.name}' carregado. Digite a senha e clique em Descriptografar.`);
     } catch (error) {
-        showStatus(`Error reading file: ${error.message}`, true);
+        showStatus(`Erro ao ler arquivo: ${error.message}`, true);
         console.error('Error reading file:', error);
     }
 }
 
-// 3. Escrever no Arquivo
+// 3. Save File Content
 saveFileBtn.addEventListener('click', async () => {
     if (!fileHandle) {
-        showStatus('No file selected to save.', true);
+        showStatus('Nenhum arquivo selecionado para salvar.', true);
+        return;
+    }
+
+    if (!passwordInput.value) {
+        showStatus('Informe a senha para criptografar antes de salvar.', true);
+        passwordInput.focus();
         return;
     }
 
     try {
-        // Solicita permissão de escrita (se ainda não tiver)
         const permissionStatus = await fileHandle.requestPermission({ mode: 'readwrite' });
         if (permissionStatus !== 'granted') {
-            showStatus('Write permission denied.', true);
+            showStatus('Permissão de escrita negada pelo navegador.', true);
             return;
         }
 
-        // Crie um WritableStream para escrever no arquivo
         const writableStream = await fileHandle.createWritable();
-        await writableStream.write(codificar(fileContentTextArea.value, password.value));
-        await writableStream.close(); // Feche o stream para garantir que os dados sejam gravados
+        const encryptedData = codificar(fileContentTextArea.value, passwordInput.value);
+        await writableStream.write(encryptedData);
+        await writableStream.close();
 
-        showStatus(`File '${fileHandle.name}' saved.`);
+        content = encryptedData;
+        showStatus(`Arquivo '${fileHandle.name}' salvo e criptografado com sucesso.`);
     } catch (error) {
-        showStatus(`Error saving file: ${error.message}`, true);
+        showStatus(`Erro ao salvar arquivo: ${error.message}`, true);
         console.error('Error saving file:', error);
     }
 });
 
-// Remover a referência ao arquivo (opcional)
-clearHandleBtn.addEventListener('click', () => {
+// 4. Remove File Handle Reference
+clearHandleBtn.addEventListener('click', async () => {
     fileHandle = null;
-    removeHandle();
+    await removeHandle();
     fileContentTextArea.value = '';
-    showStatus('File access removed. Select a new file.');
+    content = '';
+    showStatus('Acesso ao arquivo removido. Selecione um novo arquivo.');
     updateUI();
 });
 
-// Inicializa a UI
-updateUI();
-
-// Verifica se a API está disponível
-if (!window.showSaveFilePicker) {
-    showStatus('This browser do not supports the File System Access API. Por favor, use Chrome, Edge or other Chromium based browser.', true);
-    selectFileBtn.disabled = true;
-}
-
-// Lógica de inicialização para carregar o arquivo padrão
-//document.addEventListener('DOMContentLoaded', async () => {
+// 5. Decrypt / Verify Password
 verifyPasswordBtn.addEventListener('click', async () => {
+    if (!fileHandle) {
+        showStatus('Selecione um arquivo primeiro antes de descriptografar.', true);
+        return;
+    }
+
+    if (!passwordInput.value) {
+        showStatus('Por favor, digite a senha.', true);
+        passwordInput.focus();
+        return;
+    }
+
     try {
         const permissionStatus = await fileHandle.requestPermission({ mode: 'readwrite' });
-
         if (permissionStatus === 'granted') {
-            // Permissão concedida ou renovada, agora podemos ler e escrever
-            await readFile(); // Sua função para ler do arquivo
+            await readFile();
         } else {
-            showStatus('Write access denied.', true);
+            showStatus('Permissão de acesso ao arquivo não concedida.', true);
+            return;
         }
     } catch (error) {
         if (error.name === 'AbortError') {
-            showStatus('File permission operation aborted.', true);
+            showStatus('Operação de permissão cancelada.', true);
+            return;
         } else {
-            showStatus(`Error saving file: ${error.message}`, true);
-            console.error('Error saving file:', error);
+            showStatus(`Erro de permissão: ${error.message}`, true);
+            console.error('Error in permission:', error);
+            return;
         }
     }
-    fileContentTextArea.value = await decodificar(content, password.value);
+
+    const decrypted = await decodificar(content, passwordInput.value);
+    if (decrypted !== '') {
+        fileContentTextArea.value = decrypted;
+        showStatus(`Arquivo '${fileHandle.name}' descriptografado com sucesso!`);
+    }
     updateUI();
 });
 
-window.onload = async function() {
-    if (!fileHandle && window.showSaveFilePicker) { // Verifique se não já abriu por outro método
-        fileHandle = await loadHandle();
-        // Verifica se a permissão ainda é válida
-        const permissionStatus = await fileHandle.queryPermission({ mode: 'readwrite' });
-        if (permissionStatus === 'granted') {
-            showStatus(`Loading default file '${fileHandle.name}'.`);
-            await readFile(fileHandle);
-        } else if (permissionStatus === 'prompt') {
-            // Permissão é 'prompt' (o navegador perguntará de novo)
-            showStatus(`Access permission to '${fileHandle.name}' needs to be requested again.`);
-        } else {
-            showStatus(`Access permission to file '${fileHandle.name}' revoked. Select a file again.`, true);
-            fileHandle = null;
-            await removeHandle();
+// 6. Password Visibility Toggle
+if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        
+        const eyeOpen = togglePasswordBtn.querySelector('.eye-open');
+        const eyeClosed = togglePasswordBtn.querySelector('.eye-closed');
+        if (eyeOpen && eyeClosed) {
+            eyeOpen.style.display = isPassword ? 'none' : 'block';
+            eyeClosed.style.display = isPassword ? 'block' : 'none';
         }
-        updateUI();
-    }
-
+    });
 }
 
+// 7. Keyboard Shortcuts
+passwordInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        verifyPasswordBtn.click();
+    }
+});
 
-function codificar(texto, pwd)
-{
+fileContentTextArea.addEventListener('input', () => {
+    updateEditorStats();
+});
 
-    if (texto.substring(1,5)!="iv:\"")
-    {
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        if (!saveFileBtn.disabled) {
+            saveFileBtn.click();
+        }
+    }
+});
+
+// Initialize on Load
+window.onload = async function() {
+    updateUI();
+
+    if (!window.showSaveFilePicker) {
+        showStatus('Seu navegador não suporta a File System Access API. Utilize o Google Chrome, Microsoft Edge ou Brave.', true);
+        selectFileBtn.disabled = true;
+        return;
+    }
+
+    if (!fileHandle) {
+        fileHandle = await loadHandle();
+        if (fileHandle) {
+            const permissionStatus = await fileHandle.queryPermission({ mode: 'readwrite' });
+            if (permissionStatus === 'granted') {
+                showStatus(`Arquivo padrão '${fileHandle.name}' carregado. Digite a senha para abrir.`);
+                await readFile();
+            } else if (permissionStatus === 'prompt') {
+                showStatus(`Permissão de acesso para '${fileHandle.name}' precisa ser confirmada.`);
+            } else {
+                showStatus(`Acesso ao arquivo '${fileHandle.name}' revogado. Selecione novamente.`, true);
+                fileHandle = null;
+                await removeHandle();
+            }
+            updateUI();
+        }
+    }
+};
+
+// Encryption Helper with SJCL
+function codificar(texto, pwd) {
+    if (texto.substring(0, 5) !== '{"iv"') {
         return sjcl.encrypt(pwd, texto);
     }
-
+    return texto;
 }
 
-async function decodificar(texto, pwd)
-{
-    
+// Decryption Helper with SJCL
+async function decodificar(texto, pwd) {
     try {
-        // Crie um stream legível a partir do arquivo
-        if (texto=='') {
-            showStatus(`File not opened`);
+        if (!texto || texto.trim() === '') {
+            showStatus('Arquivo vazio ou não carregado.', false);
             return '';
         }
-        texto2 = sjcl.decrypt(pwd, texto);
-        return texto2;
+        const decryptedText = sjcl.decrypt(pwd, texto);
+        return decryptedText;
     } catch (error) {
-        showStatus(`Invalid password: ${error.message}`, true);
-        console.error('Invalid password:', error);
+        showStatus(`Senha incorreta ou conteúdo inválido (${error.message})`, true);
+        console.error('Invalid password or content:', error);
         return '';
     }
 }

@@ -2,21 +2,173 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Editor e criptografador de arquivos de texto seguro e local com SJCL e PWA">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
     <title>SJCL File Encrypt</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="images/icon-1024x1024.png"> </head>
+    <link rel="icon" href="images/icon-1024x1024.png">
+    <link rel="apple-touch-icon" href="images/icon-1024x1024.png">
+</head>
 <body>
-    <div class="container">
-        <input type="password" id="password" autocomplete="current-password" placeholder="Password" />
-        <button id="verifyPasswordBtn" type="submit">Check password</button>
-        <button id="selectFileBtn">Select/Create File</button>
-        <button id="saveFileBtn" disabled>Save</button>
-        <button id="clearHandleBtn" disabled>Remove File Access</button>
-        <textarea id="fileContent" rows="26" disabled></textarea>
-        <p id="statusMessage"> </p>
+    <div class="app-layout">
+        <!-- Main Card Container -->
+        <main class="container">
+            <!-- App Header -->
+            <header class="app-header">
+                <div class="brand">
+                    <div class="logo-wrapper">
+                        <img src="images/icon-1024x1024.png" alt="SJCL Encrypt Logo" class="app-logo" />
+                    </div>
+                    <div class="brand-text">
+                        <h1>SJCL File Encrypt</h1>
+                        <span class="security-badge">
+                            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            Criptografia Local AES-CCM
+                        </span>
+                    </div>
+                </div>
+
+                <div class="file-chip" id="fileChip" title="Arquivo atualmente associado">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span id="activeFileName">Nenhum arquivo selecionado</span>
+                </div>
+            </header>
+
+            <!-- Control Bar / Actions Grid -->
+            <section class="controls-panel">
+                <!-- Password & Decrypt Group -->
+                <div class="control-group password-group">
+                    <label for="password" class="control-label">Senha do Arquivo</label>
+                    <div class="input-action-row">
+                        <div class="password-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                autocomplete="current-password" 
+                                placeholder="Digite a chave/senha..."
+                                aria-label="Senha para criptografia e descriptografia"
+                            />
+                            <button type="button" id="togglePasswordBtn" class="icon-btn" title="Exibir/Ocultar senha" aria-label="Exibir ou ocultar senha">
+                                <svg class="icon-svg eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="icon-svg eye-closed" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <button id="verifyPasswordBtn" type="button" class="btn btn-primary" title="Descriptografar com a senha digitada">
+                            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                            </svg>
+                            <span>Descriptografar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File Operations Toolbar -->
+                <div class="control-group file-actions-group">
+                    <label class="control-label">Ações do Arquivo</label>
+                    <div class="button-toolbar">
+                        <button id="selectFileBtn" class="btn btn-secondary" title="Abrir arquivo existente ou criar um novo">
+                            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                <line x1="12" y1="11" x2="12" y2="17"></line>
+                                <line x1="9" y1="14" x2="15" y2="14"></line>
+                            </svg>
+                            <span>Selecionar / Criar</span>
+                        </button>
+
+                        <button id="saveFileBtn" class="btn btn-success" disabled title="Salvar e criptografar alterações no arquivo (Ctrl+S)">
+                            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                            <span>Salvar</span>
+                        </button>
+
+                        <button id="clearHandleBtn" class="btn btn-danger-outline" disabled title="Remover acesso ao arquivo carregado">
+                            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                            <span>Remover Acesso</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Editor Section -->
+            <section class="editor-section">
+                <div class="editor-header">
+                    <span class="editor-title">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        Editor de Conteúdo
+                    </span>
+                    <div class="editor-stats">
+                        <span id="charCount">0 caracteres</span>
+                        <span class="divider">•</span>
+                        <span id="lineCount">0 linhas</span>
+                    </div>
+                </div>
+                
+                <div class="textarea-wrapper">
+                    <textarea 
+                        id="fileContent" 
+                        rows="22" 
+                        disabled 
+                        placeholder="Abra ou crie um arquivo e informe a senha para visualizar e editar o conteúdo de forma segura..."
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+            </section>
+
+            <!-- Status Message Bar -->
+            <div class="status-wrapper">
+                <div class="status-card" id="statusCard">
+                    <svg class="status-icon" id="statusIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <p id="statusMessage">Aguardando seleção de arquivo ou autenticação.</p>
+                </div>
+            </div>
+
+            <!-- App Footer -->
+            <footer class="app-footer">
+                <p>🔒 Seus dados nunca saem do seu dispositivo. Criptografia ponta a ponta via Stanford JavaScript Crypto Library.</p>
+            </footer>
+        </main>
     </div>
+
+    <!-- Scripts -->
     <script src="filehandledb.js"></script>
     <script src="sjcl.js"></script>
     <script src="app.js"></script>
