@@ -173,16 +173,27 @@
     <script src="sjcl.js"></script>
     <script src="app.js"></script>
     <script>
-        // Registrar o Service Worker
+        // Registrar e atualizar o Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/pwa.sjcl/sw.js')
                     .then(reg => {
                         console.log('Service Worker registered:', reg);
+                        // Força checagem imediata por atualizações no servidor
+                        reg.update();
                     })
                     .catch(err => {
                         console.error('Service Worker Failure:', err);
                     });
+            });
+
+            // Se um novo Service Worker assumir o controle, recarrega suavemente a página
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
             });
         }
     </script>
